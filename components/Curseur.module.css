@@ -1,0 +1,87 @@
+.curseur {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.legende {
+  padding: 0;
+  margin-bottom: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--rouge-profond);
+}
+.points {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.trait {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  top: 50%;
+  height: 1.5px;
+  background: var(--rose);
+  z-index: 0;
+}
+.point {
+  position: relative;
+  z-index: 1;
+  width: var(--cible);
+  height: var(--cible);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.point input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.rond {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1.5px solid var(--rouge-profond);
+  background: var(--blanc);
+  transition: transform 0.15s ease;
+}
+.point:hover .rond {
+  background: var(--rose-pale);
+}
+.point input:checked + .rond {
+  background: var(--rouge-profond);
+  transform: scale(1.15);
+  box-shadow: 0 0 0 4px var(--rose);
+}
+.point input:focus-visible + .rond {
+  outline: 3px solid var(--bordeaux);
+  outline-offset: 4px;
+}
+.surRose .rond {
+  background: var(--rose-pale);
+}
+.surRose .trait {
+  background: var(--rouge-profond);
+  opacity: 0.3;
+}
+.bornes {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--rouge-profond);
+}
+.bornes span:last-child {
+  text-align: right;
+}

@@ -1,0 +1,288 @@
+.page {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+.hero {
+  background: var(--rouge) url(/images/grain.jpg) center / cover no-repeat;
+  color: var(--blanc);
+  padding: 22px var(--gouttiere) 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+}
+.haut {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+.nav {
+  display: flex;
+  gap: 18px;
+}
+.nav a {
+  color: var(--blanc);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  min-height: var(--cible);
+  display: inline-flex;
+  align-items: center;
+  border-bottom: 1.5px solid transparent;
+}
+.nav a[aria-current="page"] {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+.heroBas {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.heroTitre {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.surtitre {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+.slash {
+  color: var(--rouge);
+}
+.nomQuete {
+  margin: 0;
+  font-size: 68px;
+  line-height: 1.02;
+  overflow-wrap: anywhere;
+}
+.ceMois {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.ceMoisTexte {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.semaines {
+  padding: 36px var(--gouttiere);
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.semaine {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.pastille {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+.faite .pastille {
+  background: var(--rouge-profond);
+  color: var(--blanc);
+}
+.avenir .pastille {
+  border: 1.5px dashed var(--rouge-profond);
+}
+.semaineTexte {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 2px;
+}
+.titreSemaine {
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+.avenir .titreSemaine {
+  font-weight: 500;
+}
+.active {
+  background: var(--rouge-profond);
+  color: var(--blanc);
+  border-radius: 24px;
+  padding: 24px;
+  flex-direction: column;
+  gap: 14px;
+}
+.titreActive {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.description {
+  font-size: 16px;
+  line-height: 1.55;
+}
+.commencer {
+  align-self: flex-start;
+  margin-top: 4px;
+}
+.bas {
+  background: var(--rose-pale);
+  padding: 32px var(--gouttiere) 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+.humeur {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.humeurTitre {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--rouge);
+}
+.humeurs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.puce {
+  min-height: var(--cible);
+  background: var(--blanc);
+  color: var(--rouge-profond);
+  border: 1.5px solid var(--rose);
+  border-radius: 999px;
+  padding: 9px 18px;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+}
+.puce:hover {
+  border-color: var(--rouge-profond);
+}
+.puceChoisie {
+  background: var(--rouge-profond);
+  color: var(--blanc);
+  border-color: var(--rouge-profond);
+}
+.suite {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--bleu-ciel);
+  border: 1.5px solid var(--rouge-profond);
+  border-radius: 24px;
+  padding: 24px;
+}
+.suiteTitre {
+  font-size: 26px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+.suiteTexte {
+  font-size: 15px;
+  line-height: 1.6;
+}
+.pied {
+  padding: 24px var(--gouttiere) 32px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.discret {
+  background: none;
+  border: 0;
+  font: inherit;
+  font-size: 13px;
+  color: var(--rouge-profond);
+  text-decoration: underline;
+  min-height: var(--cible);
+  padding: 0;
+  cursor: pointer;
+}
+.discret:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    padding: 28px 96px 64px;
+    gap: 96px;
+  }
+  .nav {
+    gap: 32px;
+  }
+  .heroBas {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 380px;
+    gap: 64px;
+    align-items: end;
+  }
+  .nomQuete {
+    font-size: 140px;
+    line-height: 0.95;
+  }
+  .ceMoisTexte {
+    font-size: 18px;
+  }
+  .semaines {
+    padding: 56px 96px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+  }
+  .semaine {
+    flex-direction: column;
+    border: 1.5px solid var(--rouge-profond);
+    border-radius: 24px;
+    padding: 24px;
+    min-height: 300px;
+  }
+  .avenir {
+    border-style: dashed;
+  }
+  .titreSemaine {
+    font-size: 24px;
+    font-weight: 500;
+  }
+  .bas {
+    background: none;
+    padding: 0 96px 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .humeur {
+    background: var(--rose-pale);
+    border-radius: 24px;
+    padding: 32px 28px;
+  }
+  .humeurTitre {
+    font-size: 26px;
+  }
+  .suite {
+    padding: 32px 28px;
+  }
+  .suiteTitre {
+    font-size: 32px;
+  }
+  .pied {
+    padding: 8px 96px 48px;
+  }
+}

@@ -1,4 +1,4 @@
-# Mise en route (étape 1)
+# Mise en route
 
 Ce qui est en place : le projet Next.js, la base de données Supabase (fichier de migration),
 la connexion par lien magique et la liste blanche d'emails.
@@ -48,3 +48,18 @@ cp .env.example .env.local   # puis remplir
 npm run dev
 npm test
 ```
+
+## Étapes 2 à 4 : questionnaire, calcul du chemin, carte
+
+1. **Lancer la seconde migration** : SQL Editor > New query > coller le contenu de
+   `supabase/migrations/20261118000000_questionnaire_etape.sql` > Run.
+   Elle ajoute de quoi reprendre le questionnaire là où on s'est arrêtée.
+2. **Clé Claude** (facultative à ce stade) : dans Vercel, ajouter `ANTHROPIC_API_KEY`.
+   Claude ne sert ici qu'à deux lectures : départager deux quêtes à égalité grâce à
+   « Laquelle t'appelle le plus », et compléter une capacité qu'elle n'a pas cochée.
+   Sans clé, une lecture simple par mots-clés prend le relais : le chemin se trace quand même.
+   `CLAUDE_MODEL` est facultative (par défaut : `claude-sonnet-5-5`).
+3. Redéployer.
+
+Pour recommencer le questionnaire de zéro pendant les tests : dans Supabase, Table Editor,
+supprimer sa ligne dans `paths` et ses lignes dans `questionnaire_responses`.

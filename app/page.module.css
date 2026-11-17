@@ -1,0 +1,82 @@
+.hero {
+  background: var(--rouge) url(/images/grain.jpg) center / cover no-repeat;
+  color: var(--blanc);
+  min-height: 100svh;
+  padding: 22px var(--gouttiere) 48px;
+  display: flex;
+  flex-direction: column;
+}
+.haut {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+.texte {
+  margin-top: 64px;
+  display: flex;
+  flex-direction: column;
+  max-width: 900px;
+}
+.avant {
+  margin: 0;
+  font-size: 36px;
+  line-height: 1.06;
+  font-weight: 300;
+  letter-spacing: -0.04em;
+  color: rgba(255, 255, 255, 0.85);
+}
+.titre {
+  margin: 0;
+  font-size: 36px;
+  line-height: 1.06;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+.appel {
+  margin-top: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.appel span {
+  text-align: center;
+  font-size: 13px;
+}
+.pied {
+  margin-top: auto;
+  padding-top: 48px;
+  font-size: 13px;
+}
+.pied a {
+  color: var(--blanc);
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    padding: 28px 96px 72px;
+  }
+  .texte {
+    margin-top: 96px;
+  }
+  .avant {
+    font-size: 40px;
+    line-height: 1.15;
+  }
+  .titre {
+    margin-top: 6px;
+    font-size: 56px;
+    line-height: 1.1;
+  }
+  .appel {
+    margin-top: 52px;
+    flex-direction: row;
+    align-items: center;
+    gap: 22px;
+  }
+  .appel span {
+    text-align: left;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}

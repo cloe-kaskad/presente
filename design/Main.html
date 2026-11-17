@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Accueil</title>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face{font-family:'Anton';src:url(assets/Anton.woff2) format('woff2');font-display:swap}
+@font-face{font-family:'DMSans';src:url(assets/DMSans.woff2) format('woff2');font-weight:100 1000;font-style:normal;font-display:swap}
+@font-face{font-family:'DMSans';src:url(assets/DMSans-Italic.woff2) format('woff2');font-weight:100 1000;font-style:italic;font-display:swap}
+body{margin:0}
+a{color:#c42c14}a:hover{color:#510004}
+input::placeholder,textarea::placeholder{color:#d98f86}
+</style>
+</helmet>
+<div style="width:390px;height:5050px;box-sizing:border-box;background:#ffffff;color:#c42c14;font-family:'DMSans',system-ui,sans-serif;display:flex;flex-direction:column;">
+  <section style="background:#e6361d url(assets/grain.jpg) center/cover no-repeat;padding:22px 24px 0;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start">
+      <div style="display:flex;flex-direction:column;gap:6px"><span style="font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.01em;font-size:26px;line-height:1.1;color:#ffffff">Présente&nbsp;!</span><div style="display:flex;align-items:center;gap:5px"><span style="font-size:10px;font-weight:500;line-height:1;color:#ffffff">l'école de</span><img src="assets/logo-lc-rouge.png" alt="Liberté, Chérie !" style="height:13px;width:auto;display:block;filter:brightness(0) invert(1);"></div></div>
+      <a href="Questionnaire-ouverte.html" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;font-weight:600;font-size:13px;line-height:1.2;border-radius:999px;padding:10px 18px;box-sizing:border-box;background:transparent;color:#ffffff;border:1.5px solid #ffffff;">Se connecter</a>
+    </div>
+    <div style="margin-top:64px;display:flex;flex-direction:column">
+      <p style="margin:0;font-size:36px;line-height:1.06;font-weight:300;letter-spacing:-.04em;color:rgba(255,255,255,.78)">Personne ne peut faire le chemin à ta place.</p>
+      <h1 style="margin:0;font-size:36px;line-height:1.06;font-weight:600;letter-spacing:-.04em;color:#ffffff">Mais on peut t'aider à le tracer.</h1>
+      <a href="Questionnaire-ouverte.html" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;font-weight:600;font-size:17px;line-height:1.2;border-radius:999px;padding:14px 26px;box-sizing:border-box;background:#ffffff;color:#c42c14;border:1.5px solid #ffffff;margin-top:36px;padding:18px 24px">Commencer le questionnaire</a>
+      <span style="margin-top:12px;text-align:center;font-size:13px;color:#ffffff">Un quart d'heure. Tu peux t'arrêter et reprendre.</span>
+    </div>
+    <div style="margin-top:48px;padding-bottom:36px;display:flex;flex-direction:column;gap:14px">
+      <div role="img" aria-label="Un exemple de chemin : Ouvrir mes comptes sans trembler, Annoncer mon prix, puis me taire, Dire non sans me justifier, Ne plus attendre qu'on m'autorise" style="position:relative;width:342px;height:370px"><svg viewBox="0 0 342 370" width="342" height="370" aria-hidden="true" style="position:absolute;left:0;top:0;overflow:visible"><path d="M -42.0 348.0 Q -2.0 334.0 28.0 330.0 C 190 315 150 90 300 52" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/><path d="M 300.0 52.0 Q 330.0 40.0 356.0 36.0" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="2 6" stroke-linecap="round" opacity=".75"/><circle cx="28.0" cy="330.0" r="6.5" fill="#ffffff"/><circle cx="117.8" cy="285.6" r="5" fill="#ffffff"/><circle cx="168.5" cy="199.6" r="5" fill="#ffffff"/><circle cx="217.0" cy="109.4" r="5" fill="#ffffff"/><circle cx="300.0" cy="52.0" r="9" fill="none" stroke="#ffffff" stroke-width="2"/></svg><span style="position:absolute;left:44.0px;top:336.0px;text-align:left;width:140px;font-size:14px;line-height:1.2;font-weight:500;letter-spacing:-.015em;color:#ffffff">Ouvrir mes comptes sans trembler</span><span style="position:absolute;left:133.8px;top:291.6px;text-align:left;width:140px;font-size:14px;line-height:1.2;font-weight:500;letter-spacing:-.015em;color:#ffffff">Annoncer mon prix, puis me taire</span><span style="position:absolute;left:12.5px;top:189.6px;transform:translateY(-100%);text-align:right;width:140px;font-size:14px;line-height:1.2;font-weight:500;letter-spacing:-.015em;color:#ffffff">Dire non sans me justifier</span><span style="position:absolute;left:61.0px;top:99.4px;transform:translateY(-100%);text-align:right;width:140px;font-size:14px;line-height:1.2;font-weight:500;letter-spacing:-.015em;color:#ffffff">Ne plus attendre qu'on m'autorise</span><span style="position:absolute;left:60.0px;top:42.0px;transform:translateY(-100%);text-align:right;width:224px;font-size:23px;line-height:1.2;font-weight:600;letter-spacing:-.015em;color:#ffffff">Toi, dans trois mois</span></div>
+      <span style="font-size:12px;color:#ffffff;opacity:.85;text-align:right">Un chemin, par exemple</span>
+    </div>
+  </section>
+  <section style="padding:72px 24px 64px;display:flex;flex-direction:column;gap:36px">
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <h1 style="margin:0;font-size:36px;line-height:1.06;font-weight:400;letter-spacing:-.035em;color:#e6361d;">Trois mois, une semaine après l'autre.</h1>
+      <p style="margin:0;font-size:16px;line-height:1.6;color:#c42c14;">Ce qu'on ne nous apprend pas à l'école : l'argent, la voix, les liens, le corps. Un chemin personnel, pas un cours de plus.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px"><div style="border-radius:18px;overflow:hidden;background:#fdf0f4"><img src="assets/ecrire.jpg" alt="" style="display:block;width:100%;height:220px;object-fit:cover;object-position:center 30%;"></div><div style="display:flex;gap:14px;align-items:baseline"><span style="font-size:44px;font-weight:200;line-height:.9;letter-spacing:-.04em;color:#e6361d">1</span><div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:21px;font-weight:600;line-height:1.2;letter-spacing:-.015em;color:#e6361d">Tu réponds</span><span style="font-size:16px;line-height:1.55;color:#c42c14">Un questionnaire d'un quart d'heure, avec tes mots. Pas de cases à cocher pour te résumer.</span></div></div></div><div style="display:flex;flex-direction:column;gap:16px"><div style="border-radius:18px;overflow:hidden;background:#fdf0f4"><img src="assets/carnets.jpg" alt="" style="display:block;width:100%;height:220px;object-fit:cover;object-position:center 40%;"></div><div style="display:flex;gap:14px;align-items:baseline"><span style="font-size:44px;font-weight:200;line-height:.9;letter-spacing:-.04em;color:#e6361d">2</span><div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:21px;font-weight:600;line-height:1.2;letter-spacing:-.015em;color:#e6361d">Tu reçois ton chemin</span><span style="font-size:16px;line-height:1.55;color:#c42c14">Trois quêtes et trois mondes, choisis pour toi, sur trois mois.</span></div></div></div><div style="display:flex;flex-direction:column;gap:16px"><div style="border-radius:18px;overflow:hidden;background:#fdf0f4"><img src="assets/talk.jpg" alt="" style="display:block;width:100%;height:220px;object-fit:cover;object-position:center 30%;"></div><div style="display:flex;gap:14px;align-items:baseline"><span style="font-size:44px;font-weight:200;line-height:.9;letter-spacing:-.04em;color:#e6361d">3</span><div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:21px;font-weight:600;line-height:1.2;letter-spacing:-.015em;color:#e6361d">Tu avances</span><span style="font-size:16px;line-height:1.55;color:#c42c14">Chaque semaine : écouter, écrire, puis oser un geste dans ta vraie vie.</span></div></div></div>
+  </section>
+  <section style="background:#510004;display:flex;flex-direction:column">
+    <div style="height:340px"><img src="assets/cercle-talk.jpg" alt="" style="display:block;width:100%;height:100%;object-fit:cover;object-position:center 62%;"></div>
+    <div style="padding:48px 24px 56px;display:flex;flex-direction:column;gap:6px">
+      <p style="margin:0;font-size:28px;line-height:1.1;font-weight:300;letter-spacing:-.035em;color:#f7beca">On passe 15 ans à l'école à apprendre à répondre.</p>
+      <p style="margin:0;font-size:28px;line-height:1.1;font-weight:600;letter-spacing:-.035em;color:#ffffff">Personne ne nous apprend à questionner.</p>
+      <p style="margin:22px 0 0;font-size:17px;line-height:1.6;color:#fbe4e9">Une école pour les femmes. Comprendre le monde, reprendre sa vie.</p>
+      <a href="Questionnaire-ouverte.html" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;font-weight:600;font-size:17px;line-height:1.2;border-radius:999px;padding:14px 26px;box-sizing:border-box;background:#f7beca;color:#510004;border:1.5px solid #f7beca;margin-top:28px;padding:18px 24px">Commencer le questionnaire</a>
+    </div>
+  </section>
+  <section style="padding:64px 24px;display:flex;flex-direction:column;gap:20px">
+    <h1 style="margin:0;font-size:36px;line-height:1.06;font-weight:400;letter-spacing:-.035em;color:#e6361d;">Sept quêtes, en vidéo.</h1>
+    <p style="margin:0;font-size:16px;line-height:1.6;color:#c42c14;">Chacune portée par une intervenante. Ton chemin en prend trois.</p>
+    <ul style="list-style:none;margin:8px 0 0;padding:0">
+      <li style="padding:10px 0;border-top:1.5px solid #f7beca"><span style="font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.01em;font-size:40px;line-height:1.05;color:#e6361d">L'Argent</span></li><li style="padding:10px 0;border-top:1.5px solid #f7beca"><span style="font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.01em;font-size:40px;line-height:1.05;color:#c42c14">La Voix</span></li><li style="padding:10px 0;border-top:1.5px solid #f7beca"><span style="font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.01em;font-size:40px;line-height:1.05;color:#e6361d">Le Travail</span></li><li style="padding:10px 0;border-top:1.5px solid #f7beca"><span style="font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.01em;font-size:40px;line-height:1.05;color:#c42c14">Les Émotions</span></li><li style="padding:10px 0;border-top:1.5px solid #f7beca"><span style="font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.01em;font-size:40px;line-height:1.05;color:#e6361d">Le Corps</span></li><li style="padding:10px 0;border-top:1.5px solid #f7beca"><span style="font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.01em;font-size:40px;line-height:1.05;color:#c42c14">Les Liens</span></li><li style="padding:10px 0;border-top:1.5px solid #f7beca"><span style="font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.01em;font-size:40px;line-height:1.05;color:#e6361d">La Création</span></li>
+    </ul>
+  </section>
+  <section style="background:#fdf0f4;padding:56px 24px 64px;display:flex;flex-direction:column;gap:20px">
+    <div style="border-radius:22px;overflow:hidden;height:300px"><img src="assets/lecture-illu.jpg" alt="" style="display:block;width:100%;height:100%;object-fit:cover;object-position:center;"></div>
+    <h1 style="margin:0;font-size:36px;line-height:1.06;font-weight:400;letter-spacing:-.035em;color:#e6361d;margin-top:12px">Et des mondes, en podcast.</h1>
+    <div style="display:flex;flex-direction:column"><div style="display:flex;flex-direction:column;gap:4px;padding:14px 0;border-top:1.5px solid #f7beca"><span style="font-size:22px;font-weight:400;letter-spacing:-.02em;line-height:1.2;color:#e6361d">Histoire, au prisme du féminisme</span><span style="font-size:15px;color:#c42c14">D'où l'on vient, pour choisir où l'on va.</span></div><div style="display:flex;flex-direction:column;gap:4px;padding:14px 0;border-top:1.5px solid #f7beca"><span style="font-size:22px;font-weight:400;letter-spacing:-.02em;line-height:1.2;color:#e6361d">Philosophie pratique</span><span style="font-size:15px;color:#c42c14">Des idées qui servent un mardi soir.</span></div><div style="display:flex;flex-direction:column;gap:4px;padding:14px 0;border-top:1.5px solid #f7beca"><span style="font-size:22px;font-weight:400;letter-spacing:-.02em;line-height:1.2;color:#e6361d">Attention et réseaux</span><span style="font-size:15px;color:#c42c14">Ce que l'écran fait de nos journées.</span></div></div>
+  </section>
+  <section style="flex:1;padding:64px 24px 32px;display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;align-items:baseline;gap:14px"><span style="font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.01em;font-size:96px;line-height:.9;color:#e6361d">75&nbsp;€</span><span style="font-size:16px;line-height:1.4;color:#c42c14">le chemin<br>de trois mois</span></div>
+    <p style="margin:0;font-size:16px;line-height:1.6;color:#c42c14;">Ou trois fois 25 €. Pas d'abonnement. Une carte postale à offrir est incluse.</p>
+    <a href="Questionnaire-ouverte.html" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;font-weight:600;font-size:17px;line-height:1.2;border-radius:999px;padding:14px 26px;box-sizing:border-box;background:#c42c14;color:#ffffff;border:1.5px solid #c42c14;margin-top:8px;padding:18px 24px">Commencer le questionnaire</a>
+    <div style="margin-top:auto;padding-top:56px;display:flex;justify-content:space-between;align-items:center;border-top:1.5px solid #f7beca">
+      <img src="assets/logo-lc-rouge.png" alt="Liberté, Chérie !" style="height:24px;width:auto;display:block;margin-top:20px">
+      <span style="margin-top:20px"><span style="font-size:13px;font-weight:500;color:#c42c14">@libertecherie_fr</span></span>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview": {"width": 390, "height": 5050}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

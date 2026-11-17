@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Son carnet</title>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face{font-family:'Anton';src:url(assets/Anton.woff2) format('woff2');font-display:swap}
+@font-face{font-family:'DMSans';src:url(assets/DMSans.woff2) format('woff2');font-weight:100 1000;font-style:normal;font-display:swap}
+@font-face{font-family:'DMSans';src:url(assets/DMSans-Italic.woff2) format('woff2');font-weight:100 1000;font-style:italic;font-display:swap}
+body{margin:0}
+a{color:#c42c14}a:hover{color:#510004}
+input::placeholder,textarea::placeholder{color:#d98f86}
+</style>
+</helmet>
+<div style="width:390px;height:1110px;box-sizing:border-box;background:#fdf0f4;color:#c42c14;font-family:'DMSans',system-ui,sans-serif;display:flex;flex-direction:column;">
+  <header style="display:flex;justify-content:space-between;align-items:center;padding:20px 24px">
+    <a href="Chemin.html" style="font-size:15px;font-weight:600;text-decoration:none;color:#c42c14">← Mon chemin</a>
+    <a href="#" style="font-size:15px;font-weight:600;color:#c42c14">Télécharger</a>
+  </header>
+  <section style="padding:16px 24px 24px;display:flex;flex-direction:column;gap:20px">
+    <h1 style="margin:0;font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.01em;font-size:64px;line-height:1.08;color:#e6361d;">Carnet</h1>
+    <label for="rech" style="position:absolute;left:-9999px">Chercher dans mon carnet</label>
+    <input id="rech" placeholder="Chercher un mot, une personne…" style="box-sizing:border-box;width:100%;border:1.5px solid #f7beca;border-radius:16px;background:#ffffff;font-family:'DMSans',system-ui,sans-serif;font-size:16px;line-height:1.5;color:#510004;height:52px;border-radius:999px;padding:0 20px">
+  </section>
+  <section style="flex:1;padding:0 24px 40px;display:flex;flex-direction:column;gap:14px">
+    <div style="background:#ffffff;border:1.5px solid #f7beca;border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:18px"><span style="font-size:14px;font-weight:600;line-height:1.45;color:#c42c14;"><span style="color:#e6361d">/</span> Semaine 3 · L'Argent</span><div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:14px;font-weight:500;color:#c42c14">Ce que tu as eu envie de dire pour remplir</span><p style="margin:0;font-size:18px;line-height:1.5;font-weight:600;font-style:italic;color:#510004">« Mais si ce n'est pas possible, ce n'est pas grave. »</p></div></div><div style="background:#ffffff;border:1.5px solid #f7beca;border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:18px"><span style="font-size:14px;font-weight:600;line-height:1.45;color:#c42c14;"><span style="color:#e6361d">/</span> Semaine 2 · monde Histoire</span><div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:14px;font-weight:500;color:#c42c14">Le fait qui t'a le plus surprise</span><p style="margin:0;font-size:18px;line-height:1.5;font-weight:600;font-style:italic;color:#510004">« Les vingt ans entre 1965 et 1985. Ma mère avait 24 ans. »</p></div></div><div style="background:#ffffff;border:1.5px solid #f7beca;border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:18px"><span style="font-size:14px;font-weight:600;line-height:1.45;color:#c42c14;"><span style="color:#e6361d">/</span> Semaine 1 · L'Argent</span><div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:14px;font-weight:500;color:#c42c14">Une scène de ta vie</span><p style="margin:0;font-size:18px;line-height:1.5;font-weight:600;font-style:italic;color:#510004">« Mon père qui faisait les comptes le dimanche, porte fermée. »</p></div><div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:14px;font-weight:500;color:#c42c14">Donc l'argent, c'est…</span><p style="margin:0;font-size:18px;line-height:1.5;font-weight:600;font-style:italic;color:#510004">« une affaire d'homme, derrière une porte »</p></div><div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:14px;font-weight:500;color:#c42c14">Au début du chemin</span><p style="margin:0;font-size:18px;line-height:1.5;font-weight:600;font-style:italic;color:#510004">« j'ai honte de ne rien comprendre à mes comptes »</p></div></div>
+    <span style="margin-top:auto;padding-top:24px;font-size:14px;line-height:1.55;color:#c42c14">Ton carnet n'est lu par personne de l'équipe. Il sert à toi, et à adapter ton chemin.</span>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview": {"width": 390, "height": 1110}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

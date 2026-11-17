@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Questionnaire, ordinateur</title>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face{font-family:'Anton';src:url(assets/Anton.woff2) format('woff2');font-display:swap}
+@font-face{font-family:'DMSans';src:url(assets/DMSans.woff2) format('woff2');font-weight:100 1000;font-style:normal;font-display:swap}
+@font-face{font-family:'DMSans';src:url(assets/DMSans-Italic.woff2) format('woff2');font-weight:100 1000;font-style:italic;font-display:swap}
+body{margin:0}
+a{color:#c42c14}a:hover{color:#510004}
+input::placeholder,textarea::placeholder{color:#d98f86}
+</style>
+</helmet>
+<div style="width:1440px;height:900px;box-sizing:border-box;background:#ffffff;color:#c42c14;font-family:'DMSans',system-ui,sans-serif;display:flex;flex-direction:column;">
+  <div style="height:6px;background:#fdf0f4"><div style="width:12%;height:6px;background:#c42c14"></div></div>
+  <header style="display:flex;justify-content:space-between;align-items:center;padding:24px 96px">
+    <span style="font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.01em;font-size:26px;line-height:1.1;color:#c42c14">Présente&nbsp;!</span><span style="font-size:14px;font-weight:600;line-height:1.45;color:#c42c14;"><span style="color:#e6361d">/</span> Partie 1 sur 5 · Tes mots</span>
+  </header>
+  <main style="flex:1;padding-top:72px;padding-bottom:48px;padding-left:96px;padding-right:96px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:96px;align-items:start">
+    <div style="display:flex;flex-direction:column;gap:24px">
+      <h1 style="margin:0;font-size:56px;line-height:1.06;font-weight:400;letter-spacing:-.035em;color:#c42c14;line-height:1.15">Qu'est-ce qui t'amène ici, maintenant ?</h1>
+      <p style="margin:0;font-size:20px;line-height:1.6;color:#c42c14;">Il n'y a pas de bonne réponse. Écris comme tu parlerais à une amie.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <label for="q1d" style="position:absolute;left:-9999px">Ta réponse</label>
+      <textarea id="q1d" placeholder="Un moment précis, une phrase qui tourne en boucle, une envie, une fatigue…" style="box-sizing:border-box;width:100%;border:1.5px solid #f7beca;border-radius:16px;background:#ffffff;font-family:'DMSans',system-ui,sans-serif;font-size:16px;line-height:1.5;color:#510004;height:340px;resize:none;padding:22px;font-size:18px"></textarea>
+      <span style="font-size:13px;color:#c42c14">Enregistré automatiquement</span>
+    </div>
+  </main>
+  <footer style="padding:24px 96px 48px;display:flex;justify-content:space-between;align-items:center;border-top:1.5px solid #fdf0f4">
+    <a href="Main.html" style="font-size:16px;font-weight:600;color:#c42c14">← Retour</a>
+    <div style="display:flex;align-items:center;gap:28px"><a href="Questionnaire-zoom.html" style="font-size:16px;font-weight:600;color:#c42c14">Passer</a><a href="D-Carte.html" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;font-weight:600;font-size:17px;line-height:1.2;border-radius:999px;padding:14px 26px;box-sizing:border-box;background:#c42c14;color:#ffffff;border:1.5px solid #c42c14;">Continuer</a></div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview": {"width": 1440, "height": 900}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

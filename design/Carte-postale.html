@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>La carte postale</title>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face{font-family:'Anton';src:url(assets/Anton.woff2) format('woff2');font-display:swap}
+@font-face{font-family:'DMSans';src:url(assets/DMSans.woff2) format('woff2');font-weight:100 1000;font-style:normal;font-display:swap}
+@font-face{font-family:'DMSans';src:url(assets/DMSans-Italic.woff2) format('woff2');font-weight:100 1000;font-style:italic;font-display:swap}
+body{margin:0}
+a{color:#c42c14}a:hover{color:#510004}
+input::placeholder,textarea::placeholder{color:#d98f86}
+</style>
+</helmet>
+<div style="width:390px;height:1040px;box-sizing:border-box;background:#ffffff;color:#c42c14;font-family:'DMSans',system-ui,sans-serif;display:flex;flex-direction:column;">
+  <header style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 24px;border-bottom:1.5px solid #fdf0f4"><a href="Chemin.html" style="font-size:15px;font-weight:600;text-decoration:none;color:#c42c14">← Mon chemin</a><span style="font-size:14px;font-weight:600;line-height:1.45;color:#c42c14;"><span style="color:#e6361d">/</span> Offerte avec ton chemin</span></header>
+  <section style="padding:32px 24px 24px;display:flex;flex-direction:column;gap:16px">
+    <h1 style="margin:0;font-size:32px;line-height:1.06;font-weight:400;letter-spacing:-.035em;color:#e6361d;">Une carte pour une femme qui compte.</h1>
+    <p style="margin:0;font-size:17px;line-height:1.6;color:#c42c14;">On l'imprime et on la poste pour toi. Elle contient un code qui lui offre son premier mois de chemin.</p>
+  </section>
+  <section style="padding:0 24px 28px;display:flex;flex-direction:column;gap:12px">
+    <div style="height:200px;border-radius:20px;background:#e6361d url(assets/grain.jpg) center/cover no-repeat;display:flex;flex-direction:column;justify-content:space-between;padding:20px;box-sizing:border-box">
+      <span style="font-size:14px;font-weight:600;color:#ffffff">/ Pour toi</span>
+      <span style="font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.01em;font-size:44px;line-height:1.05;color:#ffffff">Présente&nbsp;!</span>
+    </div>
+    <div style="border-radius:20px;background:#ffffff;border:1.5px solid #f7beca;padding:18px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;min-height:180px">
+      <textarea aria-label="Ton mot" style="resize:none;border:0;border-right:1.5px solid #f7beca;padding:0 12px 0 0;font-family:'DMSans',system-ui,sans-serif;font-style:italic;font-weight:500;font-size:15px;line-height:1.55;color:#510004">Ma chère Inès, j'ai pensé à toi. Tu m'as appris à dire les choses. À ton tour de prendre trois mois pour toi.</textarea>
+      <div style="display:flex;flex-direction:column;justify-content:flex-end;gap:14px">
+        <span style="height:1.5px;background:#f7beca"></span><span style="height:1.5px;background:#f7beca"></span><span style="height:1.5px;background:#f7beca"></span>
+      </div>
+    </div>
+  </section>
+  <section style="flex:1;padding:0 24px 40px;display:flex;flex-direction:column;gap:18px">
+    <label style="display:flex;flex-direction:column;gap:10px;font-size:15px;font-weight:600;line-height:1.45;color:#c42c14">Son prénom et son nom
+<input placeholder="Inès Martin" style="box-sizing:border-box;width:100%;border:1.5px solid #f7beca;border-radius:16px;background:#ffffff;font-family:'DMSans',system-ui,sans-serif;font-size:16px;line-height:1.5;color:#510004;height:52px;padding:0 16px;"></label>
+    <label style="display:flex;flex-direction:column;gap:10px;font-size:15px;font-weight:600;line-height:1.45;color:#c42c14">Son adresse postale
+<input placeholder="Numéro, rue, code postal, ville" style="box-sizing:border-box;width:100%;border:1.5px solid #f7beca;border-radius:16px;background:#ffffff;font-family:'DMSans',system-ui,sans-serif;font-size:16px;line-height:1.5;color:#510004;height:52px;padding:0 16px;"></label>
+    <a href="Chemin.html" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;font-weight:600;font-size:16px;line-height:1.2;border-radius:999px;padding:14px 26px;box-sizing:border-box;background:#c42c14;color:#ffffff;border:1.5px solid #c42c14;width:100%;margin-top:auto">Envoyer la carte</a>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview": {"width": 390, "height": 1040}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

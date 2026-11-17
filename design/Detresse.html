@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Quand ça ne va pas</title>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face{font-family:'Anton';src:url(assets/Anton.woff2) format('woff2');font-display:swap}
+@font-face{font-family:'DMSans';src:url(assets/DMSans.woff2) format('woff2');font-weight:100 1000;font-style:normal;font-display:swap}
+@font-face{font-family:'DMSans';src:url(assets/DMSans-Italic.woff2) format('woff2');font-weight:100 1000;font-style:italic;font-display:swap}
+body{margin:0}
+a{color:#c42c14}a:hover{color:#510004}
+input::placeholder,textarea::placeholder{color:#d98f86}
+</style>
+</helmet>
+<div style="width:390px;height:844px;box-sizing:border-box;background:#fdf0f4;color:#c42c14;font-family:'DMSans',system-ui,sans-serif;display:flex;flex-direction:column;">
+  <section style="flex:1;padding:28px 24px 40px;display:flex;flex-direction:column;gap:22px">
+    <span style="font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.01em;font-size:22px;line-height:1.1;color:#c42c14">Présente&nbsp;!</span>
+    <h1 style="margin:0;font-size:28px;line-height:1.06;font-weight:400;letter-spacing:-.035em;color:#c42c14;margin-top:28px">Ce que tu écris compte. Tu n'as pas à porter ça seule.</h1>
+    <p style="margin:0;font-size:17px;line-height:1.6;color:#c42c14;">Si tu traverses un moment très difficile, des personnes formées peuvent t'écouter, maintenant.</p>
+    <a href="tel:3114" style="display:flex;flex-direction:column;gap:8px;text-decoration:none;background:#c42c14;border-radius:24px;padding:22px">
+      <span style="font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.01em;font-size:44px;line-height:1.05;color:#ffffff">3114</span>
+      <span style="font-size:15px;line-height:1.55;color:#ffffff">Numéro national de prévention du suicide. Gratuit, 24 heures sur 24, 7 jours sur 7.</span>
+    </a>
+    <a href="tel:15" style="display:flex;flex-direction:column;gap:8px;text-decoration:none;background:#ffffff;border:1.5px solid #c42c14;border-radius:24px;padding:22px">
+      <span style="font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.01em;font-size:36px;line-height:1.05;color:#c42c14">15 ou 112</span>
+      <span style="font-size:15px;line-height:1.55;color:#c42c14">En cas d'urgence.</span>
+    </a>
+    <p style="margin:auto 0 0;font-size:19px;line-height:1.45;font-weight:700;color:#c42c14">Ton chemin t'attend. Il n'y a aucune urgence.</p>
+    <a href="Chemin.html" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;font-weight:600;font-size:16px;line-height:1.2;border-radius:999px;padding:14px 26px;box-sizing:border-box;background:transparent;color:#c42c14;border:1.5px solid #c42c14;align-self:flex-start">Revenir à mon chemin</a>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview": {"width": 390, "height": 844}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

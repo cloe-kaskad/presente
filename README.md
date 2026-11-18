@@ -6,6 +6,7 @@ Tout commence par [BRIEF.md](BRIEF.md). Les réglages Supabase et Vercel sont da
 
 ## Ce qui est en place
 
+- Étapes 2 à 4 : questionnaire en 5 parties avec sauvegarde automatique et reprise, calcul du chemin (`lib/chemin/calcul.ts`, testé), carte, échange d'une quête, chemin semaine par semaine, humeur du jour, bouton de test « semaine suivante ».
 - Étape 1 : projet Next.js (App Router, TypeScript), schéma Supabase avec RLS (`supabase/migrations/`), connexion par lien magique, liste blanche (`ALLOWED_EMAILS`), page de confidentialité.
 
 ## Commandes

@@ -214,3 +214,15 @@ describe("échanger une quête", () => {
     await expect(echangerQuete(chemin, "liens", "voix", camille, sansClaude)).rejects.toThrow();
   });
 });
+
+describe("l'aperçu en direct (écran Échanger)", () => {
+  it("donne le même chemin que le calcul complet", async () => {
+    const { apercuTroisQuetes } = await import("./calcul");
+    expect(apercuTroisQuetes(camille.positions, () => null)).toEqual(["argent", "voix", "liens"]);
+  });
+  it("se recompose quand elle bouge un curseur", async () => {
+    const { apercuTroisQuetes } = await import("./calcul");
+    const p = { ...camille.positions, creation: { ou: 1, envie: 5 } };
+    expect(apercuTroisQuetes(p, () => null)).toEqual(["creation", "voix", "argent"]);
+  });
+});

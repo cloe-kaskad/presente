@@ -100,5 +100,5 @@ export async function tracerMonChemin(): Promise<ResultatEnregistrement> {
     .update({ questionnaire_termine_le: new Date().toISOString(), questionnaire_etape: "fin" })
     .eq("id", user.id);
 
-  redirect("/carte");
+  redirect("/carte/trace");
 }

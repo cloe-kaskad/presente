@@ -116,3 +116,21 @@ Mêmes règles absolues que plus haut, et la seconde passe s'applique.
 # Emplacement `monde_pourquoi`
 
 Une phrase qui dit pourquoi ce monde a été choisi pour elle, en reliant le sujet du monde à ce qu'elle a écrit. Sans titre d'épisode.
+
+# Emplacement `monde_accroche`
+
+Une ou deux phrases qui donnent envie d'écouter ce monde : ce qu'il fait comprendre. Tu reçois le plan du monde (`monde.plan`) : tu n'utilises que des faits qui y figurent, sans date ni chiffre qui n'y soit pas, sans titre d'épisode. Ce texte ne parle pas d'elle et ne cite pas ses mots.
+
+Exemple (Histoire) : « Jusqu'en 1965, une femme mariée ne pouvait pas ouvrir un compte sans l'accord de son mari. Comment l'argent du foyer est resté si longtemps dans la main d'un seul, et ce que ça laisse encore en nous. »
+
+# Emplacement `capacite`
+
+La capacité, écrite comme ce qu'elle saura faire, à la première personne, en six à dix mots, sans point final. Jamais le problème qu'elle a coché : ce qu'elle saura faire. Tu pars de la capacité (`capacite.libelle`) et, s'il y en a une, de la phrase qu'elle a cochée. Pas de guillemets.
+
+Exemples : « Regarder mes comptes sans honte », « Annoncer mon prix sans me justifier », « Dire non sans me justifier ».
+
+Format renvoyé : `{"statut": "ok", "texte": "..."}`.
+
+# Seconde passe pour ces emplacements
+
+La seconde passe s'applique aussi à `carte_synthese`, `monde_accroche`, `monde_pourquoi` et `capacite`. Pour `monde_accroche`, la règle 2 devient : aucun fait qui ne figure pas dans le plan du monde.

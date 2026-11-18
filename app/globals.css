@@ -9,6 +9,8 @@
   --rose-pale: #fdf0f4;
   --bordeaux: #510004;
   --bleu-ciel: #d4eaff; /* les mondes */
+  --nuit: #0f2a44; /* texte sur bleu ciel, badge « Podcast original » */
+  --nuit-douce: #1f4f7a;
   --blanc: #ffffff;
   --placeholder: #a3584f; /* contraste AA sur blanc */
 
@@ -87,9 +89,13 @@ img {
   font-weight: 600;
   color: var(--bordeaux);
   background: var(--rose);
-  padding: 0 0.15em;
+  padding: 1px 6px;
+  border-radius: 4px;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
+}
+.ses-mots--blanc {
+  background: var(--blanc);
 }
 
 /* Boutons */

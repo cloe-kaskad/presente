@@ -74,3 +74,12 @@ Le site lit Airtable sans jamais y écrire, avec un cache de 10 minutes : une mo
 apparaît sur le site au plus tard 10 minutes après. Seuls les contenus et pratiques « Validé » sont proposés.
 Dans la médiathèque, le site lit les champs « P! » plus le titre, l'autrice, le type, la description,
 l'image et le lien (pour pouvoir afficher le contenu). Il ne lit pas « Thème LC », « Tags » ni « Recommandé par ».
+
+## Carte V0.3 : « On trace ton chemin », nouvelle carte, « Échanger une quête »
+
+1. **Lancer la migration** `supabase/migrations/20261118200000_textes_carte.sql` (SQL Editor > Run).
+2. **Vercel** : `ANTHROPIC_API_KEY` doit être renseignée pour que le moteur écrive les textes.
+   Sans clé, la carte s'affiche avec des textes de secours, sans personnalisation.
+
+Le moteur lit ses consignes dans `prompts/moteur-ecriture.md` : on peut les modifier sans toucher au code.
+Pour réécrire une carte pendant la démo : lien « Recalculer mon chemin (démo) » en bas de la carte.

@@ -1,46 +1,128 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { echangerQuete } from "@/lib/chemin/calcul";
+import { calculerChemin, ordonner, troisQuetes, capacitesDe } from "@/lib/chemin/calcul";
 import { chargerChemin } from "@/lib/chemin/donnees";
 import { dependancesIA } from "@/lib/chemin/lecture-ia";
-import { isQueteId } from "@/lib/questionnaire/contenu";
+import { carteEcrite, chargerTextesCarte, effacerTextes } from "@/lib/moteur/carte";
+import { ecrireLaCarte } from "@/lib/moteur/ecriture";
 import { chargerReponses } from "@/lib/questionnaire/donnees";
+import { Partie2 } from "@/lib/questionnaire/reponses";
 import { createClient } from "@/lib/supabase/server";
 
-export async function echanger(formData: FormData): Promise<void> {
-  const sortante = formData.get("sortante");
-  const entrante = formData.get("entrante");
-  if (!isQueteId(sortante) || !isQueteId(entrante)) redirect("/carte/echanger?erreur=choix");
-
+async function session() {
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) redirect("/connexion");
+  return { supabase, user };
+}
 
+export type ResultatCarte = { ok: true } | { detresse: true } | { ok: false };
+
+/**
+ * Pendant l'écran « On trace ton chemin » : le moteur écrit les textes de la carte qui manquent.
+ * Ses réponses ne sont jamais écrites dans les logs.
+ */
+export async function ecrireMaCarte(): Promise<ResultatCarte> {
+  const { supabase, user } = await session();
   const chemin = await chargerChemin(supabase);
-  if (!chemin) redirect("/questionnaire");
-  if (!chemin.quetes.includes(sortante) || chemin.quetes.includes(entrante)) {
-    redirect("/carte/echanger?erreur=choix");
+  if (!chemin) return { ok: false };
+
+  const [{ data: profil }, reponses, textes] = await Promise.all([
+    supabase.from("profiles").select("sujets_a_eviter, detresse_le").maybeSingle(),
+    chargerReponses(supabase, 1),
+    chargerTextesCarte(supabase, chemin.id),
+  ]);
+  if (profil?.detresse_le) return { detresse: true };
+  if (carteEcrite(textes, chemin)) return { ok: true };
+
+  const r = await ecrireLaCarte(
+    { chemin, reponses, sujetsAEviter: profil?.sujets_a_eviter ?? null },
+    new Set(textes.keys()),
+  );
+
+  if (r.detresse) {
+    await supabase.from("profiles").update({ detresse_le: new Date().toISOString() }).eq("id", user.id);
+    return { detresse: true };
   }
 
+  if (r.textes.length) {
+    const lignes = r.textes.map((t) => ({ user_id: user.id, path_id: chemin.id, ...t }));
+    const { error } = await supabase.from("generated_texts").insert(lignes);
+    // 23505 : un autre onglet les a écrits entre-temps. Rien de grave.
+    if (error && error.code !== "23505") {
+      console.error("[carte] textes non enregistrés :", error.code);
+      return { ok: false };
+    }
+  }
+  return { ok: true };
+}
+
+/** Pour la démo : recalcule le chemin à partir des réponses enregistrées, et réécrit la carte. */
+export async function recalculerMonChemin(): Promise<void> {
+  const { supabase, user } = await session();
+  const chemin = await chargerChemin(supabase);
   const reponses = await chargerReponses(supabase, 1);
-  const nouveau = await echangerQuete(
-    chemin,
-    sortante,
-    entrante,
+  const nouveau = await calculerChemin(
     { positions: reponses[2].quetes, appelle: reponses[2].appelle, zoom: reponses[3].zoom },
     dependancesIA(reponses),
   );
 
-  const { error } = await supabase
-    .from("paths")
-    .update({ quetes: nouveau.quetes, capacites: nouveau.capacites })
-    .eq("id", chemin.id);
-  if (error) {
-    console.error("[chemin] échange impossible :", error.code);
-    redirect("/carte/echanger?erreur=enregistrement");
+  if (chemin) {
+    const { error } = await supabase
+      .from("paths")
+      .update({ quetes: nouveau.quetes, capacites: nouveau.capacites, mondes: nouveau.mondes, choix: {} })
+      .eq("id", chemin.id);
+    if (error) console.error("[chemin] recalcul impossible :", error.code);
+    await effacerTextes(supabase, chemin.id);
+  } else {
+    await supabase
+      .from("paths")
+      .insert({ user_id: user.id, quetes: nouveau.quetes, capacites: nouveau.capacites, mondes: nouveau.mondes });
   }
-  redirect("/carte");
+  await supabase.from("profiles").update({ detresse_le: null }).eq("id", user.id);
+  redirect("/carte/trace");
+}
+
+/**
+ * « Garder ce chemin » sur l'écran Échanger : on enregistre ses curseurs.
+ * Si les trois quêtes ou leur ordre changent, le chemin est recomposé et la carte réécrite.
+ */
+export async function garderCeChemin(positions: unknown): Promise<void> {
+  const lu = Partie2.shape.quetes.safeParse(positions);
+  if (!lu.success) redirect("/carte/echanger");
+
+  const { supabase, user } = await session();
+  const chemin = await chargerChemin(supabase);
+  if (!chemin) redirect("/questionnaire");
+  const reponses = await chargerReponses(supabase, 1);
+
+  const partie2 = { ...reponses[2], quetes: lu.data };
+  const { error } = await supabase
+    .from("questionnaire_responses")
+    .upsert({ user_id: user.id, passage: 1, partie: 2, reponses: partie2 }, { onConflict: "user_id,passage,partie" });
+  if (error) {
+    console.error("[echanger] curseurs non enregistrés :", error.code);
+    redirect("/carte/echanger");
+  }
+
+  const deps = dependancesIA({ ...reponses, 2: partie2 });
+  const quetes = ordonner(await troisQuetes(partie2.quetes, partie2.appelle, deps.departage), partie2.quetes);
+  const inchange = quetes.every((q, i) => q === chemin.quetes[i]);
+  if (inchange) redirect("/carte");
+
+  const capacites = Object.fromEntries(
+    await Promise.all(
+      quetes.map(async (q) => [q, chemin.capacites[q] ?? (await capacitesDe(q, reponses[3].zoom, deps.choisirCapacites))] as const),
+    ),
+  );
+  const { error: e2 } = await supabase.from("paths").update({ quetes, capacites, choix: {} }).eq("id", chemin.id);
+  if (e2) {
+    console.error("[echanger] chemin non recomposé :", e2.code);
+    redirect("/carte");
+  }
+  await effacerTextes(supabase, chemin.id);
+  redirect("/carte/trace");
 }

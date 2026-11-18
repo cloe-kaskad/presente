@@ -2,7 +2,8 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Marque } from "@/components/Marque";
 import { chargerChemin } from "@/lib/chemin/donnees";
-import { HUMEURS, semainesDuMois } from "@/lib/chemin/textes";
+import { HUMEURS, prenomAffiche, semainesDuMois } from "@/lib/chemin/textes";
+import { carteEcrite, chargerTextesCarte, texte } from "@/lib/moteur/carte";
 import { MONDE, QUETE, libelleCapacite } from "@/lib/questionnaire/contenu";
 import { decrireContenu } from "@/lib/catalogue/presentation";
 import { choixDuMois, profilDeChoix } from "@/lib/catalogue/semaines";
@@ -26,7 +27,10 @@ export default async function Chemin() {
   const debutJour = new Date();
   debutJour.setHours(0, 0, 0, 0);
   const [{ data: profil }, { data: humeurs }, reponses] = await Promise.all([
-    supabase.from("profiles").select("prenom, temps_par_semaine, formats_preferes, sujets_a_eviter").maybeSingle(),
+    supabase
+      .from("profiles")
+      .select("prenom, temps_par_semaine, formats_preferes, sujets_a_eviter, detresse_le")
+      .maybeSingle(),
     supabase
       .from("moods")
       .select("humeur")
@@ -35,6 +39,10 @@ export default async function Chemin() {
       .limit(1),
     chargerReponses(supabase, 1),
   ]);
+  if (profil?.detresse_le) redirect("/quand-ca-ne-va-pas");
+  const textesCarte = await chargerTextesCarte(supabase, chemin.id);
+  if (!carteEcrite(textesCarte, chemin)) redirect("/carte/trace");
+  const capaciteDite = (c: Parameters<typeof libelleCapacite>[0]) => texte(textesCarte, "capacite", c) ?? libelleCapacite(c);
   const humeurDuJour = humeurs?.[0]?.humeur as string | undefined;
 
   const mois = Math.min(2, Math.floor((chemin.semaine - 1) / 4)) as 0 | 1 | 2;
@@ -53,7 +61,7 @@ export default async function Chemin() {
     return { ...s, titre: c.titre, description: `${decrireContenu(c)}, ${suite}` };
   });
   const autresMois = [0, 1, 2].filter((m) => m > mois);
-  const prenom = profil?.prenom?.trim();
+  const prenom = prenomAffiche(profil?.prenom);
 
   return (
     <div className={styles.page}>
@@ -77,7 +85,7 @@ export default async function Chemin() {
           <div className={styles.ceMois}>
             <span className={styles.surtitre}>/ Ce mois-ci</span>
             <span className={styles.ceMoisTexte}>
-              {libelleCapacite(capacites[0])}. {libelleCapacite(capacites[1])}.
+              {capaciteDite(capacites[0])}. {capaciteDite(capacites[1])}.
             </span>
           </div>
         </div>

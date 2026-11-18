@@ -1,0 +1,75 @@
+.page {
+  min-height: 100svh;
+  background: var(--rose-pale);
+  padding: 28px var(--gouttiere) 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.marque {
+  font-size: 22px;
+  color: var(--rouge-profond);
+}
+.titre {
+  margin: 28px 0 0;
+  font-size: 28px;
+  line-height: 1.1;
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  color: var(--rouge-profond);
+}
+.texte {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.6;
+}
+.carte {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-decoration: none;
+  border-radius: 24px;
+  padding: 22px;
+  border: 1.5px solid var(--rouge-profond);
+  background: var(--blanc);
+  color: var(--rouge-profond);
+  font-size: 15px;
+  line-height: 1.55;
+}
+.cartePleine {
+  background: var(--rouge-profond);
+  color: var(--blanc);
+}
+.cartePleine:hover {
+  color: var(--blanc);
+  background: var(--bordeaux);
+}
+.numero {
+  font-size: 44px;
+  line-height: 1.05;
+}
+.numeroPetit {
+  font-size: 36px;
+}
+.attend {
+  margin: 16px 0 0;
+  font-size: 19px;
+  line-height: 1.45;
+  font-weight: 700;
+}
+.revenir {
+  align-self: flex-start;
+  background: transparent;
+  color: var(--rouge-profond);
+}
+@media (min-width: 1024px) {
+  .page {
+    max-width: none;
+    padding: 72px max(96px, calc((100vw - 720px) / 2));
+  }
+  .titre {
+    font-size: 48px;
+  }
+}

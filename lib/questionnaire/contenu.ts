@@ -211,17 +211,20 @@ export const PARTIE5 = {
 export const MONDES = ["histoire", "philosophie_pratique", "attention_reseaux"] as const;
 export type MondeId = (typeof MONDES)[number];
 
-export const MONDE: Record<MondeId, { nom: string; episodes: [string, string] }> = {
+export const MONDE: Record<MondeId, { nom: string; nomComplet: string; episodes: [string, string] }> = {
   histoire: {
     nom: "Histoire",
+    nomComplet: "Histoire, au prisme du féminisme",
     episodes: ["Elle avait un compte, pas la main", "Celles qu'on a effacées"],
   },
   philosophie_pratique: {
     nom: "Philosophie pratique",
+    nomComplet: "Philosophie pratique",
     episodes: ["Qu'est-ce qu'une vie choisie ?", "Vivre avec les autres sans se perdre"],
   },
   attention_reseaux: {
     nom: "Attention et réseaux",
+    nomComplet: "Attention et réseaux",
     episodes: ["Qui décide de ce que je regarde ?", "Se comparer sans fin"],
   },
 };

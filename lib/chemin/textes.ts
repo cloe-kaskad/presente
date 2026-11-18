@@ -104,3 +104,12 @@ export const HUMEURS = [
   "vivante",
 ] as const;
 export type Humeur = (typeof HUMEURS)[number];
+
+/** Le prénom, toujours avec une majuscule : « marie-claire » devient « Marie-Claire ». */
+export function prenomAffiche(prenom: string | null | undefined): string | null {
+  const p = prenom?.trim();
+  if (!p) return null;
+  return p
+    .toLowerCase()
+    .replace(/(^|[\s-])(\p{L})/gu, (_, sep: string, l: string) => sep + l.toUpperCase());
+}

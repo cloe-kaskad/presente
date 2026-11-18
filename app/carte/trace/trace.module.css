@@ -1,0 +1,152 @@
+.page {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background: var(--rouge) url(/images/grain.jpg) center / cover no-repeat;
+  color: var(--blanc);
+}
+.entete {
+  padding: 22px var(--gouttiere);
+}
+.corps {
+  flex: 1;
+  padding: 24px var(--gouttiere) 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.dessin {
+  order: 2;
+}
+.dessin svg {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  overflow: visible;
+}
+.texte {
+  order: 1;
+  display: contents;
+}
+.titre {
+  order: 1;
+  margin: 0;
+  font-size: 34px;
+  line-height: 1.06;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+}
+.etapes {
+  order: 3;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.etape {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  font-size: 17px;
+  line-height: 1.35;
+  transition: opacity 0.4s ease;
+}
+.a_venir {
+  opacity: 0.55;
+}
+.en_cours {
+  font-weight: 600;
+}
+.pastille {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--blanc);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.faite .pastille {
+  background: var(--blanc);
+  color: var(--rouge);
+}
+.rond {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--blanc);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+@keyframes pulse {
+  50% {
+    transform: scale(1.5);
+    opacity: 0.6;
+  }
+}
+.citation {
+  display: block;
+  margin-top: 8px;
+  font-size: 15px;
+}
+.trait {
+  transition: stroke-dashoffset 0.6s linear;
+}
+.point {
+  transition: opacity 0.6s ease, fill 0.6s ease;
+}
+.bouton {
+  order: 4;
+  margin-top: auto;
+  min-height: 60px;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.boutonVisible {
+  opacity: 1;
+}
+.bouton a {
+  width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rond {
+    animation: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .entete {
+    padding: 28px 96px;
+  }
+  .corps {
+    padding: 0 96px 64px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 96px;
+    align-items: center;
+  }
+  .dessin {
+    order: 0;
+  }
+  .dessin svg {
+    max-width: 640px;
+  }
+  .texte {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .titre {
+    font-size: 52px;
+  }
+  .bouton {
+    margin-top: 0;
+  }
+  .bouton a {
+    width: auto;
+  }
+}

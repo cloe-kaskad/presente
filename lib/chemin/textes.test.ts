@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { pourquoiSecours, semainesDuMois, toucheUnSujetAEviter } from "./textes";
+import { pourquoiSecours, prenomAffiche, semainesDuMois, toucheUnSujetAEviter } from "./textes";
 
 describe("les textes de secours de la carte", () => {
   it("cite ses mots exacts, sans les modifier", () => {
@@ -25,5 +25,15 @@ describe("les semaines", () => {
     expect(s[0].titre).toBe("Savoir dire non");
     expect(s[1].titre).toBe("Qu'est-ce qu'une vie choisie ?");
     expect(s[3].etiquette).toContain("palier");
+  });
+});
+
+describe("le prénom", () => {
+  it("prend toujours une majuscule", () => {
+    expect(prenomAffiche("cloe")).toBe("Cloe");
+    expect(prenomAffiche("  marie-claire ")).toBe("Marie-Claire");
+    expect(prenomAffiche("ÉLODIE")).toBe("Élodie");
+    expect(prenomAffiche("anne sophie")).toBe("Anne Sophie");
+    expect(prenomAffiche("")).toBeNull();
   });
 });

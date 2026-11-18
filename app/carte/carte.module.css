@@ -4,286 +4,676 @@
   flex-direction: column;
 }
 .entete {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   padding: 22px var(--gouttiere);
 }
-.marque {
-  font-size: 24px;
-  color: var(--rouge-profond);
-  text-decoration: none;
-}
-.intro {
-  padding: 24px var(--gouttiere) 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-.introTitre {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-.surtitre {
-  font-size: 14px;
+.espace {
+  font-size: 15px;
   font-weight: 600;
-  line-height: 1.45;
+  text-decoration: none;
+  min-height: var(--cible);
+  display: inline-flex;
+  align-items: center;
 }
-.slash {
-  color: var(--rouge);
+
+/* 1. Ce qu'on a compris */
+.compris {
+  padding: 40px var(--gouttiere) 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
-.titre {
+.titreCompris {
   margin: 0;
-  font-size: 40px;
+  font-size: 36px;
   line-height: 1.06;
   font-weight: 400;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.04em;
   color: var(--rouge);
 }
-.chapo {
+.ouverture {
   margin: 0;
-  font-size: 17px;
-  line-height: 1.6;
+  font-size: 22px;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--rouge);
 }
-.mois {
-  padding: 0 var(--gouttiere) 40px;
+.blocs {
   display: flex;
   flex-direction: column;
-  gap: 14px;
 }
-.carteMois {
-  border: 1.5px solid var(--rouge-profond);
+.bloc {
+  border-top: 1.5px solid var(--rouge);
+  padding: 18px 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.blocTitre {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--rouge-profond);
+}
+.blocTexte {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+}
+.lecture {
+  margin: 0;
+  font-size: 13px;
+}
+
+/* 2. Ton chemin */
+.chemin {
+  padding: 16px var(--gouttiere) 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.titreSection {
+  margin: 0 0 8px;
+  font-size: 32px;
+  line-height: 1.08;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  color: var(--rouge);
+}
+.explication {
+  background: var(--rose-pale);
+  border-radius: 24px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.explication > div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+.explicationTitre {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.explicationTexte {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.explicationMonde .explicationTitre,
+.explicationMonde .explicationTexte {
+  color: var(--nuit);
+}
+.badgeQuete {
+  background: var(--rouge-profond);
+  color: var(--blanc);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+}
+.badgePodcast {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--nuit);
+  color: var(--blanc);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+}
+.badgeContour {
+  border: 1.5px solid currentColor;
+  border-radius: 999px;
+  padding: 4px 11px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.mois {
   border-radius: 24px;
   padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 14px;
 }
-.moisPlein {
+.mois1 {
   background: var(--rouge-profond);
   color: var(--blanc);
+  gap: 24px;
 }
-.moisContour {
-  background: var(--blanc);
-}
-.moisCiel {
-  background: var(--bleu-ciel);
-}
-.carteHaut {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-.etiquette {
-  font-size: 14px;
-  font-weight: 600;
-}
-.monde {
-  font-size: 13px;
-  font-weight: 600;
-  border: 1.5px solid currentColor;
-  border-radius: 999px;
-  padding: 4px 10px;
-}
-.nomQuete {
-  margin: 0;
-  font-size: 40px;
-  line-height: 1.08;
-}
-.moisContour .nomQuete,
-.moisCiel .nomQuete {
-  color: var(--rouge-profond);
-}
-.pourquoi {
-  margin: 0;
-  font-size: 16px;
-  line-height: 1.6;
-}
-.sesMots {
-  font-style: italic;
-  font-weight: 600;
-  color: var(--bordeaux);
-  background: var(--rose);
-  padding: 1px 6px;
-  border-radius: 4px;
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
-}
-.moisPlein .sesMots {
-  background: var(--blanc);
-}
-.bande {
-  background: var(--rose-pale);
-  padding: 36px var(--gouttiere);
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-}
-.capacites {
+.moisQuete {
   display: flex;
   flex-direction: column;
   gap: 14px;
 }
-.capacite {
-  margin: 0;
-  display: flex;
-  gap: 10px;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1.4;
+.moisLeger {
+  border: 1.5px solid var(--rose);
 }
-.boutons {
+.moisSuivants {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 }
-.boutons a {
-  width: 100%;
+.moisHaut {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
 }
-.boutonContour {
-  background: transparent;
-  color: var(--rouge-profond);
+.mois1 .moisHaut {
+  justify-content: flex-start;
 }
-.boutonContour:hover {
-  background: var(--blanc);
+.moisEtiquette {
+  font-size: 14px;
+  font-weight: 600;
+}
+.moisNom {
+  margin: 0;
+  font-size: 56px;
+  line-height: 1;
+}
+.moisLeger .moisNom {
+  font-size: 44px;
+  color: var(--rouge);
+}
+.moisPourquoi {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+}
+.mois1 .moisPourquoi {
+  font-size: 17px;
+}
+.apprendre {
+  font-size: 13px;
+  font-weight: 600;
+  opacity: 0.85;
+}
+.capacites {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.capacites li {
+  display: flex;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+.mois1 .capacites li {
+  font-size: 18px;
+}
+.monde {
+  background: var(--bleu-ciel);
+  color: var(--nuit);
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+.mondeHaut {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+.mondeEtiquette {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--nuit-douce);
+}
+.mondeNom {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+}
+.mondeAccroche {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.mondePourquoi {
+  margin: 0;
+  padding-top: 12px;
+  border-top: 1px solid rgba(15, 42, 68, 0.2);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--nuit-douce);
+}
+.mondePourquoi strong {
+  color: var(--nuit);
+}
+
+/* 3. Les semaines */
+.semaines {
+  background: var(--rose-pale);
+  padding: 56px var(--gouttiere);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.semainesIntro {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.semainesChapo {
+  margin: 0 0 8px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+.escalier {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.semaine {
+  border-radius: 24px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.semaine1 {
+  background: var(--rouge-profond);
+  color: var(--blanc);
+}
+.semaine2 {
+  background: var(--bleu-ciel);
+  color: var(--nuit);
+}
+.semaine3 {
+  background: var(--rose);
   color: var(--bordeaux);
 }
-.sept {
-  padding: 40px var(--gouttiere) 56px;
+.semaine4 {
+  background: var(--bordeaux);
+  color: var(--blanc);
+}
+.semaineHaut {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.semaineNumero {
+  font-size: 64px;
+  line-height: 0.9;
+}
+.semaineIcones {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.semaineTitre {
+  margin: 4px 0 0;
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.semaineTexte {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.pointilles {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 6px;
+}
+.pointilles span {
+  height: 8px;
+  border-radius: 4px;
+  background: repeating-linear-gradient(90deg, currentColor 0 10px, transparent 10px 15px);
+  opacity: 0.4;
+  width: 85%;
+}
+.pointilles span + span {
+  width: 55%;
+}
+.sousTitre {
+  margin: 32px 0 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--rouge);
+}
+.chiffres {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 20px;
+}
+.chiffre {
+  border-top: 1.5px solid var(--rose);
+  padding: 14px 0 18px;
+}
+.chiffre dt {
+  font-size: 44px;
+  line-height: 1;
+  color: var(--rouge);
+}
+.chiffre dd {
+  margin: 6px 0 0;
+  font-size: 14px;
+  line-height: 1.4;
+}
+.temps {
+  margin: 0;
+  font-size: 15px;
+}
+
+/* 4. Dans trois mois */
+.troisMois {
+  padding: 56px var(--gouttiere);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.sesMotsGrand {
+  margin: 8px 0 16px;
+  font-size: 30px;
+  line-height: 1.2;
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--bordeaux);
+}
+.sesMotsMoyen {
+  font-size: 22px;
+}
+.troisMoisTexte {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+}
+.mesures {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
-.liste {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 0;
-}
-.ligne {
-  padding: 16px 0;
-  border-top: 1.5px solid var(--rose);
+.mesures li {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-}
-.ligneHaut {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
   gap: 12px;
 }
-.ligneNom {
-  font-size: 26px;
-  color: var(--rouge-profond);
-}
-.ligneChoisie .ligneNom {
-  color: var(--rouge);
-}
-.ligneMois {
-  font-size: 13px;
+.mesurePhrase {
+  font-size: 15px;
   font-weight: 600;
-  background: var(--rouge-profond);
-  color: var(--blanc);
-  border-radius: 999px;
-  padding: 3px 10px;
 }
-.piste {
+.mesurePiste {
   position: relative;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  height: 22px;
 }
-.piste::before {
+.mesurePiste::before {
   content: "";
   position: absolute;
-  left: 6px;
-  right: 6px;
+  left: 4px;
+  right: 4px;
   top: 50%;
   height: 1.5px;
   background: var(--rose);
 }
-.cran {
+.mesurePiste span {
   position: relative;
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  background: var(--rose);
+  border: 1.5px solid var(--rose);
+  background: var(--blanc);
 }
-.cranIci {
-  width: 20px;
-  height: 20px;
-  background: var(--rouge-profond);
-  box-shadow: 0 0 0 4px var(--blanc);
-}
-.ligneChoisie .cranIci {
-  background: var(--rouge);
-}
-.bornes {
+
+/* 5. L'offre */
+.offre {
+  background: var(--bordeaux);
+  color: var(--blanc);
   display: flex;
-  justify-content: space-between;
-  gap: 24px;
-  font-size: 12px;
-  line-height: 1.4;
+  flex-direction: column;
 }
-.bornes span:last-child {
-  text-align: right;
+.offreImage img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+}
+.offreTexte {
+  padding: 40px var(--gouttiere) 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: flex-start;
+}
+.prix {
+  margin: 0;
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.prix .titre-nom,
+.prix > span:first-child {
+  font-size: 88px;
+  line-height: 0.9;
+}
+.prixUnite {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.35;
+  padding-bottom: 6px;
+}
+.soit {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--rose);
+}
+.inclus {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.inclus li {
+  display: flex;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+.commencer {
+  background: var(--rose);
+  border-color: var(--rose);
+  color: var(--bordeaux);
+  width: 100%;
+  margin-top: 8px;
+}
+.commencer:hover {
+  background: var(--blanc);
+  border-color: var(--blanc);
+  color: var(--bordeaux);
+}
+.rassure {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--rose);
+}
+
+/* 6. Fin */
+.fin {
+  padding: 40px var(--gouttiere) 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+  font-size: 15px;
+}
+.discret {
+  background: none;
+  border: 0;
+  font: inherit;
+  font-size: 12px;
+  color: var(--rouge-profond);
+  opacity: 0.8;
+  text-decoration: underline;
+  min-height: var(--cible);
+  cursor: pointer;
 }
 
 @media (min-width: 1024px) {
   .entete {
     padding: 28px 96px;
   }
-  .marque {
-    font-size: 30px;
+  .compris {
+    padding: 72px 96px 96px;
   }
-  .intro {
-    padding: 72px 96px 56px;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
-    gap: 96px;
-    align-items: end;
-  }
-  .titre {
+  .titreCompris {
     font-size: 72px;
-    line-height: 1.04;
   }
-  .chapo {
-    font-size: 20px;
+  .ouverture {
+    font-size: 34px;
+    line-height: 1.4;
+    max-width: 900px;
   }
-  .mois {
-    padding: 0 96px 48px;
+  .blocs {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 40px;
+    margin-top: 16px;
+  }
+  .blocTexte {
+    font-size: 18px;
+  }
+  .chemin {
+    padding: 24px 96px 96px;
     gap: 20px;
   }
-  .nomQuete {
-    font-size: 44px;
+  .titreSection {
+    font-size: 48px;
   }
-  .bande {
-    padding: 56px 96px 64px;
+  .explication {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    padding: 28px;
+  }
+  .mois1 {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 56px;
+    padding: 40px;
+    align-items: start;
+  }
+  .moisNom {
+    font-size: 96px;
+  }
+  .moisSuivants {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .moisLeger .moisNom {
+    font-size: 56px;
+  }
+  .moisLeger .monde {
+    margin-top: auto;
+  }
+  .mondeHaut {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  .semaines {
+    padding: 96px;
+  }
+  .semainesIntro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 96px;
+    align-items: end;
+    margin-bottom: 40px;
+  }
+  .escalier {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .semaine {
+    flex: 1;
+  }
+  .semaine1 {
+    margin-top: 72px;
+  }
+  .semaine2 {
+    margin-top: 48px;
+  }
+  .semaine3 {
+    margin-top: 24px;
+  }
+  .semaineNumero {
+    font-size: 80px;
+  }
+  .chiffres {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+  .troisMois {
+    padding: 96px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
     gap: 96px;
     align-items: center;
   }
-  .capacite {
-    font-size: 20px;
+  .sesMotsGrand {
+    font-size: 48px;
   }
-  .boutons {
-    flex-direction: row;
-    flex-wrap: wrap;
+  .sesMotsMoyen {
+    font-size: 32px;
   }
-  .boutons a {
+  .offre {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .offreImage img {
+    height: 100%;
+    min-height: 640px;
+  }
+  .offreTexte {
+    padding: 96px 88px;
+    justify-content: center;
+  }
+  .prix > span:first-child {
+    font-size: 140px;
+  }
+  .commencer {
     width: auto;
-  }
-  .sept {
-    padding: 64px 96px 80px;
-  }
-  .liste {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 64px;
   }
 }

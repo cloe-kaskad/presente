@@ -119,17 +119,26 @@ export function quetesDuZoom(positions: Positions): QueteId[] {
 // 3. Les 3 quêtes
 // ---------------------------------------------------------------------------
 
+function decouper(positions: Positions) {
+  const c = classement(positions);
+  const seuil = scoreDe(positions, c[2]);
+  const sures = c.filter((q) => scoreDe(positions, q) > seuil);
+  const egales = c.filter((q) => scoreDe(positions, q) === seuil);
+  return { sures, egales, places: 3 - sures.length };
+}
+
+function completer(sures: QueteId[], egales: QueteId[], places: number, nommee: unknown): QueteId[] {
+  const n = isQueteId(nommee) && egales.includes(nommee) ? nommee : null;
+  const departagees = n ? [n, ...egales.filter((q) => q !== n)] : egales;
+  return [...sures, ...departagees.slice(0, places)];
+}
+
 export async function troisQuetes(
   positions: Positions,
   appelle: string | undefined,
   departage: Departage,
 ): Promise<QueteId[]> {
-  const c = classement(positions);
-  const seuil = scoreDe(positions, c[2]);
-  const sures = c.filter((q) => scoreDe(positions, q) > seuil);
-  const egales = c.filter((q) => scoreDe(positions, q) === seuil);
-  const places = 3 - sures.length;
-
+  const { sures, egales, places } = decouper(positions);
   if (egales.length <= places) return [...sures, ...egales];
 
   // Égalité : sa réponse ouverte départage. Sinon, l'ordre du classement
@@ -137,14 +146,25 @@ export async function troisQuetes(
   let nommee: QueteId | null = null;
   if (appelle && appelle.trim()) {
     try {
-      const r = await departage(appelle, egales);
-      if (isQueteId(r) && egales.includes(r)) nommee = r;
+      nommee = await departage(appelle, egales);
     } catch {
       nommee = null;
     }
   }
-  const departagees = nommee ? [nommee, ...egales.filter((q) => q !== nommee)] : egales;
-  return [...sures, ...departagees.slice(0, places)];
+  return completer(sures, egales, places, nommee);
+}
+
+/**
+ * La même règle, sans attendre Claude : pour l'aperçu en direct de l'écran « Échanger ».
+ * Le départage se fait avec une lecture simple de sa réponse.
+ */
+export function apercuTroisQuetes(
+  positions: Positions,
+  departageSimple: (egales: QueteId[]) => QueteId | null,
+): [QueteId, QueteId, QueteId] {
+  const { sures, egales, places } = decouper(positions);
+  const trois = egales.length <= places ? [...sures, ...egales] : completer(sures, egales, places, departageSimple(egales));
+  return ordonner(trois, positions);
 }
 
 // ---------------------------------------------------------------------------

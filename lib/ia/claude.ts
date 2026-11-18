@@ -29,6 +29,7 @@ export async function demanderJson<S extends z.ZodType>(options: {
   message: string;
   schema: S;
   maxTokens?: number;
+  effort?: "low" | "medium" | "high";
 }): Promise<z.infer<S> | null> {
   if (!claudeDisponible()) return null;
   try {
@@ -37,8 +38,9 @@ export async function demanderJson<S extends z.ZodType>(options: {
       max_tokens: options.maxTokens ?? 2000,
       betas: ["server-side-fallback-2026-07-01"],
       fallbacks: "default",
-      output_config: { effort: "low", format: betaZodOutputFormat(options.schema) },
-      system: options.systeme,
+      output_config: { effort: options.effort ?? "low", format: betaZodOutputFormat(options.schema) },
+      // Le prompt système est le même pour tous les appels : on le met en cache.
+      system: [{ type: "text", text: options.systeme, cache_control: { type: "ephemeral" } }],
       messages: [{ role: "user", content: options.message }],
     });
     if (reponse.stop_reason === "refusal") {

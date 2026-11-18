@@ -1,9 +1,18 @@
 .page {
   min-height: 100svh;
+  display: flex;
+  flex-direction: column;
 }
 .entete {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
   padding: 12px var(--gouttiere);
   border-bottom: 1.5px solid var(--rose-pale);
+}
+.marqueOrdi {
+  display: none;
 }
 .retour {
   font-size: 15px;
@@ -13,13 +22,14 @@
   display: inline-flex;
   align-items: center;
 }
-.corps {
-  max-width: 640px;
-  margin: 0 auto;
-  padding: 36px var(--gouttiere) 48px;
+.grille {
+  flex: 1;
+}
+.gauche {
+  padding: 32px var(--gouttiere) 8px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 16px;
 }
 .titre {
   margin: 0;
@@ -31,92 +41,121 @@
 }
 .texte {
   margin: 0;
-  font-size: 17px;
+  font-size: 16px;
+  line-height: 1.6;
 }
-.erreur {
-  margin: 0;
-  padding: 12px 16px;
-  border-radius: 16px;
-  background: var(--rose-pale);
-  color: var(--bordeaux);
-}
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-  margin-top: 8px;
-}
-.groupe {
-  border: 0;
-  margin: 0;
-  padding: 0;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.legende {
-  padding: 0;
-  margin-bottom: 12px;
-  font-size: 18px;
+.etiquette {
+  margin-top: 6px;
+  font-size: 13px;
   font-weight: 600;
 }
-.option {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 14px 16px;
-  min-height: var(--cible);
-  border: 1.5px solid var(--rose);
-  border-radius: 16px;
-  cursor: pointer;
-}
-.option:has(input:checked) {
-  background: var(--rose-pale);
-  border-color: var(--rouge-profond);
-}
-.option:has(input:focus-visible) {
-  outline: 3px solid var(--bordeaux);
-  outline-offset: 2px;
-}
-.option input {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
+.puces {
+  list-style: none;
   margin: 0;
-  cursor: pointer;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
-.rond {
-  flex: none;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  border: 1.5px solid var(--rouge-profond);
-}
-.option:has(input:checked) .rond {
+.puce {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   background: var(--rouge-profond);
-  box-shadow: inset 0 0 0 4px var(--rose-pale);
+  color: var(--blanc);
+  border-radius: 999px;
+  padding: 9px 16px;
+  font-size: 15px;
+  font-weight: 600;
 }
-.nom {
-  font-size: 24px;
-  color: var(--rouge-profond);
+.puceMois {
+  opacity: 0.8;
 }
-.detail {
-  margin-left: auto;
-  font-size: 13px;
-  text-align: right;
+.note {
+  margin: 0;
+  font-size: 14px;
 }
-.actions {
+.boutonOrdi {
+  display: none;
+}
+.quetes {
+  padding: 16px var(--gouttiere) 24px;
+}
+.quete {
+  border-top: 1.5px solid var(--rose);
+  padding: 18px 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.queteHaut {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
+  gap: 12px;
 }
-.annuler {
+.nom {
+  margin: 0;
+  font-size: 30px;
+  line-height: 1.05;
+  color: var(--rouge);
+}
+.mois {
+  background: var(--rouge-profond);
+  color: var(--blanc);
+  border-radius: 999px;
+  padding: 4px 11px;
+  font-size: 13px;
   font-weight: 600;
-  min-height: var(--cible);
-  display: inline-flex;
-  align-items: center;
+}
+.pied {
+  position: sticky;
+  bottom: 0;
+  background: var(--blanc);
+  padding: 16px var(--gouttiere) 28px;
+  border-top: 1.5px solid var(--rose-pale);
+}
+.pied button {
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .entete {
+    padding: 28px 96px;
+    border-bottom: 0;
+  }
+  .marqueOrdi {
+    display: block;
+  }
+  .grille {
+    padding: 24px 96px 64px;
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr);
+    gap: 96px;
+    align-items: start;
+  }
+  .gauche {
+    position: sticky;
+    top: 24px;
+    padding: 0;
+  }
+  .titre {
+    font-size: 52px;
+  }
+  .texte {
+    font-size: 18px;
+  }
+  .boutonOrdi {
+    display: block;
+    margin-top: 16px;
+  }
+  .quetes {
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 48px;
+  }
+  .pied {
+    display: none;
+  }
 }

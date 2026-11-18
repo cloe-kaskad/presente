@@ -225,80 +225,98 @@ const SchemaVerdict = z.object({
 
 type Resultat = { texte: TexteEcrit } | { detresse: true };
 
+/** Nombre d'essais d'écriture : le second reçoit la raison du refus du premier. */
+const ESSAIS = 2;
+
 async function ecrireUne(t: Tache, ctx: ContexteCarte, reponses: Reponse[]): Promise<Resultat> {
   const deSecours = (raison: string): Resultat => ({
     texte: { emplacement: t.emplacement, cle: t.cle, texte: secours(t, ctx), statut: "secours", raison },
   });
   if (!claudeDisponible()) return deSecours("pas de clé ANTHROPIC_API_KEY");
 
-  const message = JSON.stringify(entree(t, ctx, reponses));
-  let morceaux: string[];
-  let texte: string;
+  const base = entree(t, ctx, reponses);
+  const sources = t.emplacement === "monde_accroche" ? [planDuMonde(t.cle as MondeId)] : reponses.map((r) => r.reponse);
+  let refus: { texte: string; raison: string } | null = null;
+  let derniereRaison = "inconnue";
 
-  if (t.emplacement === "carte_synthese") {
-    const a = await appelerJson({
-      usage: "carte_synthese",
-      systeme: promptEcriture(),
-      message,
-      schema: SchemaSynthese,
-      effort: "medium",
+  for (let essai = 1; essai <= ESSAIS; essai++) {
+    // Au second essai, Claude voit son texte refusé et pourquoi. Rien de tout ça n'est journalisé.
+    const message = JSON.stringify(
+      refus
+        ? {
+            ...base,
+            essai_precedent_refuse: {
+              texte: refus.texte,
+              raison: refus.raison,
+              consigne:
+                "Réécris le texte en corrigeant ce point. Toute citation entre guillemets doit reprendre ses mots exacts, recopiés tels quels depuis reponses_utiles. Dans le doute, n'en mets pas.",
+            },
+          }
+        : base,
+    );
+
+    let morceaux: string[];
+    let texte: string;
+    if (t.emplacement === "carte_synthese") {
+      const a = await appelerJson({ usage: "carte_synthese", systeme: promptEcriture(), message, schema: SchemaSynthese, effort: "medium" });
+      if (!a.ok) return deSecours(`écriture : ${a.raison}`);
+      if (a.data.statut === "detresse") return { detresse: true };
+      const s: Synthese = {
+        ouverture: a.data.ouverture.trim(),
+        ce_qui_revient: a.data.ce_qui_revient.trim(),
+        d_ou_ca_vient: a.data.d_ou_ca_vient.trim(),
+        ce_qui_se_joue: a.data.ce_qui_se_joue.trim(),
+      };
+      morceaux = [s.ouverture, s.ce_qui_revient, s.d_ou_ca_vient, s.ce_qui_se_joue];
+      texte = JSON.stringify(s);
+    } else {
+      const a = await appelerJson({ usage: t.emplacement, systeme: promptEcriture(), message, schema: SchemaTexte });
+      if (!a.ok) return deSecours(`écriture : ${a.raison}`);
+      if (a.data.statut === "detresse") return { detresse: true };
+      texte = a.data.texte.trim();
+      if (t.emplacement === "capacite") texte = texte.replace(/\.$/, "").replace(/^[«"]\s*|\s*[»"]$/g, "");
+      morceaux = [texte];
+    }
+
+    // 1. Les règles vérifiables sans Claude.
+    const regles = verifierRegles(
+      t.emplacement,
+      morceaux,
+      sources,
+      ctx.sujetsAEviter,
+      t.emplacement === "carte_synthese" ? 1 : t.emplacement === "monde_accroche" ? 3 : 2,
+    );
+    if (!regles.ok) {
+      derniereRaison = `règle ${regles.regle} : ${regles.raison}`;
+      console.warn(`[moteur:${t.emplacement}] essai ${essai}, ${derniereRaison}`);
+      refus = { texte: morceaux.join("\n\n"), raison: regles.raison };
+      continue;
+    }
+
+    // 2. La seconde passe.
+    const v = await appelerJson({
+      usage: `verif:${t.emplacement}`,
+      systeme: promptVerification(),
+      message: JSON.stringify({
+        emplacement: t.emplacement,
+        longueur_attendue: LONGUEUR_ATTENDUE[t.emplacement],
+        texte: morceaux.join("\n\n"),
+        reponses_sources: t.emplacement === "monde_accroche" ? [] : reponses,
+        plan_du_monde:
+          t.emplacement === "monde_accroche" || t.emplacement === "monde_pourquoi" ? planDuMonde(t.cle as MondeId) : undefined,
+        sujets_a_eviter: ctx.sujetsAEviter?.trim() || "aucun",
+      }),
+      schema: SchemaVerdict,
     });
-    if (!a.ok) return deSecours(`écriture : ${a.raison}`);
-    const r = a.data;
-    if (r.statut === "detresse") return { detresse: true };
-    const s: Synthese = {
-      ouverture: r.ouverture.trim(),
-      ce_qui_revient: r.ce_qui_revient.trim(),
-      d_ou_ca_vient: r.d_ou_ca_vient.trim(),
-      ce_qui_se_joue: r.ce_qui_se_joue.trim(),
-    };
-    morceaux = [s.ouverture, s.ce_qui_revient, s.d_ou_ca_vient, s.ce_qui_se_joue];
-    texte = JSON.stringify(s);
-  } else {
-    const a = await appelerJson({ usage: t.emplacement, systeme: promptEcriture(), message, schema: SchemaTexte });
-    if (!a.ok) return deSecours(`écriture : ${a.raison}`);
-    const r = a.data;
-    if (r.statut === "detresse") return { detresse: true };
-    texte = r.texte.trim();
-    if (t.emplacement === "capacite") texte = texte.replace(/\.$/, "").replace(/^[«"]\s*|\s*[»"]$/g, "");
-    morceaux = [texte];
-  }
+    if (!v.ok) return deSecours(`seconde passe : ${v.raison}`);
+    if (v.data.verdict === "ok") return { texte: { emplacement: t.emplacement, cle: t.cle, texte, statut: "ok" } };
 
-  // 1. Les règles vérifiables sans Claude.
-  const sources = reponses.map((r) => r.reponse);
-  const regles = verifierRegles(
-    t.emplacement,
-    morceaux,
-    t.emplacement === "monde_accroche" ? [planDuMonde(t.cle as MondeId)] : sources,
-    ctx.sujetsAEviter,
-    t.emplacement === "carte_synthese" ? 1 : t.emplacement === "monde_accroche" ? 3 : 2,
-  );
-  if (!regles.ok) {
-    console.warn(`[moteur:${t.emplacement}] règle ${regles.regle} : ${regles.raison}`);
-    return deSecours(`règle ${regles.regle} : ${regles.raison}`);
+    // On ne garde dans la base que le numéro de la règle : la raison peut citer ses mots.
+    derniereRaison = `seconde passe : KO, règle ${v.data.regle ?? "?"}`;
+    console.warn(`[moteur:${t.emplacement}] essai ${essai}, ${derniereRaison}`);
+    refus = { texte: morceaux.join("\n\n"), raison: `seconde passe, règle ${v.data.regle ?? "?"} : ${v.data.raison ?? ""}` };
   }
-
-  // 2. La seconde passe.
-  const v = await appelerJson({
-    usage: `verif:${t.emplacement}`,
-    systeme: promptVerification(),
-    message: JSON.stringify({
-      emplacement: t.emplacement,
-      longueur_attendue: LONGUEUR_ATTENDUE[t.emplacement],
-      texte: morceaux.join("\n\n"),
-      reponses_sources: t.emplacement === "monde_accroche" ? [] : reponses,
-      plan_du_monde: t.emplacement === "monde_accroche" || t.emplacement === "monde_pourquoi" ? planDuMonde(t.cle as MondeId) : undefined,
-      sujets_a_eviter: ctx.sujetsAEviter?.trim() || "aucun",
-    }),
-    schema: SchemaVerdict,
-  });
-  if (!v.ok) return deSecours(`seconde passe : ${v.raison}`);
-  if (v.data.verdict !== "ok") {
-    // On ne garde que le numéro de la règle : la raison peut citer ses mots.
-    console.warn(`[moteur:${t.emplacement}] seconde passe KO (règle ${v.data.regle ?? "?"})`);
-    return deSecours(`seconde passe : KO, règle ${v.data.regle ?? "?"}`);
-  }
-  return { texte: { emplacement: t.emplacement, cle: t.cle, texte, statut: "ok" } };
+  return deSecours(`${derniereRaison} (après ${ESSAIS} essais)`);
 }
 
 async function parLots<T, R>(items: T[], taille: number, f: (x: T) => Promise<R>): Promise<R[]> {

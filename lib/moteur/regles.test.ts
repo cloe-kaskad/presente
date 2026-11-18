@@ -10,6 +10,17 @@ describe("les règles du moteur", () => {
     expect(r.ok).toBe(true);
   });
 
+  it("accepte une citation qui ne diffère que par la ponctuation ou les majuscules", () => {
+    expect(verifierRegles("carte_pourquoi", ["Tu as écrit « J'ai honte de ne rien comprendre à mes comptes. »"], sources, null).ok).toBe(true);
+    expect(verifierRegles("carte_pourquoi", ["Tu parles de « porte fermée »."], sources, null).ok).toBe(true);
+    expect(verifierRegles("carte_pourquoi", ["« j'ai honte… mes comptes »"], sources, null).ok).toBe(true);
+  });
+
+  it("refuse une citation dont un mot a changé", () => {
+    expect(verifierRegles("carte_pourquoi", ["« j'ai honte de ne rien comprendre à mon compte »"], sources, null).ok).toBe(false);
+    expect(verifierRegles("carte_pourquoi", ["« porte »"], ["apporte"], null).ok).toBe(false);
+  });
+
   it("refuse une citation déformée", () => {
     const r = verifierRegles("carte_pourquoi", ["Tu as écrit « j'ai honte de mes comptes »."], sources, null);
     expect(r).toMatchObject({ ok: false, regle: 1 });
@@ -32,7 +43,7 @@ describe("les règles du moteur", () => {
   });
 
   it("refuse un texte trop long ou vide", () => {
-    expect(verifierRegles("capacite", ["a".repeat(100)], sources, null)).toMatchObject({ ok: false, regle: 7 });
+    expect(verifierRegles("capacite", ["a".repeat(120)], sources, null)).toMatchObject({ ok: false, regle: 7 });
     expect(verifierRegles("capacite", [" "], sources, null)).toMatchObject({ ok: false, regle: 7 });
   });
 

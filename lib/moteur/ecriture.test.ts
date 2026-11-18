@@ -83,7 +83,24 @@ describe("le moteur d'écriture de la carte", () => {
     expect(appels.some((a) => a.usage === "carte_synthese")).toBe(false);
   });
 
-  it("une citation inventée : texte de secours, sans même la seconde passe", async () => {
+  it("un texte refusé est réécrit une fois, avec la raison du refus", async () => {
+    let n = 0;
+    repondre = (a) => {
+      if (a.usage === "carte_pourquoi" && a.message.includes('"cle_test":"voix"') === false) {
+        n++;
+        return a.message.includes("essai_precedent_refuse")
+          ? { statut: "ok", texte: "Tu as écrit « j'ai honte de ne rien comprendre à mes comptes »." }
+          : { statut: "ok", texte: "Tu as écrit « je déteste l'argent »." };
+      }
+      return bonneReponse(a);
+    };
+    const r = await ecrireLaCarte({ chemin, reponses: reponses(), sujetsAEviter: null }, new Set());
+    if (r.detresse) throw new Error("pas de détresse attendue");
+    expect(r.textes.filter((t) => t.emplacement === "carte_pourquoi").every((t) => t.statut === "ok")).toBe(true);
+    expect(n).toBe(6); // 3 quêtes, 2 essais chacune
+  });
+
+  it("une citation inventée deux fois : texte de secours, sans même la seconde passe", async () => {
     repondre = (a) =>
       a.usage === "carte_pourquoi" ? { statut: "ok", texte: "Tu as écrit « je déteste l'argent »." } : bonneReponse(a);
     const r = await ecrireLaCarte({ chemin, reponses: reponses(), sujetsAEviter: null }, new Set());

@@ -1,6 +1,7 @@
 /**
  * Les règles du moteur d'écriture qu'on peut vérifier sans Claude.
- * Elles passent avant la seconde passe : un texte qui échoue ici est remplacé par le texte de secours.
+ * Elles passent avant la seconde passe. Un texte qui échoue est réécrit une fois par Claude,
+ * avec la raison du refus ; s'il échoue encore, le texte de secours le remplace.
  */
 import { racinesAEviter, toucheSujet } from "@/lib/catalogue/filtres";
 
@@ -13,30 +14,36 @@ export type Emplacement =
 
 /** Longueur maximale, en caractères, de chaque texte (ou de chaque bloc pour la synthèse). */
 export const LONGUEUR_MAX: Record<Emplacement, number> = {
-  carte_synthese: 420,
-  carte_pourquoi: 280,
-  capacite: 80,
-  monde_accroche: 320,
-  monde_pourquoi: 280,
+  carte_synthese: 600,
+  carte_pourquoi: 420,
+  capacite: 90,
+  monde_accroche: 480,
+  monde_pourquoi: 380,
 };
 
 /** Ce qu'on dit à Claude (écriture et seconde passe) de la longueur attendue. */
 export const LONGUEUR_ATTENDUE: Record<Emplacement, string> = {
-  carte_synthese: "ouverture : deux phrases au plus ; chaque bloc : deux ou trois phrases",
-  carte_pourquoi: "une phrase, deux au plus",
-  capacite: "six à dix mots, à la première personne, sans point final",
-  monde_accroche: "une ou deux phrases",
-  monde_pourquoi: "une phrase",
+  carte_synthese:
+    "ouverture : deux phrases au plus ; chaque bloc : deux ou trois phrases ; 500 caractères au plus par bloc ; une seule citation entre guillemets dans tout le texte",
+  carte_pourquoi: "une phrase, deux au plus, 350 caractères au plus",
+  capacite: "six à dix mots, à la première personne, sans point final, sans guillemets",
+  monde_accroche: "une ou deux phrases, 400 caractères au plus",
+  monde_pourquoi: "une phrase, 300 caractères au plus",
 };
 
 const MOTS_INTERDITS = [/empowerment/i, /bienveillant/i, /transformation/i];
 
+/**
+ * Pour comparer une citation à ses réponses : sans majuscules, sans ponctuation, espaces réduits.
+ * « J’ai honte, de mes comptes. » et « j'ai honte de mes comptes » sont la même citation ;
+ * un mot changé, ajouté ou retiré ne l'est pas.
+ */
 function normaliser(t: string): string {
-  return t
-    .replace(/[’‘]/g, "'")
-    .replace(/\s+/g, " ")
-    .trim()
-    .toLowerCase();
+  return ` ${t
+    .normalize("NFC")
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}]+/gu, " ")
+    .trim()} `;
 }
 
 /** Les passages entre guillemets français. */
@@ -68,7 +75,11 @@ export function verifierRegles(
   if (cites.length > citationsPermises) return { ok: false, regle: 1, raison: "trop de citations" };
   const corpus = normaliser(sources.join("\n"));
   for (const c of cites) {
-    if (!corpus.includes(normaliser(c))) return { ok: false, regle: 1, raison: "citation introuvable dans ses réponses" };
+    // Une citation coupée par des points de suspension : chaque morceau doit exister.
+    const morceaux = c.split(/…|\.\.\.|\[…\]/).map(normaliser).filter((m) => m.trim());
+    if (!morceaux.length || morceaux.some((m) => !corpus.includes(m))) {
+      return { ok: false, regle: 1, raison: "citation introuvable dans ses réponses" };
+    }
   }
 
   if (toucheSujet(racinesAEviter(sujetsAEviter), tout)) return { ok: false, regle: 5, raison: "sujet à éviter" };

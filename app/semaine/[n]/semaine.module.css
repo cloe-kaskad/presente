@@ -1,0 +1,98 @@
+.page {
+  min-height: 100svh;
+}
+.entete {
+  padding: 12px var(--gouttiere);
+  border-bottom: 1.5px solid var(--rose-pale);
+}
+.retour {
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  min-height: var(--cible);
+  display: inline-flex;
+  align-items: center;
+}
+.corps {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 36px var(--gouttiere) 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.surtitre {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+.slash {
+  color: var(--rouge);
+}
+.titre {
+  margin: 0;
+  font-size: 34px;
+  line-height: 1.08;
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  color: var(--rouge);
+}
+.carte {
+  border: 1.5px solid var(--rouge-profond);
+  border-radius: 24px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: flex-start;
+}
+.cartePleine {
+  background: var(--rose-pale);
+}
+.image {
+  width: 100%;
+  max-height: 260px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+.texte {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.6;
+}
+.auteur {
+  font-weight: 600;
+}
+.description {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.nomPratique {
+  margin: 0;
+  font-size: 26px;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.rythme {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+.manque {
+  margin: 0;
+  padding: 16px;
+  border-radius: 16px;
+  background: var(--rose-pale);
+  color: var(--bordeaux);
+  font-size: 15px;
+}
+@media (min-width: 1024px) {
+  .corps {
+    padding-top: 72px;
+  }
+  .titre {
+    font-size: 52px;
+  }
+}

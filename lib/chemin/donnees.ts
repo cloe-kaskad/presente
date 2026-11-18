@@ -3,17 +3,27 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { isCode, isQueteId, MONDES, type CodeCapacite, type MondeId, type QueteId } from "@/lib/questionnaire/contenu";
 import type { Chemin } from "./calcul";
 
+export type ChoixEnregistre = {
+  quete: string;
+  contenu: string | null;
+  pratique: string | null;
+  capaciteContenu?: string | null;
+  capacitePratique?: string | null;
+};
+
 export type CheminEnregistre = Chemin & {
   id: string;
   dateDebut: string;
   semaine: number;
+  /** Clés « m1s1 », « m1s3 », « m2s1 »… */
+  choix: Record<string, ChoixEnregistre>;
 };
 
 /** Son chemin actif, ou null. */
 export async function chargerChemin(supabase: SupabaseClient): Promise<CheminEnregistre | null> {
   const { data, error } = await supabase
     .from("paths")
-    .select("id, quetes, capacites, mondes, date_debut, semaine_en_cours")
+    .select("*")
     .eq("actif", true)
     .maybeSingle();
   if (error) throw new Error(`Lecture du chemin impossible (${error.code})`);
@@ -37,5 +47,6 @@ export async function chargerChemin(supabase: SupabaseClient): Promise<CheminEnr
     mondes: mondes as [MondeId, MondeId, MondeId],
     dateDebut: data.date_debut,
     semaine: data.semaine_en_cours,
+    choix: (data.choix && typeof data.choix === "object" ? data.choix : {}) as Record<string, ChoixEnregistre>,
   };
 }

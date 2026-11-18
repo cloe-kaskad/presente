@@ -63,3 +63,14 @@ npm test
 
 Pour recommencer le questionnaire de zéro pendant les tests : dans Supabase, Table Editor,
 supprimer sa ligne dans `paths` et ses lignes dans `questionnaire_responses`.
+
+## Étape 5 : Airtable, choix des contenus et des exercices
+
+1. **Lancer la migration** `supabase/migrations/20261118100000_choix_semaines.sql` (SQL Editor > Run).
+2. **Vercel** : ajouter `AIRTABLE_TOKEN` (un jeton Airtable en lecture seule, accès à la base Liberté, Chérie !)
+   et `AIRTABLE_BASE_ID` = `appXzGMlNyLLQeRwY`. Redéployer.
+
+Le site lit Airtable sans jamais y écrire, avec un cache de 10 minutes : une modification dans Airtable
+apparaît sur le site au plus tard 10 minutes après. Seuls les contenus et pratiques « Validé » sont proposés.
+Dans la médiathèque, le site lit les champs « P! » plus le titre, l'autrice, le type, la description,
+l'image et le lien (pour pouvoir afficher le contenu). Il ne lit pas « Thème LC », « Tags » ni « Recommandé par ».

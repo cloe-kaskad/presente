@@ -4,6 +4,9 @@ import { Marque } from "@/components/Marque";
 import { chargerChemin } from "@/lib/chemin/donnees";
 import { HUMEURS, semainesDuMois } from "@/lib/chemin/textes";
 import { MONDE, QUETE, libelleCapacite } from "@/lib/questionnaire/contenu";
+import { decrireContenu } from "@/lib/catalogue/presentation";
+import { choixDuMois, profilDeChoix } from "@/lib/catalogue/semaines";
+import { chargerReponses } from "@/lib/questionnaire/donnees";
 import { createClient } from "@/lib/supabase/server";
 import { noterHumeur, semaineSuivante } from "./actions";
 import styles from "./chemin.module.css";
@@ -22,25 +25,33 @@ export default async function Chemin() {
 
   const debutJour = new Date();
   debutJour.setHours(0, 0, 0, 0);
-  const [{ data: profil }, { data: humeurs }] = await Promise.all([
-    supabase.from("profiles").select("prenom").maybeSingle(),
+  const [{ data: profil }, { data: humeurs }, reponses] = await Promise.all([
+    supabase.from("profiles").select("prenom, temps_par_semaine, formats_preferes, sujets_a_eviter").maybeSingle(),
     supabase
       .from("moods")
       .select("humeur")
       .gte("created_at", debutJour.toISOString())
       .order("created_at", { ascending: false })
       .limit(1),
+    chargerReponses(supabase, 1),
   ]);
   const humeurDuJour = humeurs?.[0]?.humeur as string | undefined;
 
   const mois = Math.min(2, Math.floor((chemin.semaine - 1) / 4)) as 0 | 1 | 2;
   const quete = chemin.quetes[mois];
   const capacites = chemin.capacites[quete];
+  const choix = await choixDuMois(supabase, chemin, mois, profilDeChoix(profil, reponses));
   const semaines = semainesDuMois(
     mois,
     [libelleCapacite(capacites[0]), libelleCapacite(capacites[1])],
     chemin.mondes[mois],
-  );
+  ).map((s) => {
+    // Semaines 1 et 3 : le titre du contenu choisi pour elle.
+    const c = s.dansLeMois === 1 ? choix.s1.contenu : s.dansLeMois === 3 ? choix.s3.contenu : null;
+    if (!c) return s;
+    const suite = s.dansLeMois === 1 ? "ton carnet, puis un exercice pour ouvrir la question." : "ton carnet, puis un geste à poser dans ta semaine.";
+    return { ...s, titre: c.titre, description: `${decrireContenu(c)}, ${suite}` };
+  });
   const autresMois = [0, 1, 2].filter((m) => m > mois);
   const prenom = profil?.prenom?.trim();
 

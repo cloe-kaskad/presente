@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>On trace ton chemin, ordinateur</title>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face{font-family:'Anton';src:url(assets/Anton.woff2) format('woff2');font-display:swap}
+@font-face{font-family:'DMSans';src:url(assets/DMSans.woff2) format('woff2');font-weight:100 1000;font-style:normal;font-display:swap}
+@font-face{font-family:'DMSans';src:url(assets/DMSans-Italic.woff2) format('woff2');font-weight:100 1000;font-style:italic;font-display:swap}
+body{margin:0}
+a{color:#c42c14}a:hover{color:#510004}
+input::placeholder,textarea::placeholder{color:#d98f86}
+</style>
+</helmet>
+<style>
+@keyframes pr-trace{0%{stroke-dashoffset:1}70%,100%{stroke-dashoffset:0}}
+@keyframes pr-fade{0%,60%{opacity:0}75%,100%{opacity:1}}
+@media (prefers-reduced-motion:reduce){.pr-anim{animation:none!important;stroke-dashoffset:0!important;opacity:1!important}}
+</style><div style="width:1440px;height:900px;box-sizing:border-box;background:#e6361d;color:#c42c14;font-family:'DMSans',system-ui,sans-serif;display:flex;flex-direction:column;color:#fff;background:#e6361d url(assets/grain.jpg) center/cover no-repeat">
+  <header style="padding:28px 96px"><div style="display:flex;flex-direction:column;gap:6px"><span style="font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.01em;font-size:30px;line-height:1.1;color:#ffffff">Présente&nbsp;!</span><div style="display:flex;align-items:center;gap:5px"><span style="font-size:10px;font-weight:500;line-height:1;color:#ffffff">l'école de</span><img src="assets/logo-lc-rouge.png" alt="Liberté, Chérie !" style="height:15px;width:auto;display:block;filter:brightness(0) invert(1);"></div></div></header>
+  <main style="flex:1;padding:24px 96px 72px;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:80px;align-items:center">
+    <div><svg viewBox="0 0 640 420" width="640" height="420" role="img" aria-label="Ton chemin se dessine" style="display:block;overflow:visible"><path d="M 20 400 C 350.0 394.0 290.0 34.0 620 30" fill="none" stroke="rgba(255,255,255,.28)" stroke-width="2" stroke-dasharray="2 7" stroke-linecap="round"/><path class="pr-anim" d="M 20 400 C 350.0 394.0 290.0 34.0 620 30" pathLength="1" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" style="stroke-dasharray:1;stroke-dashoffset:.42;animation:pr-trace 9s ease-in-out -4s infinite"/><circle cx="20.0" cy="400.0" r="7" fill="#ffffff" style=""/><circle cx="177.4" cy="359.6" r="5.5" fill="#ffffff" style=""/><circle cx="278.7" cy="268.3" r="5.5" fill="#ffffff" style=""/><circle cx="361.3" cy="160.2" r="5.5" fill="#ffffff" style="opacity:.35"/><circle cx="462.6" cy="69.4" r="5.5" fill="#ffffff" style="opacity:.35"/><circle cx="620.0" cy="30.0" r="10" fill="none" stroke="#ffffff" stroke-width="2" style="opacity:.35"/></svg></div>
+    <div style="display:flex;flex-direction:column;gap:36px">
+      <h1 style="margin:0;font-size:52px;line-height:1.06;font-weight:400;letter-spacing:-.035em;color:#ffffff;letter-spacing:-.04em">Camille, on trace ton chemin.</h1>
+      <ol aria-live="polite" style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:18px"><li style="display:flex;gap:14px;align-items:flex-start;opacity:1"><span style="flex:none;width:24px;height:24px;border-radius:50%;background:#ffffff;color:#e6361d;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span style="font-size:20px;line-height:1.35;font-weight:400;color:#ffffff">On relit ce que tu as écrit.<span style="display:block;margin-top:8px;font-size:18px"><span style="font-style:italic;font-weight:600;color:#510004;background:#ffffff;padding:1px 6px;border-radius:4px;-webkit-box-decoration-break:clone;box-decoration-break:clone">« porte fermée »</span></span></span></li><li style="display:flex;gap:14px;align-items:flex-start;opacity:1"><span style="flex:none;width:24px;height:24px;border-radius:50%;background:#ffffff;color:#e6361d;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span style="font-size:20px;line-height:1.35;font-weight:400;color:#ffffff">On choisit tes trois quêtes.</span></li><li style="display:flex;gap:14px;align-items:flex-start;opacity:1"><span style="flex:none;width:24px;height:24px;border-radius:50%;border:2px solid #ffffff;box-sizing:border-box;display:flex;align-items:center;justify-content:center"><span style="width:8px;height:8px;border-radius:50%;background:#ffffff"></span></span><span style="font-size:20px;line-height:1.35;font-weight:600;color:#ffffff">On cherche les mondes qui éclairent ton histoire.</span></li><li style="display:flex;gap:14px;align-items:flex-start;opacity:.5"><span style="flex:none;width:24px;height:24px;border-radius:50%;border:2px solid #ffffff;box-sizing:border-box"></span><span style="font-size:20px;line-height:1.35;font-weight:400;color:#ffffff">On prépare tes exercices et tes gestes.</span></li></ol>
+      <div class="pr-anim" style="animation:pr-fade 9s ease-in-out infinite"><a href="D-Carte.html" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;font-weight:600;font-size:18px;line-height:1.2;border-radius:999px;padding:14px 26px;box-sizing:border-box;background:#ffffff;color:#c42c14;border:1.5px solid #ffffff;padding:18px 32px">Découvrir mon chemin</a></div>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview": {"width": 1440, "height": 900}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

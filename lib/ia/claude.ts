@@ -1,6 +1,7 @@
 import "server-only";
 import Anthropic from "@anthropic-ai/sdk";
 import { betaZodOutputFormat } from "@anthropic-ai/sdk/helpers/beta/zod";
+import { zodOutputFormat } from "@anthropic-ai/sdk/helpers/zod";
 import type { z } from "zod";
 
 /** Le modèle : variable CLAUDE_MODEL, un Sonnet récent par défaut. */
@@ -39,28 +40,56 @@ export async function appelerJson<S extends z.ZodType>(options: {
     return { ok: false, raison, ms: Date.now() - debut };
   };
   if (!claudeDisponible()) return echec("pas de clé ANTHROPIC_API_KEY");
-  try {
-    const reponse = await getClient().beta.messages.parse({
+
+  const effort = options.effort ?? "low";
+  const system = [{ type: "text" as const, text: options.systeme, cache_control: { type: "ephemeral" as const } }];
+  const messages = [{ role: "user" as const, content: options.message }];
+  const max_tokens = options.maxTokens ?? 16000;
+
+  // Premier essai : avec le relais automatique vers un autre modèle en cas de refus (bêta).
+  // Si le compte n'y a pas accès (erreur 400), on réessaie aussitôt sans.
+  const avecRelais = () =>
+    getClient().beta.messages.parse({
       model: modele(),
-      max_tokens: options.maxTokens ?? 16000,
+      max_tokens,
       betas: ["server-side-fallback-2026-07-01"],
       fallbacks: "default",
-      output_config: { effort: options.effort ?? "low", format: betaZodOutputFormat(options.schema) },
-      // Le prompt système est le même pour tous les appels : on le met en cache.
-      system: [{ type: "text", text: options.systeme, cache_control: { type: "ephemeral" } }],
-      messages: [{ role: "user", content: options.message }],
+      output_config: { effort, format: betaZodOutputFormat(options.schema) },
+      system,
+      messages,
     });
+  const sansRelais = () =>
+    getClient().messages.parse({
+      model: modele(),
+      max_tokens,
+      output_config: { effort, format: zodOutputFormat(options.schema) },
+      system,
+      messages,
+    });
+
+  const lire = (reponse: { stop_reason: string | null; parsed_output?: unknown }): Appel<z.infer<S>> => {
     if (reponse.stop_reason === "refusal") return echec("refus du modèle");
     if (reponse.stop_reason === "max_tokens") return echec("réponse coupée (max_tokens)");
     if (!reponse.parsed_output) return echec("réponse illisible");
     return { ok: true, data: reponse.parsed_output as z.infer<S>, ms: Date.now() - debut };
+  };
+  const raisonDe = (e: unknown): string => {
+    if (e instanceof Anthropic.APIConnectionTimeoutError) return "délai dépassé";
+    // Le message d'erreur de l'API ne contient pas ses réponses : on peut le garder.
+    if (e instanceof Anthropic.APIError) return `erreur ${e.status ?? "?"} : ${String(e.message).slice(0, 300)}`;
+    return `réseau : ${e instanceof Error ? e.message.slice(0, 200) : "inconnue"}`;
+  };
+
+  try {
+    return lire(await avecRelais());
   } catch (e) {
-    if (e instanceof Anthropic.APIConnectionTimeoutError) return echec("délai dépassé");
-    if (e instanceof Anthropic.APIError) {
-      // Le message d'erreur de l'API ne contient pas ses réponses : on peut le garder.
-      return echec(`erreur ${e.status ?? "?"} : ${String(e.message).slice(0, 300)}`);
-    }
-    return echec(`réseau : ${e instanceof Error ? e.message.slice(0, 200) : "inconnue"}`);
+    if (!(e instanceof Anthropic.BadRequestError)) return echec(raisonDe(e));
+    console.warn(`[claude:${options.usage}] relais refusé (${raisonDe(e)}), nouvel essai sans`);
+  }
+  try {
+    return lire(await sansRelais());
+  } catch (e) {
+    return echec(raisonDe(e));
   }
 }
 

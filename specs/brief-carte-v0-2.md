@@ -61,3 +61,10 @@ Quand les maquettes sont validées, Claude Code devra :
 • lancer ces écritures pendant l'écran « On trace ton chemin » ;
 • mettre une majuscule au prénom ;
 • déplacer le récapitulatif des sept quêtes vers l'écran « Échanger une quête ».
+V0.3 : ajustements après relecture de Cloé (maquettes design/Carte.html et design/D-Carte.html)
+• Le mot « Quête » est affiché sur chaque mois. Un encart explique la différence : une quête, c'est ce qu'elle travaille dans sa vie (contenus, exercices, gestes), choisie parmi 7 ; un monde, c'est un podcast original écrit et enregistré par l'équipe de Présente!, choisi pour elle parmi 6.
+• Chaque monde affiche « Podcast original Présente! », « Choisi pour toi parmi 6 mondes » et une phrase « pourquoi ce monde pour toi ».
+• « Ce qu'on a compris de toi » n'est plus une suite de citations : c'est une vraie synthèse avec une première lecture (posture du skill coach). Structure : une phrase d'ouverture, puis trois blocs « Ce qui revient », « D'où ça vient, peut-être », « Ce qui se joue maintenant », puis la mention « C'est une lecture, pas un verdict ». Une citation au plus.
+• Les 4 semaines ont chacune leur couleur, leur icône et leur verbe (Ouvrir, Écouter, Agir, Faire le point), disposées en escalier.
+• Le prix s'affiche « 25 € par mois, pendant trois mois », puis « Soit 75 € pour ton chemin ».
+• Plus tard : des témoignages sous l'offre.

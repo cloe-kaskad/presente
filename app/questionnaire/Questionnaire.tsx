@@ -232,6 +232,37 @@ function Titre({ r, children }: { r: React.RefObject<HTMLHeadingElement | null>;
   );
 }
 
+/**
+ * L'âge se tape chiffre par chiffre : on garde ce qu'elle tape tel quel,
+ * et on n'enregistre que quand c'est un âge plausible.
+ */
+function ChampAge({ valeur, onChange }: { valeur: number | undefined; onChange: (age: number | undefined) => void }) {
+  const [texte, setTexte] = useState(valeur ? String(valeur) : "");
+  const n = Number.parseInt(texte, 10);
+  const invalide = texte !== "" && !(n >= 12 && n <= 120);
+  return (
+    <label className={styles.champLabel}>
+      Ton âge
+      <input
+        className="champ"
+        type="text"
+        inputMode="numeric"
+        autoComplete="off"
+        maxLength={3}
+        value={texte}
+        aria-invalid={invalide || undefined}
+        onChange={(e) => {
+          const t = e.target.value.replace(/\D/g, "").slice(0, 3);
+          setTexte(t);
+          const age = Number.parseInt(t, 10);
+          onChange(age >= 12 && age <= 120 ? age : undefined);
+        }}
+      />
+      {invalide ? <span className={styles.aide}>En chiffres, par exemple 36.</span> : null}
+    </label>
+  );
+}
+
 type Maj = <N extends NumeroPartie>(p: N, f: (ancienne: Reponses[N]) => Reponses[N]) => void;
 
 function Ecran({
@@ -649,19 +680,7 @@ function Ecran({
             <input className="champ" value={email} readOnly aria-readonly="true" />
           </label>
           <div className={styles.deuxChamps}>
-            <label className={styles.champLabel}>
-              Ton âge
-              <input
-                className="champ"
-                inputMode="numeric"
-                maxLength={3}
-                value={p.age ?? ""}
-                onChange={(e) => {
-                  const n = Number.parseInt(e.target.value.replace(/\D/g, ""), 10);
-                  maj(5, (a) => ({ ...a, age: Number.isFinite(n) && n >= 12 && n <= 120 ? n : undefined }));
-                }}
-              />
-            </label>
+            <ChampAge valeur={p.age} onChange={(age) => maj(5, (a) => ({ ...a, age }))} />
             <label className={styles.champLabel}>
               Ton code postal
               <input

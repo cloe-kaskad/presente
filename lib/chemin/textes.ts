@@ -91,5 +91,16 @@ export function semainesDuMois(
   ];
 }
 
-export const HUMEURS = ["lourd", "gris", "calme", "léger", "vivante"] as const;
+/** Au féminin. De la plus lourde à la plus vive. */
+export const HUMEURS = [
+  "triste",
+  "lourde",
+  "anxieuse",
+  "énervée",
+  "grise",
+  "calme",
+  "légère",
+  "enthousiaste",
+  "vivante",
+] as const;
 export type Humeur = (typeof HUMEURS)[number];

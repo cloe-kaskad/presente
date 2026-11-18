@@ -75,11 +75,10 @@
   letter-spacing: -0.035em;
   color: var(--rouge);
 }
-.titre:focus {
-  outline: none;
-}
+/* Le titre reçoit le focus à chaque écran (pour les lecteurs d'écran) : pas de cadre visible. */
+.titre:focus,
 .titre:focus-visible {
-  outline: 3px solid var(--bordeaux);
+  outline: none;
 }
 .nomQuete {
   margin: 0;
@@ -307,4 +306,9 @@
     justify-content: space-between;
     align-items: center;
   }
+}
+
+.aide {
+  font-size: 13px;
+  font-weight: 400;
 }

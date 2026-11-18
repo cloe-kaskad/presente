@@ -53,7 +53,6 @@ export function dependancesIA(reponses: Reponses): Dependances {
         usage: "departage",
         systeme: SYSTEME,
         schema,
-        maxTokens: 1000,
         message: `Elle a répondu à la question « Laquelle t'appelle le plus, et pourquoi ? » :
 <reponse>
 ${texte}
@@ -77,7 +76,6 @@ Laquelle nomme-t-elle ou évoque-t-elle clairement ? Si aucune ne ressort, ou si
         usage: "capacites",
         systeme: SYSTEME,
         schema,
-        maxTokens: 1000,
         message: `Voici ce qu'elle a écrit :
 <reponses>
 ${textes}

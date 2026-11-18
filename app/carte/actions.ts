@@ -49,7 +49,13 @@ export async function ecrireMaCarte(): Promise<ResultatCarte> {
   }
 
   if (r.textes.length) {
-    const lignes = r.textes.map((t) => ({ user_id: user.id, path_id: chemin.id, ...t }));
+    // La raison d'un texte de secours va dans empreinte_sources : elle ne contient jamais ses mots.
+    const lignes = r.textes.map(({ raison, ...t }) => ({
+      user_id: user.id,
+      path_id: chemin.id,
+      ...t,
+      empreinte_sources: raison ?? null,
+    }));
     const { error } = await supabase.from("generated_texts").insert(lignes);
     // 23505 : un autre onglet les a écrits entre-temps. Rien de grave.
     if (error && error.code !== "23505") {

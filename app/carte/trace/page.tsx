@@ -8,8 +8,8 @@ import { createClient } from "@/lib/supabase/server";
 import { Trace } from "./Trace";
 
 export const metadata = { title: "On trace ton chemin · Présente !" };
-// Le moteur écrit pendant cet écran : on lui laisse jusqu'à deux minutes.
-export const maxDuration = 120;
+// Le moteur écrit pendant cet écran : on lui laisse jusqu'à cinq minutes.
+export const maxDuration = 300;
 
 const LONGUEUR_CITATION = 60;
 

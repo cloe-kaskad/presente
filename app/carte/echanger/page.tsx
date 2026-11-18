@@ -5,7 +5,7 @@ import { createClient } from "@/lib/supabase/server";
 import { Echanger } from "./Echanger";
 
 export const metadata = { title: "Échanger une quête · Présente !" };
-export const maxDuration = 60;
+export const maxDuration = 120;
 
 export default async function PageEchanger() {
   const supabase = await createClient();

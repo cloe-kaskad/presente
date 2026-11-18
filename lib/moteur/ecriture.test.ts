@@ -8,14 +8,21 @@ type Appel = { usage: string; message: string };
 const appels: Appel[] = [];
 let repondre: (a: Appel) => unknown = () => null;
 
-vi.mock("@/lib/ia/claude", () => ({
-  claudeDisponible: () => true,
-  demanderJson: async (o: { usage: string; message: string }) => {
+vi.mock("@/lib/ia/claude", () => {
+  const appeler = async (o: { usage: string; message: string }) => {
     const a = { usage: o.usage, message: o.message };
     appels.push(a);
     return repondre(a);
-  },
-}));
+  };
+  return {
+    claudeDisponible: () => true,
+    demanderJson: appeler,
+    appelerJson: async (o: { usage: string; message: string }) => {
+      const d = await appeler(o);
+      return d === null ? { ok: false, raison: "simulé", ms: 0 } : { ok: true, data: d, ms: 0 };
+    },
+  };
+});
 
 const { ecrireLaCarte, tachesDeLaCarte } = await import("./ecriture");
 

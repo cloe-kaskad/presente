@@ -9,7 +9,8 @@ import { semainesDuMois } from "@/lib/chemin/textes";
 import { carteEcrite, chargerTextesCarte } from "@/lib/moteur/carte";
 import { MONDE, QUETE, libelleCapacite } from "@/lib/questionnaire/contenu";
 import { chargerReponses } from "@/lib/questionnaire/donnees";
-import { citationDuJour, dateEnLettres, jourAParis } from "@/lib/rituel/citations";
+import { citationDuJour, dateEnLettres, jourAParis, plusJours } from "@/lib/rituel/citations";
+import { troisJoursLourds } from "@/lib/rituel/humeurs";
 import { articleDuJour, questionCherie } from "@/lib/rituel/airtable";
 import { chargerHumeurs } from "@/lib/rituel/donnees";
 import { echoDuJour } from "@/lib/rituel/echo";
@@ -44,7 +45,7 @@ export default async function MonEspace() {
       .maybeSingle(),
     chargerReponses(supabase, 1),
     chargerTextesCarte(supabase, chemin.id),
-    chargerHumeurs(supabase, aujourdhui),
+    chargerHumeurs(supabase, plusJours(aujourdhui, -3)),
   ]);
   if (profil?.detresse_le) redirect("/quand-ca-ne-va-pas");
   if (!carteEcrite(textesCarte, chemin)) redirect("/carte/trace");
@@ -65,7 +66,9 @@ export default async function MonEspace() {
   const mois = Math.min(2, Math.floor((chemin.semaine - 1) / 4)) as 0 | 1 | 2;
   const quete = chemin.quetes[mois];
   const capacites = chemin.capacites[quete];
-  const choix = await choixDuMois(supabase, chemin, mois, profilDeChoix(profil, reponses));
+  // Trois jours lourds de suite : on allège (contenu doux au prochain choix, geste décalable).
+  const lourd = troisJoursLourds(humeurs, aujourdhui);
+  const choix = await choixDuMois(supabase, chemin, mois, profilDeChoix(profil, reponses, lourd));
   const semaines = semainesDuMois(
     mois,
     [libelleCapacite(capacites[0]), libelleCapacite(capacites[1])],
@@ -123,6 +126,12 @@ export default async function MonEspace() {
                 <span className={styles.semaineEtiquette}>Cette semaine · {etiquetteActive(s.etiquette)}</span>
                 <span className={styles.titreActive}>{s.titre}</span>
                 <span className={styles.description}>{s.description}</span>
+                {lourd && (s.dansLeMois === 1 || s.dansLeMois === 3) ? (
+                  <span className={styles.allege}>
+                    Ces derniers jours ont l&apos;air lourds. Tu peux décaler {s.dansLeMois === 3 ? "le geste" : "l'exercice"} de cette semaine : il
+                    t&apos;attendra.
+                  </span>
+                ) : null}
                 <Link href={`/semaine/${s.numero}`} className={`bouton bouton--blanc ${styles.continuer}`}>
                   {s.commencee ? "Continuer" : "Commencer"}
                 </Link>

@@ -21,7 +21,7 @@ type Profil = {
   sujets_a_eviter: string | null;
 };
 
-export function profilDeChoix(profil: Profil | null, reponses: Reponses): ProfilChoix {
+export function profilDeChoix(profil: Profil | null, reponses: Reponses, douceur = false): ProfilChoix {
   const mots = [
     ...QUESTIONS_OUVERTES.map((q) => reponses[1][q.id] ?? ""),
     reponses[2].appelle ?? "",
@@ -33,6 +33,7 @@ export function profilDeChoix(profil: Profil | null, reponses: Reponses): Profil
     formats: (profil?.formats_preferes ?? []) as FormatId[],
     sujetsAEviter: profil?.sujets_a_eviter,
     sesMots: mots,
+    douceur,
   };
 }
 

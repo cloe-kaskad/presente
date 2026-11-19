@@ -13,6 +13,8 @@ export type ProfilChoix = {
   sujetsAEviter?: string | null;
   /** Ses réponses ouvertes, pour savoir quelles situations elle a décrites. */
   sesMots: string;
+  /** Trois jours lourds de suite dans son journal : on préfère un contenu doux. */
+  douceur?: boolean;
 };
 
 export type DemandeSemaine = {
@@ -55,6 +57,7 @@ function noteContenu(c: Contenu, d: DemandeSemaine, p: ProfilChoix, cible: strin
   else if (c.role === "comprendre") n += 1;
   if (d.semaine === 1) n += c.intensite === "douce" ? 2 : c.intensite === "franche" ? 1 : 0;
   else n += c.intensite === "franche" ? 2 : c.intensite === "douce" ? 1 : 0;
+  if (p.douceur) n += c.intensite === "douce" ? 10 : c.intensite === "bousculante" ? -10 : 0;
   if (c.capacites[0] === cible) n += 1;
   if (c.acces === "Gratuit") n += 1;
   if (p.temps === "30min" && tempsEffectif(c) === "court") n += 1;

@@ -163,6 +163,18 @@ describe("le choix du contenu", () => {
     expect(choisirContenu(cat, { ...s3, precedent }, profil).contenu?.id).toBe("b");
   });
 
+  it("après trois jours lourds, préfère un contenu doux", () => {
+    const cat: Catalogue = {
+      contenus: [
+        contenu("franc", { capacites: ["AR6"], intensite: "franche", role: "agir" }),
+        contenu("doux", { capacites: ["AR6"], intensite: "douce", format: "lire" }),
+      ],
+      pratiques: [],
+    };
+    expect(choisirContenu(cat, s3, profil).contenu?.id).toBe("franc");
+    expect(choisirContenu(cat, s3, { ...profil, douceur: true }).contenu?.id).toBe("doux");
+  });
+
   it("est stable : mêmes entrées, même choix", () => {
     const cat: Catalogue = {
       contenus: [contenu("x", { capacites: ["AR3"] }), contenu("y", { capacites: ["AR3"] })],

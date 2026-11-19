@@ -4,16 +4,9 @@ import { useEffect, useState } from "react";
 import { Marque } from "@/components/Marque";
 import styles from "./Mantra.module.css";
 
-/** Des phrases de femmes, toutes du domaine public. Traductions maison. */
-export const MANTRAS = [
-  { texte: "J’habite le possible.", autrice: "Emily Dickinson", source: "poème, vers 1862" },
-  { texte: "Il n’y a ni grille, ni serrure, ni verrou que vous puissiez poser sur la liberté de mon esprit.", autrice: "Virginia Woolf", source: "Une chambre à soi, 1929" },
-  { texte: "Femme, réveille-toi.", autrice: "Olympe de Gouges", source: "Déclaration des droits de la femme et de la citoyenne, 1791" },
-  { texte: "Je ne suis pas un oiseau, et aucun filet ne me retient.", autrice: "Charlotte Brontë", source: "Jane Eyre, 1847" },
-  { texte: "Je n’ai pas peur des tempêtes : j’apprends à mener mon bateau.", autrice: "Louisa May Alcott", source: "Les Quatre Filles du docteur March, 1869" },
-  { texte: "Je ne souhaite pas qu’elles aient du pouvoir sur les hommes, mais sur elles-mêmes.", autrice: "Mary Wollstonecraft", source: "Défense des droits de la femme, 1792" },
-  { texte: "Mon courage grandit chaque fois qu’on essaie de m’intimider.", autrice: "Jane Austen", source: "Orgueil et Préjugés, 1813" },
-];
+import { CITATIONS as MANTRAS } from "@/lib/rituel/citations";
+
+export { MANTRAS };
 
 /** Un écran de respiration, pendant un chargement : une phrase, sur le fond à grain. */
 export function Mantra({ depart = 0, defile = false, surtitre }: { depart?: number; defile?: boolean; surtitre?: string }) {

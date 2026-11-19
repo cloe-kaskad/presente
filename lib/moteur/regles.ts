@@ -103,3 +103,33 @@ export function capaciteALaPremierePersonne(libelle: string): string {
     .replace(/^S'/, "M'")
     .replace(/\s*\.$/, "");
 }
+
+/** Vrai si la citation figure mot pour mot dans ses réponses (sans majuscules ni ponctuation). */
+export function citationExacte(c: string, sources: string[]): boolean {
+  const corpus = normaliser(sources.join("\n"));
+  const morceaux = c.split(/…|\.\.\.|\[…\]/).map(normaliser).filter((m) => m.trim());
+  return morceaux.length > 0 && morceaux.every((m) => corpus.includes(m));
+}
+
+/**
+ * « Tes mots, qu'on a gardés » : on ne garde que les citations exactes, courtes,
+ * qui ne touchent aucun sujet à éviter. Quatre au plus, sans doublon.
+ */
+export function garderMotsExacts(
+  mots: string[],
+  sources: string[],
+  sujetsAEviter: string | null | undefined,
+  max = 4,
+): string[] {
+  const aEviter = racinesAEviter(sujetsAEviter);
+  const gardes: string[] = [];
+  for (const brut of mots) {
+    const m = brut.trim().replace(/^[«"“]\s*|\s*[»"”]$/g, "").replace(/[.,;:\s]+$/, "").trim();
+    if (!m || m.length > 90) continue;
+    if (!citationExacte(m, sources) || toucheSujet(aEviter, m)) continue;
+    if (gardes.some((g) => normaliser(g) === normaliser(m))) continue;
+    gardes.push(m);
+    if (gardes.length >= max) break;
+  }
+  return gardes;
+}

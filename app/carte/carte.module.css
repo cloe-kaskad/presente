@@ -18,16 +18,31 @@
   align-items: center;
 }
 
-/* 1. Ce qu'on a compris : une lettre, sur fond rose pâle, texte bordeaux pour la lecture */
+/* 1. Ce qu'on a compris : une lettre, écrite pour elle (maquettes Carte et D-Carte) */
 .compris {
   background: var(--rose-pale);
-  padding: 44px var(--gouttiere) 40px;
+  padding: 40px var(--gouttiere);
   margin-bottom: 40px;
   display: flex;
   flex-direction: column;
   gap: 24px;
+  color: var(--bordeaux);
+}
+/* Sur téléphone : la mention, le titre, la lettre, ses mots, puis le bouton. */
+.gauche,
+.droite {
+  display: contents;
+}
+.mention {
+  order: 1;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.mention strong {
+  font-weight: 600;
 }
 .titreCompris {
+  order: 2;
   margin: 0;
   font-size: 36px;
   line-height: 1.06;
@@ -35,48 +50,69 @@
   letter-spacing: -0.04em;
   color: var(--rouge);
 }
+.lettre {
+  order: 3;
+  background: var(--blanc);
+  border-radius: 24px;
+  padding: 28px 24px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  box-shadow: 0 24px 60px rgba(81, 0, 4, 0.07);
+}
 .ouverture {
   margin: 0;
-  font-size: 23px;
+  font-size: 22px;
   line-height: 1.35;
   font-weight: 500;
   letter-spacing: -0.02em;
-  color: var(--bordeaux);
 }
-.blocs {
-  background: var(--blanc);
-  border-radius: 24px;
-  padding: 4px 22px;
-  display: flex;
-  flex-direction: column;
+.filet {
+  width: 44px;
+  height: 2px;
+  background: var(--rose);
 }
 .bloc {
-  padding: 22px 0 24px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-}
-.bloc + .bloc {
-  border-top: 1.5px solid var(--rose);
+  gap: 8px;
 }
 .blocTitre {
   margin: 0;
-  font-size: 15px;
-  line-height: 1.35;
+  font-size: 14px;
   font-weight: 700;
   color: var(--rouge);
 }
 .blocTexte {
   margin: 0;
   font-size: 17px;
-  line-height: 1.65;
-  color: var(--bordeaux);
+  line-height: 1.7;
 }
 .lecture {
   margin: 0;
-  font-size: 13px;
-  color: var(--bordeaux);
-  opacity: 0.75;
+  font-size: 14px;
+  line-height: 1.5;
+  font-style: italic;
+  opacity: 0.8;
+}
+.mots {
+  order: 4;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.motsTitre {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--rouge);
+}
+.mot {
+  margin: 0;
+  font-size: 19px;
+  line-height: 1.3;
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: -0.015em;
 }
 
 /* 2. Ton chemin */
@@ -564,35 +600,59 @@
     padding: 28px 96px;
   }
   .compris {
-    padding: 80px 96px 72px;
+    padding: 88px 96px;
     margin-bottom: 72px;
-    gap: 32px;
+    display: grid;
+    grid-template-columns: minmax(0, 400px) minmax(0, 720px);
+    justify-content: space-between;
+    gap: 72px;
+    align-items: start;
+  }
+  .gauche {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    position: sticky;
+    top: 40px;
+  }
+  .droite {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+  .mention {
+    font-size: 15px;
   }
   .titreCompris {
-    font-size: 72px;
+    font-size: 60px;
+    line-height: 1.02;
+  }
+  .lettre {
+    border-radius: 32px;
+    padding: 56px 64px 60px;
+    gap: 36px;
   }
   .ouverture {
-    font-size: 36px;
-    line-height: 1.3;
-    max-width: 26em;
-  }
-  .blocs {
-    margin-top: 16px;
-    border-radius: 28px;
-    padding: 8px 44px;
+    font-size: 30px;
   }
   .bloc {
-    display: grid;
-    grid-template-columns: 230px minmax(0, 62ch);
-    gap: 40px;
-    padding: 32px 0 34px;
-    align-items: baseline;
+    gap: 10px;
   }
   .blocTitre {
-    font-size: 16px;
+    font-size: 15px;
   }
   .blocTexte {
-    font-size: 19px;
+    font-size: 20px;
+  }
+  .lecture {
+    font-size: 15px;
+  }
+  .mots {
+    margin-top: 20px;
+    gap: 14px;
+  }
+  .mot {
+    font-size: 24px;
   }
   .chemin {
     padding: 24px 96px 96px;
@@ -705,6 +765,7 @@
   display: none;
 }
 .appel {
+  order: 5;
   display: flex;
   flex-direction: column;
   align-items: stretch;

@@ -14,6 +14,8 @@ import {
 } from "@/lib/moteur/secours";
 import { FIL_ROUGE, MONDE, QUETE } from "@/lib/questionnaire/contenu";
 import { chargerReponses } from "@/lib/questionnaire/donnees";
+import { sesReponses } from "@/lib/moteur/ecriture";
+import { garderMotsExacts } from "@/lib/moteur/regles";
 import { createClient } from "@/lib/supabase/server";
 import { recalculerMonChemin } from "./actions";
 import styles from "./carte.module.css";
@@ -76,6 +78,20 @@ export default async function Carte({ searchParams }: { searchParams: Promise<{ 
 
   const prenom = prenomAffiche(profil?.prenom);
   const synthese = lireSynthese(textes) ?? syntheseDeSecours(chemin.quetes);
+  // « Tes mots » : ceux choisis par le moteur ; sinon, ses réponses courtes, recopiées telles quelles.
+  const sources = sesReponses(reponses).map((r) => r.reponse);
+  const mots = synthese.mots?.length
+    ? synthese.mots
+    : garderMotsExacts(
+        [
+          ...chemin.quetes.map((q) => reponses[3].zoom[q]?.autrement ?? ""),
+          reponses[4].pasEncore ?? "",
+          reponses[1].q1_3 ?? "",
+        ].filter((m) => m.length <= 70),
+        sources,
+        profil?.sujets_a_eviter,
+        3,
+      );
   const pourquoi = (i: 0 | 1 | 2) =>
     texte(textes, "carte_pourquoi", chemin.quetes[i]) ??
     pourquoiDeSecours(i, reponses[3].zoom[chemin.quetes[i]]?.autrement, profil?.sujets_a_eviter);
@@ -120,34 +136,52 @@ export default async function Carte({ searchParams }: { searchParams: Promise<{ 
         </Link>
       </header>
 
-      {/* 1. Ce qu'on a compris de toi */}
+      {/* 1. Ce qu'on a compris de toi : une lettre, écrite pour elle */}
       <section className={styles.compris}>
-        <h1 className={styles.titreCompris}>{prenom ? `${prenom}, voici ce qu'on a compris.` : "Voici ce qu'on a compris."}</h1>
-        <p className={styles.ouverture}>
-          <AvecSesMots texte={synthese.ouverture} />
-        </p>
-        <div className={styles.blocs}>
-          {[
-            ["Ce qui revient", synthese.ce_qui_revient],
-            ["D'où ça vient, peut-être", synthese.d_ou_ca_vient],
-            ["Ce qui se joue maintenant", synthese.ce_qui_se_joue],
-          ].map(([titre, t]) => (
-            <div key={titre} className={styles.bloc}>
-              <h2 className={styles.blocTitre}>{titre}</h2>
-              <p className={styles.blocTexte}>
-                <AvecSesMots texte={t} />
-              </p>
+        <div className={styles.gauche}>
+          <p className={styles.mention}>
+            <strong>Écrit pour toi, à partir de tes réponses.</strong> Toi seule peux le lire.
+          </p>
+          <h1 className={styles.titreCompris}>{prenom ? `${prenom}, voici ce qu'on a compris.` : "Voici ce qu'on a compris."}</h1>
+          {mots.length ? (
+            <div className={styles.mots}>
+              <span className={styles.motsTitre}>Tes mots, qu&apos;on a gardés</span>
+              {mots.map((m) => (
+                <p key={m} className={styles.mot}>
+                  « {m} »
+                </p>
+              ))}
             </div>
-          ))}
+          ) : null}
         </div>
-        <p className={styles.lecture}>C&apos;est une lecture, pas un verdict. Elle s&apos;affinera avec ce que tu écriras en route.</p>
-        <div className={styles.appel}>
-          <Link href="/bienvenue" className="bouton bouton--grand">
-            Commencer mon chemin
-          </Link>
-          <a href="#chemin" className={styles.appelSuite}>
-            Voir d&apos;abord ce qu&apos;on m&apos;a préparé
-          </a>
+        <div className={styles.droite}>
+          <article className={styles.lettre}>
+            <p className={styles.ouverture}>
+              <AvecSesMots texte={synthese.ouverture} />
+            </p>
+            <span className={styles.filet} aria-hidden="true" />
+            {[
+              ["Ce qui revient", synthese.ce_qui_revient],
+              ["D'où ça vient, peut-être", synthese.d_ou_ca_vient],
+              ["Ce qui se joue maintenant", synthese.ce_qui_se_joue],
+            ].map(([titre, t]) => (
+              <div key={titre} className={styles.bloc}>
+                <h2 className={styles.blocTitre}>{titre}</h2>
+                <p className={styles.blocTexte}>
+                  <AvecSesMots texte={t} />
+                </p>
+              </div>
+            ))}
+            <p className={styles.lecture}>C&apos;est une lecture, pas un verdict. Elle s&apos;affinera avec ce que tu écriras en route.</p>
+          </article>
+          <div className={styles.appel}>
+            <Link href="/bienvenue" className="bouton bouton--grand">
+              Commencer mon chemin
+            </Link>
+            <a href="#chemin" className={styles.appelSuite}>
+              Voir d&apos;abord ce qu&apos;on m&apos;a préparé
+            </a>
+          </div>
         </div>
       </section>
 

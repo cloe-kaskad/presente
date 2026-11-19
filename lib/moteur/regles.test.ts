@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { signauxDeDetresse } from "./detresse";
-import { capaciteALaPremierePersonne, citations, verifierRegles } from "./regles";
+import { capaciteALaPremierePersonne, citations, garderMotsExacts, verifierRegles } from "./regles";
 
 const sources = ["j'ai honte de ne rien comprendre à mes comptes", "Ma sœur fait les comptes, porte fermée."];
 
@@ -74,5 +74,16 @@ describe("les signaux de détresse", () => {
   it("ne s'alarme pas d'une fatigue ordinaire", () => {
     expect(signauxDeDetresse("Je suis épuisée, je veux changer de vie.")).toBeNull();
     expect(signauxDeDetresse("Mourir de rire avec mes amies me manque")).toBeNull();
+  });
+});
+
+describe("tes mots, qu'on a gardés", () => {
+  const src = ["j'ai honte de ne rien comprendre à mes comptes", "Mon père faisait les comptes, porte fermée.", "La maternité me fait peur"];
+  it("ne garde que les citations exactes", () => {
+    expect(garderMotsExacts(["« porte fermée »", "honte de mes comptes", "j’ai honte"], src, null)).toEqual(["porte fermée", "j’ai honte"]);
+  });
+  it("jamais un sujet à éviter, jamais de doublon, quatre au plus", () => {
+    expect(garderMotsExacts(["La maternité me fait peur", "porte fermée", "Porte fermée."], src, "la maternité")).toEqual(["porte fermée"]);
+    expect(garderMotsExacts(["honte", "comptes", "porte", "père", "fermée"], src, null)).toHaveLength(4);
   });
 });

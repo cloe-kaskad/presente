@@ -20,7 +20,7 @@ import {
 import type { Reponses } from "@/lib/questionnaire/reponses";
 import { signauxDeDetresse } from "./detresse";
 import { planDuMonde, promptEcriture, promptVerification } from "./prompts";
-import { LONGUEUR_ATTENDUE, verifierRegles, type Emplacement } from "./regles";
+import { LONGUEUR_ATTENDUE, garderMotsExacts, verifierRegles, type Emplacement } from "./regles";
 import {
   accrocheDeSecours,
   capaciteDeSecours,
@@ -216,6 +216,7 @@ const SchemaSynthese = z.object({
   ce_qui_revient: z.string(),
   d_ou_ca_vient: z.string(),
   ce_qui_se_joue: z.string(),
+  mots: z.array(z.string()),
 });
 const SchemaVerdict = z.object({
   verdict: z.enum(["ok", "ko"]),
@@ -272,6 +273,8 @@ async function ecrireUne(t: Tache, ctx: ContexteCarte, reponses: Reponse[]): Pro
         ce_qui_revient: sansTiret(a.data.ce_qui_revient),
         d_ou_ca_vient: sansTiret(a.data.d_ou_ca_vient),
         ce_qui_se_joue: sansTiret(a.data.ce_qui_se_joue),
+        // « Tes mots » : seulement ceux qui figurent mot pour mot dans ses réponses. Ils ne touchent pas au texte.
+        mots: garderMotsExacts(a.data.mots ?? [], reponses.map((r) => r.reponse), ctx.sujetsAEviter),
       };
       morceaux = [s.ouverture, s.ce_qui_revient, s.d_ou_ca_vient, s.ce_qui_se_joue];
       texte = JSON.stringify(s);

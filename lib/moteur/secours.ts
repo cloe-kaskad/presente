@@ -12,6 +12,8 @@ export type Synthese = {
   ce_qui_revient: string;
   d_ou_ca_vient: string;
   ce_qui_se_joue: string;
+  /** Trois ou quatre citations exactes de ses réponses (« Tes mots, qu'on a gardés »). */
+  mots?: string[];
 };
 
 export const ACCROCHE_MONDE: Record<MondeId, string> = {

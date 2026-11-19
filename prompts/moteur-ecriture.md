@@ -117,12 +117,13 @@ Ce que tu écris : une lecture, comme une praticienne expérimentée après un p
 
 Format renvoyé :
 
-`{"statut": "ok", "ouverture": "...", "ce_qui_revient": "...", "d_ou_ca_vient": "...", "ce_qui_se_joue": "..."}`
+`{"statut": "ok", "ouverture": "...", "ce_qui_revient": "...", "d_ou_ca_vient": "...", "ce_qui_se_joue": "...", "mots": ["...", "...", "..."]}`
 
 - `ouverture` : deux phrases, la lecture centrale. Elle doit tenir seule.
 - `ce_qui_revient` : le fil entre plusieurs domaines de sa vie, deux ou trois phrases.
 - `d_ou_ca_vient` : l'hypothèse d'origine, le système avant la personne, deux ou trois phrases.
 - `ce_qui_se_joue` : la tension de fond, et ce que le chemin va desserrer, deux ou trois phrases.
+- `mots` : trois ou quatre de ses expressions, courtes (deux à huit mots), recopiées exactement depuis ses réponses, sans guillemets. Les plus parlantes : celles qui disent le mieux ce qui se joue pour elle. Elles s'affichent à côté de la lecture, sous « Tes mots, qu'on a gardés ». Jamais un sujet qu'elle a demandé d'éviter.
 
 Exemple (Camille, qui a écrit sur l'argent, sur ses comptes, et qu'elle dit oui avant d'avoir réfléchi) :
 - ouverture : « Dès qu'il s'agit d'argent, quelque chose se ferme chez toi. Pas par manque de capacités : par une honte que tu nommes toi-même, et qui a sans doute une histoire. »

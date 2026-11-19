@@ -1,0 +1,421 @@
+/* « Mon espace » : maquettes design/Chemin.html (téléphone) et design/D-Chemin.html (ordinateur) */
+.page {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Le bandeau à grain */
+.bandeau {
+  background: var(--rouge) url(/images/grain.jpg) center / cover no-repeat;
+  color: var(--blanc);
+  padding: 40px var(--gouttiere) 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.citation {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.date {
+  font-size: 14px;
+  font-weight: 600;
+}
+.citationTexte {
+  margin: 0;
+  font-size: 40px;
+  line-height: 1.05;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+}
+.autrice {
+  font-size: 14px;
+  line-height: 1.4;
+}
+.autrice strong {
+  font-weight: 600;
+}
+.trace {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.traceTexte {
+  font-size: 14px;
+  line-height: 1.5;
+}
+.traceTexte strong {
+  font-weight: 600;
+}
+.ordi {
+  display: none;
+}
+
+/* Ton chemin, cette semaine */
+.semaines {
+  padding: 44px var(--gouttiere) 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.titreSection {
+  margin: 0;
+  font-size: 30px;
+  line-height: 1.06;
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  color: var(--rouge);
+}
+.grilleSemaines {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.semaine {
+  border-radius: 24px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+/* Sur téléphone, seule la semaine en cours est montrée en carte. */
+.faite,
+.avenir {
+  display: none;
+}
+.faite {
+  background: var(--blanc);
+  border: 1.5px solid var(--rose);
+}
+.avenir {
+  border: 1.5px dashed var(--rose);
+}
+.active {
+  background: var(--rouge-profond);
+  color: var(--blanc);
+}
+.pastille {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+}
+.faite .pastille {
+  background: var(--rouge-profond);
+  color: var(--blanc);
+}
+.avenir .pastille {
+  border: 1.5px dashed var(--rouge-profond);
+}
+.semaineEtiquette {
+  font-size: 14px;
+  font-weight: 600;
+}
+.titreActive {
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+.description {
+  font-size: 15px;
+  line-height: 1.5;
+}
+.continuer {
+  align-self: flex-start;
+  margin-top: auto;
+}
+.titreSemaine {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--bordeaux);
+  text-decoration: none;
+}
+.avenir .titreSemaine {
+  font-weight: 500;
+  color: var(--rouge-profond);
+}
+.toutLeMois summary {
+  list-style: none;
+  cursor: pointer;
+}
+.toutLeMois summary::-webkit-details-marker {
+  display: none;
+}
+.resume {
+  font-size: 14px;
+  line-height: 1.5;
+}
+.voirTout {
+  font-weight: 600;
+  text-decoration: underline;
+}
+.toutLeMois ol {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.toutLeMois li {
+  border-top: 1.5px solid var(--rose);
+  padding: 12px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.titreLigne {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--bordeaux);
+}
+
+/* Aujourd'hui, deux minutes pour toi */
+.aujourdhui {
+  padding: 40px var(--gouttiere) 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.aujourdhuiHaut {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.aujourdhuiTexte {
+  display: none;
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+}
+.grilleJour,
+.colonne {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.bloc {
+  border-radius: 24px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.humeur {
+  background: var(--rose-pale);
+}
+.blocTitre {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.1;
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  color: var(--rouge);
+}
+.puces {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.puce {
+  min-height: var(--cible);
+  background: var(--blanc);
+  color: var(--bordeaux);
+  border: 1.5px solid var(--rose);
+  border-radius: 999px;
+  padding: 9px 15px;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+}
+.puce:hover {
+  border-color: var(--bordeaux);
+}
+.puceChoisie {
+  background: var(--bordeaux);
+  border-color: var(--bordeaux);
+  color: var(--blanc);
+}
+.ligneLibre {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--bordeaux);
+}
+.facultatif {
+  font-weight: 400;
+}
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.note {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--bordeaux);
+  min-height: var(--cible);
+  display: inline-flex;
+  align-items: center;
+}
+.lienDiscret {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--bordeaux);
+  min-height: var(--cible);
+  display: inline-flex;
+  align-items: center;
+}
+.erreur {
+  margin: 0;
+  font-size: 14px;
+  color: var(--bordeaux);
+}
+.ensuite {
+  background: var(--bleu-ciel);
+  color: var(--nuit);
+  border-radius: 24px;
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+.ensuite strong {
+  font-weight: 600;
+}
+.ensuite a {
+  color: var(--nuit);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.pied {
+  padding: 8px var(--gouttiere) 32px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.discret {
+  background: none;
+  border: 0;
+  font: inherit;
+  font-size: 13px;
+  color: var(--rouge-profond);
+  text-decoration: underline;
+  min-height: var(--cible);
+  padding: 0;
+  cursor: pointer;
+}
+.discret:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+@media (min-width: 1024px) {
+  .bandeau {
+    padding: 72px 96px 64px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+    gap: 80px;
+    align-items: end;
+  }
+  .date {
+    font-size: 15px;
+  }
+  .citationTexte {
+    font-size: 84px;
+    line-height: 1.02;
+  }
+  .autrice {
+    font-size: 16px;
+  }
+  .trace {
+    padding-bottom: 8px;
+  }
+  .traceTexte {
+    font-size: 15px;
+  }
+  .ordi {
+    display: inline;
+  }
+  .semaines {
+    padding: 64px 96px 24px;
+    gap: 24px;
+  }
+  .titreSection {
+    font-size: 44px;
+  }
+  .grilleSemaines {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .faite,
+  .avenir {
+    display: flex;
+  }
+  .semaine {
+    min-height: 210px;
+  }
+  .titreActive {
+    font-size: 24px;
+  }
+  .toutLeMois {
+    display: none;
+  }
+  .aujourdhui {
+    padding: 56px 96px 88px;
+    gap: 24px;
+  }
+  .aujourdhuiHaut {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 40px;
+  }
+  .aujourdhuiTexte {
+    display: block;
+    max-width: 34ch;
+  }
+  .grilleJour {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 20px;
+    align-items: start;
+  }
+  .colonne {
+    gap: 20px;
+  }
+  .bloc {
+    padding: 30px;
+  }
+  .blocTitre {
+    font-size: 26px;
+  }
+  .ensuite {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    padding: 22px 26px;
+    margin-top: 12px;
+    font-size: 16px;
+  }
+  .pied {
+    padding: 0 96px 48px;
+  }
+}

@@ -65,16 +65,16 @@ export default async function Chemin() {
 
   return (
     <div className={styles.page}>
+      <header className={styles.haut}>
+        <Marque couleur="rouge" />
+        <nav className={styles.nav} aria-label="Navigation principale">
+          <Link href="/chemin" aria-current="page">
+            Mon chemin
+          </Link>
+          <Link href="/carte">Ma carte</Link>
+        </nav>
+      </header>
       <section className={styles.hero}>
-        <div className={styles.haut}>
-          <Marque />
-          <nav className={styles.nav} aria-label="Navigation principale">
-            <Link href="/chemin" aria-current="page">
-              Mon chemin
-            </Link>
-            <Link href="/carte">Ma carte</Link>
-          </nav>
-        </div>
         <div className={styles.heroBas}>
           <div className={styles.heroTitre}>
             <span className={styles.surtitre}>

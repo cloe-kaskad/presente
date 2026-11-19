@@ -699,3 +699,75 @@
     width: auto;
   }
 }
+
+/* Les appels à commencer */
+.commencerHaut {
+  display: none;
+}
+.appel {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+  margin-top: 8px;
+}
+.appelSuite {
+  align-self: center;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--bordeaux);
+  min-height: var(--cible);
+  display: inline-flex;
+  align-items: center;
+}
+.page {
+  padding-bottom: 84px;
+}
+.barreBas {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px var(--gouttiere) calc(12px + env(safe-area-inset-bottom));
+  background: var(--blanc);
+  border-top: 1.5px solid var(--rose);
+  box-shadow: 0 -8px 30px rgba(81, 0, 4, 0.08);
+}
+.barreTexte {
+  font-size: 13px;
+  line-height: 1.35;
+  color: var(--bordeaux);
+}
+.barreTexte strong {
+  display: block;
+  font-size: 15px;
+  color: var(--rouge);
+}
+@media (min-width: 1024px) {
+  .commencerHaut {
+    display: inline-flex;
+  }
+  .appel {
+    flex-direction: row;
+    align-items: center;
+    gap: 28px;
+  }
+  .appelSuite {
+    align-self: auto;
+  }
+  .barreBas {
+    padding: 14px 96px;
+  }
+  .barreTexte {
+    font-size: 16px;
+  }
+  .barreTexte strong {
+    display: inline;
+    font-size: 16px;
+  }
+}

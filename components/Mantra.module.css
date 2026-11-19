@@ -1,0 +1,85 @@
+.page {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background: var(--rouge) url(/images/grain.jpg) center / cover no-repeat;
+  color: var(--blanc);
+}
+.entete {
+  padding: 22px var(--gouttiere);
+}
+.centre {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 22px;
+  padding: 0 var(--gouttiere) 96px;
+  max-width: 980px;
+}
+.surtitre {
+  font-size: 14px;
+  font-weight: 600;
+}
+.phrase {
+  margin: 0;
+  font-size: 34px;
+  line-height: 1.12;
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  animation: apparait 700ms ease both;
+}
+.points {
+  display: flex;
+  gap: 8px;
+}
+.points i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--blanc);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+.points i:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.points i:nth-child(3) {
+  animation-delay: 0.4s;
+}
+@keyframes apparait {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .phrase,
+  .points i {
+    animation: none;
+  }
+}
+@media (min-width: 1024px) {
+  .entete {
+    padding: 28px 96px;
+  }
+  .centre {
+    padding: 0 96px 120px;
+  }
+  .phrase {
+    font-size: 64px;
+    line-height: 1.06;
+  }
+}

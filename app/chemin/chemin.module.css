@@ -12,17 +12,23 @@
   gap: 56px;
 }
 .haut {
+  position: sticky;
+  top: 0;
+  z-index: 20;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   gap: 16px;
+  padding: 12px var(--gouttiere);
+  background: var(--blanc);
+  border-bottom: 1.5px solid var(--rose);
 }
 .nav {
   display: flex;
   gap: 18px;
 }
 .nav a {
-  color: var(--blanc);
+  color: var(--rouge-profond);
   font-size: 15px;
   font-weight: 600;
   text-decoration: none;
@@ -284,5 +290,11 @@
   }
   .pied {
     padding: 8px 96px 48px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .haut {
+    padding: 14px 96px;
   }
 }

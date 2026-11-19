@@ -115,8 +115,8 @@ export default async function Carte({ searchParams }: { searchParams: Promise<{ 
     <div className={styles.page}>
       <header className={styles.entete}>
         <Marque couleur="rouge" />
-        <Link href="/chemin" className={styles.espace}>
-          Mon espace
+        <Link href="/bienvenue" className={`bouton ${styles.commencerHaut}`}>
+          Commencer mon chemin
         </Link>
       </header>
 
@@ -141,10 +141,18 @@ export default async function Carte({ searchParams }: { searchParams: Promise<{ 
           ))}
         </div>
         <p className={styles.lecture}>C&apos;est une lecture, pas un verdict. Elle s&apos;affinera avec ce que tu écriras en route.</p>
+        <div className={styles.appel}>
+          <Link href="/bienvenue" className="bouton bouton--grand">
+            Commencer mon chemin
+          </Link>
+          <a href="#chemin" className={styles.appelSuite}>
+            Voir d&apos;abord ce qu&apos;on m&apos;a préparé
+          </a>
+        </div>
       </section>
 
       {/* 2. Ton chemin, mois par mois */}
-      <section className={styles.chemin}>
+      <section className={styles.chemin} id="chemin">
         <h2 className={styles.titreSection}>Ton chemin : trois quêtes, trois mondes.</h2>
         <div className={styles.explication}>
           <div>
@@ -324,7 +332,7 @@ export default async function Carte({ searchParams }: { searchParams: Promise<{ 
               </li>
             ))}
           </ul>
-          <Link href="/chemin" className={`bouton bouton--grand ${styles.commencer}`}>
+          <Link href="/bienvenue" className={`bouton bouton--grand ${styles.commencer}`}>
             Commencer mon chemin
           </Link>
           <p className={styles.rassure}>Personne de l&apos;équipe ne lit tes réponses. Tu peux mettre ton chemin en pause quand tu veux.</p>
@@ -340,6 +348,15 @@ export default async function Carte({ searchParams }: { searchParams: Promise<{ 
           </button>
         </form>
       </section>
+      {/* Toujours à portée : la barre du bas */}
+      <div className={styles.barreBas}>
+        <span className={styles.barreTexte}>
+          <strong>Ton chemin est prêt.</strong> 25 € par mois, pendant trois mois.
+        </span>
+        <Link href="/bienvenue" className="bouton">
+          Commencer mon chemin
+        </Link>
+      </div>
     </div>
   );
 }

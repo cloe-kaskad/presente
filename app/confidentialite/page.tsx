@@ -38,6 +38,14 @@ export default function Confidentialite() {
           aux États-Unis. Anthropic n&apos;utilise pas ces échanges pour entraîner ses modèles.
         </p>
 
+        <h2>Ton journal d&apos;humeur</h2>
+        <p>
+          Chaque jour où tu le notes, on enregistre ton mot d&apos;humeur et, si tu en écris une, ta phrase. Personne de
+          l&apos;équipe ne les lit. Une fois par semaine, Claude, l&apos;outil d&apos;IA d&apos;Anthropic, relit les entrées
+          de ta semaine pour écrire « Ta semaine, relue ». Si une phrase montre que tu traverses un moment très difficile,
+          on te montre des numéros d&apos;aide plutôt que la suite du chemin.
+        </p>
+
         <h2>Où elles sont stockées</h2>
         <p>
           Dans une base de données Supabase, hébergée dans l&apos;Union européenne. Le site tourne sur

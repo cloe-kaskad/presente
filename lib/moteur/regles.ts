@@ -10,7 +10,13 @@ export type Emplacement =
   | "carte_pourquoi"
   | "capacite"
   | "monde_accroche"
-  | "monde_pourquoi";
+  | "monde_pourquoi"
+  | "avant_contenu"
+  | "avant_episode"
+  | "intro_exercice"
+  | "intro_acte"
+  | "palier"
+  | "journal_semaine";
 
 /** Longueur maximale, en caractères, de chaque texte (ou de chaque bloc pour la synthèse). */
 export const LONGUEUR_MAX: Record<Emplacement, number> = {
@@ -19,6 +25,12 @@ export const LONGUEUR_MAX: Record<Emplacement, number> = {
   capacite: 90,
   monde_accroche: 480,
   monde_pourquoi: 380,
+  avant_contenu: 700,
+  avant_episode: 700,
+  intro_exercice: 750,
+  intro_acte: 750,
+  palier: 600,
+  journal_semaine: 650,
 };
 
 /** Ce qu'on dit à Claude (écriture et seconde passe) de la longueur attendue. */
@@ -29,6 +41,12 @@ export const LONGUEUR_ATTENDUE: Record<Emplacement, string> = {
   capacite: "six à dix mots, à la première personne, sans point final, sans guillemets",
   monde_accroche: "une ou deux phrases, 400 caractères au plus",
   monde_pourquoi: "une phrase, 300 caractères au plus",
+  avant_contenu: "trois à cinq phrases, 600 caractères au plus, qui finissent par une question à garder en tête",
+  avant_episode: "trois à cinq phrases, 600 caractères au plus, qui finissent par une question à garder en tête",
+  intro_exercice: "deux à quatre phrases, puis un exemple tiré de ce qu'elle a écrit (« Tu pourrais partir de… »), 650 caractères au plus",
+  intro_acte: "deux à quatre phrases, puis un exemple tiré de ce qu'elle a écrit (« Tu pourrais partir de… »), 650 caractères au plus",
+  palier: "trois phrases, 500 caractères au plus",
+  journal_semaine: "trois ou quatre phrases, 550 caractères au plus, la dernière est une question à garder",
 };
 
 const MOTS_INTERDITS = [/empowerment/i, /bienveillant/i, /transformation/i];

@@ -43,3 +43,15 @@ export function dateEnLettres(jour: string = jourAParis(), avecAnnee = false): s
   }).format(d);
   return t.charAt(0).toUpperCase() + t.slice(1);
 }
+
+/** Le lundi de la semaine du jour donné (AAAA-MM-JJ). */
+export function lundiDe(jour: string): string {
+  const d = new Date(`${jour}T12:00:00Z`);
+  const decalage = (d.getUTCDay() + 6) % 7; // lundi = 0
+  return new Date(d.getTime() - decalage * 86_400_000).toISOString().slice(0, 10);
+}
+
+/** Ajoute n jours à un jour (AAAA-MM-JJ). */
+export function plusJours(jour: string, n: number): string {
+  return new Date(Date.parse(`${jour}T12:00:00Z`) + n * 86_400_000).toISOString().slice(0, 10);
+}

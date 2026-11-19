@@ -9,6 +9,7 @@ describe("le découpage des prompts", () => {
     expect(ecriture).toMatch(/^Tu écris pour Présente!/);
     expect(ecriture).toContain("Emplacement `carte_synthese`");
     expect(ecriture).toContain("Emplacement `capacite`");
+    expect(ecriture).toContain("Emplacement `journal_semaine`");
     expect(ecriture).not.toContain("Tu relis un texte écrit");
   });
 

@@ -14,3 +14,13 @@ describe("la citation du jour", () => {
     expect(jourAParis(new Date("2026-11-19T23:30:00Z"))).toBe("2026-11-20");
   });
 });
+
+describe("les semaines", async () => {
+  const { lundiDe, plusJours } = await import("./citations");
+  it("trouve le lundi", () => {
+    expect(lundiDe("2026-11-19")).toBe("2026-11-16");
+    expect(lundiDe("2026-11-16")).toBe("2026-11-16");
+    expect(lundiDe("2026-11-22")).toBe("2026-11-16");
+    expect(plusJours("2026-11-30", 1)).toBe("2026-12-01");
+  });
+});

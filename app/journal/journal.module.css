@@ -1,0 +1,191 @@
+/* Le journal d'humeur : maquettes design/Journal.html et design/D-Journal.html */
+.page {
+  padding: 40px var(--gouttiere) 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  color: var(--bordeaux);
+}
+.haut {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.titre {
+  margin: 0;
+  font-size: 72px;
+  line-height: 0.95;
+  color: var(--rouge);
+}
+.compte {
+  font-size: 15px;
+  color: var(--rouge-profond);
+}
+.relue {
+  background: var(--rose-pale);
+  border-radius: 24px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.relueTitre {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--rouge);
+}
+.relueTexte {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.55;
+  font-weight: 500;
+}
+.relueNote {
+  margin: 0;
+  font-size: 13px;
+  opacity: 0.85;
+}
+.colonnes {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+.sousTitre {
+  margin: 0 0 18px;
+  font-size: 28px;
+  line-height: 1.1;
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  color: var(--rouge);
+}
+.calendrier {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 6px;
+}
+.entete {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--rouge-profond);
+  padding-bottom: 6px;
+}
+.jour {
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  border: 0;
+}
+.note {
+  cursor: pointer;
+}
+.vide {
+  border: 1.5px dashed var(--rose);
+  color: var(--rouge-profond);
+  font-weight: 400;
+}
+.aujourdhui {
+  box-shadow: 0 0 0 2px var(--blanc), 0 0 0 4px var(--bordeaux);
+}
+.choisi {
+  outline: 3px solid var(--bordeaux);
+  outline-offset: 2px;
+}
+.detail {
+  margin: 12px 0 0;
+  min-height: 1.5em;
+  font-size: 15px;
+  line-height: 1.5;
+}
+.legende {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  font-size: 13px;
+}
+.legende li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.legende i,
+.liste i {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex: none;
+}
+.liste {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.liste li {
+  border-top: 1.5px solid var(--rose);
+  padding: 16px 0;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.liste li i {
+  margin-top: 5px;
+}
+.listeDate {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--rouge-profond);
+}
+.listeNote {
+  margin: 4px 0 0;
+  font-size: 17px;
+  line-height: 1.45;
+}
+.vide p,
+p.vide {
+  margin: 0;
+  font-size: 16px;
+  border: 0;
+}
+@media (min-width: 1024px) {
+  .page {
+    padding: 72px 96px 96px;
+    gap: 40px;
+  }
+  .haut {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .titre {
+    font-size: 120px;
+  }
+  .relue {
+    padding: 36px;
+  }
+  .relueTexte {
+    font-size: 24px;
+  }
+  .colonnes {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 72px;
+    align-items: start;
+  }
+  .sousTitre {
+    font-size: 32px;
+  }
+  .jour {
+    height: 64px;
+    border-radius: 14px;
+    font-size: 16px;
+  }
+}

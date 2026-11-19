@@ -24,7 +24,7 @@ export async function chargerHumeurs(supabase: SupabaseClient, depuis: string): 
       .order("created_at", { ascending: false });
     lignes = (sans.data ?? []).map((m) => ({ jour: jourAParis(new Date(m.created_at)), humeur: m.humeur, note: null }));
   } else {
-    lignes = (avec.data ?? []).map((m) => ({ jour: m.jour, humeur: m.humeur, note: m.note }));
+    lignes = (avec.data ?? []).map((m) => ({ jour: String(m.jour).slice(0, 10), humeur: m.humeur, note: m.note }));
   }
   const parJour = new Map<string, JourNote>();
   for (const l of lignes) {

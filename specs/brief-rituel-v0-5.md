@@ -6,20 +6,39 @@
 
 Donner envie d'ouvrir son espace chaque jour, pour une visite de deux minutes qui a un début et une fin. Pas de compteur de jours consécutifs, rien qui culpabilise.
 
-En haut de « Mon espace », sous la barre fixe et avant les semaines, un bloc « Aujourd'hui » avec, dans cet ordre :
+## Les maquettes font foi
 
-1. la phrase du jour ;
-2. l'humeur, avec une phrase ;
-3. un écho de son carnet ;
-4. la Question Chérie ;
-5. l'article à lire aujourd'hui.
+Cloé a validé ces écrans. Les suivre de près (mise en page, tailles, ordre, textes) :
 
-Sur mobile, les blocs s'empilent. Sur ordinateur, phrase du jour en pleine largeur, puis une grille. Garder la charte (texte courant bordeaux sur fonds clairs pour ce qui se lit, rouge pour les titres).
+- `design/Chemin.html` et `design/D-Chemin.html` : « Mon espace » ;
+- `design/Journal.html` et `design/D-Journal.html` : le journal d'humeur ;
+- `design/Bienvenue.html` et `design/D-Bienvenue.html` : l'écran de citation (déjà en ligne) ;
+- `design/Carte.html` et `design/D-Carte.html` : la lecture « voici ce qu'on a compris », refaite comme une lettre (voir l'étape 0).
 
-## 1. La phrase du jour
+Ordre de la page « Mon espace » :
 
-- La même pour toutes, une par jour, choisie par la date dans une liste (fichier `lib/rituel/phrases.ts`, une centaine de phrases ; partir de celles de `components/Mantra.tsx` et en écrire d'autres dans le même ton : court, vrai, jamais « empowerment », jamais d'injonction).
-- Affichée en grand, sur le fond à grain.
+1. la barre blanche fixe (Mon chemin, Mon journal, Mon carnet, Ma carte) ;
+2. le bandeau à grain : la date, la citation du jour avec le nom de l'autrice, et à droite le chemin du mois qui se dessine ;
+3. « Ton chemin, cette semaine. » : les quatre semaines (sur mobile, seulement la semaine en cours et une ligne « Voir tout le mois ») ;
+4. « Aujourd'hui, deux minutes pour toi. » : à gauche l'humeur puis l'écho du carnet ; à droite, en petit, La Question Chérie puis l'article du jour. Sur mobile, les quatre blocs s'empilent dans cet ordre.
+
+Garder la charte (texte courant bordeaux sur fonds clairs pour ce qui se lit, rouge pour les titres).
+
+## 0. La lecture de la carte, comme une lettre
+
+Sur `/carte`, refaire le bloc « voici ce qu'on a compris » d'après `design/D-Carte.html` et `design/Carte.html` :
+
+- à gauche (ordinateur) : « Écrit pour toi, à partir de tes réponses. Toi seule peux le lire. », le titre, puis « Tes mots, qu'on a gardés » : trois ou quatre citations exactes de ses réponses, en italique ;
+- à droite : une feuille blanche, colonne étroite. La phrase d'ouverture en grand, un petit filet rose, puis les trois lectures l'une sous l'autre (titre rouge, texte bordeaux 20 px, interligne 1,7), ses mots surlignés en rose dans le texte, et la note « C'est une lecture, pas un verdict. » en italique ;
+- sur mobile : la lettre, puis ses mots, puis le bouton.
+
+« Tes mots » : demander au moteur, dans la même réponse que la synthèse, une liste `mots` de 3 ou 4 citations courtes. Le code ne garde que celles qui figurent mot pour mot dans ses réponses (sinon on ne les affiche pas), et jamais sur un sujet à éviter. Ne rien changer au texte de la synthèse elle-même.
+
+## 1. La citation du jour
+
+- La même pour toutes, une par jour, choisie par la date dans la liste `MANTRAS` de `components/Mantra.tsx` (déplacer la liste dans `lib/rituel/citations.ts` et l'importer aux deux endroits).
+- Uniquement des phrases de femmes, avec leur nom et la source. Ne pas en ajouter : c'est Cloé qui valide chaque citation, la liste grandira plus tard.
+- Affichée en grand, entre guillemets, sur le fond à grain, avec « Prénom Nom, source » dessous.
 
 ## 2. L'humeur, avec une phrase
 
@@ -51,7 +70,8 @@ Sur mobile, les blocs s'empilent. Sur ordinateur, phrase du jour en pleine large
 ## 7. La Question Chérie
 
 - Lue dans Airtable, table `tbl1Cs9vXd8kV9D5u` (« P! Questions chéries »), en lecture seule : Question `fldRRx8QdjtridCdq`, Date de l'édition `fldMHht3JNLJR3zX8`, Lien vers l'édition `fldgZVmuUgdQgLWw1`, Accroche `fldUYmk4oOXeDy5JQ`, Statut `fldVlsCSmDEczGRRT` (afficher la ligne « Validé » la plus récente).
-- Affiche la question, un champ d'une ligne pour y répondre (va dans le carnet), et un lien « Lire l'édition » qui ouvre le lien dans un nouvel onglet.
+- Bloc compact, fond bordeaux, avec une petite image carrée à gauche du titre (`public/images/ecrire.jpg` pour l'instant, la même pour toutes les lettres).
+- Affiche la question, un champ d'une ligne pour y répondre (va dans le carnet), et un lien « Lire la lettre » qui ouvre le lien dans un nouvel onglet.
 - Sous le lien, si elle n'est pas abonnée : une case à cocher « Recevoir La Question Chérie, deux mercredis par mois » (jamais cochée d'avance). Stocker son choix dans `profiles.newsletter` ; l'inscription réelle à la newsletter sera branchée plus tard.
 - Table vide : ne pas afficher le bloc.
 
@@ -59,7 +79,7 @@ Sur mobile, les blocs s'empilent. Sur ordinateur, phrase du jour en pleine large
 
 - Lu dans Airtable, table `tblnNOClHG4522gic` (« P! À lire aujourd'hui »), en lecture seule : Titre `fldqPNubIwpx7BcJR`, Date de publication `fldnBaooiFhkMJJYb`, Statut `fldnqIQq1LSSvxEBa`, Lien `fldTFnyWOoP20vORm`, Source `fldcerynNul7C3LoS`, Notre regard `fldheFTahAgYeH9Uo`.
 - Afficher la ligne « Validé » dont la date est aujourd'hui ; sinon la plus récente des 3 derniers jours ; sinon rien.
-- Titre, source, « Notre regard », image de la page (réutiliser `lib/catalogue/apercu.ts`), bouton « Lire l'article » (nouvel onglet).
+- Bloc compact : petite image carrée de la page à gauche (réutiliser `lib/catalogue/apercu.ts`), puis source, titre, « Notre regard » et le lien « Lire l'article » (nouvel onglet).
 - Les propositions arrivent chaque soir dans cette table, Cloé les valide dans Airtable : rien à coder pour ça.
 
 ## 9. Le chemin qui se dessine
@@ -73,8 +93,9 @@ Sur mobile, les blocs s'empilent. Sur ordinateur, phrase du jour en pleine large
 
 ## Ordre de travail
 
+0. La lecture de la carte comme une lettre, et la nouvelle mise en page de « Mon espace ».
 1. Humeur avec phrase, journal, puis résumé de la semaine.
-2. Phrase du jour et écho du carnet.
+2. Citation du jour et écho du carnet.
 3. Question Chérie et article du jour.
 4. L'humeur qui ajuste le chemin, puis le tracé.
 

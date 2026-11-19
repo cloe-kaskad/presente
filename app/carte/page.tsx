@@ -71,7 +71,8 @@ export default async function Carte({ searchParams }: { searchParams: Promise<{ 
   ]);
   if (profil?.detresse_le) redirect("/quand-ca-ne-va-pas");
   // Les textes de la carte n'existent pas encore (ou le chemin a changé) : on passe par « On trace ton chemin ».
-  if (!carteEcrite(textes, chemin) && !secours) redirect("/carte/trace");
+  const syntheseDeSecoursEnregistree = textes.get("carte_synthese:")?.statut === "secours";
+  if ((!carteEcrite(textes, chemin) || syntheseDeSecoursEnregistree) && !secours) redirect("/carte/trace");
 
   const prenom = prenomAffiche(profil?.prenom);
   const synthese = lireSynthese(textes) ?? syntheseDeSecours(chemin.quetes);

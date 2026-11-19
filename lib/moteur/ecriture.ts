@@ -2,7 +2,7 @@ import "server-only";
 import { z } from "zod";
 import { position } from "@/lib/chemin/calcul";
 import type { CheminEnregistre } from "@/lib/chemin/donnees";
-import { appelerJson, claudeDisponible, demanderJson } from "@/lib/ia/claude";
+import { appelerJson, claudeDisponible, demanderJson, modeleSynthese } from "@/lib/ia/claude";
 import {
   MONDE,
   QUESTION_APPELLE,
@@ -238,6 +238,8 @@ async function ecrireUne(t: Tache, ctx: ContexteCarte, reponses: Reponse[]): Pro
   const sources = t.emplacement === "monde_accroche" ? [planDuMonde(t.cle as MondeId)] : reponses.map((r) => r.reponse);
   let refus: { texte: string; raison: string } | null = null;
   let derniereRaison = "inconnue";
+  // Pour la synthèse : le dernier brouillon refusé seulement sur la forme (règles 3 ou 7), gardé en dernier recours.
+  let brouillonDeForme: string | null = null;
 
   for (let essai = 1; essai <= ESSAIS; essai++) {
     // Au second essai, Claude voit son texte refusé et pourquoi. Rien de tout ça n'est journalisé.
@@ -258,14 +260,18 @@ async function ecrireUne(t: Tache, ctx: ContexteCarte, reponses: Reponse[]): Pro
     let morceaux: string[];
     let texte: string;
     if (t.emplacement === "carte_synthese") {
-      const a = await appelerJson({ usage: "carte_synthese", systeme: promptEcriture(), message, schema: SchemaSynthese, effort: "medium" });
+      // Le texte qui compte le plus : le meilleur modèle, et du temps pour réfléchir.
+      const demande = { usage: "carte_synthese", systeme: promptEcriture(), message, schema: SchemaSynthese, effort: "high" as const };
+      let a = await appelerJson({ ...demande, modele: modeleSynthese() });
+      // Si ce modèle n'est pas accessible avec cette clé, on reprend le modèle par défaut.
+      if (!a.ok && /erreur (400|403|404)/.test(a.raison)) a = await appelerJson(demande);
       if (!a.ok) return deSecours(`écriture : ${a.raison}`);
       if (a.data.statut === "detresse") return { detresse: true };
       const s: Synthese = {
-        ouverture: a.data.ouverture.trim(),
-        ce_qui_revient: a.data.ce_qui_revient.trim(),
-        d_ou_ca_vient: a.data.d_ou_ca_vient.trim(),
-        ce_qui_se_joue: a.data.ce_qui_se_joue.trim(),
+        ouverture: sansTiret(a.data.ouverture),
+        ce_qui_revient: sansTiret(a.data.ce_qui_revient),
+        d_ou_ca_vient: sansTiret(a.data.d_ou_ca_vient),
+        ce_qui_se_joue: sansTiret(a.data.ce_qui_se_joue),
       };
       morceaux = [s.ouverture, s.ce_qui_revient, s.d_ou_ca_vient, s.ce_qui_se_joue];
       texte = JSON.stringify(s);
@@ -273,7 +279,7 @@ async function ecrireUne(t: Tache, ctx: ContexteCarte, reponses: Reponse[]): Pro
       const a = await appelerJson({ usage: t.emplacement, systeme: promptEcriture(), message, schema: SchemaTexte });
       if (!a.ok) return deSecours(`écriture : ${a.raison}`);
       if (a.data.statut === "detresse") return { detresse: true };
-      texte = a.data.texte.trim();
+      texte = sansTiret(a.data.texte);
       if (t.emplacement === "capacite") texte = texte.replace(/\.$/, "").replace(/^[«"]\s*|\s*[»"]$/g, "");
       morceaux = [texte];
     }
@@ -287,6 +293,7 @@ async function ecrireUne(t: Tache, ctx: ContexteCarte, reponses: Reponse[]): Pro
       t.emplacement === "carte_synthese" ? 1 : t.emplacement === "monde_accroche" ? 3 : 2,
     );
     if (!regles.ok) {
+      if (t.emplacement === "carte_synthese") brouillonDeForme = regles.regle === 7 ? texte : null;
       derniereRaison = `règle ${regles.regle} : ${regles.raison}`;
       console.warn(`[moteur:${t.emplacement}] essai ${essai}, ${derniereRaison}`);
       refus = { texte: morceaux.join("\n\n"), raison: regles.raison };
@@ -312,11 +319,20 @@ async function ecrireUne(t: Tache, ctx: ContexteCarte, reponses: Reponse[]): Pro
     if (v.data.verdict === "ok") return { texte: { emplacement: t.emplacement, cle: t.cle, texte, statut: "ok" } };
 
     // On ne garde dans la base que le numéro de la règle : la raison peut citer ses mots.
+    if (t.emplacement === "carte_synthese") brouillonDeForme = v.data.regle === 3 || v.data.regle === 7 ? texte : null;
     derniereRaison = `seconde passe : KO, règle ${v.data.regle ?? "?"}`;
     console.warn(`[moteur:${t.emplacement}] essai ${essai}, ${derniereRaison}`);
     refus = { texte: morceaux.join("\n\n"), raison: `seconde passe, règle ${v.data.regle ?? "?"} : ${v.data.raison ?? ""}` };
   }
+  // Une synthèse refusée seulement sur la forme (lecture jugée trop affirmée, ou un peu longue) vaut mieux
+  // que le texte générique : les règles de fond (citations, faits, santé, proches, sujets) restent bloquantes.
+  if (brouillonDeForme) return { texte: { emplacement: t.emplacement, cle: t.cle, texte: brouillonDeForme, statut: "ok" } };
   return deSecours(`${derniereRaison} (après ${ESSAIS} essais)`);
+}
+
+/** Le tiret cadratin est interdit : on le remplace plutôt que de refuser tout le texte. */
+function sansTiret(t: string): string {
+  return t.trim().replace(/\s*[—–]\s*/g, ", ");
 }
 
 async function parLots<T, R>(items: T[], taille: number, f: (x: T) => Promise<R>): Promise<R[]> {

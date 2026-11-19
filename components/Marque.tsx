@@ -12,7 +12,7 @@ export function Marque({ couleur = "blanc" }: { couleur?: "blanc" | "rouge" }) {
         <img
           src="/images/logo-lc-rouge.png"
           alt="Liberté, Chérie !"
-          style={{ height: 13, width: "auto", filter: blanc ? "brightness(0) invert(1)" : undefined }}
+          style={{ height: 16, width: "auto", filter: blanc ? "brightness(0) invert(1)" : undefined }}
         />
       </span>
     </div>

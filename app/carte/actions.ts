@@ -36,16 +36,24 @@ export async function ecrireMaCarte(): Promise<ResultatCarte> {
     chargerTextesCarte(supabase, chemin.id),
   ]);
   if (profil?.detresse_le) return { detresse: true };
-  if (carteEcrite(textes, chemin)) return { ok: true };
+  // Les textes de secours ne comptent pas comme écrits : on retente de les écrire pour de vrai.
+  const valides = new Set([...textes].filter(([, t]) => t.statut === "ok").map(([cle]) => cle));
+  const aReecrire = [...textes].filter(([, t]) => t.statut !== "ok").map(([cle]) => cle);
+  if (carteEcrite(textes, chemin) && !aReecrire.length) return { ok: true };
 
-  const r = await ecrireLaCarte(
-    { chemin, reponses, sujetsAEviter: profil?.sujets_a_eviter ?? null },
-    new Set(textes.keys()),
-  );
+  const r = await ecrireLaCarte({ chemin, reponses, sujetsAEviter: profil?.sujets_a_eviter ?? null }, valides);
 
   if (r.detresse) {
     await supabase.from("profiles").update({ detresse_le: new Date().toISOString() }).eq("id", user.id);
     return { detresse: true };
+  }
+
+  if (aReecrire.length) {
+    // On retire les anciens textes de secours avant d'enregistrer les nouveaux.
+    for (const cle of aReecrire) {
+      const [emplacement, ...reste] = cle.split(":");
+      await supabase.from("generated_texts").delete().eq("path_id", chemin.id).eq("emplacement", emplacement).eq("cle", reste.join(":"));
+    }
   }
 
   if (r.textes.length) {
@@ -63,7 +71,9 @@ export async function ecrireMaCarte(): Promise<ResultatCarte> {
       return { ok: false };
     }
   }
-  return { ok: true };
+  // Si la synthèse n'a pas pu être écrite, on le dit : la carte s'affiche quand même, sans boucler.
+  const synthese = r.textes.find((t) => t.emplacement === "carte_synthese");
+  return synthese?.statut === "secours" ? { ok: false } : { ok: true };
 }
 
 /** Pour la démo : recalcule le chemin à partir des réponses enregistrées, et réécrit la carte. */

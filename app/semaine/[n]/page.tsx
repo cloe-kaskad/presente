@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
+import { apercuDuLien } from "@/lib/catalogue/apercu";
 import { decrireContenu } from "@/lib/catalogue/presentation";
 import { choixDuMois, profilDeChoix } from "@/lib/catalogue/semaines";
 import { chargerChemin } from "@/lib/chemin/donnees";
@@ -48,8 +49,14 @@ export default async function Semaine({ params }: { params: Promise<{ n: string 
     indisponible = choix.catalogueIndisponible;
   }
 
-  const contenu = quete?.contenu;
+  const contenuBrut = quete?.contenu;
   const pratique = quete?.pratique;
+  // Image et résumé : ceux d'Airtable, sinon ceux de la page du contenu (balises Open Graph).
+  const apercu =
+    contenuBrut && (!contenuBrut.image || !contenuBrut.description) ? await apercuDuLien(contenuBrut.lien) : null;
+  const contenu = contenuBrut
+    ? { ...contenuBrut, image: contenuBrut.image ?? apercu?.image ?? null, description: contenuBrut.description ?? apercu?.description ?? null }
+    : contenuBrut;
 
   return (
     <div className={styles.page}>
@@ -71,26 +78,35 @@ export default async function Semaine({ params }: { params: Promise<{ n: string 
                 <span className={styles.surtitre} id="contenu-titre">
                   1. Le contenu
                 </span>
-                {contenu.image ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={contenu.image} alt="" className={styles.image} />
-                ) : null}
-                <p className={styles.texte}>
-                  {decrireContenu(contenu)}
-                  {contenu.auteur ? (
-                    <>
-                      {" "}
-                      · <span className={styles.auteur}>{contenu.auteur}</span>
-                    </>
+                <div className={contenu.image ? styles.contenuAvecImage : undefined}>
+                  {contenu.image ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={contenu.image} alt="" className={styles.image} />
                   ) : null}
-                </p>
-                {contenu.description ? <p className={styles.description}>{contenu.description}</p> : null}
-                {contenu.lien ? (
-                  <a href={contenu.lien} target="_blank" rel="noopener noreferrer" className="bouton">
-                    {VERBE[contenu.format ?? ""] ?? "Ouvrir"}
-                    <span className="sr-only"> (s&apos;ouvre dans un nouvel onglet)</span>
-                  </a>
-                ) : null}
+                  <div className={styles.contenuTexte}>
+                    <p className={styles.texte}>
+                      {decrireContenu(contenu)}
+                      {contenu.auteur ? (
+                        <>
+                          {" "}
+                          · <span className={styles.auteur}>{contenu.auteur}</span>
+                        </>
+                      ) : null}
+                    </p>
+                    {contenu.description ? (
+                      <>
+                        <span className={styles.resumeTitre}>En quelques mots</span>
+                        <p className={styles.description}>{contenu.description}</p>
+                      </>
+                    ) : null}
+                    {contenu.lien ? (
+                      <a href={contenu.lien} target="_blank" rel="noopener noreferrer" className="bouton">
+                        {VERBE[contenu.format ?? ""] ?? "Ouvrir"}
+                        <span className="sr-only"> (s&apos;ouvre dans un nouvel onglet)</span>
+                      </a>
+                    ) : null}
+                  </div>
+                </div>
               </section>
             ) : (
               <p className={styles.manque}>

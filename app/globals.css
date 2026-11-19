@@ -194,21 +194,21 @@ img {
 .marque {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 7px;
 }
 .marque__nom {
-  font-size: 26px;
+  font-size: 31px;
 }
 .marque__ecole {
   display: flex;
   align-items: center;
-  gap: 5px;
-  font-size: 10px;
+  gap: 6px;
+  font-size: 12px;
   font-weight: 500;
   line-height: 1;
 }
 @media (min-width: 1024px) {
   .marque__nom {
-    font-size: 30px;
+    font-size: 36px;
   }
 }

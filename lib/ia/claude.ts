@@ -9,6 +9,11 @@ export function modele(): string {
   return process.env.CLAUDE_MODEL || "claude-sonnet-5-5";
 }
 
+/** La synthèse « Ce qu'on a compris de toi » demande le meilleur modèle : variable CLAUDE_MODEL_SYNTHESE, Opus par défaut. */
+export function modeleSynthese(): string {
+  return process.env.CLAUDE_MODEL_SYNTHESE || "claude-opus-5-5";
+}
+
 export function claudeDisponible(): boolean {
   return Boolean(process.env.ANTHROPIC_API_KEY);
 }
@@ -33,6 +38,7 @@ export async function appelerJson<S extends z.ZodType>(options: {
   schema: S;
   maxTokens?: number;
   effort?: "low" | "medium" | "high";
+  modele?: string; // sinon CLAUDE_MODEL
 }): Promise<Appel<z.infer<S>>> {
   const debut = Date.now();
   const echec = (raison: string): Appel<z.infer<S>> => {
@@ -50,7 +56,7 @@ export async function appelerJson<S extends z.ZodType>(options: {
   // Si le compte n'y a pas accès (erreur 400), on réessaie aussitôt sans.
   const avecRelais = () =>
     getClient().beta.messages.parse({
-      model: modele(),
+      model: options.modele ?? modele(),
       max_tokens,
       betas: ["server-side-fallback-2026-07-01"],
       fallbacks: "default",
@@ -60,7 +66,7 @@ export async function appelerJson<S extends z.ZodType>(options: {
     });
   const sansRelais = () =>
     getClient().messages.parse({
-      model: modele(),
+      model: options.modele ?? modele(),
       max_tokens,
       output_config: { effort, format: zodOutputFormat(options.schema) },
       system,

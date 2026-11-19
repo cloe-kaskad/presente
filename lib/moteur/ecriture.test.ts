@@ -16,6 +16,7 @@ vi.mock("@/lib/ia/claude", () => {
   };
   return {
     claudeDisponible: () => true,
+    modeleSynthese: () => "modele-synthese-test",
     demanderJson: appeler,
     appelerJson: async (o: { usage: string; message: string }) => {
       const d = await appeler(o);
@@ -110,8 +111,27 @@ describe("le moteur d'écriture de la carte", () => {
     expect(appels.some((a) => a.usage === "verif:carte_pourquoi")).toBe(false);
   });
 
-  it("la seconde passe dit KO : texte de secours", async () => {
+  it("la seconde passe dit KO sur la forme (règle 3) : la synthèse est gardée plutôt que le texte générique", async () => {
     repondre = (a) => (a.usage === "verif:carte_synthese" ? { verdict: "ko", regle: 3, raison: "tranche" } : bonneReponse(a));
+    const r = await ecrireLaCarte({ chemin, reponses: reponses(), sujetsAEviter: null }, new Set());
+    if (r.detresse) throw new Error("pas de détresse attendue");
+    const s = r.textes.find((t) => t.emplacement === "carte_synthese")!;
+    expect(s.statut).toBe("ok");
+    expect(JSON.parse(s.texte).ouverture).toContain("argent");
+  });
+
+  it("le tiret cadratin est remplacé, pas refusé", async () => {
+    repondre = (a) =>
+      a.usage === "carte_synthese" ? { ...SYNTHESE_OK, ouverture: "Dès qu'il s'agit d'argent — quelque chose se ferme." } : bonneReponse(a);
+    const r = await ecrireLaCarte({ chemin, reponses: reponses(), sujetsAEviter: null }, new Set());
+    if (r.detresse) throw new Error("pas de détresse attendue");
+    const s = r.textes.find((t) => t.emplacement === "carte_synthese")!;
+    expect(s.statut).toBe("ok");
+    expect(JSON.parse(s.texte).ouverture).toBe("Dès qu'il s'agit d'argent, quelque chose se ferme.");
+  });
+
+  it("la seconde passe dit KO sur le fond (règle 4) : texte de secours", async () => {
+    repondre = (a) => (a.usage === "verif:carte_synthese" ? { verdict: "ko", regle: 4, raison: "proches" } : bonneReponse(a));
     const r = await ecrireLaCarte({ chemin, reponses: reponses(), sujetsAEviter: null }, new Set());
     if (r.detresse) throw new Error("pas de détresse attendue");
     const s = r.textes.find((t) => t.emplacement === "carte_synthese")!;

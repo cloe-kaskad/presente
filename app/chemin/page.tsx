@@ -11,9 +11,13 @@ import { MONDE, QUETE, libelleCapacite } from "@/lib/questionnaire/contenu";
 import { chargerReponses } from "@/lib/questionnaire/donnees";
 import { citationDuJour, dateEnLettres, jourAParis } from "@/lib/rituel/citations";
 import { chargerHumeurs } from "@/lib/rituel/donnees";
+import { echoDuJour } from "@/lib/rituel/echo";
+import { candidatsEcho } from "@/lib/rituel/echo-donnees";
+import { chargerCarnet } from "@/lib/semaines/carnet";
 import { enLettres, etapesFaitesDuMois } from "@/lib/semaines/etapes";
 import { createClient } from "@/lib/supabase/server";
 import { semaineSuivante } from "./actions";
+import { Echo } from "./Echo";
 import { Humeur } from "./Humeur";
 import styles from "./espace.module.css";
 
@@ -42,6 +46,12 @@ export default async function MonEspace() {
   if (profil?.detresse_le) redirect("/quand-ca-ne-va-pas");
   if (!carteEcrite(textesCarte, chemin)) redirect("/carte/trace");
   const humeurDuJour = humeurs.find((h) => h.jour === aujourdhui);
+
+  // L'écho du carnet : une de ses réponses d'il y a au moins dix jours, choisie par la date.
+  const [candidats, carnet] = await Promise.all([candidatsEcho(supabase, reponses), chargerCarnet(supabase)]);
+  const echo = echoDuJour(candidats, aujourdhui, profil?.sujets_a_eviter);
+  const echoRepondu = carnet.find((e) => e.code === `echo:${aujourdhui}`);
+  const [echoChoix, ...echoLigne] = (echoRepondu?.reponse ?? "").split(" · ");
 
   const mois = Math.min(2, Math.floor((chemin.semaine - 1) / 4)) as 0 | 1 | 2;
   const quete = chemin.quetes[mois];
@@ -158,6 +168,16 @@ export default async function MonEspace() {
         <div className={styles.grilleJour}>
           <div className={styles.colonne}>
             <Humeur initiale={humeurDuJour?.humeur} noteInitiale={humeurDuJour?.note} />
+            {echo ? (
+              <Echo
+                semaine={chemin.semaine}
+                jour={aujourdhui}
+                dateEcrite={dateEnLettres(echo.jour).replace(/^\S+ /, "")}
+                mots={echo.reponse}
+                dejaChoisi={echoRepondu ? echoChoix : undefined}
+                dejaLigne={echoRepondu ? echoLigne.join(" · ") : undefined}
+              />
+            ) : null}
           </div>
           <div className={styles.colonne} />
         </div>

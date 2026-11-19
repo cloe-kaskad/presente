@@ -419,3 +419,34 @@
     padding: 0 96px 48px;
   }
 }
+
+/* L'écho du carnet */
+.echo {
+  background: var(--blanc);
+  border: 1.5px solid var(--rose);
+}
+.echoDate {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--rouge-profond);
+}
+.echoMots {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.25;
+  font-weight: 600;
+  font-style: italic;
+  letter-spacing: -0.02em;
+  color: var(--bordeaux);
+}
+.echoQuestion {
+  padding-top: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--bordeaux);
+}
+@media (min-width: 1024px) {
+  .echoMots {
+    font-size: 26px;
+  }
+}

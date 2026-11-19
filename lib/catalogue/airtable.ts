@@ -72,7 +72,7 @@ const PRATIQUES = {
 
 type Enregistrement = { id: string; fields: Record<string, unknown> };
 
-async function lireTable(table: string, champs: string[]): Promise<Enregistrement[]> {
+export async function lireTable(table: string, champs: string[]): Promise<Enregistrement[]> {
   const token = process.env.AIRTABLE_TOKEN;
   const base = process.env.AIRTABLE_BASE_ID;
   if (!token || !base) throw new Error("AIRTABLE_TOKEN ou AIRTABLE_BASE_ID manquant");

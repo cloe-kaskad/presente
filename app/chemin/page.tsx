@@ -10,6 +10,7 @@ import { carteEcrite, chargerTextesCarte } from "@/lib/moteur/carte";
 import { MONDE, QUETE, libelleCapacite } from "@/lib/questionnaire/contenu";
 import { chargerReponses } from "@/lib/questionnaire/donnees";
 import { citationDuJour, dateEnLettres, jourAParis } from "@/lib/rituel/citations";
+import { articleDuJour, questionCherie } from "@/lib/rituel/airtable";
 import { chargerHumeurs } from "@/lib/rituel/donnees";
 import { echoDuJour } from "@/lib/rituel/echo";
 import { candidatsEcho } from "@/lib/rituel/echo-donnees";
@@ -17,7 +18,9 @@ import { chargerCarnet } from "@/lib/semaines/carnet";
 import { enLettres, etapesFaitesDuMois } from "@/lib/semaines/etapes";
 import { createClient } from "@/lib/supabase/server";
 import { semaineSuivante } from "./actions";
+import { Article } from "./Article";
 import { Echo } from "./Echo";
+import { QuestionCherie } from "./QuestionCherie";
 import { Humeur } from "./Humeur";
 import styles from "./espace.module.css";
 
@@ -37,7 +40,7 @@ export default async function MonEspace() {
   const [{ data: profil }, reponses, textesCarte, humeurs] = await Promise.all([
     supabase
       .from("profiles")
-      .select("prenom, temps_par_semaine, formats_preferes, sujets_a_eviter, detresse_le")
+      .select("*")
       .maybeSingle(),
     chargerReponses(supabase, 1),
     chargerTextesCarte(supabase, chemin.id),
@@ -48,7 +51,13 @@ export default async function MonEspace() {
   const humeurDuJour = humeurs.find((h) => h.jour === aujourdhui);
 
   // L'écho du carnet : une de ses réponses d'il y a au moins dix jours, choisie par la date.
-  const [candidats, carnet] = await Promise.all([candidatsEcho(supabase, reponses), chargerCarnet(supabase)]);
+  const [candidats, carnet, qc, article] = await Promise.all([
+    candidatsEcho(supabase, reponses),
+    chargerCarnet(supabase),
+    questionCherie(),
+    articleDuJour(aujourdhui),
+  ]);
+  const qcReponse = qc ? carnet.find((e) => e.code === `qc:${qc.id.toLowerCase()}`) : undefined;
   const echo = echoDuJour(candidats, aujourdhui, profil?.sujets_a_eviter);
   const echoRepondu = carnet.find((e) => e.code === `echo:${aujourdhui}`);
   const [echoChoix, ...echoLigne] = (echoRepondu?.reponse ?? "").split(" · ");
@@ -179,7 +188,19 @@ export default async function MonEspace() {
               />
             ) : null}
           </div>
-          <div className={styles.colonne} />
+          <div className={styles.colonne}>
+            {qc ? (
+              <QuestionCherie
+                semaine={chemin.semaine}
+                id={qc.id}
+                question={qc.question}
+                lien={qc.lien}
+                reponseInitiale={qcReponse?.reponse}
+                abonnee={Boolean(profil?.newsletter)}
+              />
+            ) : null}
+            {article ? <Article article={article} /> : null}
+          </div>
         </div>
         {autresMois.length ? (
           <div className={styles.ensuite}>

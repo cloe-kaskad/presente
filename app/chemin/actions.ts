@@ -62,3 +62,11 @@ export async function semaineSuivante(): Promise<void> {
   }
   revalidatePath("/chemin");
 }
+
+/** « Recevoir La Question Chérie » : on garde son choix. L'inscription réelle sera branchée plus tard. */
+export async function choisirNewsletter(oui: boolean): Promise<{ ok: boolean }> {
+  const { supabase, user } = await session();
+  const { error } = await supabase.from("profiles").update({ newsletter: oui }).eq("id", user.id);
+  if (error) console.error("[newsletter] choix non enregistré :", error.code);
+  return { ok: !error };
+}

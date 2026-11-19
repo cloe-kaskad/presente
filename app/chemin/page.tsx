@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { Marque } from "@/components/Marque";
+import { BarreEspace } from "@/components/BarreEspace";
 import { chargerChemin } from "@/lib/chemin/donnees";
 import { HUMEURS, prenomAffiche, semainesDuMois } from "@/lib/chemin/textes";
 import { carteEcrite, chargerTextesCarte, texte } from "@/lib/moteur/carte";
@@ -65,15 +65,7 @@ export default async function Chemin() {
 
   return (
     <div className={styles.page}>
-      <header className={styles.haut}>
-        <Marque couleur="rouge" />
-        <nav className={styles.nav} aria-label="Navigation principale">
-          <Link href="/chemin" aria-current="page">
-            Mon chemin
-          </Link>
-          <Link href="/carte">Ma carte</Link>
-        </nav>
-      </header>
+      <BarreEspace courante="chemin" />
       <section className={styles.hero}>
         <div className={styles.heroBas}>
           <div className={styles.heroTitre}>

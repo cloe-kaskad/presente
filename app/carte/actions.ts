@@ -89,7 +89,7 @@ export async function recalculerMonChemin(): Promise<void> {
   if (chemin) {
     const { error } = await supabase
       .from("paths")
-      .update({ quetes: nouveau.quetes, capacites: nouveau.capacites, mondes: nouveau.mondes, choix: {} })
+      .update({ quetes: nouveau.quetes, capacites: nouveau.capacites, mondes: nouveau.mondes, choix: {}, progression: {} })
       .eq("id", chemin.id);
     if (error) console.error("[chemin] recalcul impossible :", error.code);
     await effacerTextes(supabase, chemin.id);
@@ -134,7 +134,7 @@ export async function garderCeChemin(positions: unknown): Promise<void> {
       quetes.map(async (q) => [q, chemin.capacites[q] ?? (await capacitesDe(q, reponses[3].zoom, deps.choisirCapacites))] as const),
     ),
   );
-  const { error: e2 } = await supabase.from("paths").update({ quetes, capacites, choix: {} }).eq("id", chemin.id);
+  const { error: e2 } = await supabase.from("paths").update({ quetes, capacites, choix: {}, progression: {} }).eq("id", chemin.id);
   if (e2) {
     console.error("[echanger] chemin non recomposé :", e2.code);
     redirect("/carte");

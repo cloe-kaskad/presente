@@ -1,0 +1,36 @@
+.champ {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.question {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+.zone {
+  min-height: 110px;
+  resize: vertical;
+}
+.statut {
+  font-size: 12px;
+  min-height: 1.2em;
+  opacity: 0.85;
+}
+.blanc {
+}
+.rose :global(.champ) {
+  background: var(--blanc);
+}
+.sombre .question,
+.sombre .statut {
+  color: var(--blanc);
+}
+.sombre :global(.champ) {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: var(--blanc);
+}
+.sombre :global(.champ)::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}

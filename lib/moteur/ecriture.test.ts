@@ -35,6 +35,7 @@ const chemin: CheminEnregistre = {
   dateDebut: "2026-11-18",
   semaine: 1,
   choix: {},
+  progression: {},
 };
 
 function reponses(): Reponses {

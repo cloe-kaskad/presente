@@ -17,6 +17,8 @@ export type CheminEnregistre = Chemin & {
   semaine: number;
   /** Clés « m1s1 », « m1s3 », « m2s1 »… */
   choix: Record<string, ChoixEnregistre>;
+  /** L'étape ouverte dans chaque semaine : {"1": 3}. */
+  progression: Record<string, number>;
 };
 
 /** Son chemin actif, ou null. */
@@ -48,5 +50,6 @@ export async function chargerChemin(supabase: SupabaseClient): Promise<CheminEnr
     dateDebut: data.date_debut,
     semaine: data.semaine_en_cours,
     choix: (data.choix && typeof data.choix === "object" ? data.choix : {}) as Record<string, ChoixEnregistre>,
+    progression: (data.progression && typeof data.progression === "object" ? data.progression : {}) as Record<string, number>,
   };
 }

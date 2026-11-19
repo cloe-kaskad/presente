@@ -1,0 +1,93 @@
+.page {
+  min-height: calc(100svh - 70px);
+  background: var(--rose-pale);
+  padding: 32px var(--gouttiere) 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.haut {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+}
+.titre {
+  margin: 0;
+  font-size: 64px;
+  line-height: 1;
+  color: var(--rouge);
+}
+.telecharger {
+  font-size: 15px;
+  font-weight: 600;
+  min-height: var(--cible);
+  display: inline-flex;
+  align-items: center;
+}
+.groupes {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.groupe {
+  background: var(--blanc);
+  border: 1.5px solid var(--rose);
+  border-radius: 24px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.groupeTitre {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+.slash {
+  color: var(--rouge);
+}
+.ligne {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.question {
+  font-size: 14px;
+  line-height: 1.45;
+}
+.reponse {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.45;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--bordeaux);
+  white-space: pre-line;
+}
+.geste {
+  margin: 0;
+  align-self: flex-start;
+  font-size: 14px;
+  font-weight: 600;
+  background: var(--rouge-profond);
+  color: var(--blanc);
+  border-radius: 999px;
+  padding: 6px 14px;
+}
+.vide {
+  margin: 0;
+  font-size: 16px;
+}
+.note {
+  margin: 8px 0 0;
+  font-size: 13px;
+}
+@media (min-width: 1024px) {
+  .page {
+    padding: 56px max(96px, calc((100vw - 880px) / 2)) 72px;
+  }
+  .titre {
+    font-size: 96px;
+  }
+}

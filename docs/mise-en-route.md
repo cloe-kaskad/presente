@@ -83,3 +83,18 @@ l'image et le lien (pour pouvoir afficher le contenu). Il ne lit pas « Thème L
 
 Le moteur lit ses consignes dans `prompts/moteur-ecriture.md` : on peut les modifier sans toucher au code.
 Pour réécrire une carte pendant la démo : lien « Recalculer mon chemin (démo) » en bas de la carte.
+
+## V0.4 et V0.5 : les semaines, le carnet, le rituel du jour
+
+Deux migrations, dans cet ordre (SQL Editor > Run) :
+
+1. `supabase/migrations/20261119000000_carnet_semaines.sql` (déjà lancée le 19 novembre).
+2. `supabase/migrations/20261119100000_rituel.sql` : l'humeur avec une phrase (une par jour),
+   le résumé de la semaine du journal, le choix « Recevoir La Question Chérie ».
+
+Dans Airtable : La Question Chérie (« P! Questions chéries ») et l'article du jour (« P! À lire aujourd'hui »)
+n'apparaissent que s'il y a une ligne « Validé ». Le jeton Airtable doit avoir accès à ces deux tables.
+
+Les questions de carnet des quêtes Le Travail, Les Émotions, Le Corps et La Création sont un gabarit
+provisoire (`lib/semaines/contenu.ts`), à remplacer par les vraies questions une fois écrites.
+Le fichier audio des épisodes est provisoire (`public/audio/provisoire.mp3`).

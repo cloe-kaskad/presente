@@ -18,14 +18,15 @@ export type Entree = {
 export async function chargerCarnet(supabase: SupabaseClient): Promise<Entree[]> {
   const { data, error } = await supabase
     .from("carnet_entries")
-    .select("semaine, type, question_code, question, reponse, retour, updated_at")
+    .select("semaine, type, question_code, question, reponse, retour, created_at, updated_at")
     .order("semaine", { ascending: false })
     .order("created_at", { ascending: true });
   if (error) {
     console.error("[carnet] lecture impossible :", error.code);
     return [];
   }
-  return (data ?? []).map((e) => ({
+  const lignes = [...(data ?? [])].sort((a, b) => b.semaine - a.semaine || (a.created_at < b.created_at ? -1 : 1));
+  return lignes.map((e) => ({
     semaine: e.semaine,
     type: e.type,
     code: e.question_code ?? "",

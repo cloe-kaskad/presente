@@ -20,6 +20,7 @@ export function ChampCarnet({
   placeholder,
   onChange,
   surFond = "blanc",
+  libelle,
 }: {
   semaine: number;
   type: EntreeAEnregistrer["type"];
@@ -31,6 +32,8 @@ export function ChampCarnet({
   placeholder?: string;
   onChange?: (valeur: string) => void;
   surFond?: "blanc" | "rose" | "sombre";
+  /** Ce qui s'affiche au-dessus du champ, si différent de la question enregistrée. */
+  libelle?: string;
 }) {
   const [valeur, setValeur] = useState(initial);
   const [statut, setStatut] = useState<Statut>("idle");
@@ -60,7 +63,7 @@ export function ChampCarnet({
   return (
     <div className={`${styles.champ} ${styles[surFond]}`}>
       <label htmlFor={id} className={styles.question}>
-        {question}
+        {libelle ?? question}
       </label>
       {ligne ? (
         <input

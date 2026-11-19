@@ -29,6 +29,14 @@
   letter-spacing: -0.035em;
   animation: apparait 700ms ease both;
 }
+.autrice {
+  font-size: 15px;
+  line-height: 1.4;
+  animation: apparait 700ms ease both;
+}
+.autrice strong {
+  font-weight: 600;
+}
 .points {
   display: flex;
   gap: 8px;

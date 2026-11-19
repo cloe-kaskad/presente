@@ -9,7 +9,7 @@ export function Bienvenue() {
   const router = useRouter();
   useEffect(() => {
     router.prefetch("/chemin");
-    const t = setTimeout(() => router.replace("/chemin"), 7600);
+    const t = setTimeout(() => router.replace("/chemin"), 7800);
     return () => clearTimeout(t);
   }, [router]);
   return <Mantra defile surtitre="/ On ouvre ton espace" />;

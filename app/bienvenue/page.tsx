@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { chargerChemin } from "@/lib/chemin/donnees";
+import { chargerChemin, espaceOuvert, ouvrirEspace } from "@/lib/chemin/donnees";
 import { createClient } from "@/lib/supabase/server";
 import { Bienvenue } from "./Bienvenue";
 
@@ -15,6 +15,10 @@ export default async function Page() {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) redirect("/connexion");
-  if (!(await chargerChemin(supabase))) redirect("/questionnaire");
+  const chemin = await chargerChemin(supabase);
+  if (!chemin) redirect("/questionnaire");
+  // L'écran de passage ne se voit qu'une fois : ensuite, on va droit à son espace.
+  if (espaceOuvert(chemin)) redirect("/chemin");
+  await ouvrirEspace(supabase, chemin);
   return <Bienvenue />;
 }

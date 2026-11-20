@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { AvecSesMots } from "@/components/AvecSesMots";
+import { BarreEspace } from "@/components/BarreEspace";
 import { Marque } from "@/components/Marque";
-import { chargerChemin } from "@/lib/chemin/donnees";
+import { chargerChemin, espaceOuvert } from "@/lib/chemin/donnees";
 import { prenomAffiche } from "@/lib/chemin/textes";
 import { carteEcrite, chargerTextesCarte, lireSynthese, texte } from "@/lib/moteur/carte";
 import {
@@ -74,7 +75,10 @@ export default async function Carte({ searchParams }: { searchParams: Promise<{ 
   if (profil?.detresse_le) redirect("/quand-ca-ne-va-pas");
   // Les textes de la carte n'existent pas encore (ou le chemin a changé) : on passe par « On trace ton chemin ».
   const syntheseDeSecoursEnregistree = textes.get("carte_synthese:")?.statut === "secours";
-  if ((!carteEcrite(textes, chemin) || syntheseDeSecoursEnregistree) && !secours) redirect("/carte/trace");
+  // Une fois son espace ouvert, la carte est une page de l'espace : on ne repasse plus par l'écran d'attente,
+  // sauf si les textes n'existent pas du tout.
+  const dansLEspace = espaceOuvert(chemin);
+  if ((!carteEcrite(textes, chemin) || (syntheseDeSecoursEnregistree && !dansLEspace)) && !secours) redirect("/carte/trace");
 
   const prenom = prenomAffiche(profil?.prenom);
   const synthese = lireSynthese(textes) ?? syntheseDeSecours(chemin.quetes);
@@ -129,12 +133,16 @@ export default async function Carte({ searchParams }: { searchParams: Promise<{ 
 
   return (
     <div className={styles.page}>
-      <header className={styles.entete}>
-        <Marque couleur="rouge" />
-        <Link href="/bienvenue" className={`bouton ${styles.commencerHaut}`}>
-          Commencer mon chemin
-        </Link>
-      </header>
+      {dansLEspace ? (
+        <BarreEspace courante="carte" />
+      ) : (
+        <header className={styles.entete}>
+          <Marque couleur="rouge" />
+          <Link href="/bienvenue" className={`bouton ${styles.commencerHaut}`}>
+            Commencer mon chemin
+          </Link>
+        </header>
+      )}
 
       {/* 1. Ce qu'on a compris de toi : une lettre, écrite pour elle */}
       <section className={styles.compris}>
@@ -174,14 +182,16 @@ export default async function Carte({ searchParams }: { searchParams: Promise<{ 
             ))}
             <p className={styles.lecture}>C&apos;est une lecture, pas un verdict. Elle s&apos;affinera avec ce que tu écriras en route.</p>
           </article>
-          <div className={styles.appel}>
-            <Link href="/bienvenue" className="bouton bouton--grand">
-              Commencer mon chemin
-            </Link>
-            <a href="#chemin" className={styles.appelSuite}>
-              Voir d&apos;abord ce qu&apos;on m&apos;a préparé
-            </a>
-          </div>
+          {dansLEspace ? null : (
+            <div className={styles.appel}>
+              <Link href="/bienvenue" className="bouton bouton--grand">
+                Commencer mon chemin
+              </Link>
+              <a href="#chemin" className={styles.appelSuite}>
+                Voir d&apos;abord ce qu&apos;on m&apos;a préparé
+              </a>
+            </div>
+          )}
         </div>
       </section>
 
@@ -337,7 +347,9 @@ export default async function Carte({ searchParams }: { searchParams: Promise<{ 
         </ul>
       </section>
 
-      {/* 5. L'offre */}
+      {/* 5. L'offre : seulement avant d'avoir commencé */}
+      {dansLEspace ? null : (
+        <>
       <section className={styles.offre}>
         <div className={styles.offreImage}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -373,6 +385,9 @@ export default async function Carte({ searchParams }: { searchParams: Promise<{ 
         </div>
       </section>
 
+        </>
+      )}
+
       {/* 6. Échanger une quête */}
       <section className={styles.fin}>
         <Link href="/carte/echanger">Ce n&apos;est pas tout à fait ça ? Échanger une quête.</Link>
@@ -382,7 +397,8 @@ export default async function Carte({ searchParams }: { searchParams: Promise<{ 
           </button>
         </form>
       </section>
-      {/* Toujours à portée : la barre du bas */}
+      {/* Toujours à portée : la barre du bas (avant d'avoir commencé) */}
+      {dansLEspace ? null : (
       <div className={styles.barreBas}>
         <span className={styles.barreTexte}>
           <strong>Ton chemin est prêt.</strong> 25 € par mois, pendant trois mois.
@@ -391,6 +407,7 @@ export default async function Carte({ searchParams }: { searchParams: Promise<{ 
           Commencer mon chemin
         </Link>
       </div>
+      )}
     </div>
   );
 }

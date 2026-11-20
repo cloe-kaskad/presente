@@ -4,7 +4,7 @@ import { BarreEspace } from "@/components/BarreEspace";
 import { TraceDuMois } from "@/components/TraceDuMois";
 import { decrireContenu } from "@/lib/catalogue/presentation";
 import { choixDuMois, profilDeChoix } from "@/lib/catalogue/semaines";
-import { chargerChemin } from "@/lib/chemin/donnees";
+import { chargerChemin, ouvrirEspace } from "@/lib/chemin/donnees";
 import { semainesDuMois } from "@/lib/chemin/textes";
 import { carteEcrite, chargerTextesCarte } from "@/lib/moteur/carte";
 import { MONDE, QUETE, libelleCapacite } from "@/lib/questionnaire/contenu";
@@ -49,6 +49,7 @@ export default async function MonEspace() {
   ]);
   if (profil?.detresse_le) redirect("/quand-ca-ne-va-pas");
   if (!carteEcrite(textesCarte, chemin)) redirect("/carte/trace");
+  await ouvrirEspace(supabase, chemin);
   const humeurDuJour = humeurs.find((h) => h.jour === aujourdhui);
 
   // L'écho du carnet : une de ses réponses d'il y a au moins dix jours, choisie par la date.

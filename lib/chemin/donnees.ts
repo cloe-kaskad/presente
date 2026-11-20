@@ -53,3 +53,20 @@ export async function chargerChemin(supabase: SupabaseClient): Promise<CheminEnr
     progression: (data.progression && typeof data.progression === "object" ? data.progression : {}) as Record<string, number>,
   };
 }
+
+/**
+ * Vrai une fois qu'elle a ouvert son espace (après « Commencer mon chemin »).
+ * La carte devient alors une page de son espace comme les autres : la barre du haut, sans l'offre.
+ */
+export function espaceOuvert(chemin: CheminEnregistre): boolean {
+  return chemin.progression.espace === 1 || chemin.semaine > 1 || Object.values(chemin.progression).some((v) => v > 0);
+}
+
+/** Note que son espace est ouvert (une seule fois). */
+export async function ouvrirEspace(supabase: SupabaseClient, chemin: CheminEnregistre): Promise<void> {
+  if (chemin.progression.espace === 1) return;
+  const progression = { ...chemin.progression, espace: 1 };
+  const { error } = await supabase.from("paths").update({ progression }).eq("id", chemin.id);
+  if (error) console.error("[chemin] ouverture de l'espace non enregistrée :", error.code);
+  else chemin.progression = progression;
+}

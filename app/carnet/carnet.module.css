@@ -1,100 +1,369 @@
+/* Mon carnet (maquettes Carnet et D-Carnet, brief V0.7) : un fil daté, une feuille blanche par semaine. */
 .page {
   min-height: calc(100svh - 70px);
   background: var(--rose-pale);
-  padding: 32px var(--gouttiere) 48px;
+  padding: 28px var(--gouttiere) 48px;
   display: flex;
   flex-direction: column;
   gap: 20px;
-}
-.haut {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 16px;
-}
-.titre {
-  margin: 0;
-  font-size: 64px;
-  line-height: 1;
-  color: var(--rouge);
-}
-.telecharger {
-  font-size: 15px;
-  font-weight: 600;
-  min-height: var(--cible);
-  display: inline-flex;
-  align-items: center;
-}
-.intro {
-  margin: 0;
-  max-width: 62ch;
-  font-size: 17px;
-  line-height: 1.6;
   color: var(--bordeaux);
 }
-.groupes {
+.entete,
+.outils {
   display: flex;
   flex-direction: column;
   gap: 14px;
 }
-.groupe {
-  background: var(--blanc);
-  border: 1.5px solid var(--rose);
-  border-radius: 24px;
-  padding: 22px;
+.titreLigne {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  justify-content: space-between;
+  align-items: flex-end;
 }
-.groupeTitre {
+.titre {
   margin: 0;
-  font-size: 14px;
-  font-weight: 600;
-}
-.slash {
+  font-family: var(--font-titre-nom);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  font-size: 60px;
+  line-height: 1.08;
   color: var(--rouge);
 }
-.ligne {
+.telecharger {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--rouge-profond);
+  white-space: nowrap;
+  min-height: var(--cible);
+  display: inline-flex;
+  align-items: center;
+}
+.telTel {
+  padding-bottom: 0;
+}
+.telOrdi {
+  display: none;
+}
+.intro {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+}
+.rechercheLigne {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
+  gap: 14px;
+  align-items: center;
 }
-.question {
-  font-size: 14px;
-  line-height: 1.45;
-}
-.reponse {
-  margin: 0;
-  font-size: 18px;
-  line-height: 1.45;
-  font-style: italic;
-  font-weight: 600;
+.recherche {
+  flex: 1;
+  width: 100%;
+  height: 50px;
+  padding: 0 16px;
+  border: 1.5px solid var(--rose);
+  border-radius: 14px;
+  background: var(--blanc);
+  font: inherit;
+  font-size: 16px;
   color: var(--bordeaux);
-  white-space: pre-line;
 }
-.geste {
-  margin: 0;
-  align-self: flex-start;
-  font-size: 14px;
-  font-weight: 600;
-  background: var(--rouge-profond);
-  color: var(--blanc);
+.recherche::placeholder {
+  color: var(--placeholder);
+}
+.recherche:focus-visible {
+  outline: 2px solid var(--rouge-profond);
+  outline-offset: 2px;
+}
+.filtres {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  margin-right: calc(-1 * var(--gouttiere));
+  padding-right: var(--gouttiere);
+  scrollbar-width: none;
+}
+.filtres::-webkit-scrollbar {
+  display: none;
+}
+.filtre {
+  flex: none;
+  background: var(--blanc);
+  color: var(--bordeaux);
+  border: 1.5px solid var(--rose);
   border-radius: 999px;
-  padding: 6px 14px;
+  padding: 9px 15px;
+  min-height: var(--cible);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+}
+.filtre[aria-pressed="true"] {
+  background: var(--bordeaux);
+  border-color: var(--bordeaux);
+  color: var(--blanc);
+}
+.filtre:focus-visible,
+.lien:focus-visible,
+.replie:focus-visible,
+.replier:focus-visible {
+  outline: 2px solid var(--rouge-profond);
+  outline-offset: 2px;
 }
 .vide {
   margin: 0;
   font-size: 16px;
+  line-height: 1.55;
+}
+.lien {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  font-weight: 600;
+  color: var(--rouge-profond);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Une semaine */
+.semaine {
+  background: var(--blanc);
+  border-radius: 24px;
+  padding: 22px 20px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.semaineTete {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.cette {
+  align-self: flex-start;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--blanc);
+  background: var(--rouge-profond);
+  border-radius: 999px;
+  padding: 4px 12px;
+}
+.semaineTitre {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--rouge);
+}
+.semaineInfo {
+  font-size: 14px;
+  opacity: 0.7;
 }
 .note {
-  margin: 8px 0 0;
-  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px 0;
+  border-top: 1.5px solid var(--rose-pale);
 }
+.date {
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0.6;
+}
+.date:empty {
+  display: none;
+}
+.dateOrdi {
+  display: none;
+}
+.noteCorps {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.origineLigne {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.origine {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--rouge-profond);
+}
+.pastille {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--rouge-profond);
+  background: var(--rose-pale);
+  border-radius: 999px;
+  padding: 4px 10px;
+  white-space: nowrap;
+}
+.ligne {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.question {
+  font-size: 13px;
+  line-height: 1.45;
+  opacity: 0.72;
+}
+.reponse {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.55;
+  white-space: pre-line;
+}
+
+/* Au début du chemin, replié */
+.semaine:has(.replie) {
+  background: none;
+  padding: 0;
+}
+.replie {
+  width: 100%;
+  text-align: left;
+  background: var(--blanc);
+  border: 1.5px dashed var(--rose);
+  border-radius: 24px;
+  padding: 18px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  font: inherit;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--bordeaux);
+  cursor: pointer;
+}
+.deplier,
+.replier {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--rouge-profond);
+  white-space: nowrap;
+}
+.replier {
+  background: none;
+  border: 0;
+  padding: 0;
+  font-family: inherit;
+  cursor: pointer;
+}
+.confidentiel {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  opacity: 0.75;
+}
+
 @media (min-width: 1024px) {
   .page {
-    padding: 56px max(96px, calc((100vw - 880px) / 2)) 72px;
+    padding: 56px 96px 88px;
+    gap: 40px;
+  }
+  .entete {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 760px);
+    gap: 56px;
+    align-items: end;
   }
   .titre {
     font-size: 96px;
+  }
+  .telTel {
+    display: none;
+  }
+  .telOrdi {
+    display: inline-flex;
+    font-size: 15px;
+  }
+  .outils {
+    gap: 18px;
+  }
+  .intro {
+    font-size: 18px;
+    max-width: 56ch;
+  }
+  .filtres {
+    flex-wrap: wrap;
+    overflow: visible;
+    margin-right: 0;
+    padding-right: 0;
+  }
+  .vide,
+  .confidentiel {
+    margin-left: 316px;
+    max-width: 760px;
+  }
+  .semaine,
+  .semaine:has(.replie) {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 760px);
+    gap: 56px;
+    align-items: start;
+    background: none;
+    padding: 0;
+  }
+  .semaineTete {
+    position: sticky;
+    top: 104px;
+    padding-top: 26px;
+  }
+  .semaineTitre {
+    font-size: 26px;
+    line-height: 1.06;
+    font-weight: 400;
+    letter-spacing: -0.035em;
+  }
+  .feuille {
+    background: var(--blanc);
+    border-radius: 28px;
+    padding: 6px 40px 10px;
+  }
+  .note {
+    display: grid;
+    grid-template-columns: 104px minmax(0, 1fr);
+    gap: 24px;
+    padding: 26px 0;
+  }
+  .feuille .note:first-child {
+    border-top: 0;
+  }
+  .date {
+    font-size: 13px;
+    padding-top: 2px;
+  }
+  .date:empty {
+    display: block;
+  }
+  .dateTel {
+    display: none;
+  }
+  .dateOrdi {
+    display: inline;
+  }
+  .noteCorps {
+    gap: 14px;
+  }
+  .origine {
+    font-size: 14px;
+  }
+  .question {
+    font-size: 14px;
+  }
+  .reponse {
+    font-size: 19px;
+  }
+  .replie {
+    padding: 22px 28px;
   }
 }

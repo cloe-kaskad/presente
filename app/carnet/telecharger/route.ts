@@ -3,10 +3,11 @@ import { chargerChemin } from "@/lib/chemin/donnees";
 import { sesReponses } from "@/lib/moteur/ecriture";
 import { chargerReponses } from "@/lib/questionnaire/donnees";
 import { chargerCarnet } from "@/lib/semaines/carnet";
-import { RETOURS, etiquetteSemaine } from "@/lib/semaines/etiquettes";
+import { LIBELLES_RETOURS, infosDesSemaines } from "@/lib/semaines/fil-donnees";
+import { dateDeNote, filDuCarnet, periode } from "@/lib/semaines/fil-du-carnet";
 import { createClient } from "@/lib/supabase/server";
 
-/** Son carnet en texte brut, pour le garder chez elle. */
+/** Son carnet en texte brut, pour le garder chez elle : même ordre et mêmes regroupements que la page. */
 export async function GET(request: Request) {
   const supabase = await createClient();
   const {
@@ -16,24 +17,21 @@ export async function GET(request: Request) {
   const chemin = await chargerChemin(supabase);
   if (!chemin) return NextResponse.redirect(new URL("/questionnaire", request.url));
 
-  const [entrees, reponses] = await Promise.all([chargerCarnet(supabase), chargerReponses(supabase, 1)]);
+  const [entrees, reponses, infos] = await Promise.all([chargerCarnet(supabase), chargerReponses(supabase, 1), infosDesSemaines(chemin)]);
+  const semaines = filDuCarnet({ entrees, infos, semaineCourante: chemin.semaine, retours: LIBELLES_RETOURS });
   const lignes: string[] = ["Mon carnet · Présente !", ""];
-  let titre = "";
-  for (const e of entrees) {
-    const r = RETOURS.find((x) => x.id === e.retour);
-    if (!e.reponse.trim() && !r) continue;
-    const t = etiquetteSemaine(chemin, e.semaine);
-    if (t !== titre) {
-      lignes.push("", `/ ${t} /`, "");
-      titre = t;
+  for (const s of semaines) {
+    lignes.push("", `/ ${s.titre} · ${periode(s.premier, s.dernier)} /`, "");
+    for (const n of s.notes) {
+      lignes.push(`${dateDeNote(n.jour)} · ${n.origine}${n.pastille ? ` (${n.pastille})` : ""}`);
+      for (const l of n.lignes) lignes.push(l.question, l.reponse);
+      lignes.push("");
     }
-    if (e.reponse.trim()) lignes.push(e.question, `« ${e.reponse.trim()} »`, "");
-    if (r) lignes.push(`Ce contenu, pour toi : ${r.label}`, "");
   }
   const debut = sesReponses(reponses).filter((r) => !r.question.includes("phrase qu'elle a cochée"));
   if (debut.length) {
     lignes.push("", "/ Au début du chemin /", "");
-    for (const d of debut) lignes.push(d.question, `« ${d.reponse} »`, "");
+    for (const d of debut) lignes.push(d.question, d.reponse, "");
   }
   return new NextResponse(lignes.join("\n"), {
     headers: {

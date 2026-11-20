@@ -12,6 +12,7 @@ export type Entree = {
   reponse: string;
   retour: Retour | null;
   modifiee: string;
+  creee: string;
 };
 
 /** Toutes ses entrées de carnet. La RLS garantit qu'on ne lit que les siennes. */
@@ -34,6 +35,7 @@ export async function chargerCarnet(supabase: SupabaseClient): Promise<Entree[]>
     reponse: e.reponse ?? "",
     retour: e.retour,
     modifiee: e.updated_at,
+    creee: e.created_at,
   }));
 }
 

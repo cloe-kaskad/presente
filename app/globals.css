@@ -177,7 +177,9 @@ img {
   padding: 14px 16px;
 }
 .champ:focus-visible {
+  outline: none;
   border-color: var(--rouge-profond);
+  box-shadow: 0 0 0 3px var(--rose);
 }
 
 @media (prefers-reduced-motion: reduce) {

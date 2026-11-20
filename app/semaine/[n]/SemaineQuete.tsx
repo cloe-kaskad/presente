@@ -1,15 +1,16 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { AvecSesMots } from "@/components/AvecSesMots";
 import { ChampCarnet } from "@/components/ChampCarnet";
 import { EcritureEnCours } from "@/components/EcritureEnCours";
-import { CurseurCarnet, RetourCarnet } from "@/components/SaisieCarnet";
-import { enregistrerEntree } from "@/app/carnet/actions";
+import { RetourCarnet } from "@/components/SaisieCarnet";
 import { decrireContenu } from "@/lib/catalogue/presentation";
-import { QUESTIONS_ACTE, type QuestionCarnet } from "@/lib/semaines/contenu";
-import { avancer, terminer } from "../actions";
+import type { QuestionCarnet } from "@/lib/semaines/contenu";
+import type { EtatExercice } from "@/lib/semaines/exercice";
+import { avancer, preparerExercice, terminer } from "../actions";
 import styles from "./vivre.module.css";
 
 type Initiales = Record<string, { reponse: string; retour: string | null }>;
@@ -36,6 +37,10 @@ type Pratique = {
   forme: string | null;
 };
 
+type Exercice = { nom: string; etat: EtatExercice; ou: string };
+
+const ACTION: Record<EtatExercice, string> = { pas_commence: "Commencer", en_cours: "Reprendre", termine: "Relire" };
+
 const VERBE: Record<string, string> = { ecouter: "Écouter", lire: "Lire", regarder: "Regarder", faire: "Découvrir" };
 const APRES_CONTENU: Record<string, string> = {
   ecouter: "Je l'ai écouté",
@@ -57,7 +62,7 @@ export function SemaineQuete({
   contenu,
   catalogueIndisponible,
   pratique,
-  intro,
+  exercice,
 }: {
   n: number;
   etape: number;
@@ -72,35 +77,64 @@ export function SemaineQuete({
   contenu: Contenu | null;
   catalogueIndisponible: boolean;
   pratique: Pratique | null;
-  intro: string | null;
+  exercice: Exercice | null;
 }) {
   const router = useRouter();
   const [etape, setEtape] = useState(etapeInitiale);
   const [enCours, demarrer] = useTransition();
-  const [decale, setDecale] = useState(Boolean(initiales[`s${n}:decale`]));
+  const [ecriture, setEcriture] = useState(false);
   const val = (code: string) => initiales[code]?.reponse ?? "";
 
-  // Passe à l'étape suivante. Pour l'exercice, le serveur écrit l'introduction : on recharge la page.
-  const ouvrir = (e: number, recharger = false) =>
+  // Passe à l'étape suivante.
+  const ouvrir = (e: number) =>
     demarrer(async () => {
       await avancer(n, e);
       setEtape(e);
-      if (recharger) router.refresh();
     });
 
   const agir = dansLeMois === 3;
+  const versExercice = `/semaine/${n}/exercice`;
+
+  // « Vers ton exercice » : on crée l'exercice (le moteur écrit son introduction), puis on ouvre sa page.
+  const creerExercice = () => {
+    setEcriture(true);
+    demarrer(async () => {
+      const r = await preparerExercice(n).catch(() => ({ ok: false }));
+      if (r.ok) router.push(versExercice);
+      else setEcriture(false);
+    });
+  };
 
   return (
     <main className={styles.page}>
-      {enCours && etape >= 2 && !intro ? (
+      {ecriture ? (
         <EcritureEnCours
           surtitre={agir ? "Dans ta vraie vie, cette semaine" : `Exercice${pratique?.rythme ? ` · ${pratique.rythme.toLowerCase()}` : ""}`}
           titre={agir ? "On écrit ton geste." : "On écrit ton exercice."}
         />
       ) : null}
-      <p className={styles.fil}>
-        <span className={styles.slash}>/</span> {titreQuete} · semaine {((n - 1) % 4) + 1}
-      </p>
+      <div className={styles.filHaut}>
+        <Link href="/chemin" className={styles.retour}>
+          ← Mon chemin
+        </Link>
+        <span className={styles.filQuete}>
+          {titreQuete} · semaine {((n - 1) % 4) + 1}
+        </span>
+      </div>
+
+      {/* L'exercice, une fois créé : un bloc court, tout en haut */}
+      {exercice ? (
+        <Link href={versExercice} className={styles.blocExercice}>
+          <span className={styles.blocExerciceTexte}>
+            <strong>
+              {agir ? "Ton geste" : "Ton exercice"} : {exercice.nom}
+            </strong>
+            <br />
+            {exercice.ou}
+          </span>
+          <span className={styles.blocExerciceAction}>{ACTION[exercice.etat]} →</span>
+        </Link>
+      ) : null}
 
       {/* 1. Avant */}
       <section className={styles.section} aria-labelledby="avant">
@@ -182,10 +216,16 @@ export function SemaineQuete({
             />
           ))}
           <RetourCarnet semaine={n} code={`s${n}:retour`} initial={initiales[`s${n}:retour`]?.retour} />
-          {etape < 3 && pratique ? (
-            <button type="button" className={`bouton ${styles.suite}`} onClick={() => ouvrir(3, true)} disabled={enCours}>
-              {agir ? "Vers ton geste" : "Vers ton exercice"}
-            </button>
+          {pratique ? (
+            exercice ? (
+              <Link href={versExercice} className={`bouton ${styles.suite}`}>
+                {agir ? "Vers ton geste" : "Vers ton exercice"}
+              </Link>
+            ) : (
+              <button type="button" className={`bouton ${styles.suite}`} onClick={creerExercice} disabled={enCours}>
+                {agir ? "Vers ton geste" : "Vers ton exercice"}
+              </button>
+            )
           ) : null}
           {!pratique && !finie ? (
             <>
@@ -202,123 +242,6 @@ export function SemaineQuete({
         </section>
       ) : null}
 
-      {/* 4. L'exercice, ou l'acte */}
-      {etape >= 3 && pratique ? (
-        <section className={`${styles.section} ${agir ? styles.acte : ""}`} aria-labelledby="pratique">
-          <span className={styles.etiquette}>
-            <span className={styles.slash}>/</span> {agir ? "Dans ta vraie vie, cette semaine" : `Exercice${pratique.rythme ? ` · ${pratique.rythme}` : ""}`}
-          </span>
-          <h2 id="pratique" className={styles.titrePratique}>
-            {pratique.nom}
-          </h2>
-          {intro ? (
-            <p className={styles.intro}>
-              <AvecSesMots texte={intro} />
-            </p>
-          ) : null}
-          {pratique.consigne ? (
-            <div className={styles.consigne}>
-              <span className={styles.etiquette}>
-                <span className={styles.slash}>/</span> La consigne
-              </span>
-              <p className={agir ? styles.consigneForte : undefined}>{pratique.consigne}</p>
-            </div>
-          ) : pratique.enBref ? (
-            <p>{pratique.enBref}</p>
-          ) : null}
-          {pratique.regles ? (
-            <details className={styles.depliant}>
-              <summary>Les règles</summary>
-              <p>{pratique.regles}</p>
-            </details>
-          ) : null}
-          {pratique.pourquoi ? (
-            <details className={styles.depliant}>
-              <summary>Pourquoi ça compte</summary>
-              <p>{pratique.pourquoi}</p>
-            </details>
-          ) : null}
-
-          {agir ? (
-            <>
-              <div className={styles.decaler}>
-                <span>
-                  {decale
-                    ? "C'est décalé. Il t'attendra, sans compte à rebours : tu peux quand même terminer ta semaine."
-                    : "Pas encore fait ? Tu as jusqu'à dimanche. Et si ce n'est pas le moment, tu peux le décaler."}
-                </span>
-                {!decale ? (
-                  <button
-                    type="button"
-                    className={styles.decalerBouton}
-                    onClick={async () => {
-                      setDecale(true);
-                      await enregistrerEntree({
-                        semaine: n,
-                        type: "acte",
-                        code: `s${n}:decale`,
-                        question: `${pratique.nom} : décalé`,
-                        reponse: `Décalé le ${new Date().toLocaleDateString("fr-FR", { day: "numeric", month: "long" })}`,
-                      }).catch(() => null);
-                    }}
-                  >
-                    Décaler
-                  </button>
-                ) : null}
-              </div>
-              <span className={styles.etiquette}>
-                <span className={styles.slash}>/</span> Je l&apos;ai fait
-              </span>
-              {QUESTIONS_ACTE.map((q, i) => (
-                <ChampCarnet
-                  key={i}
-                  semaine={n}
-                  type="acte"
-                  code={`s${n}:acte:${i + 1}`}
-                  question={q.texte}
-                  initial={val(`s${n}:acte:${i + 1}`)}
-                />
-              ))}
-            </>
-          ) : (
-            <FormulaireExercice n={n} pratique={pratique} val={val} />
-          )}
-          {!finie ? (
-            <button type="button" className={`bouton bouton--grand ${styles.suite}`} onClick={() => demarrer(() => terminer(n, 4))} disabled={enCours}>
-              {agir ? "Garder dans mon carnet" : "J'ai terminé"}
-            </button>
-          ) : (
-            <p className={styles.faite}>Semaine faite. Tout est dans ton carnet.</p>
-          )}
-        </section>
-      ) : null}
     </main>
   );
-}
-
-/** Le formulaire de l'exercice, selon le champ « Forme de réponse » de la pratique. */
-function FormulaireExercice({ n, pratique, val }: { n: number; pratique: Pratique; val: (code: string) => string }) {
-  const forme = pratique.forme ?? "Texte libre";
-  const q = (label: string) => `${pratique.nom} · ${label}`;
-  if (forme === "Liste ou colonnes") {
-    return (
-      <div className={styles.elements}>
-        {["Premier élément", "Deuxième élément", "Troisième élément"].map((l, i) => (
-          <div key={l} className={styles.element}>
-            <ChampCarnet semaine={n} type="exercice" code={`s${n}:exo:${i + 1}`} question={q(l)} initial={val(`s${n}:exo:${i + 1}`)} />
-          </div>
-        ))}
-      </div>
-    );
-  }
-  if (forme === "Curseur") {
-    return (
-      <>
-        <CurseurCarnet semaine={n} type="exercice" code={`s${n}:exo:curseur`} question={q("Où tu en es")} label="Où tu en es" gauche="pas du tout" droite="tout à fait" />
-        <ChampCarnet semaine={n} type="exercice" code={`s${n}:exo:1`} question={q("Ce que tu en dis")} initial={val(`s${n}:exo:1`)} />
-      </>
-    );
-  }
-  const note = forme === "Audio" || forme === "Photo" ? " (l'audio et la photo arriveront plus tard : écris-le ici)" : "";
-  return <ChampCarnet semaine={n} type="exercice" code={`s${n}:exo:1`} question={q(`Ta réponse${note}`)} initial={val(`s${n}:exo:1`)} />;
 }

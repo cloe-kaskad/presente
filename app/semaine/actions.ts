@@ -47,3 +47,45 @@ export async function terminer(n: number, etapes: number): Promise<void> {
   revalidatePath("/chemin");
   redirect("/chemin");
 }
+
+// ---------------------------------------------------------------------------
+// L'exercice, sur sa propre page
+// ---------------------------------------------------------------------------
+
+async function majProgression(n: number, patch: (p: Record<string, number>, semaine: number) => Record<string, number>, avancerSemaine = false) {
+  if (!Number.isInteger(n) || n < 1 || n > 12) return { ok: false };
+  const { supabase, chemin } = await session();
+  if (n > chemin.semaine) return { ok: false };
+  const maj: Record<string, unknown> = { progression: patch({ ...chemin.progression }, chemin.semaine) };
+  if (avancerSemaine && n === chemin.semaine && n < 12) maj.semaine_en_cours = n + 1;
+  const { error } = await supabase.from("paths").update(maj).eq("id", chemin.id);
+  if (error) console.error("[exercice] progression non enregistrée :", error.code);
+  revalidatePath(`/semaine/${n}`);
+  revalidatePath(`/semaine/${n}/exercice`);
+  revalidatePath("/chemin");
+  return { ok: !error };
+}
+
+/**
+ * « Vers ton exercice » : l'exercice est créé (étape 3) et son introduction s'écrit maintenant,
+ * pendant que l'écran « On écrit ton exercice » est affiché. La page de l'exercice s'ouvre ensuite.
+ */
+export async function preparerExercice(n: number): Promise<{ ok: boolean }> {
+  const r = await majProgression(n, (p) => ({ ...p, [String(n)]: Math.max(3, p[String(n)] ?? 0) }));
+  if (!r.ok) return r;
+  const { contexteSemaine, queteDeLaSemaine, introDeLaPratique } = await import("./[n]/contexte");
+  const ctx = await contexteSemaine(n);
+  if (ctx.d !== 1 && ctx.d !== 3) return { ok: false };
+  await introDeLaPratique(ctx, await queteDeLaSemaine(ctx));
+  return { ok: true };
+}
+
+/** « Commencer » : l'exercice passe en cours. */
+export async function commencerExercice(n: number): Promise<{ ok: boolean }> {
+  return majProgression(n, (p) => ({ ...p, [String(n)]: Math.max(3, p[String(n)] ?? 0), [`ex${n}`]: Math.max(1, p[`ex${n}`] ?? 0) }));
+}
+
+/** « J'ai terminé » : l'exercice est terminé, et sa semaine aussi. On reste sur la page de l'exercice. */
+export async function terminerExercice(n: number): Promise<{ ok: boolean }> {
+  return majProgression(n, (p) => ({ ...p, [String(n)]: Math.max(4, p[String(n)] ?? 0), [`ex${n}`]: 2 }), true);
+}

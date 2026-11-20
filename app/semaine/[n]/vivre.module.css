@@ -14,6 +14,57 @@
 .slash {
   color: var(--rouge);
 }
+/* « ← Mon chemin » et la quête (maquette Contenu-apres) */
+.filHaut {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 20px var(--gouttiere) 0;
+  font-size: 14px;
+}
+.retour {
+  font-weight: 600;
+  color: var(--rouge-profond);
+  text-decoration: none;
+}
+.retour:hover {
+  text-decoration: underline;
+}
+.filQuete {
+  color: var(--bordeaux);
+}
+/* L'exercice, une fois créé : un bloc court tout en haut */
+.blocExercice {
+  margin: 16px var(--gouttiere) 0;
+  background: var(--rose-pale);
+  border: 1.5px solid var(--rose);
+  border-radius: 20px;
+  padding: 14px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
+.blocExerciceTexte {
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--bordeaux);
+}
+.blocExerciceTexte strong {
+  font-weight: 600;
+}
+.blocExerciceAction {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--rouge-profond);
+  white-space: nowrap;
+}
+.blocExercice:hover .blocExerciceAction {
+  text-decoration: underline;
+}
 .section {
   padding: 28px var(--gouttiere) 36px;
   display: flex;
@@ -359,6 +410,12 @@
   margin-top: 8px;
 }
 @media (min-width: 1024px) {
+  .filHaut {
+    padding: 32px max(96px, calc((100vw - 760px) / 2)) 0;
+  }
+  .blocExercice {
+    margin: 20px max(96px, calc((100vw - 760px) / 2)) 0;
+  }
   .fil {
     padding: 32px max(96px, calc((100vw - 760px) / 2)) 0;
   }

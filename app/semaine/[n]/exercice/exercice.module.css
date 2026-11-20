@@ -1,0 +1,303 @@
+/* L'exercice sur sa propre page (maquettes Exercice-debut, Exercice-en-cours, Exercice-fini et leurs versions D-). */
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 28px var(--gouttiere) 48px;
+  max-width: 1248px;
+  margin: 0 auto;
+  color: var(--bordeaux);
+}
+.filHaut {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 14px;
+}
+.retour {
+  font-weight: 600;
+  color: var(--rouge-profond);
+  text-decoration: none;
+}
+.retour:hover {
+  text-decoration: underline;
+}
+.origine a {
+  font-weight: 600;
+  color: var(--rouge-profond);
+}
+.tete {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.surtitre {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--rouge-profond);
+}
+.titre {
+  margin: 0;
+  font-size: 36px;
+  line-height: 1.06;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  color: var(--rouge);
+}
+.barre {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.barre i {
+  width: 28px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--blanc);
+  border: 1.5px dashed var(--rose);
+}
+.barre .fait {
+  background: var(--rouge-profond);
+  border: 1.5px solid var(--rouge-profond);
+}
+.barre .aujourdhui {
+  border: 2px solid var(--rouge-profond);
+}
+.etiquette {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--rouge);
+}
+.consigne {
+  background: var(--rose-pale);
+  border-radius: 24px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.intro {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 500;
+}
+.consigneTexte {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+.depliant {
+  border-top: 1.5px solid var(--rose);
+  padding-top: 6px;
+}
+.depliant summary {
+  font-weight: 600;
+  cursor: pointer;
+  min-height: var(--cible);
+  display: flex;
+  align-items: center;
+  color: var(--rouge-profond);
+}
+.depliant p {
+  margin: 4px 0 8px;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+.aide {
+  font-size: 14px;
+  line-height: 1.5;
+  opacity: 0.8;
+}
+.colonnes,
+.colonne {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.saisie {
+  border: 1.5px solid var(--rose);
+  border-radius: 24px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.saisieTitre {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--rouge);
+}
+.jourForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.champ {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+.champ textarea {
+  width: 100%;
+  border: 1.5px solid var(--rose);
+  border-radius: 14px;
+  background: var(--blanc);
+  font: inherit;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--bordeaux);
+  padding: 12px 16px;
+  resize: vertical;
+}
+.champ textarea::placeholder {
+  color: var(--placeholder);
+}
+.champ textarea:focus-visible {
+  outline: 2px solid var(--rouge-profond);
+  outline-offset: 2px;
+}
+.jourActions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.note {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.ligneNote {
+  display: grid;
+  grid-template-columns: 84px minmax(0, 1fr);
+  gap: 12px;
+  padding: 14px 0;
+  border-top: 1.5px solid var(--rose-pale);
+}
+.jourNote {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--rouge-profond);
+}
+.texteNote {
+  font-size: 16px;
+  line-height: 1.45;
+  font-weight: 600;
+  font-style: italic;
+  white-space: pre-line;
+}
+.decaler {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  background: var(--rose-pale);
+  border-radius: 16px;
+  padding: 14px 16px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.lien {
+  background: none;
+  border: 0;
+  padding: 0;
+  min-height: var(--cible);
+  font: inherit;
+  font-weight: 600;
+  color: var(--rouge-profond);
+  text-decoration: underline;
+  cursor: pointer;
+}
+.retiens {
+  background: var(--rose-pale);
+  border-radius: 24px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.liens {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.lienFort {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--rouge-profond);
+}
+.citation {
+  background: var(--rouge) url(/images/grain.jpg) center / cover no-repeat;
+  border-radius: 24px;
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: var(--blanc);
+}
+.citationEtiquette {
+  font-size: 14px;
+  font-weight: 600;
+}
+.citationTexte {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.15;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+.citationAutrice {
+  font-size: 14px;
+}
+.citationAutrice strong {
+  font-weight: 600;
+}
+
+@media (min-width: 1024px) {
+  .page {
+    padding: 48px 96px 88px;
+    gap: 32px;
+  }
+  .titre {
+    font-size: 64px;
+  }
+  .saisie,
+  .consigne,
+  .retiens {
+    padding: 32px;
+  }
+  .saisieTitre {
+    font-size: 26px;
+    font-weight: 400;
+    letter-spacing: -0.035em;
+  }
+  .colonnes {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 40px;
+    align-items: start;
+  }
+  .citationTexte {
+    font-size: 32px;
+  }
+}

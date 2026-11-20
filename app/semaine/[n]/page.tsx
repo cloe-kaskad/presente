@@ -1,21 +1,14 @@
-import { notFound, redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 import { BarreEspace } from "@/components/BarreEspace";
-import { racinesAEviter, toucheSujet } from "@/lib/catalogue/filtres";
 import { apercuDuLien } from "@/lib/catalogue/apercu";
-import { choixDuMois, profilDeChoix } from "@/lib/catalogue/semaines";
-import { chargerChemin } from "@/lib/chemin/donnees";
-import { carteEcrite, chargerTextesCarte, texte as texteCarte } from "@/lib/moteur/carte";
-import { sesReponses } from "@/lib/moteur/ecriture";
 import { planDuMonde } from "@/lib/moteur/prompts";
-import { MONDE, QUETE, libelleCapacite, type CodeCapacite } from "@/lib/questionnaire/contenu";
-import { chargerReponses } from "@/lib/questionnaire/donnees";
-import { extraitExact } from "@/lib/rituel/echo";
-import { chargerCarnet } from "@/lib/semaines/carnet";
+import { MONDE, QUETE } from "@/lib/questionnaire/contenu";
 import { CARNETS, EPISODES, avantEpisodeDeSecours, remplir } from "@/lib/semaines/contenu";
-import { dansLeMois, moisDe } from "@/lib/semaines/etiquettes";
+import { etatExercice, joursDuRythme, jourEnCours, estCodeJour, jourDuCode } from "@/lib/semaines/exercice";
 import { ficheDeLEpisode } from "@/lib/semaines/fiche";
 import { texteDeSemaine } from "@/lib/semaines/textes";
-import { createClient } from "@/lib/supabase/server";
+import { jourAParis } from "@/lib/rituel/citations";
+import { contexteSemaine, court, queteDeLaSemaine } from "./contexte";
 import { SemaineMonde } from "./SemaineMonde";
 import { SemaineQuete } from "./SemaineQuete";
 
@@ -25,56 +18,9 @@ export const maxDuration = 180;
 
 const minuscule = (t: string) => t.charAt(0).toLowerCase() + t.slice(1);
 
-const court = (t: string | undefined | null, max = 120) => {
-  const x = extraitExact(t ?? "");
-  return x && x.length <= max ? x.replace(/[.\s]+$/, "") : undefined;
-};
-
 export default async function Semaine({ params }: { params: Promise<{ n: string }> }) {
-  const n = Number((await params).n);
-  if (!Number.isInteger(n) || n < 1 || n > 12) notFound();
-
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) redirect("/connexion");
-  const chemin = await chargerChemin(supabase);
-  if (!chemin) redirect("/questionnaire");
-  if (n > chemin.semaine) redirect("/chemin");
-
-  const [{ data: profil }, reponses, carnet, textesCarte] = await Promise.all([
-    supabase.from("profiles").select("*").maybeSingle(),
-    chargerReponses(supabase, 1),
-    chargerCarnet(supabase),
-    chargerTextesCarte(supabase, chemin.id),
-  ]);
-  if (profil?.detresse_le) redirect("/quand-ca-ne-va-pas");
-  if (!carteEcrite(textesCarte, chemin)) redirect("/carte/trace");
-
-  const mois = moisDe(n);
-  const d = dansLeMois(n);
-  const quete = chemin.quetes[mois];
-  const monde = chemin.mondes[mois];
-  const sujets: string | null = profil?.sujets_a_eviter ?? null;
-  const aEviter = racinesAEviter(sujets);
-  const finie = n < chemin.semaine;
-  const etape = chemin.progression[String(n)] ?? 0;
-  const capaciteDite = (c: CodeCapacite) => texteCarte(textesCarte, "capacite", c) ?? libelleCapacite(c);
-  const caps = chemin.capacites[quete];
-
-  // Ce qu'elle a écrit : le questionnaire, puis le carnet des semaines précédentes et de celle-ci.
-  const questionnaire = sesReponses(reponses);
-  const avant = carnet.filter((e) => e.semaine < n && e.reponse.trim()).slice(0, 24);
-  const decetteSemaine = carnet.filter((e) => e.semaine === n);
-  const reponsesUtiles = [
-    ...questionnaire,
-    ...avant.map((e) => ({ question: `Semaine ${e.semaine} : ${e.question}`, reponse: e.reponse })),
-  ];
-  const sources = [...questionnaire.map((r) => r.reponse), ...carnet.map((e) => e.reponse).filter(Boolean)];
-  const initiales = Object.fromEntries(decetteSemaine.map((e) => [e.code, { reponse: e.reponse, retour: e.retour }]));
-  const sesMotsDeLaQuete = court(reponses[3].zoom[quete]?.autrement);
-  const sur = (t: string | undefined) => (t && !toucheSujet(aEviter, t) ? t : undefined);
+  const ctx = await contexteSemaine(Number((await params).n));
+  const { n, supabase, user, chemin, carnet, mois, d, quete, monde, sujets, finie, etape, decetteSemaine, reponsesUtiles, sources, initiales, sesMotsDeLaQuete, sur } = ctx;
 
   const commun = {
     n,
@@ -88,15 +34,13 @@ export default async function Semaine({ params }: { params: Promise<{ n: string 
   // Semaines 1 et 3 : la quête
   // -------------------------------------------------------------------------
   if (d === 1 || d === 3) {
-    const choix = await choixDuMois(supabase, chemin, mois, profilDeChoix(profil, reponses));
-    const s = d === 1 ? choix.s1 : choix.s3;
-    const brut = s.contenu;
+    const q = await queteDeLaSemaine(ctx);
+    const { pratique, capacite } = q;
+    const brut = q.contenu;
     const apercu = brut && (!brut.image || !brut.description) ? await apercuDuLien(brut.lien) : null;
     const contenu = brut
       ? { ...brut, image: brut.image ?? apercu?.image ?? null, description: brut.description ?? apercu?.description ?? null }
       : null;
-    const pratique = s.pratique;
-    const capacite = capaciteDite(caps[d === 1 ? 0 : 1]);
 
     // La question avant, avec ses mots de la semaine 1 quand c'est la semaine 3.
     const carnetQ = CARNETS[quete][d === 1 ? "s1" : "s3"];
@@ -129,36 +73,25 @@ export default async function Semaine({ params }: { params: Promise<{ n: string 
     });
     if ("detresse" in avantTexte) redirect("/quand-ca-ne-va-pas");
 
-    // L'introduction de l'exercice ou de l'acte : écrite une fois le carnet rempli, à partir de ce qu'elle vient d'écrire.
-    let intro: string | null = null;
-    if (pratique && (finie || etape >= 3)) {
-      const adapter = sur(court(decetteSemaine.find((e) => e.code === `s${n}:carnet:2`)?.reponse, 110));
-      const r = await texteDeSemaine(supabase, {
-        userId: user.id,
-        pathId: chemin.id,
-        cle: `s${n}:intro`,
-        emplacement: d === 1 ? "intro_exercice" : "intro_acte",
-        entree: {
-          semaine: n,
-          quete: QUETE[quete].nom,
-          capacite,
-          [d === 1 ? "exercice" : "acte"]: { nom: pratique.nom, en_bref: pratique.enBref, consigne: pratique.consigne, rythme: pratique.rythme },
-          carnet_de_cette_semaine: decetteSemaine.filter((e) => e.reponse.trim()).map((e) => ({ question: e.question, reponse: e.reponse })),
-          reponses_utiles: reponsesUtiles,
-        },
-        sources,
-        sujetsAEviter: sujets,
-        secours: adapter
-          ? d === 1
-            ? `Tu as noté : « ${adapter} ». Pars de là. Il n'y a pas de bonne réponse, seulement la tienne.`
-            : `Tu as parlé de « ${adapter} » : c'est peut-être le bon endroit pour essayer, à ta mesure.`
-          : d === 1
-            ? "Prends-le à ton rythme. Il n'y a pas de bonne réponse, seulement la tienne."
-            : "Choisis un endroit où tu ne risques pas grand-chose : un petit geste compte autant qu'un grand.",
-      });
-      if ("detresse" in r) redirect("/quand-ca-ne-va-pas");
-      intro = r.texte;
-    }
+    // L'exercice, une fois créé : son nom, son état et où elle en est (bloc en haut de la page du contenu).
+    const etat = pratique ? etatExercice({ n, progression: chemin.progression, semaineCourante: chemin.semaine, entrees: decetteSemaine }) : null;
+    const total = pratique && d === 1 ? joursDuRythme(pratique.rythme) : null;
+    const joursNotes = decetteSemaine.filter((e) => estCodeJour(n, e.code) && e.reponse.trim()).map((e) => jourDuCode(e.code));
+    const exercice =
+      pratique && etat
+        ? {
+            nom: pratique.nom,
+            etat,
+            ou:
+              etat === "termine"
+                ? "terminé"
+                : etat === "pas_commence"
+                  ? "pas commencé"
+                  : total
+                    ? `en cours, jour ${jourEnCours(total, joursNotes, jourAParis())} sur ${total}`
+                    : "en cours",
+          }
+        : null;
 
     return (
       <>
@@ -185,7 +118,7 @@ export default async function Semaine({ params }: { params: Promise<{ n: string 
                 }
               : null
           }
-          catalogueIndisponible={choix.catalogueIndisponible}
+          catalogueIndisponible={q.catalogueIndisponible}
           pratique={
             pratique
               ? {
@@ -199,7 +132,7 @@ export default async function Semaine({ params }: { params: Promise<{ n: string 
                 }
               : null
           }
-          intro={intro}
+          exercice={exercice}
         />
       </>
     );

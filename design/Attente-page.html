@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Une page qui charge</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face{font-family:'Anton';src:url(assets/Anton.woff2) format('woff2');font-display:swap}
+@font-face{font-family:'DMSans';src:url(assets/DMSans.woff2) format('woff2');font-weight:100 1000;font-style:normal;font-display:swap}
+@font-face{font-family:'DMSans';src:url(assets/DMSans-Italic.woff2) format('woff2');font-weight:100 1000;font-style:italic;font-display:swap}
+body{margin:0}
+a{color:#c42c14}a:hover{color:#510004}
+input::placeholder,textarea::placeholder{color:#d98f86}
+</style>
+</helmet>
+<div style="width:390px;height:844px;box-sizing:border-box;background:#ffffff;color:#c42c14;font-family:'DMSans',system-ui,sans-serif;display:flex;flex-direction:column;"><header style="position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 24px;background:#ffffff;border-bottom:1.5px solid #f7beca"><div style="display:flex;flex-direction:column;gap:6px"><span style="font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.01em;font-size:22px;line-height:1.1;color:#e6361d">Présente&nbsp;!</span><div style="display:flex;align-items:center;gap:5px"><span style="font-size:10px;font-weight:500;line-height:1;color:#e6361d">l'école de</span><img src="assets/logo-lc-rouge.png" alt="Liberté, Chérie !" style="height:13px;width:auto;display:block;"></div></div><nav style="display:flex;align-items:center;gap:14px"><a href="Chemin.html" style="font-size:14px;font-weight:600;color:#c42c14;text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:2px;">Chemin</a><a href="Journal.html" style="font-size:14px;font-weight:600;color:#c42c14;text-decoration:none;">Journal</a><a href="Carnet.html" style="font-size:14px;font-weight:600;color:#c42c14;text-decoration:none;">Carnet</a></nav></header><main aria-busy="true" style="flex:1;padding:28px 24px 48px;display:flex;flex-direction:column;gap:20px;max-width:none"><i style="display:block;width:38%;height:14px;border-radius:12px;background:#f3dfe4;"></i><i style="display:block;width:100%;height:124px;border-radius:24px;background:#f3dfe4;"></i><div style="background:#fdf0f4;border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:16px"><i style="display:block;width:52%;height:22px;border-radius:12px;background:#f3dfe4;"></i><i style="display:block;width:86%;height:12px;border-radius:12px;background:#f3dfe4;"></i><i style="display:block;width:100%;height:84px;border-radius:14px;background:#f3dfe4;background:#fff"></i><i style="display:block;width:100%;height:50px;border-radius:14px;background:#f3dfe4;background:#fff"></i></div><div style="border:1.5px solid #f7beca;border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:14px"><i style="display:block;width:44%;height:20px;border-radius:12px;background:#f3dfe4;"></i><span style="display:flex;gap:8px"><i style="display:block;width:96px;height:38px;border-radius:999px;background:#f3dfe4;"></i><i style="display:block;width:72px;height:38px;border-radius:999px;background:#f3dfe4;"></i><i style="display:block;width:120px;height:38px;border-radius:999px;background:#f3dfe4;"></i></span></div><span class="sr-only" style="position:absolute;left:-9999px">La page se charge</span></main></div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview": {"width": 390, "height": 844}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

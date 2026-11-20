@@ -26,6 +26,11 @@ export function Carnet({ groupes }: { groupes: Groupe[] }) {
           Télécharger
         </a>
       </div>
+      <p className={styles.intro}>
+        Tout ce que tu écris en chemin vient se ranger ici, dans l&apos;ordre : tes réponses après chaque podcast, tes exercices, tes
+        gestes, la question du jour. Pour l&apos;instant, il commence avec tes réponses du début. Il se remplira semaine après semaine,
+        et c&apos;est en te relisant que tu verras ce qui a bougé.
+      </p>
       <label htmlFor="recherche" className="sr-only">
         Chercher dans mon carnet
       </label>

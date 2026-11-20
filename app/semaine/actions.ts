@@ -87,5 +87,5 @@ export async function commencerExercice(n: number): Promise<{ ok: boolean }> {
 
 /** « J'ai terminé » : l'exercice est terminé, et sa semaine aussi. On reste sur la page de l'exercice. */
 export async function terminerExercice(n: number): Promise<{ ok: boolean }> {
-  return majProgression(n, (p) => ({ ...p, [String(n)]: Math.max(4, p[String(n)] ?? 0), [`ex${n}`]: 2 }), true);
+  return majProgression(n, (p) => ({ ...p, [String(n)]: Math.max(4, p[String(n)] ?? 0), [`ex${n}`]: 2, [`exfin${n}`]: Math.floor(Date.now() / 1000) }), true);
 }

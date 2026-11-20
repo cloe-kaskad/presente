@@ -1,0 +1,151 @@
+/* « Mes exercices en cours » dans Mon chemin (maquettes Exercices-etats, D-Exercices-etats, Chemin, D-Chemin). */
+.zone {
+  padding: 44px var(--gouttiere) 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.haut {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+.titre {
+  margin: 0;
+  font-size: 30px;
+  line-height: 1.06;
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  color: var(--rouge);
+}
+.lienTermines {
+  background: none;
+  border: 0;
+  padding: 0;
+  min-height: var(--cible);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--rouge-profond);
+  text-decoration: underline;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.grille {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+}
+.carte {
+  text-decoration: none;
+  background: var(--blanc);
+  border: 1.5px solid var(--rose);
+  border-radius: 20px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+.carte:hover {
+  border-color: var(--rouge-profond);
+}
+.rythme {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--rouge-profond);
+}
+.nom {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--bordeaux);
+}
+.barre {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.barre i {
+  width: 28px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--blanc);
+  border: 1.5px dashed var(--rose);
+}
+.barre .fait {
+  background: var(--rouge-profond);
+  border: 1.5px solid var(--rouge-profond);
+}
+.barre .aujourdhui {
+  border: 2px solid var(--rouge-profond);
+}
+.bas {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-top: 2px;
+}
+.ou {
+  font-size: 14px;
+  color: var(--bordeaux);
+}
+.action {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--rouge-profond);
+  white-space: nowrap;
+}
+.vide {
+  border: 1.5px dashed var(--rose);
+  border-radius: 20px;
+  padding: 18px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--bordeaux);
+}
+.termine {
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1.5px solid var(--rose-pale);
+}
+.termineNom {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--bordeaux);
+}
+.termineDate {
+  font-size: 14px;
+  color: var(--rouge-profond);
+  white-space: nowrap;
+}
+.termine:hover .termineDate {
+  text-decoration: underline;
+}
+@media (min-width: 1024px) {
+  .zone {
+    padding: 64px 96px 0;
+    gap: 20px;
+  }
+  .haut {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .titre {
+    font-size: 44px;
+  }
+  .grille {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .vide {
+    padding: 22px;
+  }
+}

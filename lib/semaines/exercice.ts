@@ -69,3 +69,67 @@ export function jourEnCours(total: number, joursNotes: string[], aujourdhui: str
   const n = distincts.size + (distincts.has(aujourdhui) ? 0 : 1);
   return Math.max(1, Math.min(total, n));
 }
+
+// ---------------------------------------------------------------------------
+// « Mes exercices en cours », dans Mon chemin
+// ---------------------------------------------------------------------------
+
+export type ExerciceDuChemin = {
+  n: number;
+  nom: string;
+  agir: boolean;
+  rythme: string | null;
+  etat: EtatExercice;
+  total: number | null;
+  notes: number;
+  jour: number | null;
+  /** Date de fin (AAAA-MM-JJ), quand on la connaît. */
+  fin: string | null;
+};
+
+/**
+ * Tous les exercices créés sur son chemin (semaines 1 et 3 de chaque mois), du plus récent au plus ancien.
+ * `pratiques` : l'identifiant Airtable de chaque pratique, avec son nom et son rythme.
+ */
+export function exercicesDuChemin(args: {
+  semaineCourante: number;
+  progression: Record<string, number>;
+  choix: Record<string, { pratique?: string | null } | undefined>;
+  pratiques: Map<string, { nom: string; rythme: string | null }>;
+  entrees: { semaine: number; code: string; reponse: string; modifiee?: string | null }[];
+  aujourdhui: string;
+}): ExerciceDuChemin[] {
+  const { semaineCourante, progression, choix, pratiques, entrees, aujourdhui } = args;
+  const liste: ExerciceDuChemin[] = [];
+  for (let n = Math.min(12, semaineCourante); n >= 1; n--) {
+    const d = ((n - 1) % 4) + 1;
+    if (d !== 1 && d !== 3) continue;
+    const id = choix[`m${Math.floor((n - 1) / 4) + 1}s${d}`]?.pratique;
+    const pratique = id ? pratiques.get(id) : undefined;
+    if (!pratique) continue;
+    const deLaSemaine = entrees.filter((e) => e.semaine === n);
+    const etat = etatExercice({ n, progression, semaineCourante, entrees: deLaSemaine });
+    if (!etat) continue;
+    const agir = d === 3;
+    const total = agir ? null : joursDuRythme(pratique.rythme);
+    const jours = deLaSemaine.filter((e) => estCodeJour(n, e.code) && e.reponse.trim()).map((e) => jourDuCode(e.code));
+    const finSecondes = progression[`exfin${n}`];
+    const derniere = deLaSemaine
+      .filter((e) => (e.code.startsWith(`s${n}:exo:`) || e.code.startsWith(`s${n}:acte:`)) && e.reponse.trim() && e.modifiee)
+      .map((e) => String(e.modifiee).slice(0, 10))
+      .sort()
+      .pop();
+    liste.push({
+      n,
+      nom: pratique.nom,
+      agir,
+      rythme: pratique.rythme,
+      etat,
+      total,
+      notes: new Set(jours).size,
+      jour: total && etat === "en_cours" ? jourEnCours(total, jours, aujourdhui) : null,
+      fin: etat === "termine" ? (finSecondes ? new Date(finSecondes * 1000).toISOString().slice(0, 10) : (derniere ?? null)) : null,
+    });
+  }
+  return liste;
+}

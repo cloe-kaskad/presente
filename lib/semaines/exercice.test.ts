@@ -41,3 +41,28 @@ describe("jourEnCours", () => {
     expect(jourEnCours(7, ["2026-11-19", "2026-11-20"], "2026-11-20")).toBe(2);
   });
 });
+
+import { exercicesDuChemin } from "./exercice";
+
+describe("exercicesDuChemin", () => {
+  it("liste les exercices créés, en cours et terminés", () => {
+    const l = exercicesDuChemin({
+      semaineCourante: 5,
+      progression: { "1": 4, "3": 4, ex3: 2, exfin3: 1763337600, "5": 3, ex5: 1 },
+      choix: { m1s1: { pratique: "p1" }, m1s3: { pratique: "p3" }, m2s1: { pratique: "p5" } },
+      pratiques: new Map([
+        ["p1", { nom: "Un", rythme: "30 min" }],
+        ["p3", { nom: "Trois", rythme: "Une fois" }],
+        ["p5", { nom: "Cinq", rythme: "Une semaine" }],
+      ]),
+      entrees: [{ semaine: 5, code: "s5:exo:jour:2026-11-19", reponse: "x" }],
+      aujourdhui: "2026-11-20",
+    });
+    expect(l.map((e) => [e.n, e.etat, e.jour])).toEqual([
+      [5, "en_cours", 2],
+      [3, "termine", null],
+      [1, "termine", null],
+    ]);
+    expect(l[1].fin).toBe("2025-11-17");
+  });
+});

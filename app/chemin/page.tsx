@@ -15,7 +15,9 @@ import { articleDuJour, questionCherie } from "@/lib/rituel/airtable";
 import { chargerHumeurs } from "@/lib/rituel/donnees";
 import { echoDuJour } from "@/lib/rituel/echo";
 import { candidatsEcho } from "@/lib/rituel/echo-donnees";
+import { chargerCatalogue } from "@/lib/catalogue/airtable";
 import { chargerCarnet } from "@/lib/semaines/carnet";
+import { exercicesDuChemin } from "@/lib/semaines/exercice";
 import { enLettres, etapesFaitesDuMois } from "@/lib/semaines/etapes";
 import { createClient } from "@/lib/supabase/server";
 import { semaineSuivante } from "./actions";
@@ -23,6 +25,7 @@ import { Article } from "./Article";
 import { Echo } from "./Echo";
 import { QuestionCherie } from "./QuestionCherie";
 import { Humeur } from "./Humeur";
+import { MesExercices } from "./MesExercices";
 import styles from "./espace.module.css";
 
 export const metadata = { title: "Mon espace · Présente !" };
@@ -53,11 +56,12 @@ export default async function MonEspace() {
   const humeurDuJour = humeurs.find((h) => h.jour === aujourdhui);
 
   // L'écho du carnet : une de ses réponses d'il y a au moins dix jours, choisie par la date.
-  const [candidats, carnet, qc, article] = await Promise.all([
+  const [candidats, carnet, qc, article, { catalogue }] = await Promise.all([
     candidatsEcho(supabase, reponses),
     chargerCarnet(supabase),
     questionCherie(),
     articleDuJour(aujourdhui),
+    chargerCatalogue(),
   ]);
   const qcReponse = qc ? carnet.find((e) => e.code === `qc:${qc.id.toLowerCase()}`) : undefined;
   const echo = echoDuJour(candidats, aujourdhui, profil?.sujets_a_eviter);
@@ -88,6 +92,15 @@ export default async function MonEspace() {
   const prochaine = semaines.find((s) => s.etat === "avenir");
 
   const citation = citationDuJour(aujourdhui);
+  // Tous ses exercices, pour les suivre depuis cette page sans repasser par le contenu.
+  const exercices = exercicesDuChemin({
+    semaineCourante: chemin.semaine,
+    progression: chemin.progression,
+    choix: chemin.choix,
+    pratiques: new Map(catalogue.pratiques.map((p) => [p.id, { nom: p.nom, rythme: p.rythme }])),
+    entrees: carnet,
+    aujourdhui,
+  });
   const etapes = etapesFaitesDuMois(mois, chemin.semaine, chemin.progression);
   const autresMois = [0, 1, 2].filter((m) => m > mois);
   const etiquetteActive = (e: string) => e.replace(/^Semaine \d · /, "");
@@ -116,6 +129,9 @@ export default async function MonEspace() {
           </span>
         </div>
       </section>
+
+      {/* Mes exercices en cours, juste sous le bandeau */}
+      <MesExercices exercices={exercices} />
 
       {/* Ton chemin, cette semaine */}
       <section className={styles.semaines}>

@@ -3,11 +3,11 @@ import { BarreEspace } from "@/components/BarreEspace";
 import { apercuDuLien } from "@/lib/catalogue/apercu";
 import { planDuMonde } from "@/lib/moteur/prompts";
 import { MONDE, QUETE } from "@/lib/questionnaire/contenu";
-import { CARNETS, EPISODES, avantEpisodeDeSecours, remplir } from "@/lib/semaines/contenu";
+import { CARNETS, EPISODES, avantEpisodeDeSecours, questionsApres, remplir, versionLongue } from "@/lib/semaines/contenu";
 import { etatExercice, joursDuRythme, jourEnCours, estCodeJour, jourDuCode } from "@/lib/semaines/exercice";
 import { ficheDeLEpisode } from "@/lib/semaines/fiche";
 import { texteDeSemaine } from "@/lib/semaines/textes";
-import { jourAParis } from "@/lib/rituel/citations";
+import { CITATIONS, jourAParis, numeroDuJour } from "@/lib/rituel/citations";
 import { contexteSemaine, court, queteDeLaSemaine } from "./contexte";
 import { SemaineMonde } from "./SemaineMonde";
 import { SemaineQuete } from "./SemaineQuete";
@@ -102,7 +102,7 @@ export default async function Semaine({ params }: { params: Promise<{ n: string 
           avantTexte={avantTexte.texte}
           questionAvant={questionAvant}
           questionAvantLigne={Boolean(carnetQ.avantLigne)}
-          apres={carnetQ.apres}
+          apres={questionsApres(contenu?.format, versionLongue(contenu?.intensite, mois))}
           contenu={
             contenu
               ? {
@@ -133,6 +133,7 @@ export default async function Semaine({ params }: { params: Promise<{ n: string 
               : null
           }
           exercice={exercice}
+          citation={CITATIONS[(numeroDuJour(jourAParis()) + n * 3 + 1) % CITATIONS.length]}
         />
       </>
     );

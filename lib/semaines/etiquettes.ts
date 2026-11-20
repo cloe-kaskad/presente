@@ -20,6 +20,7 @@ export function etiquetteSemaine(chemin: CheminPourEtiquette, n: number): string
 
 export const RETOURS = [
   { id: "parle", label: "ça m'a parlé" },
+  { id: "moyen", label: "moyen" },
   { id: "pas_maintenant", label: "pas maintenant" },
   { id: "pas_pour_moi", label: "pas pour moi" },
 ] as const;

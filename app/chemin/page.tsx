@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { BarreEspace } from "@/components/BarreEspace";
 import { TraceDuMois } from "@/components/TraceDuMois";
 import { decrireContenu } from "@/lib/catalogue/presentation";
-import { choixDuMois, profilDeChoix } from "@/lib/catalogue/semaines";
+import { choixDuMois, profilDeChoix, retoursDuCarnet } from "@/lib/catalogue/semaines";
 import { chargerChemin, ouvrirEspace } from "@/lib/chemin/donnees";
 import { semainesDuMois } from "@/lib/chemin/textes";
 import { carteEcrite, chargerTextesCarte } from "@/lib/moteur/carte";
@@ -73,7 +73,7 @@ export default async function MonEspace() {
   const capacites = chemin.capacites[quete];
   // Trois jours lourds de suite : on allège (contenu doux au prochain choix, geste décalable).
   const lourd = troisJoursLourds(humeurs, aujourdhui);
-  const choix = await choixDuMois(supabase, chemin, mois, profilDeChoix(profil, reponses, lourd));
+  const choix = await choixDuMois(supabase, chemin, mois, profilDeChoix(profil, reponses, lourd, retoursDuCarnet(carnet)));
   const semaines = semainesDuMois(
     mois,
     [libelleCapacite(capacites[0]), libelleCapacite(capacites[1])],

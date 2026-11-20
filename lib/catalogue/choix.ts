@@ -15,6 +15,68 @@ export type ProfilChoix = {
   sesMots: string;
   /** Trois jours lourds de suite dans son journal : on préfère un contenu doux. */
   douceur?: boolean;
+  /** Ses avis sur les contenus déjà proposés (« Ce contenu, pour toi ? »), avec le mot libre. */
+  avis?: AvisContenu[];
+};
+
+export type RetourId = "parle" | "moyen" | "pas_maintenant" | "pas_pour_moi";
+
+export type AvisContenu = {
+  retour: RetourId;
+  auteur: string;
+  registre: string | null;
+  format: FormatId | null;
+  /** Son mot libre, facultatif. Il ne sert qu'ici, au calcul : jamais affiché ailleurs que dans son carnet, jamais dans les logs. */
+  mot: string;
+};
+
+// ---------------------------------------------------------------------------
+// Ses avis
+// ---------------------------------------------------------------------------
+
+const normal = (t: string) => t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[’']/g, "'");
+
+const VISE_LA_PERSONNE = /(autrice|auteure|auteur|ecrivaine|journaliste|animatrice|invitee|cette femme|cet homme|cette personne|sa voix|son ton|sa facon|elle m'|il m')/;
+const NEGATIF = /(n'?accroche pas|accroche pas|pas accroche|n'aime pas|aime pas|agace|supporte pas|insupportable|pas fan|du mal avec|pas pour moi|bof|ennuie|enerve)/;
+
+export type LectureDesAvis = {
+  /** Autrices et auteurs à ne plus proposer. */
+  auteursEcartes: string[];
+  /** Points par autrice, par registre et par format. */
+  auteurs: Map<string, number>;
+  registres: Map<string, number>;
+  formats: Map<string, number>;
+  longueur: "plus_long" | "plus_court" | null;
+  moinsTheorique: boolean;
+  plusDoux: boolean;
+};
+
+/** Ce que ses avis et ses mots disent pour la suite. Module pur, testé. */
+export function lireLesAvis(avis: AvisContenu[] = []): LectureDesAvis {
+  const l: LectureDesAvis = { auteursEcartes: [], auteurs: new Map(), registres: new Map(), formats: new Map(), longueur: null, moinsTheorique: false, plusDoux: false };
+  const ajoute = (m: Map<string, number>, cle: string | null, n: number) => {
+    if (cle) m.set(cle, (m.get(cle) ?? 0) + n);
+  };
+  const POIDS: Record<RetourId, number> = { parle: 2, moyen: -1, pas_maintenant: 0, pas_pour_moi: -6 };
+  for (const a of avis) {
+    const auteur = normal(a.auteur).trim();
+    ajoute(l.auteurs, auteur, POIDS[a.retour]);
+    ajoute(l.registres, a.registre, a.retour === "parle" ? 1 : a.retour === "pas_pour_moi" ? -2 : 0);
+    ajoute(l.formats, a.format, a.retour === "parle" ? 1 : a.retour === "pas_pour_moi" ? -1 : 0);
+    const mot = normal(a.mot);
+    if (!mot.trim()) continue;
+    if (auteur && VISE_LA_PERSONNE.test(mot) && (NEGATIF.test(mot) || a.retour === "pas_pour_moi")) l.auteursEcartes.push(auteur);
+    if (/trop court/.test(mot)) l.longueur = "plus_long";
+    if (/trop long/.test(mot)) l.longueur = "plus_court";
+    if (/(theorique|abstrait|intello|trop de concepts)/.test(mot)) l.moinsTheorique = true;
+    if (/(trop dur|trop violent|trop lourd|trop fort|trop intense|ca m'a remuee)/.test(mot)) l.plusDoux = true;
+  }
+  return l;
+}
+
+const memeAuteur = (ecarte: string, auteur: string) => {
+  const a = normal(auteur).trim();
+  return Boolean(a) && (a === ecarte || a.includes(ecarte) || ecarte.includes(a));
 };
 
 export type DemandeSemaine = {
@@ -49,8 +111,17 @@ function tempsEffectif(c: Contenu): Temps {
 // Le contenu
 // ---------------------------------------------------------------------------
 
-function noteContenu(c: Contenu, d: DemandeSemaine, p: ProfilChoix, cible: string): number {
+function noteContenu(c: Contenu, d: DemandeSemaine, p: ProfilChoix, cible: string, avis: LectureDesAvis): number {
   let n = 0;
+  // Ses avis : la même autrice, le même registre, le même format qu'un contenu qu'elle a aimé ou pas.
+  n += avis.auteurs.get(normal(c.auteur).trim()) ?? 0;
+  if (c.registre) n += avis.registres.get(c.registre) ?? 0;
+  if (c.format) n += avis.formats.get(c.format) ?? 0;
+  const t = tempsEffectif(c);
+  if (avis.longueur === "plus_long") n += t === "moyen" || t === "long" ? 2 : t === "court" ? -2 : 0;
+  if (avis.longueur === "plus_court") n += t === "court" ? 2 : t === "long" ? -2 : 0;
+  if (avis.moinsTheorique && c.role === "comprendre") n -= 2;
+  if (avis.plusDoux) n += c.intensite === "douce" ? 3 : c.intensite === "bousculante" ? -3 : 0;
   if (c.format && p.formats.includes(c.format)) n += 4;
   const roleVoulu = d.semaine === 1 ? "ouvrir" : "agir";
   if (c.role === roleVoulu) n += 3;
@@ -80,6 +151,7 @@ export function choisirContenu(catalogue: Catalogue, d: DemandeSemaine, p: Profi
   const aEviter = racinesAEviter(p.sujetsAEviter);
   const situations = situationsDecrites(p.sesMots);
   const pris = new Set(d.dejaPris ?? []);
+  const avis = lireLesAvis(p.avis);
   const [cap1, cap2] = d.capacites;
   const cible = d.semaine === 1 ? cap1 : cap2;
   const autre = d.semaine === 1 ? cap2 : cap1;
@@ -88,6 +160,7 @@ export function choisirContenu(catalogue: Catalogue, d: DemandeSemaine, p: Profi
   const sains = catalogue.contenus.filter(
     (c) =>
       !pris.has(c.id) &&
+      !avis.auteursEcartes.some((a) => memeAuteur(a, c.auteur)) &&
       !toucheSujet(aEviter, c.aEviterSi, c.titre, c.description, c.pourquoi) &&
       !supposeAutreChose(c.supposeQue, situations),
   );
@@ -103,7 +176,7 @@ export function choisirContenu(catalogue: Catalogue, d: DemandeSemaine, p: Profi
     const candidats = sains.filter(niveau.garder);
     for (const durees of paliersDeTemps(p.temps)) {
       const dansLeTemps = candidats.filter((c) => durees.includes(tempsEffectif(c)));
-      const c = meilleur(dansLeTemps, (x) => noteContenu(x, d, p, cible), (x) => x.titre);
+      const c = meilleur(dansLeTemps, (x) => noteContenu(x, d, p, cible, avis), (x) => x.titre);
       if (c) return { contenu: c, capacite: niveau.capacite };
     }
   }

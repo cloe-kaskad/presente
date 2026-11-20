@@ -207,3 +207,35 @@ describe("le choix de l'exercice et de l'acte", () => {
     expect(choisirPratique(c, s1, { ...profil, sujetsAEviter: "maternité" }).pratique).toBeNull();
   });
 });
+
+describe("ses avis comptent pour la suite", () => {
+  const cat = (): Catalogue => ({
+    contenus: [
+      contenu("insaff-2", { auteur: "Ma juste valeur, Insaff El Hassini", capacites: ["AR3"], role: "ouvrir" }),
+      contenu("autre", { auteur: "Toutes puissantes", capacites: ["AR3"], role: "ouvrir", format: "lire" }),
+    ],
+    pratiques: [],
+  });
+  const avis = (retour: "parle" | "moyen" | "pas_maintenant" | "pas_pour_moi", mot = "") => [
+    { retour, auteur: "Ma juste valeur, Insaff El Hassini", registre: null, format: "ecouter" as const, mot },
+  ];
+
+  it("sans avis, on choisit l'autrice qui correspond le mieux", () => {
+    expect(choisirContenu(cat(), s1, profil).contenu?.id).toBe("insaff-2");
+  });
+  it("« je n'accroche pas avec cette autrice » : ses contenus ne sont plus proposés", () => {
+    const p = { ...profil, avis: avis("moyen", "Je n'accroche pas avec cette autrice.") };
+    expect(choisirContenu(cat(), s1, p).contenu?.id).toBe("autre");
+    // Même s'il ne restait qu'elle : on ne la repropose pas.
+    const seule: Catalogue = { contenus: [cat().contenus[0]], pratiques: [] };
+    expect(choisirContenu(seule, s1, p).contenu).toBeNull();
+  });
+  it("« moyen » est un signal faible, « pas pour moi » un signal fort, « ça m'a parlé » rapproche", () => {
+    expect(choisirContenu(cat(), s1, { ...profil, avis: avis("moyen") }).contenu?.id).toBe("insaff-2");
+    expect(choisirContenu(cat(), s1, { ...profil, avis: avis("pas_pour_moi") }).contenu?.id).toBe("autre");
+    expect(choisirContenu(cat(), s1, { ...profil, avis: avis("parle") }).contenu?.id).toBe("insaff-2");
+  });
+  it("« pas maintenant » n'écarte personne", () => {
+    expect(choisirContenu(cat(), s1, { ...profil, avis: avis("pas_maintenant") }).contenu?.id).toBe("insaff-2");
+  });
+});

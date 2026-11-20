@@ -10,7 +10,25 @@ import type { MondeId, QueteId } from "@/lib/questionnaire/contenu";
 // Les carnets de quête (semaines 1 et 3)
 // ---------------------------------------------------------------------------
 
-export type QuestionCarnet = { texte: string; adapter?: boolean; ligne?: boolean };
+export type QuestionCarnet = { texte: string; adapter?: boolean; ligne?: boolean; placeholder?: string };
+
+/**
+ * Les questions après un contenu (brief V0.6, point 3). Version courte pour tous les contenus ;
+ * version longue (le corps) pour un contenu marqué « bousculante » dans Airtable, ou à partir du mois 3.
+ * Codes : carnet:1 la phrase, carnet:2 la personne, carnet:3 le corps. Aucune n'est obligatoire.
+ */
+export function questionsApres(format: string | null | undefined, longue: boolean): QuestionCarnet[] {
+  const verbe = format === "lire" ? "en lisant" : format === "regarder" ? "en regardant" : "en écoutant";
+  const q: QuestionCarnet[] = [
+    { texte: "La phrase que tu as envie de noter.", placeholder: "Recopie-la, ou dis-la avec tes mots." },
+    { texte: `À qui as-tu pensé ${verbe} ?`, adapter: true, ligne: true, placeholder: "Un prénom suffit." },
+  ];
+  if (longue) q.push({ texte: "Dans ton corps, où est-ce que ça a réagi ?", placeholder: "La gorge, le ventre, les épaules… ou nulle part." });
+  return q;
+}
+
+/** La version longue : contenu « bousculante », ou mois 3 du chemin (mois = 0, 1, 2). */
+export const versionLongue = (intensite: string | null | undefined, mois: number) => intensite === "bousculante" || mois >= 2;
 
 export type CarnetSemaine = {
   /** La question « avant », très courte. Peut contenir [scène], [personne], [capacité]. */
@@ -18,7 +36,6 @@ export type CarnetSemaine = {
   /** La même, quand elle n'a rien écrit d'utilisable pour les crochets. */
   avantParDefaut?: string;
   avantLigne?: boolean;
-  apres: [QuestionCarnet, QuestionCarnet, QuestionCarnet];
 };
 
 export type CarnetQuete = {
@@ -35,41 +52,21 @@ export const CARNETS: Record<QueteId, CarnetQuete> = {
     s1: {
       avant: "En un mot : ce que le mot « argent » te fait, là, maintenant.",
       avantLigne: true,
-      apres: [
-        { texte: "La phrase que tu as envie de noter." },
-        { texte: "À quelle scène de ta vie ça t'a fait penser ? Où, et avec qui.", adapter: true },
-        { texte: "Qu'est-ce que tu ne savais pas, ou que tu ne voulais pas savoir ?" },
-      ],
     },
     s3: {
       avant: "Il y a deux semaines, tu avais noté : « [scène] ». Sur « [capacité] », qu'est-ce qui a bougé depuis ? « Rien » est une réponse.",
       avantParDefaut: "Il y a deux semaines, tu as ouvert cette quête. Sur « [capacité] », qu'est-ce qui a bougé depuis ? « Rien » est une réponse.",
-      apres: [
-        { texte: "Ce que cette personne fait avec l'argent, et que tu ne fais pas encore." },
-        { texte: "Dans ta vie, où est-ce que ça pourrait se jouer cette semaine ? Une situation précise, une personne.", adapter: true },
-        { texte: "Ce qui te retient, en une phrase." },
-      ],
     },
-    sources: { scene: "apres2" },
+    sources: { scene: "avant" },
   },
   voix: {
     s1: {
       avant: "Le dernier moment où tu n'as pas dit ce que tu pensais : en trois mots.",
       avantLigne: true,
-      apres: [
-        { texte: "La phrase que tu as envie de noter." },
-        { texte: "À qui as-tu pensé en écoutant ?", adapter: true, ligne: true },
-        { texte: "Dans ton corps, où est-ce que ça a réagi ?" },
-      ],
     },
     s3: {
       avant: "Il y a deux semaines, tu avais pensé à [personne]. Depuis, y a-t-il eu une fois où tu as dit quelque chose que tu n'aurais pas dit avant ?",
       avantParDefaut: "Depuis deux semaines, y a-t-il eu une fois où tu as dit quelque chose que tu n'aurais pas dit avant ?",
-      apres: [
-        { texte: "La phrase ou le geste que tu voudrais lui emprunter." },
-        { texte: "Où vas-tu en avoir besoin cette semaine ? Une situation, une personne.", adapter: true },
-        { texte: "Qu'est-ce que tu risques, vraiment ?" },
-      ],
     },
     sources: { personne: "apres2" },
   },
@@ -77,20 +74,10 @@ export const CARNETS: Record<QueteId, CarnetQuete> = {
     s1: {
       avant: "Le prénom qui te vient quand tu lis le mot « lien ».",
       avantLigne: true,
-      apres: [
-        { texte: "La phrase que tu as envie de noter." },
-        { texte: "Dans quelle relation de ta vie est-ce que ça résonne ?", adapter: true },
-        { texte: "Qu'est-ce que tu as reconnu de toi, et qui ne t'a pas plu ?" },
-      ],
     },
     s3: {
       avant: "Il y a deux semaines, tu avais nommé [personne]. Qu'est-ce qui a bougé entre vous depuis ? « Rien » est une réponse.",
       avantParDefaut: "Depuis deux semaines, qu'est-ce qui a bougé dans tes liens ? « Rien » est une réponse.",
-      apres: [
-        { texte: "Ce que tu voudrais oser dans un lien." },
-        { texte: "Avec qui, cette semaine ?", adapter: true, ligne: true },
-        { texte: "Qu'est-ce que tu as peur de perdre ?" },
-      ],
     },
     sources: { personne: "avant" },
   },
@@ -107,22 +94,12 @@ function gabarit(mot: string): CarnetQuete {
     s1: {
       avant: `En un mot : ce que le mot « ${mot} » te fait, là, maintenant.`,
       avantLigne: true,
-      apres: [
-        { texte: "La phrase que tu as envie de noter." },
-        { texte: "À quelle scène de ta vie ça t'a fait penser ? Où, et avec qui.", adapter: true },
-        { texte: "Qu'est-ce que tu as reconnu de toi ?" },
-      ],
     },
     s3: {
       avant: "Il y a deux semaines, tu avais noté : « [scène] ». Sur « [capacité] », qu'est-ce qui a bougé depuis ? « Rien » est une réponse.",
       avantParDefaut: "Il y a deux semaines, tu as ouvert cette quête. Sur « [capacité] », qu'est-ce qui a bougé depuis ? « Rien » est une réponse.",
-      apres: [
-        { texte: "Ce que tu voudrais emprunter à ce contenu." },
-        { texte: "Où est-ce que ça pourrait se jouer cette semaine ? Une situation précise, une personne.", adapter: true },
-        { texte: "Ce qui te retient, en une phrase." },
-      ],
     },
-    sources: { scene: "apres2" },
+    sources: { scene: "avant" },
   };
 }
 

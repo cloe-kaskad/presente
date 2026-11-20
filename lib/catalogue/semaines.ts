@@ -4,7 +4,7 @@ import type { CheminEnregistre, ChoixEnregistre } from "@/lib/chemin/donnees";
 import { QUESTIONS_OUVERTES, type FormatId, type TempsId } from "@/lib/questionnaire/contenu";
 import type { Reponses } from "@/lib/questionnaire/reponses";
 import { chargerCatalogue } from "./airtable";
-import { choisirContenu, choisirPratique, type ProfilChoix } from "./choix";
+import { choisirContenu, choisirPratique, type AvisContenu, type ProfilChoix, type RetourId } from "./choix";
 import type { Contenu, Pratique } from "./types";
 
 export type SemaineDeQuete = {
@@ -21,7 +21,19 @@ type Profil = {
   sujets_a_eviter: string | null;
 };
 
-export function profilDeChoix(profil: Profil | null, reponses: Reponses, douceur = false): ProfilChoix {
+/** Son avis sur le contenu d'une semaine (« Ce contenu, pour toi ? ») et son mot libre, tels que rangés dans son carnet. */
+export type RetourDeSemaine = { semaine: number; retour: RetourId; mot: string };
+
+/** Ses avis, lus dans son carnet (entrées « s{n}:retour »). */
+export function retoursDuCarnet(entrees: { semaine: number; code: string; retour: string | null; reponse: string }[]): RetourDeSemaine[] {
+  return entrees
+    .filter((e) => e.code === `s${e.semaine}:retour` && e.retour)
+    .map((e) => ({ semaine: e.semaine, retour: e.retour as RetourId, mot: e.reponse ?? "" }));
+}
+
+export type ProfilAvecRetours = ProfilChoix & { retours?: RetourDeSemaine[] };
+
+export function profilDeChoix(profil: Profil | null, reponses: Reponses, douceur = false, retours: RetourDeSemaine[] = []): ProfilAvecRetours {
   const mots = [
     ...QUESTIONS_OUVERTES.map((q) => reponses[1][q.id] ?? ""),
     reponses[2].appelle ?? "",
@@ -34,6 +46,7 @@ export function profilDeChoix(profil: Profil | null, reponses: Reponses, douceur
     sujetsAEviter: profil?.sujets_a_eviter,
     sesMots: mots,
     douceur,
+    retours,
   };
 }
 
@@ -54,7 +67,7 @@ export async function choixDuMois(
   supabase: SupabaseClient,
   chemin: CheminEnregistre,
   mois: 0 | 1 | 2,
-  profil: ProfilChoix,
+  profilBrut: ProfilAvecRetours,
 ): Promise<ChoixDuMois> {
   const { catalogue, erreur } = await chargerCatalogue();
   const quete = chemin.quetes[mois];
@@ -63,6 +76,26 @@ export async function choixDuMois(
     contenus: new Map(catalogue.contenus.map((c) => [c.id, c])),
     pratiques: new Map(catalogue.pratiques.map((p) => [p.id, p])),
   };
+
+  // Ses avis sur les contenus déjà proposés : chaque semaine retrouve son contenu par le choix enregistré.
+  const contenuDeLaSemaine = (n: number) => {
+    const d = ((n - 1) % 4) + 1;
+    const id = chemin.choix[`m${Math.floor((n - 1) / 4) + 1}s${d}`]?.contenu;
+    return id ? parId.contenus.get(id) : undefined;
+  };
+  const retours = profilBrut.retours ?? [];
+  const avis: AvisContenu[] = retours.flatMap((r) => {
+    const c = contenuDeLaSemaine(r.semaine);
+    return c ? [{ retour: r.retour, auteur: c.auteur, registre: c.registre, format: c.format, mot: r.mot }] : [];
+  });
+  const profil: ProfilChoix = { ...profilBrut, avis };
+  // « Pas maintenant » : ce contenu pourra revenir plus tard, à partir du mois suivant.
+  const aReproposer = new Set(
+    retours
+      .filter((r) => r.retour === "pas_maintenant" && Math.floor((r.semaine - 1) / 4) < mois)
+      .map((r) => contenuDeLaSemaine(r.semaine)?.id)
+      .filter((x): x is string => Boolean(x)),
+  );
 
   const encoreBon = (c: ChoixEnregistre | undefined) =>
     c &&
@@ -77,7 +110,10 @@ export async function choixDuMois(
 
   for (const [i, cle] of cles.entries()) {
     const deja = chemin.choix[cle];
-    if (encoreBon(deja)) {
+    // La semaine 3 se choisit à nouveau tant qu'elle n'est pas ouverte : l'avis de la semaine 1 compte déjà.
+    const n = mois * 4 + (i === 0 ? 1 : 3);
+    const ouverte = (chemin.progression[String(n)] ?? 0) > 0 || n < chemin.semaine;
+    if (encoreBon(deja) && (i === 0 || ouverte || erreur)) {
       precedent = parId.contenus.get(deja!.contenu!) ?? null;
       continue;
     }
@@ -86,11 +122,16 @@ export async function choixDuMois(
       quete,
       semaine: (i === 0 ? 1 : 3) as 1 | 3,
       capacites: chemin.capacites[quete] as [string, string],
-      dejaPris: [...idsDejaPris(chemin.choix, [cle]), ...idsDejaPris(nouveaux, [])],
+      dejaPris: [...idsDejaPris(chemin.choix, [cle]), ...idsDejaPris(nouveaux, [])].filter((id) => !aReproposer.has(id)),
       precedent,
     };
     const c = choisirContenu(catalogue, demande, profil);
     const p = choisirPratique(catalogue, demande, profil);
+    const memeChose = deja && deja.quete === quete && deja.contenu === (c.contenu?.id ?? null) && deja.pratique === (p.pratique?.id ?? null);
+    if (memeChose) {
+      precedent = c.contenu;
+      continue;
+    }
     nouveaux[cle] = {
       quete,
       contenu: c.contenu?.id ?? null,

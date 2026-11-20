@@ -14,6 +14,12 @@
 .slash {
   color: var(--rouge);
 }
+.rienObligatoire {
+  margin: -6px 0 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--bordeaux);
+}
 /* « ← Mon chemin » et la quête (maquette Contenu-apres) */
 .filHaut {
   display: flex;

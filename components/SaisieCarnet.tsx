@@ -68,38 +68,3 @@ export function CurseurCarnet({
     />
   );
 }
-
-const RETOURS = [
-  { id: "parle", label: "ça m'a parlé" },
-  { id: "pas_maintenant", label: "pas maintenant" },
-  { id: "pas_pour_moi", label: "pas pour moi" },
-] as const;
-
-/** « Ce contenu, pour toi : ça m'a parlé / pas maintenant / pas pour moi » */
-export function RetourCarnet({ semaine, code, initial, question = "Ce contenu, pour toi :" }: { semaine: number; code: string; initial?: string | null; question?: string }) {
-  const [r, setR] = useState(initial ?? "");
-  return (
-    <div className={styles.champ}>
-      <span id={`retour-${code}`} className={styles.question}>
-        {question}
-      </span>
-      <div className={styles.puces} role="radiogroup" aria-labelledby={`retour-${code}`}>
-        {RETOURS.map((x) => (
-          <button
-            key={x.id}
-            type="button"
-            role="radio"
-            aria-checked={r === x.id}
-            className={`${styles.puce} ${r === x.id ? styles.puceChoisie : ""}`}
-            onClick={() => {
-              setR(x.id);
-              void sauver({ semaine, type: "carnet", code, question: "Ce contenu, pour toi", reponse: "", retour: x.id });
-            }}
-          >
-            {x.label}
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-}

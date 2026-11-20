@@ -6,7 +6,8 @@ import { useState, useTransition } from "react";
 import { AvecSesMots } from "@/components/AvecSesMots";
 import { ChampCarnet } from "@/components/ChampCarnet";
 import { EcritureEnCours } from "@/components/EcritureEnCours";
-import { RetourCarnet } from "@/components/SaisieCarnet";
+import { AvisContenu } from "@/components/AvisContenu";
+import type { Citation } from "@/lib/rituel/citations";
 import { decrireContenu } from "@/lib/catalogue/presentation";
 import type { QuestionCarnet } from "@/lib/semaines/contenu";
 import type { EtatExercice } from "@/lib/semaines/exercice";
@@ -63,6 +64,7 @@ export function SemaineQuete({
   catalogueIndisponible,
   pratique,
   exercice,
+  citation,
 }: {
   n: number;
   etape: number;
@@ -78,6 +80,7 @@ export function SemaineQuete({
   catalogueIndisponible: boolean;
   pratique: Pratique | null;
   exercice: Exercice | null;
+  citation: Citation;
 }) {
   const router = useRouter();
   const [etape, setEtape] = useState(etapeInitiale);
@@ -199,10 +202,11 @@ export function SemaineQuete({
         <section className={`${styles.section} ${styles.carnet}`} aria-labelledby="carnet">
           <div className={styles.carnetHaut}>
             <h2 id="carnet" className={styles.etiquette}>
-              <span className={styles.slash}>/</span> Après · ton carnet
+              <span className={styles.slash}>/</span> Après, ton carnet.
             </h2>
-            <span className={styles.duree}>2 minutes</span>
+            <span className={styles.duree}>{apres.length > 2 ? "3 minutes" : "2 minutes"}</span>
           </div>
+          <p className={styles.rienObligatoire}>Rien n&apos;est obligatoire. Écris ce qui vient, laisse le reste vide.</p>
           {apres.map((q, i) => (
             <ChampCarnet
               key={i}
@@ -212,10 +216,17 @@ export function SemaineQuete({
               question={q.texte}
               initial={val(`s${n}:carnet:${i + 1}`)}
               ligne={q.ligne}
+              placeholder={q.placeholder}
               surFond="rose"
             />
           ))}
-          <RetourCarnet semaine={n} code={`s${n}:retour`} initial={initiales[`s${n}:retour`]?.retour} />
+          <AvisContenu
+            semaine={n}
+            code={`s${n}:retour`}
+            initial={initiales[`s${n}:retour`]?.retour}
+            motInitial={initiales[`s${n}:retour`]?.reponse ?? ""}
+            citation={citation}
+          />
           {pratique ? (
             exercice ? (
               <Link href={versExercice} className={`bouton ${styles.suite}`}>

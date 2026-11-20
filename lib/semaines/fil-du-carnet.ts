@@ -75,6 +75,7 @@ function libelle(o: Origine, info: InfoSemaine | undefined): { texte: string; ca
 function questionAffichee(e: EntreeDuCarnet, info: InfoSemaine | undefined): string {
   if (e.code.includes(":exo:jour:")) return "Ce que tu as noté ce jour-là.";
   if (/:decale$/.test(e.code)) return "Tu as choisi de le décaler.";
+  if (/:retour$/.test(e.code)) return "Pourquoi, en un mot";
   // Les réponses d'exercice sont enregistrées « Nom de l'exercice · question » : on garde la question.
   if (/:exo:/.test(e.code) && e.question.includes(" · ")) return e.question.split(" · ").slice(1).join(" · ");
   const nom = info?.pratique?.nom;

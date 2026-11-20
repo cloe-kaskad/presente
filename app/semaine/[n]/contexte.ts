@@ -1,7 +1,10 @@
 import "server-only";
 import { notFound, redirect } from "next/navigation";
 import { racinesAEviter, toucheSujet } from "@/lib/catalogue/filtres";
-import { choixDuMois, profilDeChoix } from "@/lib/catalogue/semaines";
+import { choixDuMois, profilDeChoix, retoursDuCarnet } from "@/lib/catalogue/semaines";
+import { jourAParis, plusJours } from "@/lib/rituel/citations";
+import { chargerHumeurs } from "@/lib/rituel/donnees";
+import { troisJoursLourds } from "@/lib/rituel/humeurs";
 import { chargerChemin } from "@/lib/chemin/donnees";
 import { carteEcrite, chargerTextesCarte, texte as texteCarte } from "@/lib/moteur/carte";
 import { sesReponses } from "@/lib/moteur/ecriture";
@@ -97,7 +100,11 @@ export type ContexteSemaine = Awaited<ReturnType<typeof contexteSemaine>>;
 
 /** Semaines 1 et 3 : le contenu et la pratique choisis pour elle. */
 export async function queteDeLaSemaine(ctx: ContexteSemaine) {
-  const choix = await choixDuMois(ctx.supabase, ctx.chemin, ctx.mois, profilDeChoix(ctx.profil, ctx.reponses));
+  // Le même profil que dans Mon chemin (jours lourds, avis), pour que le choix soit le même des deux côtés.
+  const aujourdhui = jourAParis();
+  const humeurs = await chargerHumeurs(ctx.supabase, plusJours(aujourdhui, -3));
+  const lourd = troisJoursLourds(humeurs, aujourdhui);
+  const choix = await choixDuMois(ctx.supabase, ctx.chemin, ctx.mois, profilDeChoix(ctx.profil, ctx.reponses, lourd, retoursDuCarnet(ctx.carnet)));
   const s = ctx.d === 1 ? choix.s1 : choix.s3;
   const capacite = ctx.capaciteDite(ctx.caps[ctx.d === 1 ? 0 : 1]);
   return { contenu: s.contenu, pratique: s.pratique, capacite, catalogueIndisponible: choix.catalogueIndisponible };

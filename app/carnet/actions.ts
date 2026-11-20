@@ -11,7 +11,7 @@ const Entree = z.object({
   code: z.string().regex(/^[a-z0-9:_-]{1,60}$/),
   question: z.string().min(1).max(500),
   reponse: z.string().max(5000).default(""),
-  retour: z.enum(["parle", "pas_maintenant", "pas_pour_moi"]).nullable().optional(),
+  retour: z.enum(["parle", "moyen", "pas_maintenant", "pas_pour_moi"]).nullable().optional(),
 });
 
 export type EntreeAEnregistrer = z.input<typeof Entree>;

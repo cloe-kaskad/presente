@@ -6,7 +6,8 @@ import { useState, useTransition } from "react";
 import { AvecSesMots } from "@/components/AvecSesMots";
 import { ChampCarnet } from "@/components/ChampCarnet";
 import { EcritureEnCours } from "@/components/EcritureEnCours";
-import { ChoixCarnet, CurseurCarnet, RetourCarnet } from "@/components/SaisieCarnet";
+import { AvisContenu } from "@/components/AvisContenu";
+import { ChoixCarnet, CurseurCarnet } from "@/components/SaisieCarnet";
 import { QUESTIONS_PALIER, type Episode, type QuestionMini } from "@/lib/semaines/contenu";
 import { avancer, terminer } from "../actions";
 import { Lecteur } from "./Lecteur";
@@ -113,7 +114,7 @@ export function SemaineMonde({
           {questionQuete ? (
             <ChampCarnet semaine={n} type="mini_questionnaire" code={`s${n}:quete`} question={questionQuete} initial={initiales[`s${n}:quete`]?.reponse} />
           ) : null}
-          <RetourCarnet semaine={n} code={`s${n}:retour`} initial={initiales[`s${n}:retour`]?.retour} question="Cet épisode, pour toi :" />
+          <AvisContenu semaine={n} code={`s${n}:retour`} initial={initiales[`s${n}:retour`]?.retour} question="Cet épisode, pour toi ?" avecMot={false} />
           {!avecPalier ? (
             !finie ? (
               <button type="button" className={`bouton bouton--grand ${styles.suite}`} onClick={() => demarrer(() => terminer(n, 3))} disabled={enCours}>

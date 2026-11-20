@@ -358,12 +358,6 @@
   color: var(--blanc);
   margin-top: 8px;
 }
-.attente {
-  position: fixed;
-  inset: 0;
-  z-index: 50;
-}
-
 @media (min-width: 1024px) {
   .fil {
     padding: 32px max(96px, calc((100vw - 760px) / 2)) 0;

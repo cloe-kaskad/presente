@@ -1,6 +1,6 @@
 import type { FormatId, QueteId } from "@/lib/questionnaire/contenu";
 
-export type Temps = "court" | "moyen" | "long" | "a_verifier";
+export type Temps = "court" | "moyen" | "long" | "a_verifier" | "trop_court";
 export type Role = "ouvrir" | "comprendre" | "agir";
 export type Intensite = "douce" | "franche" | "bousculante";
 

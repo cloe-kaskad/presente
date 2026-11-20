@@ -1,0 +1,164 @@
+/* Une page qui charge (maquette Attente-page) et l'écriture de l'exercice (maquette Attente-creation). */
+.page {
+  min-height: 100svh;
+  background: var(--blanc);
+  color: var(--rouge-profond);
+}
+.corps {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 28px var(--gouttiere) 48px;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+.bloc {
+  display: block;
+  border-radius: 12px;
+  background: #f3dfe4;
+  animation: respire 1.6s ease-in-out infinite;
+}
+.blanc {
+  background: var(--blanc);
+}
+.carteRose {
+  background: var(--rose-pale);
+  border-radius: 24px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.carteBord {
+  border: 1.5px solid var(--rose);
+  border-radius: 24px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.ligne {
+  display: flex;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+.grille {
+  display: grid;
+  gap: 16px;
+}
+@media (min-width: 1024px) {
+  .corps {
+    padding: 40px 48px 64px;
+  }
+  .grille {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@keyframes respire {
+  50% {
+    opacity: 0.55;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bloc {
+    animation: none;
+  }
+}
+
+/* --- Pendant que l'exercice s'écrit --- */
+.ecriture {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  overflow-y: auto;
+  background: var(--blanc);
+  color: var(--rouge-profond);
+}
+.ecritureCorps {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 28px var(--gouttiere) 48px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+.surtitre {
+  font-size: 14px;
+  font-weight: 600;
+}
+.titre {
+  margin: 0;
+  font-size: 36px;
+  line-height: 1.06;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  color: var(--rouge);
+}
+.etapes {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.etape {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-size: 16px;
+  color: var(--bordeaux);
+}
+.etapeActive {
+  font-weight: 600;
+}
+.etapeAVenir {
+  opacity: 0.55;
+}
+.puce {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+.puceFaite {
+  background: var(--rouge-profond);
+  color: var(--blanc);
+}
+.puceActive {
+  border: 2.5px solid var(--rose);
+  border-top-color: var(--rouge-profond);
+  animation: tourne 0.9s linear infinite;
+}
+.puceAVenir {
+  border: 1.5px dashed var(--rose);
+}
+.aide {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--bordeaux);
+  opacity: 0.8;
+}
+@keyframes tourne {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .puceActive {
+    animation: none;
+  }
+}
+@media (min-width: 1024px) {
+  .ecritureCorps {
+    padding: 64px 48px;
+  }
+  .titre {
+    font-size: 56px;
+  }
+}

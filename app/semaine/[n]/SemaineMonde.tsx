@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { AvecSesMots } from "@/components/AvecSesMots";
 import { ChampCarnet } from "@/components/ChampCarnet";
-import { Mantra } from "@/components/Mantra";
+import { EcritureEnCours } from "@/components/EcritureEnCours";
 import { ChoixCarnet, CurseurCarnet, RetourCarnet } from "@/components/SaisieCarnet";
 import { QUESTIONS_PALIER, type Episode, type QuestionMini } from "@/lib/semaines/contenu";
 import { avancer, terminer } from "../actions";
@@ -58,9 +58,7 @@ export function SemaineMonde({
   return (
     <main className={`${styles.page} ${styles.monde}`}>
       {enCours && avecPalier && etape >= 2 && !palier ? (
-        <div className={styles.attente}>
-          <Mantra surtitre="/ On relit ton mois" />
-        </div>
+        <EcritureEnCours surtitre="Palier · fin du mois" titre="On relit ton mois." />
       ) : null}
       <p className={styles.fil}>
         <span className={styles.slash}>/</span> {mondeCourt} · épisode {numeroEpisode}

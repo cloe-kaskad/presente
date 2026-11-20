@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { AvecSesMots } from "@/components/AvecSesMots";
 import { ChampCarnet } from "@/components/ChampCarnet";
-import { Mantra } from "@/components/Mantra";
+import { EcritureEnCours } from "@/components/EcritureEnCours";
 import { CurseurCarnet, RetourCarnet } from "@/components/SaisieCarnet";
 import { enregistrerEntree } from "@/app/carnet/actions";
 import { decrireContenu } from "@/lib/catalogue/presentation";
@@ -18,7 +18,7 @@ type Contenu = {
   titre: string;
   auteur: string;
   type: string;
-  temps: "court" | "moyen" | "long" | "a_verifier" | null;
+  temps: "court" | "moyen" | "long" | "a_verifier" | "trop_court" | null;
   entreeCourte: string | null;
   format: string | null;
   lien: string | null;
@@ -93,9 +93,10 @@ export function SemaineQuete({
   return (
     <main className={styles.page}>
       {enCours && etape >= 2 && !intro ? (
-        <div className={styles.attente}>
-          <Mantra surtitre={agir ? "/ On prépare ton geste" : "/ On prépare ton exercice"} />
-        </div>
+        <EcritureEnCours
+          surtitre={agir ? "Dans ta vraie vie, cette semaine" : `Exercice${pratique?.rythme ? ` · ${pratique.rythme.toLowerCase()}` : ""}`}
+          titre={agir ? "On écrit ton geste." : "On écrit ton exercice."}
+        />
       ) : null}
       <p className={styles.fil}>
         <span className={styles.slash}>/</span> {titreQuete} · semaine {((n - 1) % 4) + 1}

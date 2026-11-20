@@ -1,5 +1,5 @@
-import { Mantra } from "@/components/Mantra";
+import { PageEnAttente } from "@/components/EnAttente";
 
 export default function Chargement() {
-  return <Mantra />;
+  return <PageEnAttente forme="chemin" />;
 }

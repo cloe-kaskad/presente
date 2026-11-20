@@ -133,6 +133,8 @@ function format(v: unknown): FormatId | null {
 function temps(v: unknown): Temps | null {
   const r = sans(choix(v));
   if (r === "court" || r === "moyen" || r === "long") return r;
+  // « Moins de 20 min » : jamais proposé (règle de Cloé, novembre 2026).
+  if (r.startsWith("moins de")) return "trop_court";
   return r ? "a_verifier" : null;
 }
 function image(v: unknown): string | null {
@@ -142,6 +144,16 @@ function image(v: unknown): string | null {
 }
 const valide = (v: unknown) => choix(v) === "Validé";
 
+/**
+ * Pendant la V0, Cloé teste avec tous les contenus, validés ou seulement proposés :
+ * seuls les contenus « Retiré » sont écartés. Pour la vraie version, repasser à false
+ * (seuls les contenus « Validé » seront alors proposés).
+ */
+const V0_TOUS_LES_CONTENUS = true;
+const contenuGarde = (v: unknown) => (V0_TOUS_LES_CONTENUS ? choix(v) !== "Retiré" : valide(v));
+/** Moins de 20 minutes : jamais proposé. */
+const assezLong = (c: Contenu) => Boolean(c.titre) && c.temps !== "trop_court";
+
 // --- Les trois tables ------------------------------------------------------------
 
 async function lireMediatheque(): Promise<Contenu[]> {
@@ -149,7 +161,7 @@ async function lireMediatheque(): Promise<Contenu[]> {
   const f = MEDIATHEQUE;
   const lignes = await lireTable(table, Object.values(champs));
   return lignes
-    .filter((r) => valide(r.fields[f.validation]))
+    .filter((r) => contenuGarde(r.fields[f.validation]))
     .map((r) => ({
       id: r.id,
       source: "mediatheque" as const,
@@ -172,7 +184,7 @@ async function lireMediatheque(): Promise<Contenu[]> {
       entreeCourte: texteOuNull(r.fields[f.entreeCourte]),
       pourquoi: texteOuNull(r.fields[f.pourquoi]),
     }))
-    .filter((c) => c.titre);
+    .filter(assezLong);
 }
 
 async function lireHorsMediatheque(): Promise<Contenu[]> {
@@ -180,7 +192,7 @@ async function lireHorsMediatheque(): Promise<Contenu[]> {
   const f = HORS_MEDIATHEQUE;
   const lignes = await lireTable(table, Object.values(champs));
   return lignes
-    .filter((r) => valide(r.fields[f.validation]))
+    .filter((r) => contenuGarde(r.fields[f.validation]))
     .map((r) => ({
       id: r.id,
       source: "hors_mediatheque" as const,
@@ -203,7 +215,7 @@ async function lireHorsMediatheque(): Promise<Contenu[]> {
       entreeCourte: null,
       pourquoi: texteOuNull(r.fields[f.pourquoi]),
     }))
-    .filter((c) => c.titre);
+    .filter(assezLong);
 }
 
 async function lirePratiques(): Promise<Pratique[]> {

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { BarreEspace } from "@/components/BarreEspace";
 import { TraceDuMois } from "@/components/TraceDuMois";
+import m from "@/components/mouvement.module.css";
 import { decrireContenu } from "@/lib/catalogue/presentation";
 import { choixDuMois, profilDeChoix, retoursDuCarnet } from "@/lib/catalogue/semaines";
 import { chargerChemin, ouvrirEspace } from "@/lib/chemin/donnees";
@@ -113,13 +114,13 @@ export default async function MonEspace() {
       <section className={styles.bandeau}>
         <div className={styles.citation}>
           <span className={styles.date}>{dateEnLettres(aujourdhui)} · la citation du jour</span>
-          <p className={styles.citationTexte}>« {citation.texte} »</p>
+          <p className={`${styles.citationTexte} ${m.monte}`}>« {citation.texte} »</p>
           <span className={styles.autrice}>
             <strong>{citation.autrice}</strong>, {citation.source}
           </span>
         </div>
         <div className={styles.trace}>
-          <TraceDuMois faites={etapes} label={`${etapes} étapes faites sur 8 ce mois-ci`} />
+          <TraceDuMois anime faites={etapes} label={`${etapes} étapes faites sur 8 ce mois-ci`} />
           <span className={styles.traceTexte}>
             <strong>
               {QUETE[quete].nom}, mois {mois + 1} sur 3.
@@ -137,9 +138,9 @@ export default async function MonEspace() {
       <section className={styles.semaines}>
         <h1 className={styles.titreSection}>Ton chemin, cette semaine.</h1>
         <div className={styles.grilleSemaines}>
-          {semaines.map((s) =>
+          {semaines.map((s, i) =>
             s.etat === "active" ? (
-              <div key={s.numero} className={`${styles.semaine} ${styles.active}`}>
+              <div key={s.numero} className={`${styles.semaine} ${styles.active} ${m.monte}`} style={{ animationDelay: `${0.39 + i * 0.09}s` }}>
                 <span className={styles.semaineEtiquette}>Cette semaine · {etiquetteActive(s.etiquette)}</span>
                 <span className={styles.titreActive}>{s.titre}</span>
                 <span className={styles.description}>{s.description}</span>
@@ -154,7 +155,11 @@ export default async function MonEspace() {
                 </Link>
               </div>
             ) : (
-              <div key={s.numero} className={`${styles.semaine} ${s.etat === "faite" ? styles.faite : styles.avenir}`}>
+              <div
+                key={s.numero}
+                className={`${styles.semaine} ${s.etat === "faite" ? styles.faite : styles.avenir} ${m.monte}`}
+                style={{ animationDelay: `${0.39 + i * 0.09}s` }}
+              >
                 <span className={styles.pastille} aria-hidden="true">
                   {s.etat === "faite" ? "✓" : ""}
                 </span>
@@ -201,7 +206,7 @@ export default async function MonEspace() {
           <p className={styles.aujourdhuiTexte}>Rien d&apos;obligatoire. Ce que tu notes ici nourrit ton journal et ton chemin.</p>
         </div>
         <div className={styles.grilleJour}>
-          <div className={styles.colonne}>
+          <div className={`${styles.colonne} ${m.monte}`} style={{ animationDelay: "0.75s" }}>
             <Humeur initiale={humeurDuJour?.humeur} noteInitiale={humeurDuJour?.note} />
             {echo ? (
               <Echo
@@ -214,7 +219,7 @@ export default async function MonEspace() {
               />
             ) : null}
           </div>
-          <div className={styles.colonne}>
+          <div className={`${styles.colonne} ${m.monte}`} style={{ animationDelay: "0.84s" }}>
             {qc ? (
               <QuestionCherie
                 semaine={chemin.semaine}

@@ -1,3 +1,5 @@
+import m from "./mouvement.module.css";
+
 /**
  * Le chemin du mois qui se dessine : un tracé en S, un point par étape (huit).
  * Les étapes faites sont pleines, l'étape en cours plus grosse, la suite en pointillé.
@@ -23,12 +25,15 @@ function morceau(t0: number, t1: number): string {
   return pts.map(([x, y], i) => `${i ? "L" : "M"} ${x} ${y}`).join(" ");
 }
 
-export function TraceDuMois({ faites, total = 8, label }: { faites: number; total?: number; label: string }) {
+/** `anime` : le tracé se dessine (1,6 s), puis les points des étapes faites apparaissent l'un après l'autre (brief V0.8). */
+export function TraceDuMois({ faites, total = 8, label, anime = false }: { faites: number; total?: number; label: string; anime?: boolean }) {
   const ts = Array.from({ length: total }, (_, i) => i / (total - 1));
   const tCourant = ts[Math.min(Math.max(faites - 1, 0), total - 1)];
   return (
     <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={label} style={{ display: "block", overflow: "visible", width: "100%", maxWidth: W, height: "auto" }}>
-      {faites > 0 ? <path d={morceau(0, tCourant)} fill="none" stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round" /> : null}
+      {faites > 0 ? (
+        <path d={morceau(0, tCourant)} pathLength={anime ? 1 : undefined} className={anime ? m.trace : undefined} fill="none" stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round" />
+      ) : null}
       {faites < total ? (
         <path d={morceau(tCourant, 1)} fill="none" stroke="#ffffff" strokeWidth="1.8" strokeDasharray="2 6" strokeLinecap="round" opacity=".75" />
       ) : null}
@@ -37,7 +42,15 @@ export function TraceDuMois({ faites, total = 8, label }: { faites: number; tota
         const fait = i < faites;
         const courant = i === faites - 1;
         return fait ? (
-          <circle key={i} cx={x} cy={y} r={courant ? 8 : 5} fill="#ffffff" />
+          <circle
+            key={i}
+            cx={x}
+            cy={y}
+            r={courant ? 8 : 5}
+            fill="#ffffff"
+            className={anime ? (courant ? m.ici : m.pt) : undefined}
+            style={anime ? { animationDelay: `${0.25 + i * 0.22}s` } : undefined}
+          />
         ) : (
           <circle key={i} cx={x} cy={y} r={i === total - 1 ? 6 : 5} fill="none" stroke="#ffffff" strokeWidth="1.8" opacity=".8" />
         );

@@ -85,6 +85,8 @@ export type ExerciceDuChemin = {
   jour: number | null;
   /** Date de fin (AAAA-MM-JJ), quand on la connaît. */
   fin: string | null;
+  /** Exercice sur plusieurs jours : le jour d'aujourd'hui est déjà noté. */
+  aujourdhuiNote: boolean;
 };
 
 /**
@@ -128,8 +130,16 @@ export function exercicesDuChemin(args: {
       total,
       notes: new Set(jours).size,
       jour: total && etat === "en_cours" ? jourEnCours(total, jours, aujourdhui) : null,
+      aujourdhuiNote: jours.includes(aujourdhui),
       fin: etat === "termine" ? (finSecondes ? new Date(finSecondes * 1000).toISOString().slice(0, 10) : (derniere ?? null)) : null,
     });
   }
   return liste;
+}
+
+/** La prochaine action, en clair, sur la carte de l'exercice (brief V0.8). */
+export function prochaineAction(e: Pick<ExerciceDuChemin, "etat" | "total" | "aujourdhuiNote">): string {
+  if (e.etat === "pas_commence") return "Quand tu veux cette semaine.";
+  if (e.total && e.aujourdhuiNote) return "Aujourd'hui, c'est noté. La suite demain.";
+  return "Aujourd'hui : la suite de ton exercice.";
 }

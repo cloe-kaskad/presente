@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import { BarreEspace } from "./BarreEspace";
+import { CitationSiLent } from "./CitationSiLent";
 import styles from "./EnAttente.module.css";
 
 /** Un bloc rose grisé, à la forme de ce qui arrive. */
@@ -11,12 +12,14 @@ type Forme = "chemin" | "journal" | "semaine";
 
 /**
  * Une page qui charge (maquette Attente-page) : la barre du menu reste, et la page montre
- * sa propre structure en attente. Plus de citation ici.
+ * sa propre structure en attente. Si l'attente dure, une citation apparaît.
  */
 export function PageEnAttente({ forme }: { forme: Forme }) {
   return (
     <div className={styles.page}>
       <BarreEspace courante={forme === "journal" ? "journal" : "chemin"} />
+      {/* Si la page tarde, une citation prend le relais du squelette. */}
+      <CitationSiLent />
       <main aria-busy="true" className={styles.corps}>
         <span className="sr-only">La page se charge.</span>
         {forme === "chemin" ? (

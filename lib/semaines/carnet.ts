@@ -2,7 +2,7 @@ import "server-only";
 import type { SupabaseClient } from "@supabase/supabase-js";
 
 export type TypeEntree = "avant" | "carnet" | "mini_questionnaire" | "exercice" | "acte" | "palier";
-export type Retour = "parle" | "moyen" | "pas_maintenant" | "pas_pour_moi";
+export type Retour = "parle" | "pas_mal" | "moyen" | "pas_maintenant" | "pas_pour_moi";
 
 export type Entree = {
   semaine: number;

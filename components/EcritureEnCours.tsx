@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { CITATIONS } from "@/lib/rituel/citations";
 import { BarreEspace } from "./BarreEspace";
 import styles from "./EnAttente.module.css";
 
@@ -13,9 +14,12 @@ const ETAPES = ["On relit ce que tu viens de noter", "On l’écrit avec tes mot
 export function EcritureEnCours({ surtitre, titre }: { surtitre: string; titre: string }) {
   // Les étapes avancent avec le temps : la première tout de suite, la dernière vers huit secondes.
   const [active, setActive] = useState(0);
+  // Une citation pour patienter, choisie à l'ouverture de l'écran.
+  const [citation, setCitation] = useState<(typeof CITATIONS)[number] | null>(null);
   useEffect(() => {
     const t1 = setTimeout(() => setActive(1), 1500);
     const t2 = setTimeout(() => setActive(2), 8000);
+    setCitation(CITATIONS[Math.floor(Math.random() * CITATIONS.length)]);
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
@@ -46,12 +50,14 @@ export function EcritureEnCours({ surtitre, titre }: { surtitre: string; titre: 
           })}
         </ol>
         <span className={styles.aide}>Une dizaine de secondes. Tu peux rester ici.</span>
-        <div className={styles.carteRose} aria-hidden="true">
-          <i className={`${styles.bloc} ${styles.blanc}`} style={{ width: "30%", height: 12 }} />
-          <i className={`${styles.bloc} ${styles.blanc}`} style={{ width: "100%", height: 12 }} />
-          <i className={`${styles.bloc} ${styles.blanc}`} style={{ width: "92%", height: 12 }} />
-          <i className={`${styles.bloc} ${styles.blanc}`} style={{ width: "64%", height: 12 }} />
-        </div>
+        {citation ? (
+          <figure className={styles.citation}>
+            <blockquote>« {citation.texte} »</blockquote>
+            <figcaption>
+              <strong>{citation.autrice}</strong>, {citation.source}
+            </figcaption>
+          </figure>
+        ) : null}
       </main>
     </div>
   );

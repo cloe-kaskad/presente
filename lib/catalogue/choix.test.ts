@@ -239,3 +239,19 @@ describe("ses avis comptent pour la suite", () => {
     expect(choisirContenu(cat(), s1, { ...profil, avis: avis("pas_maintenant") }).contenu?.id).toBe("insaff-2");
   });
 });
+
+describe("« pas mal »", () => {
+  it("rapproche un peu, moins que « ça m'a parlé »", () => {
+    const cat: Catalogue = {
+      contenus: [
+        contenu("a", { auteur: "Autrice A", capacites: ["AR3"], role: "ouvrir", format: "lire" }),
+        contenu("b", { auteur: "Autrice B", capacites: ["AR3"], role: "ouvrir", format: "lire" }),
+      ],
+      pratiques: [],
+    };
+    const avis = (retour: "pas_mal" | "moyen") => [{ retour, auteur: "Autrice B", registre: null, format: null, mot: "" }];
+    expect(choisirContenu(cat, s1, profil).contenu?.id).toBe("a");
+    expect(choisirContenu(cat, s1, { ...profil, avis: avis("pas_mal") }).contenu?.id).toBe("b");
+    expect(choisirContenu(cat, s1, { ...profil, avis: avis("moyen") }).contenu?.id).toBe("a");
+  });
+});

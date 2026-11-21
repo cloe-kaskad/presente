@@ -19,7 +19,7 @@ export type ProfilChoix = {
   avis?: AvisContenu[];
 };
 
-export type RetourId = "parle" | "moyen" | "pas_maintenant" | "pas_pour_moi";
+export type RetourId = "parle" | "pas_mal" | "moyen" | "pas_maintenant" | "pas_pour_moi";
 
 export type AvisContenu = {
   retour: RetourId;
@@ -57,7 +57,7 @@ export function lireLesAvis(avis: AvisContenu[] = []): LectureDesAvis {
   const ajoute = (m: Map<string, number>, cle: string | null, n: number) => {
     if (cle) m.set(cle, (m.get(cle) ?? 0) + n);
   };
-  const POIDS: Record<RetourId, number> = { parle: 2, moyen: -1, pas_maintenant: 0, pas_pour_moi: -6 };
+  const POIDS: Record<RetourId, number> = { parle: 2, pas_mal: 1, moyen: -1, pas_maintenant: 0, pas_pour_moi: -6 };
   for (const a of avis) {
     const auteur = normal(a.auteur).trim();
     ajoute(l.auteurs, auteur, POIDS[a.retour]);

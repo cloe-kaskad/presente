@@ -6,6 +6,7 @@ import { useState, useTransition } from "react";
 import { enregistrerEntree } from "@/app/carnet/actions";
 import { AvecSesMots } from "@/components/AvecSesMots";
 import { ChampCarnet } from "@/components/ChampCarnet";
+import { CitationSiLent } from "@/components/CitationSiLent";
 import { CurseurCarnet } from "@/components/SaisieCarnet";
 import type { Citation } from "@/lib/rituel/citations";
 import { QUESTIONS_ACTE } from "@/lib/semaines/contenu";
@@ -125,6 +126,8 @@ export function Exercice({
 
   return (
     <main className={styles.page}>
+      {/* « Commencer », « J'ai terminé » : si le serveur tarde, une citation pendant l'attente. */}
+      {enCours ? <CitationSiLent delai={400} /> : null}
       <div className={styles.filHaut}>
         <Link href="/chemin" className={styles.retour}>
           ← Mon chemin

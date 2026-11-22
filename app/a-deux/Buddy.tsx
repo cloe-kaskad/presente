@@ -6,7 +6,7 @@ import { useState, useTransition } from "react";
 import { CestNote } from "@/components/CestNote";
 import m from "@/components/mouvement.module.css";
 import { de, type EtatBuddy } from "@/lib/buddy/etat";
-import { CE_QUE_CA_CHANGE, POINTS_BUDDY } from "@/lib/buddy/explication";
+import { POINTS_BUDDY } from "@/lib/buddy/explication";
 import { TEXTES_A_DEUX as T } from "@/lib/buddy/textes";
 import {
   arreterEchange,
@@ -19,6 +19,8 @@ import {
   repondreProposition,
   repondreQuestion,
 } from "./actions";
+import { Attente, Proposition } from "./Duo";
+import duo from "./duo.module.css";
 import styles from "./buddy.module.css";
 
 type Moi = { prenom: string | null; quete: string; presentation: string; montrePrenom: boolean; montreQuete: boolean };
@@ -56,6 +58,10 @@ export function Buddy({
   fin: Fin;
   contactEquipe: string | null;
 }) {
+  const initiale = (moi.prenom ?? "").trim().charAt(0).toUpperCase();
+  // La proposition (et sa phrase) et l'attente ont leur propre mise en page (maquettes Duo).
+  if (etat === "proposee") return <Debut moi={moi} />;
+  if (etat === "recherche") return <Attente initiale={initiale} />;
   return (
     <main className={styles.page}>
       <div className={styles.tete}>
@@ -64,8 +70,6 @@ export function Buddy({
         </Link>
         <span className={styles.surtitre}>{T.titre}</span>
       </div>
-      {etat === "proposee" ? <Debut moi={moi} /> : null}
-      {etat === "recherche" ? <Recherche quete={moi.quete} /> : null}
       {etat === "trouvee" ? <Trouvee /> : null}
       {etat === "acceptee" ? <Rencontre autre={autre} questions={questions} prochaine={prochaine} point={point} fin={fin} contactEquipe={contactEquipe} /> : null}
       {etat === "arretee" ? (
@@ -98,31 +102,31 @@ function Debut({ moi }: { moi: Moi }) {
 
   if (ecran === "explication") {
     return (
-      <section className={`${styles.bloc} ${m.monte}`} aria-labelledby="explication">
-        <h1 id="explication" className={styles.titre}>
-          {T.titre}
-        </h1>
-        <ul className={styles.points}>
-          {POINTS_BUDDY.map((p) => (
-            <li key={p}>{p}</li>
-          ))}
-        </ul>
-        <p className={styles.change}>{CE_QUE_CA_CHANGE}</p>
-        <div className={styles.actions}>
-          <button type="button" className="bouton" onClick={() => setEcran("phrase")}>
-            Ça me tente
-          </button>
-          <form action={repondreProposition.bind(null, false)}>
-            <button type="submit" className={styles.lien}>
-              Pas maintenant
+      <Proposition
+        actions={
+          <>
+            <button type="button" className="bouton" onClick={() => setEcran("phrase")}>
+              Ça me tente
             </button>
-          </form>
-        </div>
-      </section>
+            <form action={repondreProposition.bind(null, false)}>
+              <button type="submit" className={duo.pasMaintenant}>
+                Pas maintenant
+              </button>
+            </form>
+          </>
+        }
+      />
     );
   }
 
   return (
+    <main className={styles.page}>
+    <div className={styles.tete}>
+      <Link href="/chemin" className={styles.retour}>
+        ← Mon chemin
+      </Link>
+      <span className={styles.surtitre}>{T.titre}</span>
+    </div>
     <section className={`${styles.bloc} ${m.monte}`} aria-labelledby="phrase">
       <h1 id="phrase" className={styles.titre}>
         Ce qui t&apos;amène ici, en une phrase.
@@ -160,28 +164,7 @@ function Debut({ moi }: { moi: Moi }) {
       </div>
       {erreur ? <p role="alert">Ce n&apos;est pas enregistré. Réessaie dans un instant.</p> : null}
     </section>
-  );
-}
-
-/** Écran 4 : on ne montre personne tout de suite. */
-function Recherche({ quete }: { quete: string }) {
-  return (
-    <section className={`${styles.bloc} ${m.monte}`} aria-labelledby="recherche">
-      <span className={styles.deuxPoints} aria-hidden="true">
-        <i />
-        <i />
-      </span>
-      <h1 id="recherche" className={styles.titre}>
-        {T.onCherche}
-      </h1>
-      <p className={styles.texte}>
-        Une femme en chemin depuis à peu près aussi longtemps que toi, si possible sur {quete}. On te prévient ici dès qu&apos;on l&apos;a trouvée.
-      </p>
-      <p className={styles.petit}>Phase de test : la recherche est simulée.</p>
-      <Link href="/chemin" className={styles.lien}>
-        Retour à mon chemin
-      </Link>
-    </section>
+    </main>
   );
 }
 

@@ -1,0 +1,336 @@
+/* L'échange à deux, la proposition et l'attente (maquettes Duo-A, D-Duo-A, Duo-attente, D-Duo-attente). */
+.proposition {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100svh - 70px);
+}
+.haut {
+  background: var(--rouge) url(/images/grain.jpg) center / cover no-repeat;
+  padding: 26px var(--gouttiere) 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: var(--blanc);
+}
+.hautTexte {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.titre {
+  margin: 0;
+  font-size: 34px;
+  line-height: 1.06;
+  font-weight: 400;
+  letter-spacing: -0.035em;
+}
+.accroche {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.45;
+}
+.voies,
+.voiesGrand {
+  display: block;
+  overflow: visible;
+  width: 100%;
+  height: auto;
+  margin-top: 6px;
+}
+.voiesGrand {
+  display: none;
+}
+.voie {
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+.bas {
+  flex: 1;
+  padding: 24px var(--gouttiere);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: var(--bordeaux);
+}
+.temps {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.tempsTitre {
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--rouge);
+}
+.tempsTexte {
+  font-size: 15px;
+  line-height: 1.45;
+}
+.plus summary {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--rouge-profond);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+  min-height: var(--cible);
+  display: flex;
+  align-items: center;
+  list-style: none;
+}
+.plus summary::-webkit-details-marker {
+  display: none;
+}
+.plus summary::after {
+  content: " ▾";
+  white-space: pre;
+}
+.plus[open] summary::after {
+  content: " ▴";
+}
+.plus ul {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 15px;
+  line-height: 1.45;
+}
+.boutons {
+  margin-top: auto;
+  padding-top: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+}
+.boutons :global(.bouton) {
+  min-height: 52px;
+  width: 100%;
+}
+.pasMaintenant {
+  background: none;
+  border: 0;
+  width: 100%;
+  padding: 6px 0;
+  min-height: var(--cible);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--rouge-profond);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Les deux boules */
+.boules {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex: none;
+}
+.boule {
+  box-sizing: border-box;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  line-height: 1;
+}
+.pleine {
+  background: var(--blanc);
+  color: var(--rouge);
+}
+.autre {
+  background: var(--rose);
+  color: var(--bordeaux);
+}
+.attend {
+  border: 3px dashed var(--blanc);
+  background: rgba(255, 255, 255, 0.14);
+  animation: respire 1.8s ease-in-out infinite;
+}
+.grand .boule {
+  width: 104px;
+  height: 104px;
+  font-size: 43px;
+}
+.moyen .boule {
+  width: 56px;
+  height: 56px;
+  font-size: 24px;
+}
+.petit {
+  gap: 3px;
+}
+.petit .boule {
+  width: 16px;
+  height: 16px;
+}
+.petit .attend {
+  border-width: 1.5px;
+}
+.flotte {
+  display: block;
+  animation: flotte 3.2s ease-in-out infinite;
+}
+@keyframes flotte {
+  50% {
+    transform: translateY(-7px);
+  }
+}
+@keyframes respire {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* L'attente, plein écran */
+.attente {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  overflow-y: auto;
+  background: var(--rouge) url(/images/grain.jpg) center / cover no-repeat;
+  color: var(--blanc);
+  display: flex;
+  flex-direction: column;
+  padding: 36px var(--gouttiere) 28px;
+  gap: 22px;
+}
+.attenteBoules {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+.attenteTexte {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.attenteTitre {
+  margin: 0;
+  font-size: 34px;
+  line-height: 1.06;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+}
+.attenteMessage {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.45;
+}
+.signe {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 15px;
+  line-height: 1.4;
+}
+.test {
+  font-size: 13px;
+  opacity: 0.85;
+}
+.attenteBouton {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+}
+.attenteBouton :global(.bouton) {
+  min-height: 52px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flotte,
+  .attend {
+    animation: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .proposition {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  }
+  .haut {
+    padding: 72px 72px 64px 96px;
+    gap: 20px;
+    justify-content: space-between;
+  }
+  .hautTexte {
+    gap: 20px;
+  }
+  .titre {
+    font-size: 76px;
+    letter-spacing: -0.045em;
+  }
+  .accroche {
+    font-size: 22px;
+    max-width: 26ch;
+  }
+  .voies {
+    display: none;
+  }
+  .voiesGrand {
+    display: block;
+    max-width: 560px;
+  }
+  .voiesGrand .voie {
+    stroke-width: 3;
+  }
+  .bas {
+    padding: 72px 96px 64px 72px;
+    gap: 30px;
+    justify-content: center;
+  }
+  .tempsTitre {
+    font-size: 24px;
+  }
+  .tempsTexte {
+    font-size: 17px;
+  }
+  .boutons {
+    margin-top: 0;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+  }
+  .boutons :global(.bouton),
+  .pasMaintenant {
+    width: auto;
+  }
+  .attente {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    align-content: center;
+    align-items: start;
+    padding: 72px 144px;
+    gap: 24px 72px;
+  }
+  .attenteBoules {
+    grid-row: 1 / span 2;
+  }
+  .grand .boule {
+    width: 150px;
+    height: 150px;
+    font-size: 63px;
+  }
+  .attenteTitre {
+    font-size: 56px;
+  }
+  .attenteBouton {
+    margin-top: 0;
+    align-items: flex-start;
+  }
+}

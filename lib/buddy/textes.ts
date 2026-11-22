@@ -12,11 +12,16 @@ export const TEXTES_A_DEUX = {
   onCherche_ligne: "On cherche ta copine de voyage",
   onChercheEncore: "On cherche encore ta copine de voyage",
   onATrouve: "On a trouvé ta copine de voyage.",
+  rassure: "On préfère attendre la bonne personne plutôt que t'en présenter une au hasard. Tu n'as rien à faire, on te prévient.",
+  decouvrir: "Découvrir",
+  quandTuVeux: ", quand tu veux.",
+  voir: "Voir",
   nouvelle: "Demander une nouvelle copine de voyage",
   auCercle: "Ta copine de voyage y sera.",
   test: {
     recommencer: "Recommencer l'échange à deux depuis le début",
     trouver: "Trouver ma copine de voyage maintenant",
     fin: "Aller à la fin du chemin à deux",
+    lente: "Simuler : pas encore trouvée après 24 h",
   },
 };

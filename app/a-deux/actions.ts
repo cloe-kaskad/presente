@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { enregistrerEntree } from "@/app/carnet/actions";
 import { chargerChemin } from "@/lib/chemin/donnees";
-import { codeMot, codeReponse } from "@/lib/buddy/etat";
+import { codeMot, codeReponse, etatBuddy } from "@/lib/buddy/etat";
 import { estEquipe } from "@/lib/equipe";
 import { noter } from "@/lib/mesure/noter";
 import { createClient } from "@/lib/supabase/server";
@@ -35,9 +35,13 @@ export async function repondreProposition(oui: boolean): Promise<void> {
   if (oui) {
     redirect("/a-deux");
   }
+  // Depuis le lien « Un bout de chemin à deux, quand tu veux. Voir » : elle a déjà dit « Pas maintenant », on revient sans rien noter.
+  const { chemin } = await session();
+  if (etatBuddy(chemin.progression, chemin.semaine) !== "proposee") redirect("/chemin");
   // La semaine du refus : la proposition revient une seule fois, au début du mois 2.
   const r = await maj((p, semaine) => ({ ...p, buddy_refus: (p.buddy_refus ?? 0) + 1, buddy_test: 0, buddy_refus_semaine: semaine }));
   await noter(r.supabase, "buddy_refusee", { semaine: r.chemin.semaine, pathId: r.chemin.id });
+  redirect("/chemin");
 }
 
 /** Sa phrase (rangée dans son carnet), puis « Chercher ma buddy » : on ne montre personne tout de suite. */
@@ -95,6 +99,13 @@ export async function trouverMaBuddyTest(): Promise<void> {
   const { user } = await session();
   if (!estEquipe(user.email)) return;
   await maj((p) => (p.buddy === 3 ? { ...p, buddy_trouvee: Math.floor(Date.now() / 1000) } : p));
+}
+
+/** Panneau de test : « Simuler : pas encore trouvée après 24 h ». La demande date de deux jours, rien ne se trouve tout seul. */
+export async function rechercheLenteTest(): Promise<void> {
+  const { user } = await session();
+  if (!estEquipe(user.email)) return;
+  await maj((p) => (p.buddy === 3 ? { ...p, buddy_lente: 1, buddy_trouvee: 0, buddy_recherche_le: Math.floor(Date.now() / 1000) - 2 * 86400 } : p));
 }
 
 /** « Un mot pour elle » : une seule ligne (140 caractères au plus), une fois par semaine. Pas de réponse à la réponse. */

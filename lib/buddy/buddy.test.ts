@@ -86,3 +86,30 @@ describe("l'échange sur tout le chemin (V0.11)", () => {
     expect(phraseRetenueParInes(["Un. J'ai demandé la date d'un entretien."])).toBe("J'ai demandé la date d'un entretien.");
   });
 });
+
+import { demandeLe, plusTard, rechercheLongue } from "./etat";
+
+describe("la carte sur Mon chemin (Duo-etats)", () => {
+  // Mardi 17 novembre 2026, 10 h à Paris.
+  const mardi = Date.parse("2026-11-17T09:00:00Z") / 1000;
+  it("dit quand elle a demandé", () => {
+    expect(demandeLe(mardi, mardi + 3600)).toBe("demandé aujourd'hui");
+    expect(demandeLe(mardi, mardi + 86400)).toBe("demandé hier");
+    expect(demandeLe(mardi, mardi + 3 * 86400)).toBe("demandé mardi");
+    expect(demandeLe(mardi, mardi + 10 * 86400)).toBe("demandé le 17 novembre");
+  });
+  it("passe à « On cherche encore » après 24 heures, ou quand le panneau de test le simule", () => {
+    expect(rechercheLongue({ buddy: 3, buddy_recherche_le: mardi }, mardi + 3600)).toBe(false);
+    expect(rechercheLongue({ buddy: 3, buddy_recherche_le: mardi }, mardi + 90000)).toBe(true);
+    expect(rechercheLongue({ buddy: 3, buddy_recherche_le: mardi, buddy_lente: 1 }, mardi + 60)).toBe(true);
+  });
+  it("une recherche simulée lente n'est pas « trouvée » le lendemain", () => {
+    expect(etatBuddy({ buddy: 3, buddy_recherche_le: mardi, buddy_lente: 1 }, 3, mardi + 3 * 86400)).toBe("recherche");
+    expect(etatBuddy({ buddy: 3, buddy_recherche_le: mardi }, 3, mardi + 3 * 86400)).toBe("trouvee");
+  });
+  it("garde la ligne « quand tu veux » après un « Pas maintenant »", () => {
+    expect(plusTard({ buddy_refus: 1 }, "rien")).toBe(true);
+    expect(plusTard({}, "rien")).toBe(false);
+    expect(plusTard({ buddy_refus: 1 }, "proposee")).toBe(false);
+  });
+});

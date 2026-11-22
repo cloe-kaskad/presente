@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { BarreEspace } from "@/components/BarreEspace";
-import { codeMot, codeReponse, etatBuddy, finDuCheminADeux, numeroAccessible, pointDuMois, prochaineQuestionLe } from "@/lib/buddy/etat";
+import { codeMot, codeReponse, etatBuddy, plusTard, finDuCheminADeux, numeroAccessible, pointDuMois, prochaineQuestionLe } from "@/lib/buddy/etat";
 import { dateEnLettres, jourAParis } from "@/lib/rituel/citations";
 import { INES, MENTION_TEST, phraseRetenueParInes } from "@/lib/buddy/profil-test";
 import { QUESTIONS_BUDDY_MOIS, phrasesDe } from "@/lib/buddy/questions";
@@ -27,7 +27,9 @@ export default async function PageBuddy() {
   if (!user) redirect("/connexion");
   const chemin = await chargerChemin(supabase);
   if (!chemin) redirect("/questionnaire");
-  const etat = etatBuddy(chemin.progression, chemin.semaine);
+  const etatReel = etatBuddy(chemin.progression, chemin.semaine);
+  // Après un « Pas maintenant », le lien « Voir » en bas de Mon chemin rouvre la proposition.
+  const etat = plusTard(chemin.progression, etatReel) ? "proposee" : etatReel;
   if (etat === "rien") redirect("/chemin");
 
   const [{ data: profil }, carnet] = await Promise.all([supabase.from("profiles").select("prenom").maybeSingle(), chargerCarnet(supabase)]);

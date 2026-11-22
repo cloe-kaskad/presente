@@ -175,6 +175,32 @@
 .petit .attend {
   border-width: 1.5px;
 }
+.ligne {
+  gap: 2px;
+}
+.ligne .boule {
+  width: 24px;
+  height: 24px;
+}
+.ligne .attend {
+  border-width: 2px;
+}
+.carte {
+  gap: 2px;
+}
+.carte .boule {
+  width: 52px;
+  height: 52px;
+  font-size: 21px;
+}
+.clair .pleine {
+  background: var(--rouge);
+  color: var(--blanc);
+}
+.clair .attend {
+  border-color: var(--bordeaux);
+  background: transparent;
+}
 .flotte {
   display: block;
   animation: flotte 3.2s ease-in-out infinite;
@@ -258,6 +284,14 @@
 }
 
 @media (min-width: 1024px) {
+  .carte {
+    gap: 3px;
+  }
+  .carte .boule {
+    width: 60px;
+    height: 60px;
+    font-size: 25px;
+  }
   .proposition {
     display: grid;
     grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);

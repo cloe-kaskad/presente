@@ -17,7 +17,8 @@ export function etatBuddy(p: Record<string, number>, semaine: number, maintenant
   if (p.buddy === 1) return "acceptee";
   if (p.buddy === 3) {
     // En test, on la « trouve » le lendemain (à la première visite après minuit), ou tout de suite depuis le panneau de test.
-    const lendemain = p.buddy_recherche_le ? jourParis(maintenant) > jourParis(p.buddy_recherche_le) : false;
+    // « Simuler : pas encore trouvée après 24 h » (buddy_lente) : plus de « trouvée » automatique.
+    const lendemain = p.buddy_recherche_le && !p.buddy_lente ? jourParis(maintenant) > jourParis(p.buddy_recherche_le) : false;
     return (p.buddy_trouvee ?? 0) > 0 || lendemain ? "trouvee" : "recherche";
   }
   const refus = p.buddy_refus ?? 0;
@@ -79,3 +80,22 @@ export const finDuCheminADeux = (p: Record<string, number>, douzeRepondue: boole
 
 /** Le code de son « mot pour elle » à la question n, dans son carnet (une ligne, une fois par semaine). */
 export const codeMot = (p: Record<string, number>, n: number) => `${codeReponse(p, n)}m`;
+
+/** La recherche dure depuis plus de 24 heures (ou le panneau de test le simule) : « On cherche encore… ». */
+export const rechercheLongue = (p: Record<string, number>, maintenant = Date.now() / 1000) =>
+  (p.buddy_lente ?? 0) > 0 || (p.buddy_recherche_le ? maintenant - p.buddy_recherche_le > 86400 : false);
+
+/** « demandé aujourd'hui », « demandé hier », « demandé mardi », puis « demandé le 3 novembre ». */
+export function demandeLe(secondes: number | undefined, maintenant = Date.now() / 1000): string {
+  if (!secondes) return "demandé aujourd'hui";
+  const j = (s: number) => Date.parse(`${jourParis(s)}T12:00:00Z`) / 864e5;
+  const ecart = Math.round(j(maintenant) - j(secondes));
+  if (ecart <= 0) return "demandé aujourd'hui";
+  if (ecart === 1) return "demandé hier";
+  const d = new Date(secondes * 1000);
+  if (ecart < 7) return `demandé ${new Intl.DateTimeFormat("fr-FR", { timeZone: "Europe/Paris", weekday: "long" }).format(d)}`;
+  return `demandé le ${new Intl.DateTimeFormat("fr-FR", { timeZone: "Europe/Paris", day: "numeric", month: "long" }).format(d)}`;
+}
+
+/** « Pas maintenant » choisi, et la proposition n'est pas revenue : une ligne tout en bas de Mon chemin. */
+export const plusTard = (p: Record<string, number>, etat: EtatBuddy) => etat === "rien" && (p.buddy_refus ?? 0) > 0;

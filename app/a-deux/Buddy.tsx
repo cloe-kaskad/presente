@@ -177,7 +177,7 @@ function Trouvee() {
       </h1>
       <form action={rencontrer}>
         <button type="submit" className="bouton bouton--blanc">
-          La rencontrer
+          {T.decouvrir}
         </button>
       </form>
     </section>

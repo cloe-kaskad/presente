@@ -78,17 +78,35 @@ export function Proposition({ actions }: { actions: ReactNode }) {
 }
 
 /** Les deux boules : la sienne, pleine, avec son initiale ; l'autre, un anneau en pointillé qui respire (ou pleine, trouvée). */
-export function DeuxBoules({ initiale, autre, taille = "moyen", animer = true }: { initiale: string; autre?: string | null; taille?: "petit" | "moyen" | "grand"; animer?: boolean }) {
+export function DeuxBoules({
+  initiale,
+  autre,
+  taille = "moyen",
+  animer = true,
+  flotter = animer,
+  clair = false,
+}: {
+  initiale: string;
+  autre?: string | null;
+  taille?: "petit" | "ligne" | "carte" | "moyen" | "grand";
+  animer?: boolean;
+  flotter?: boolean;
+  /** Sur fond blanc (la ligne « On cherche… » de Mon chemin) : sa boule rouge, l'anneau bordeaux. */
+  clair?: boolean;
+}) {
+  const sansInitiale = taille === "petit" || taille === "ligne";
   return (
-    <span className={`${styles.boules} ${styles[taille]}`} role="img" aria-label={autre ? "Toi, et elle" : "Toi, et une place qui attend"}>
-      <span className={animer ? styles.flotte : undefined}>
+    <span className={`${styles.boules} ${styles[taille]} ${clair ? styles.clair : ""}`} role="img" aria-label={autre ? "Toi et elle" : "Toi, et une place qui attend"}>
+      <span className={flotter ? styles.flotte : undefined}>
         <span className={`${styles.boule} ${styles.pleine} ${animer ? m.pt : ""}`} style={{ animationDelay: "0.2s" }}>
-          {taille === "petit" ? "" : initiale}
+          {sansInitiale ? "" : initiale}
         </span>
       </span>
-      <span className={animer ? styles.flotte : undefined} style={{ animationDelay: "-1.6s" }}>
+      <span className={flotter ? styles.flotte : undefined} style={{ animationDelay: "-1.6s" }}>
         {autre ? (
-          <span className={`${styles.boule} ${styles.pleine} ${styles.autre}`}>{taille === "petit" ? "" : autre}</span>
+          <span className={`${styles.boule} ${styles.pleine} ${styles.autre} ${animer ? m.pt : ""}`} style={{ animationDelay: "0.55s" }}>
+            {sansInitiale ? "" : autre}
+          </span>
         ) : (
           <span className={`${styles.boule} ${styles.attend} ${animer ? m.pt : ""}`} style={{ animationDelay: "0.9s" }} />
         )}

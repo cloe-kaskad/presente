@@ -1,9 +1,12 @@
 import Link from "next/link";
-import { allerALaFinTest, interesseeParLeCercle, proposerBuddyTest, rencontrer, repondreProposition, trouverMaBuddyTest } from "@/app/a-deux/actions";
+import { allerALaFinTest, interesseeParLeCercle, proposerBuddyTest, rechercheLenteTest, rencontrer, repondreProposition, trouverMaBuddyTest } from "@/app/a-deux/actions";
 import { CestNote } from "@/components/CestNote";
 import { TEXTES_A_DEUX as T } from "@/lib/buddy/textes";
 import { MODE_TEST } from "@/lib/mode-test";
-import { codeReponse, etatBuddy, finDuCheminADeux } from "@/lib/buddy/etat";
+import { codeReponse, demandeLe, etatBuddy, finDuCheminADeux, plusTard, rechercheLongue } from "@/lib/buddy/etat";
+import { INES } from "@/lib/buddy/profil-test";
+import { DeuxBoules } from "@/app/a-deux/Duo";
+import { prenomAffiche } from "@/lib/chemin/textes";
 import { estEquipe } from "@/lib/equipe";
 import { surpriseArrivee, surpriseOuverte } from "@/lib/surprise/quand";
 import { declencherSurprise, ouvrirLaSuite, revenirAuStadeReel } from "./actions";
@@ -148,6 +151,9 @@ export default async function MonEspace() {
     buddy === "acceptee" &&
     chemin.progression.buddy_fin === undefined &&
     finDuCheminADeux(chemin.progression, carnet.some((e) => e.code === codeReponse(chemin.progression, 12) && e.reponse.trim()));
+  // La carte de l'échange à deux (maquettes Duo-etats) : son initiale, et celle de l'autre une fois trouvée.
+  const initiale = (prenomAffiche(profil?.prenom) ?? "").trim().charAt(0).toUpperCase();
+  const joursInes = Math.max(1, Math.round((Date.now() - Date.parse(`${String(chemin.dateDebut).slice(0, 10)}T12:00:00Z`)) / 864e5) + 1);
   const surprise = surpriseOuverte(chemin.progression) ? "ouverte" : surpriseArrivee(chemin.progression, chemin.dateDebut) ? "arrivee" : null;
   const sousTitre = cette.etiquette.replace(/^Semaine \d · /, "");
   const autresMois = [0, 1, 2].filter((m) => m > mois);
@@ -155,6 +161,38 @@ export default async function MonEspace() {
   return (
     <div className={styles.page}>
       <BarreEspace courante="chemin" />
+
+      {/* L'échange à deux, en haut (maquettes Duo-etats) : la recherche en une ligne qui ne pousse rien, puis la carte « trouvée » */}
+      {buddy === "recherche" ? (
+        <div className={styles.duoLigne} role="status">
+          <DeuxBoules initiale={initiale} taille="ligne" clair flotter={false} />
+          <div className={styles.duoLigneTexte}>
+            <span>
+              <strong>{rechercheLongue(chemin.progression) ? T.onChercheEncore : T.onCherche_ligne}</strong> · {demandeLe(chemin.progression.buddy_recherche_le)}
+            </span>
+            {rechercheLongue(chemin.progression) ? <span>{T.rassure}</span> : null}
+          </div>
+        </div>
+      ) : buddy === "trouvee" ? (
+        <section className={`${styles.duoTrouvee} ${m.monte}`} aria-labelledby="duo-trouvee">
+          <div className={styles.duoTrouveeTexte}>
+            <h2 id="duo-trouvee" className={styles.duoTrouveeTitre}>
+              {T.onATrouve}
+            </h2>
+            <p>
+              {INES.prenom}, en chemin depuis {joursInes} jours, sur {QUETE[quete].nom}. Votre première question vous attend.
+            </p>
+          </div>
+          <div className={styles.duoTrouveeBas}>
+            <form action={rencontrer}>
+              <button type="submit" className="bouton bouton--blanc">
+                {T.decouvrir}
+              </button>
+            </form>
+            <DeuxBoules initiale={initiale} autre={INES.prenom.charAt(0)} taille="carte" flotter={false} />
+          </div>
+        </section>
+      ) : null}
 
       {/* Le bandeau : la date, la citation du jour, le chemin du mois qui se dessine */}
       <section className={styles.bandeau}>
@@ -210,19 +248,6 @@ export default async function MonEspace() {
               </button>
             </form>
           </div>
-        </section>
-      ) : buddy === "recherche" ? (
-        <p className={styles.attenteBuddy}>{T.onCherche}</p>
-      ) : buddy === "trouvee" ? (
-        <section className={`${styles.surprise} ${m.monte}`} style={{ animationDelay: "0.35s" }} aria-labelledby="buddy-trouvee">
-          <h2 id="buddy-trouvee" className={styles.surpriseTitre}>
-            {T.onATrouve}
-          </h2>
-          <form action={rencontrer}>
-            <button type="submit" className="bouton bouton--blanc">
-              La rencontrer
-            </button>
-          </form>
         </section>
       ) : buddy === "acceptee" ? (
         <p className={styles.maSurprise}>
@@ -332,6 +357,17 @@ export default async function MonEspace() {
         ) : null}
       </section>
 
+      {/* « Pas maintenant » choisi : une ligne tout en bas, toujours là (maquette Duo-etats) */}
+      {plusTard(chemin.progression, buddy) ? (
+        <div className={styles.duoPlusTard}>
+          <span>
+            <strong>{T.titre}</strong>
+            {T.quandTuVeux}
+          </span>
+          <Link href="/a-deux">{T.voir}</Link>
+        </div>
+      ) : null}
+
       {/* Le panneau de test : l'équipe seulement (EQUIPE_EMAILS), invisible pour toute autre personne */}
       {equipe ? (
         <details className={styles.modeTest}>
@@ -354,6 +390,11 @@ export default async function MonEspace() {
             {buddy === "recherche" ? (
               <form action={trouverMaBuddyTest}>
                 <button type="submit">{T.test.trouver}</button>
+              </form>
+            ) : null}
+            {buddy === "recherche" && !chemin.progression.buddy_lente ? (
+              <form action={rechercheLenteTest}>
+                <button type="submit">{T.test.lente}</button>
               </form>
             ) : null}
             <form action={revenirAuStadeReel}>

@@ -786,3 +786,123 @@
     padding: 32px 40px;
   }
 }
+
+/* L'échange à deux sur Mon chemin (maquettes Duo-etats) */
+.duoLigne {
+  margin: 16px var(--gouttiere) 20px;
+  border: 1.5px solid var(--rose);
+  border-radius: 18px;
+  padding: 14px 16px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  background: var(--blanc);
+  color: var(--bordeaux);
+}
+.duoLigne > [role="img"] {
+  margin-top: -1px;
+}
+.duoLigneTexte {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 15px;
+  line-height: 1.4;
+}
+.duoLigneTexte span + span {
+  font-size: 14px;
+  line-height: 1.5;
+}
+.duoLigneTexte strong {
+  font-weight: 600;
+}
+.duoTrouvee {
+  margin: 20px var(--gouttiere) 24px;
+  background: var(--rouge) url(/images/grain.jpg) center / cover no-repeat;
+  border-radius: 24px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: var(--blanc);
+}
+.duoTrouveeTexte {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.duoTrouveeTexte p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.45;
+}
+.duoTrouveeTitre {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1.06;
+  font-weight: 400;
+  letter-spacing: -0.035em;
+}
+.duoTrouveeBas {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.duoTrouveeBas :global(.bouton) {
+  min-height: 52px;
+  white-space: nowrap;
+}
+.duoPlusTard {
+  margin: 40px var(--gouttiere) 0;
+  border-top: 1.5px solid var(--rose);
+  padding-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--bordeaux);
+}
+.duoPlusTard strong {
+  font-weight: 600;
+}
+.duoPlusTard a {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--rouge-profond);
+  white-space: nowrap;
+  min-height: var(--cible);
+  display: inline-flex;
+  align-items: center;
+}
+@media (min-width: 1024px) {
+  .duoLigne,
+  .duoPlusTard {
+    margin-left: 96px;
+    margin-right: 96px;
+  }
+  .duoLigne {
+    margin-top: 24px;
+    margin-bottom: 32px;
+  }
+  .duoTrouvee {
+    margin: 32px 96px 40px;
+    padding: 30px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+  }
+  .duoTrouveeTitre {
+    font-size: 36px;
+  }
+  .duoTrouveeTexte p {
+    font-size: 18px;
+  }
+  .duoTrouveeBas {
+    flex-direction: row-reverse;
+    flex: none;
+  }
+}

@@ -1,4 +1,5 @@
 import "server-only";
+import { noter } from "@/lib/mesure/noter";
 import { notFound, redirect } from "next/navigation";
 import { racinesAEviter, toucheSujet } from "@/lib/catalogue/filtres";
 import { choixDuMois, profilDeChoix, retoursDuCarnet } from "@/lib/catalogue/semaines";
@@ -39,6 +40,7 @@ export async function contexteSemaine(n: number) {
   await suivreLeCalendrier(supabase, chemin);
   if (n > chemin.semaine) redirect("/chemin"); // pas encore arrivée
   await noterDebut(supabase, chemin, n);
+  await noter(supabase, "semaine_ouverte", { semaine: n, pathId: chemin.id, unique: true });
 
   const [{ data: profil }, reponses, carnet, textesCarte] = await Promise.all([
     supabase.from("profiles").select("*").maybeSingle(),

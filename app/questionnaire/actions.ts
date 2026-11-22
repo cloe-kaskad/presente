@@ -1,5 +1,6 @@
 "use server";
 
+import { noter } from "@/lib/mesure/noter";
 import { redirect } from "next/navigation";
 import { calculerChemin } from "@/lib/chemin/calcul";
 import { chargerChemin } from "@/lib/chemin/donnees";
@@ -45,6 +46,7 @@ export async function enregistrerPartie(
     return { ok: false, erreur: "sauvegarde impossible" };
   }
 
+  if (partie === 1) await noter(supabase, "questionnaire_commence", { unique: true });
   const profil: Record<string, unknown> = {};
   if (etape && ETAPE_RE.test(etape)) profil.questionnaire_etape = etape;
   if (partie === 5) {
@@ -99,6 +101,7 @@ export async function tracerMonChemin(): Promise<ResultatEnregistrement> {
     .from("profiles")
     .update({ questionnaire_termine_le: new Date().toISOString(), questionnaire_etape: "fin" })
     .eq("id", user.id);
+  await noter(supabase, "questionnaire_termine", { unique: true });
 
   redirect("/carte/trace");
 }

@@ -1,4 +1,5 @@
 import type { Article as ArticleDuJour } from "@/lib/rituel/airtable";
+import { LienSuivi } from "@/components/LienSuivi";
 import styles from "./espace.module.css";
 
 /** À lire aujourd'hui : l'article validé du jour, avec « Notre regard ». */
@@ -13,9 +14,9 @@ export function Article({ article }: { article: ArticleDuJour }) {
           {article.titre}
         </span>
         {article.regard ? <span className={styles.articleRegard}>{article.regard}</span> : null}
-        <a href={article.lien} target="_blank" rel="noopener noreferrer" className={styles.articleLien}>
+        <LienSuivi href={article.lien} className={styles.articleLien} type="article_ouvert">
           Lire l&apos;article<span className="sr-only"> (s&apos;ouvre dans un nouvel onglet)</span>
-        </a>
+        </LienSuivi>
       </div>
     </section>
   );

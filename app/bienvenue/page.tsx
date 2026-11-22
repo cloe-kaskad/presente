@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import { noter } from "@/lib/mesure/noter";
 import { chargerChemin, espaceOuvert, ouvrirEspace } from "@/lib/chemin/donnees";
 import { createClient } from "@/lib/supabase/server";
 import { Bienvenue } from "./Bienvenue";
@@ -20,5 +21,6 @@ export default async function Page() {
   // L'écran de passage ne se voit qu'une fois : ensuite, on va droit à son espace.
   if (espaceOuvert(chemin)) redirect("/chemin");
   await ouvrirEspace(supabase, chemin);
+  await noter(supabase, "chemin_commence", { pathId: chemin.id, unique: true });
   return <Bienvenue />;
 }

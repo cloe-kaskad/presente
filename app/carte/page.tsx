@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { noter } from "@/lib/mesure/noter";
 import { redirect } from "next/navigation";
 import { AvecSesMots } from "@/components/AvecSesMots";
 import { BarreEspace } from "@/components/BarreEspace";
@@ -80,6 +81,7 @@ export default async function Carte({ searchParams }: { searchParams: Promise<{ 
   // sauf si les textes n'existent pas du tout.
   const dansLEspace = espaceOuvert(chemin);
   if ((!carteEcrite(textes, chemin) || (syntheseDeSecoursEnregistree && !dansLEspace)) && !secours) redirect("/carte/trace");
+  await noter(supabase, "carte_vue", { pathId: chemin.id, unique: true });
 
   const prenom = prenomAffiche(profil?.prenom);
   const synthese = lireSynthese(textes) ?? syntheseDeSecours(chemin.quetes);

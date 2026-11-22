@@ -46,6 +46,12 @@ export default function Confidentialite() {
           on te montre des numéros d&apos;aide plutôt que la suite du chemin.
         </p>
 
+        <h2>Ce qu&apos;on compte</h2>
+        <p>
+          Nous comptons les étapes franchies (jamais ce que tu écris) pour améliorer le parcours. Par exemple : une semaine
+          ouverte, un podcast écouté, un exercice terminé. Ces chiffres ne sont lus qu&apos;en totaux, jamais par personne.
+        </p>
+
         <h2>Où elles sont stockées</h2>
         <p>
           Dans une base de données Supabase, hébergée dans l&apos;Union européenne. Le site tourne sur

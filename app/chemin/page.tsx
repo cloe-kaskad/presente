@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { noter } from "@/lib/mesure/noter";
 import { redirect } from "next/navigation";
 import { BarreEspace } from "@/components/BarreEspace";
 import { TraceDuMois } from "@/components/TraceDuMois";
@@ -44,6 +45,8 @@ export default async function MonEspace() {
   const chemin = await chargerChemin(supabase);
   if (!chemin) redirect("/questionnaire");
   await suivreLeCalendrier(supabase, chemin);
+  // Une visite par jour au plus (la base refuse le doublon).
+  await noter(supabase, "visite", { pathId: chemin.id, semaine: chemin.semaine });
 
   const aujourdhui = jourAParis();
   const [{ data: profil }, reponses, textesCarte, humeurs] = await Promise.all([

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { marquerEcoute } from "@/app/semaine/actions";
+import { marquerEcoute, noterDepuisLeNavigateur } from "@/app/semaine/actions";
 import { dateEnLettres, jourAParis } from "@/lib/rituel/citations";
 import { motsEcoute } from "@/lib/semaines/ecoute";
 import styles from "./JaiEcoute.module.css";
@@ -48,7 +48,7 @@ export function JaiEcoute({
 
   const lienContenu = (texte: string, classe: string) =>
     lien ? (
-      <a href={lien} target="_blank" rel="noopener noreferrer" className={classe}>
+      <a href={lien} target="_blank" rel="noopener noreferrer" className={classe} onClick={() => void noterDepuisLeNavigateur("contenu_ouvert", n).catch(() => null)}>
         {texte}
         <span className="sr-only"> (s&apos;ouvre dans un nouvel onglet)</span>
       </a>

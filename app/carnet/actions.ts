@@ -1,5 +1,6 @@
 "use server";
 
+import { noter } from "@/lib/mesure/noter";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { chargerChemin } from "@/lib/chemin/donnees";
@@ -50,5 +51,21 @@ export async function enregistrerEntree(e: EntreeAEnregistrer): Promise<{ ok: bo
     console.error("[carnet] sauvegarde impossible :", error.code);
     return { ok: false };
   }
+  await noterEtape(supabase, lu.data, chemin.id);
   return { ok: true };
+}
+
+/** L'étape franchie, déduite du code de la question. Jamais le texte écrit. */
+async function noterEtape(
+  supabase: Awaited<ReturnType<typeof createClient>>,
+  e: { semaine: number; code: string; reponse: string; retour?: string | null },
+  pathId: string,
+) {
+  const base = { semaine: e.semaine, pathId };
+  if (e.retour) return noter(supabase, "avis_donne", { ...base, cle: e.retour });
+  if (!e.reponse.trim()) return;
+  if (e.code.startsWith("qc:")) return noter(supabase, "question_cherie_repondue", { ...base, unique: true, cle: e.code.slice(3) });
+  if (e.code.startsWith("echo:")) return noter(supabase, "echo_repondu", { ...base, unique: true, cle: e.code.slice(5) });
+  if (/^s\d+:carnet:/.test(e.code)) return noter(supabase, "carnet_ecrit", { ...base, unique: true });
+  if (/^s\d+:exo:jour:/.test(e.code)) return noter(supabase, "exercice_jour_note", { ...base, unique: true, cle: e.code.split(":").pop() });
 }

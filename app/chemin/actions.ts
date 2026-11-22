@@ -1,5 +1,6 @@
 "use server";
 
+import { noter } from "@/lib/mesure/noter";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { chargerChemin } from "@/lib/chemin/donnees";
@@ -43,6 +44,7 @@ export async function noterHumeur(humeur: string, note: string): Promise<{ ok: b
       return { ok: false };
     }
   }
+  await noter(supabase, "humeur_notee", { unique: true, cle: jour });
   revalidatePath("/chemin");
   revalidatePath("/journal");
   return { ok: true };

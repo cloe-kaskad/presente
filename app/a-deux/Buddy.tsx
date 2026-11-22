@@ -203,7 +203,9 @@ function Rencontre({
   const [enCours, demarrer] = useTransition();
   const [confirmer, setConfirmer] = useState(false);
   const actuelle = questions[questions.length - 1];
-  const passees = questions.slice(0, -1).reverse();
+  // À la fin du chemin à deux, la carte de fin prend la place de la question : la douzième rejoint les semaines d'avant.
+  // Seulement les semaines où elle a répondu (une semaine sautée n'a rien à relire).
+  const passees = (fin ? questions : questions.slice(0, -1)).filter((q) => q.maReponse).reverse();
 
   return (
     <>

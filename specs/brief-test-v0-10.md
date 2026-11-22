@@ -1,4 +1,4 @@
-# Brief Claude Code V0.10 : mesurer l'engagement, la surprise « comme si », la buddy de test, la façon de pratiquer, les audios guidés
+# Brief Claude Code V0.10 : mesurer l'engagement, la surprise « comme si », la buddy de test, la variété des pratiques, les audios guidés
 
 Cinq demandes de Cloé pour la phase de test (elle seule pour l'instant, Stéphanie ensuite). La première est la plus importante pour elle : à faire en premier, même avec deux testeuses.
 
@@ -79,15 +79,13 @@ But : essayer le parcours de mise en relation avant d'avoir de vraies promotions
 - Ses réponses s'affichent dès que la testeuse a répondu.
 - Questions de la semaine et textes d'Inès : mettre des textes provisoires sobres, Cloé les réécrira.
 
-## 4. « Comment tu aimes pratiquer ? »
+## 4. Varier les façons de pratiquer
 
-But : choisir les exercices d'après ce qu'elle aime faire, pas seulement d'après la quête. Celle qui n'aime pas écrire ne doit pas recevoir trois exercices d'écriture de suite.
+Décision de Cloé : on ne demande pas à l'utilisatrice comment elle aime pratiquer. Le parcours doit lui faire découvrir plusieurs façons (écrire, bouger, créer, rester en silence, parler à voix haute).
 
-- **Dans le questionnaire**, partie 5, un nouvel écran `p5:pratiquer` juste après `p5:formats` (« Comment apprends-tu le mieux ? »). Question : « Et pour passer à la pratique, tu préfères ? ». Aide : « Deux choix au plus. » Choix : « Écrire », « Bouger », « Créer avec mes mains », « Rester en silence », « Parler à voix haute ». Aucun choix n'est obligatoire : elle peut passer.
-- **Dans le choix des exercices** : à quête et moment égaux (Ouvrir, Agir), préférer une pratique dont la façon de faire correspond à un de ses choix. C'est une préférence, pas un filtre : si aucune pratique ne correspond, on prend la meilleure comme aujourd'hui. Ne pas proposer deux semaines de suite la même façon de faire si une autre pratique convient.
-- **Pour classer les pratiques** : s'appuyer sur le champ « Format » de la table P! Pratiques (`fldJCpf9NUqxVjII9`). Si ses valeurs ne permettent pas de ranger chaque pratique dans une des cinq façons, le dire à Cloé : Claude (côté design) ajoutera un champ dédié dans Airtable. Ne rien écrire dans Airtable depuis le site.
-- **Pour les comptes qui ont déjà rempli le questionnaire** (Cloé) : poser la question une seule fois, dans une petite carte sur Mon chemin (« Une question de plus pour mieux choisir tes exercices »), qui disparaît une fois la réponse donnée ou la carte fermée.
-- Événement à noter : `pratiquer_choisi` (sans le contenu du choix).
+- Aucune question à ajouter au questionnaire.
+- Dans le choix des exercices : à quête et moment égaux (Ouvrir, Agir), éviter de proposer deux fois de suite la même façon de faire quand une autre pratique convient. S'appuyer sur le champ « Format » de la table P! Pratiques (`fldJCpf9NUqxVjII9`).
+- On apprendra ce qui marche par les avis et la mesure de l'engagement (point 1), pas par une préférence déclarée.
 
 ## 5. Les audios guidés
 
@@ -108,5 +106,5 @@ Pour que Cloé et Stéphanie n'attendent pas dix ou quatorze jours : sur Mon che
 1. La mesure de l'engagement et la page de l'équipe.
 2. Le panneau de test et la surprise.
 3. La buddy de test.
-4. La question « Comment tu aimes pratiquer ? ».
+4. La variété des façons de pratiquer.
 5. Le lecteur des audios guidés.

@@ -759,3 +759,30 @@
     margin-right: 96px;
   }
 }
+
+/* Le cercle de parole, « comme si » (V0.11) */
+.cercle {
+  margin: 28px var(--gouttiere) 0;
+  border: 1.5px dashed var(--rose);
+  border-radius: 24px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  color: var(--bordeaux);
+}
+.cercleTest {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--blanc);
+  background: var(--rouge-profond);
+  border-radius: 999px;
+  padding: 3px 10px;
+}
+@media (min-width: 1024px) {
+  .cercle {
+    margin: 48px 96px 0;
+    padding: 32px 40px;
+  }
+}

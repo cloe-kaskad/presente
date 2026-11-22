@@ -1,9 +1,10 @@
 import { redirect } from "next/navigation";
 import { BarreEspace } from "@/components/BarreEspace";
-import { codeReponse, debutEchange, etatBuddy, numeroDeQuestion, prochaineQuestionLe } from "@/lib/buddy/etat";
+import { codeMot, codeReponse, etatBuddy, finDuCheminADeux, numeroAccessible, pointDuMois, prochaineQuestionLe } from "@/lib/buddy/etat";
 import { dateEnLettres, jourAParis } from "@/lib/rituel/citations";
-import { INES, MENTION_TEST } from "@/lib/buddy/profil-test";
-import { QUESTIONS_BUDDY } from "@/lib/buddy/questions";
+import { INES, MENTION_TEST, phraseRetenueParInes } from "@/lib/buddy/profil-test";
+import { QUESTIONS_BUDDY_MOIS, phrasesDe } from "@/lib/buddy/questions";
+import { parseAllowedEmails } from "@/lib/allowed-emails";
 import { chargerChemin } from "@/lib/chemin/donnees";
 import { prenomAffiche } from "@/lib/chemin/textes";
 import { QUETE } from "@/lib/questionnaire/contenu";
@@ -37,9 +38,43 @@ export default async function PageBuddy() {
   // Inès se cale sur la testeuse : en chemin depuis à peu près aussi longtemps (un jour de plus).
   const joursInes = Math.max(1, Math.round((Date.now() - Date.parse(`${String(chemin.dateDebut).slice(0, 10)}T12:00:00Z`)) / 864e5) + 1);
   if (etat === "proposee") await noter(supabase, "buddy_explication_vue", { semaine: chemin.semaine, pathId: chemin.id, unique: true });
-  const numero = numeroDeQuestion(debutEchange(chemin.progression), Date.now() / 1000, QUESTIONS_BUDDY.length);
+  const p = chemin.progression;
+  const numero = numeroAccessible(p);
+  const maReponse = (n: number) => ecrit(codeReponse(p, n));
+  // La réponse d'Inès, une fois la sienne donnée (le serveur ne l'envoie pas avant). Aux questions « quelle phrase
+  // t'est restée ? », elle reprend une phrase de ce que la testeuse a écrit ce mois-ci.
+  const reponseInes = (n: number) => {
+    if (!maReponse(n)) return null;
+    const q = QUESTIONS_BUDDY_MOIS[n - 1];
+    if (!q.phrase) return INES.reponses[n - 1] ?? null;
+    const sesMots = [n - 3, n - 2, n - 1].map(maReponse).filter(Boolean);
+    const retenue = phraseRetenueParInes(sesMots);
+    return retenue ? `« ${retenue} » ${INES.reponses[n - 1]}` : INES.reponses[n - 1];
+  };
+  const questions = QUESTIONS_BUDDY_MOIS.slice(0, numero).map((q, i) => {
+    const n = i + 1;
+    // Pour la question « quelle phrase t'est restée ? » : les phrases d'Inès ce mois-ci, à toucher.
+    const phrasesInes = q.phrase ? [n - 3, n - 2, n - 1].flatMap((k) => (maReponse(k) ? phrasesDe(INES.reponses[k - 1] ?? "") : [])) : [];
+    return {
+      numero: n,
+      mois: q.mois,
+      texte: q.texte,
+      phrase: Boolean(q.phrase),
+      phrasesAutre: phrasesInes,
+      maReponse: maReponse(n),
+      saReponse: reponseInes(n),
+      monMot: ecrit(codeMot(p, n)),
+      sonMot: maReponse(n) && n % 2 === 0 ? (INES.mots[n] ?? null) : null,
+    };
+  });
+  const derniere = questions[questions.length - 1];
   // « Prochaine question lundi 30 novembre. » : 7 jours après le début de la question en cours.
-  const suivante = numero < QUESTIONS_BUDDY.length ? dateEnLettres(jourAParis(new Date(prochaineQuestionLe(chemin.progression, numero) * 1000))) : null;
+  const point = pointDuMois(p, numero, Boolean(derniere?.maReponse));
+  const bloquee = (numero === 4 && p.buddy_suite_m1 !== 1) || (numero === 8 && p.buddy_suite_m2 !== 1);
+  const suivante = numero < 12 && !bloquee ? dateEnLettres(jourAParis(new Date(prochaineQuestionLe(p, numero) * 1000))) : null;
+  const fin = finDuCheminADeux(p, Boolean(maReponse(12))) ? (p.buddy_fin === 1 ? "oui" : p.buddy_fin === 2 ? "non" : "question") : null;
+  // « Quelque chose me gêne » : un message à l'équipe (la première adresse de EQUIPE_EMAILS).
+  const contactEquipe = [...parseAllowedEmails(process.env.EQUIPE_EMAILS)][0] ?? null;
 
   return (
     <>
@@ -55,13 +90,10 @@ export default async function PageBuddy() {
         }}
         autre={{ prenom: INES.prenom, quete, presentation: INES.presentation, mention: MENTION_TEST, jours: joursInes }}
         prochaine={suivante ? suivante.charAt(0).toLowerCase() + suivante.slice(1) : null}
-        questions={QUESTIONS_BUDDY.slice(0, numero).map((q, i) => ({
-          numero: i + 1,
-          texte: q,
-          maReponse: ecrit(codeReponse(chemin.progression, i + 1)),
-          // La réponse de l'autre ne s'affiche que quand elle a elle-même répondu (le serveur ne l'envoie pas avant).
-          saReponse: ecrit(codeReponse(chemin.progression, i + 1)) ? (INES.reponses[i] ?? null) : null,
-        }))}
+        questions={questions}
+        point={point}
+        fin={fin}
+        contactEquipe={contactEquipe}
       />
     </>
   );

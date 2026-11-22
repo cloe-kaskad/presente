@@ -54,3 +54,28 @@ export const de = (prenom: string) => (voyelle(prenom) ? `d'${prenom}` : `de ${p
  * a son numéro, pour repartir d'une page blanche ; le premier garde les codes d'origine (« buddy:q1 »).
  */
 export const codeReponse = (p: Record<string, number>, n: number) => ((p.buddy_echange ?? 0) > 0 ? `buddy:e${p.buddy_echange}q${n}` : `buddy:q${n}`);
+
+/**
+ * La question où elle en est, sur les douze : une par semaine depuis la rencontre, mais on ne passe au mois suivant
+ * que si elle a dit « Oui, on continue » au point de fin de mois (buddy_suite_m1, buddy_suite_m2).
+ */
+export function numeroAccessible(p: Record<string, number>, maintenant = Date.now() / 1000): number {
+  let n = numeroDeQuestion(debutEchange(p), maintenant, 12);
+  if (n > 4 && p.buddy_suite_m1 !== 1) n = 4;
+  if (n > 8 && p.buddy_suite_m2 !== 1) n = 8;
+  return n;
+}
+
+/** Le point de fin de mois à proposer (1 ou 2), une fois la quatrième question du mois répondue. Sinon null. */
+export function pointDuMois(p: Record<string, number>, numero: number, aRepondu: boolean): 1 | 2 | null {
+  if (!aRepondu) return null;
+  if (numero === 4 && p.buddy_suite_m1 === undefined) return 1;
+  if (numero === 8 && p.buddy_suite_m2 === undefined) return 2;
+  return null;
+}
+
+/** La fin du chemin à deux : la douzième question répondue, ou le panneau de test. */
+export const finDuCheminADeux = (p: Record<string, number>, douzeRepondue: boolean) => douzeRepondue || (p.buddy_fin_test ?? 0) > 0;
+
+/** Le code de son « mot pour elle » à la question n, dans son carnet (une ligne, une fois par semaine). */
+export const codeMot = (p: Record<string, number>, n: number) => `${codeReponse(p, n)}m`;

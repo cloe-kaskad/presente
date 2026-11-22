@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { enregistrerEntree } from "@/app/carnet/actions";
 import { chargerChemin } from "@/lib/chemin/donnees";
-import { codeReponse } from "@/lib/buddy/etat";
+import { codeMot, codeReponse } from "@/lib/buddy/etat";
 import { estEquipe } from "@/lib/equipe";
 import { noter } from "@/lib/mesure/noter";
 import { createClient } from "@/lib/supabase/server";
@@ -95,4 +95,58 @@ export async function trouverMaBuddyTest(): Promise<void> {
   const { user } = await session();
   if (!estEquipe(user.email)) return;
   await maj((p) => (p.buddy === 3 ? { ...p, buddy_trouvee: Math.floor(Date.now() / 1000) } : p));
+}
+
+/** « Un mot pour elle » : une seule ligne (140 caractères au plus), une fois par semaine. Pas de réponse à la réponse. */
+export async function laisserUnMot(numero: number, mot: string): Promise<{ ok: boolean }> {
+  if (!Number.isInteger(numero) || numero < 2 || numero > 12) return { ok: false };
+  const texte = mot.trim().replace(/\s+/g, " ").slice(0, 140);
+  if (!texte) return { ok: false };
+  const { chemin } = await session();
+  const r = await enregistrerEntree({ semaine: chemin.semaine, type: "carnet", code: codeMot(chemin.progression, numero), question: "Un mot pour elle", reponse: texte });
+  revalidatePath("/buddy");
+  return r;
+}
+
+/** Le point de fin de mois : « Oui, on continue » ou « On s'arrête là ». Chacune répond de son côté (en test, Inès dit oui). */
+export async function continuerLeMois(mois: 1 | 2, oui: boolean): Promise<void> {
+  if (mois !== 1 && mois !== 2) return;
+  await maj((p) => (oui ? { ...p, [`buddy_suite_m${mois}`]: 1 } : { ...p, [`buddy_suite_m${mois}`]: 0, buddy: 2 }));
+}
+
+/** Après un arrêt : demander une nouvelle buddy. Un nouvel échange, qui repart d'une page blanche. */
+export async function demanderNouvelleBuddy(): Promise<void> {
+  await maj((p) => {
+    const garde = Object.fromEntries(Object.entries(p).filter(([k]) => !k.startsWith("buddy") || k === "buddy_echange"));
+    return { ...garde, buddy: 3, buddy_recherche_le: Math.floor(Date.now() / 1000), buddy_echange: (p.buddy_echange ?? 0) + 1, buddy_montre: 3 };
+  });
+}
+
+/**
+ * La fin du chemin à deux : « Envie de garder le lien ? ». En test, aucun contact n'est enregistré : Inès n'existe pas.
+ * (Vraie version : le contact tapé s'affiche une fois chez l'autre si les deux disent oui, et n'est pas gardé plus de trente jours.)
+ */
+export async function garderLeLien(oui: boolean): Promise<void> {
+  await maj((p) => ({ ...p, buddy_fin: oui ? 1 : 2 }));
+}
+
+/** Panneau de test : « Aller à la fin du chemin à deux ». */
+export async function allerALaFinTest(): Promise<void> {
+  const { user } = await session();
+  if (!estEquipe(user.email)) return;
+  await maj((p) => ({
+    ...p,
+    buddy: 1,
+    buddy_le: p.buddy_le ?? Math.floor(Date.now() / 1000),
+    buddy_avance: 11,
+    buddy_suite_m1: 1,
+    buddy_suite_m2: 1,
+    buddy_fin_test: Math.floor(Date.now() / 1000),
+  }));
+}
+
+/** La carte « comme si » du cercle de parole : « Je veux en être » note seulement l'intérêt. */
+export async function interesseeParLeCercle(): Promise<void> {
+  const r = await maj((p) => ({ ...p, cercle: Math.floor(Date.now() / 1000) }));
+  await noter(r.supabase, "cercle_interet", { semaine: r.chemin.semaine, pathId: r.chemin.id, unique: true });
 }

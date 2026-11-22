@@ -58,3 +58,31 @@ describe("la recherche (V0.11)", () => {
     expect(etatBuddy({ buddy: 3, buddy_recherche_le: lundi, buddy_trouvee: 1 }, 3, lundi)).toBe("trouvee");
   });
 });
+
+import { finDuCheminADeux, numeroAccessible, pointDuMois } from "./etat";
+import { phraseRetenueParInes } from "./profil-test";
+import { phrasesDe } from "./questions";
+
+describe("l'échange sur tout le chemin (V0.11)", () => {
+  const semaines = (k: number) => 1000 + k * 7 * 86400;
+  it("douze questions, mais on ne passe au mois suivant qu'après « Oui, on continue »", () => {
+    expect(numeroAccessible({ buddy_le: 1000 }, semaines(6))).toBe(4);
+    expect(numeroAccessible({ buddy_le: 1000, buddy_suite_m1: 1 }, semaines(6))).toBe(7);
+    expect(numeroAccessible({ buddy_le: 1000, buddy_suite_m1: 1, buddy_suite_m2: 1 }, semaines(20))).toBe(12);
+  });
+  it("le point de fin de mois, après la quatrième question", () => {
+    expect(pointDuMois({}, 4, true)).toBe(1);
+    expect(pointDuMois({}, 4, false)).toBeNull();
+    expect(pointDuMois({ buddy_suite_m1: 1 }, 4, true)).toBeNull();
+    expect(pointDuMois({ buddy_suite_m1: 1 }, 8, true)).toBe(2);
+  });
+  it("la fin du chemin à deux", () => {
+    expect(finDuCheminADeux({}, false)).toBe(false);
+    expect(finDuCheminADeux({}, true)).toBe(true);
+    expect(finDuCheminADeux({ buddy_fin_test: 1 }, false)).toBe(true);
+  });
+  it("les phrases à choisir, et celle qu'Inès retient", () => {
+    expect(phrasesDe("J'ai osé. Enfin ! Pas tout.")).toEqual(["J'ai osé.", "Enfin !", "Pas tout."]);
+    expect(phraseRetenueParInes(["Un. J'ai demandé la date d'un entretien."])).toBe("J'ai demandé la date d'un entretien.");
+  });
+});

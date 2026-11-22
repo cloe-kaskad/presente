@@ -1,6 +1,8 @@
 import Link from "next/link";
-import { proposerBuddyTest, rencontrer, repondreProposition, trouverMaBuddyTest } from "@/app/buddy/actions";
-import { etatBuddy } from "@/lib/buddy/etat";
+import { allerALaFinTest, interesseeParLeCercle, proposerBuddyTest, rencontrer, repondreProposition, trouverMaBuddyTest } from "@/app/buddy/actions";
+import { CestNote } from "@/components/CestNote";
+import { MODE_TEST } from "@/lib/mode-test";
+import { codeReponse, etatBuddy, finDuCheminADeux } from "@/lib/buddy/etat";
 import { estEquipe } from "@/lib/equipe";
 import { surpriseArrivee, surpriseOuverte } from "@/lib/surprise/quand";
 import { declencherSurprise, ouvrirLaSuite, revenirAuStadeReel } from "./actions";
@@ -141,6 +143,10 @@ export default async function MonEspace() {
   }
   const equipe = estEquipe(user.email);
   const buddy = etatBuddy(chemin.progression, chemin.semaine);
+  const finBuddy =
+    buddy === "acceptee" &&
+    chemin.progression.buddy_fin === undefined &&
+    finDuCheminADeux(chemin.progression, carnet.some((e) => e.code === codeReponse(chemin.progression, 12) && e.reponse.trim()));
   const surprise = surpriseOuverte(chemin.progression) ? "ouverte" : surpriseArrivee(chemin.progression, chemin.dateDebut) ? "arrivee" : null;
   const sousTitre = cette.etiquette.replace(/^Semaine \d · /, "");
   const autresMois = [0, 1, 2].filter((m) => m > mois);
@@ -221,6 +227,40 @@ export default async function MonEspace() {
         <p className={styles.maSurprise}>
           <Link href="/buddy">Ma buddy</Link>
         </p>
+      ) : null}
+
+      {/* La fin du chemin à deux */}
+      {finBuddy ? (
+        <section className={`${styles.surprise} ${m.monte}`} style={{ animationDelay: "0.4s" }} aria-labelledby="buddy-fin">
+          <h2 id="buddy-fin" className={styles.surpriseTitre}>
+            Ton chemin se termine. Envie de garder le lien avec Inès ?
+          </h2>
+          <Link href="/buddy" className="bouton bouton--blanc">
+            Répondre
+          </Link>
+        </section>
+      ) : null}
+
+      {/* Le cercle de parole, « comme si », au début du mois 2 */}
+      {chemin.semaine >= 5 && chemin.semaine <= 8 ? (
+        <section className={`${styles.cercle} ${m.monte}`} style={{ animationDelay: "0.45s" }} aria-labelledby="cercle">
+          {MODE_TEST ? <span className={styles.cercleTest}>Phase de test</span> : null}
+          <h2 id="cercle" className={styles.buddyTitre}>
+            Ton premier cercle.
+          </h2>
+          <p className={styles.buddyTexte}>
+            Six femmes en chemin, 1 h 15, à Kaskad République ou en visio.{buddy === "acceptee" ? " Ta buddy y sera." : ""}
+          </p>
+          {chemin.progression.cercle ? (
+            <CestNote anime={false} suite="On te tient au courant." />
+          ) : (
+            <form action={interesseeParLeCercle}>
+              <button type="submit" className="bouton">
+                Je veux en être
+              </button>
+            </form>
+          )}
+        </section>
       ) : null}
 
       {/* Mes exercices en cours, juste sous le bandeau */}
@@ -306,6 +346,9 @@ export default async function MonEspace() {
             </form>
             <form action={proposerBuddyTest}>
               <button type="submit">Recommencer la buddy depuis le début</button>
+            </form>
+            <form action={allerALaFinTest}>
+              <button type="submit">Aller à la fin du chemin à deux</button>
             </form>
             {buddy === "recherche" ? (
               <form action={trouverMaBuddyTest}>

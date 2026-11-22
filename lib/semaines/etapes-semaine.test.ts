@@ -52,3 +52,12 @@ describe("les étapes de la semaine", () => {
     ]);
   });
 });
+
+describe("« Tirer le fil » dans la semaine", () => {
+  const base = { n: 1, progression: {}, entrees: [], contenu: { type: "Podcast", format: "ecouter", temps: "moyen" }, exercice: null, pratique: null, ecoute: null };
+  it("n'apparaît que s'il y en a un de validé", () => {
+    expect(etapesDeLaSemaine({ ...base, fil: null }).map((e) => e.cle)).toEqual(["contenu", "carnet"]);
+    const e = etapesDeLaSemaine({ ...base, fil: { lu: null } });
+    expect(e.at(-1)).toMatchObject({ libelle: "Tirer le fil", etat: "a_faire", droite: "5 min de lecture", href: "/semaine/1/fil" });
+  });
+});

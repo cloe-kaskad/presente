@@ -1,6 +1,6 @@
 /**
  * Les étapes d'une semaine, avec leur état, pour la carte « Cette semaine » de Mon chemin (brief V0.9).
- * Semaine de quête : le contenu, le carnet, l'exercice (ou le geste) ; « Tirer le fil » viendra à l'étape 3.
+ * Semaine de quête : le contenu, le carnet, l'exercice (ou le geste), et « Tirer le fil » quand il y en a un de validé.
  * Semaine de monde : l'épisode, les questions d'après, et le palier en semaine 4.
  */
 import { jourAParis } from "@/lib/rituel/citations";
@@ -56,8 +56,10 @@ export function etapesDeLaSemaine(args: {
   /** Le nom et le rythme de la pratique, quand l'exercice n'est pas encore créé. */
   pratique: { nom: string; rythme: string | null } | null;
   ecoute: number | null;
+  /** « Tirer le fil » validé pour cette semaine, et quand elle l'a lu ; null : l'étape n'apparaît pas. */
+  fil?: { lu: number | null } | null;
 }): EtapeSemaine[] {
-  const { n, progression, entrees, contenu, exercice, pratique, ecoute } = args;
+  const { n, progression, entrees, contenu, exercice, pratique, ecoute, fil } = args;
   const d = ((n - 1) % 4) + 1;
   const page = `/semaine/${n}`;
   const ecrites = (filtre: (code: string) => boolean) => entrees.filter((e) => filtre(e.code) && e.reponse.trim()).length;
@@ -131,6 +133,16 @@ export function etapesDeLaSemaine(args: {
     });
   } else if (pratique) {
     etapes.push({ cle: "exercice", libelle: nom, etat: "a_faire", droite: (pratique.rythme ?? "").toLowerCase(), href: `${page}#carnet`, action: `Ouvrir ${quoi}` });
+  }
+  if (fil) {
+    etapes.push({
+      cle: "fil",
+      libelle: "Tirer le fil",
+      etat: fil.lu ? "faite" : "a_faire",
+      droite: fil.lu ? jourDeLaSemaine(fil.lu) : "5 min de lecture",
+      href: `${page}/fil`,
+      action: "Tirer le fil",
+    });
   }
   return etapes;
 }

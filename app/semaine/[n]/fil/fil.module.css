@@ -1,0 +1,150 @@
+/* « Tirer le fil » (maquettes Dossier et D-Dossier, V0.9) */
+.page {
+  padding: 28px var(--gouttiere) 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: var(--bordeaux);
+}
+.tete {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 760px;
+}
+.retour {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--rouge-profond);
+  text-decoration: none;
+  align-self: flex-start;
+}
+.retour:hover {
+  text-decoration: underline;
+}
+.surtitre {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--rouge-profond);
+}
+.titre {
+  margin: 0;
+  font-size: 36px;
+  line-height: 1.06;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  color: var(--rouge);
+}
+.chapo {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.55;
+}
+.blocs {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.bloc {
+  border-radius: 24px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.rose {
+  background: var(--rose-pale);
+}
+.blanc {
+  background: var(--blanc);
+  border: 1.5px solid var(--rose);
+}
+.bleu {
+  background: var(--bleu-ciel);
+  color: var(--nuit);
+}
+.etiquette {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--rouge);
+}
+.bleu .etiquette {
+  color: var(--nuit);
+}
+.blocTitre {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+.texte {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+.source {
+  font-size: 13px;
+  opacity: 0.7;
+  color: inherit;
+}
+a.source {
+  text-decoration: underline;
+}
+a.source:hover {
+  opacity: 1;
+}
+.fin {
+  border-top: 1.5px solid var(--rose-pale);
+  padding-top: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 760px;
+}
+.actions {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.aide {
+  font-size: 13px;
+  opacity: 0.75;
+}
+@media (min-width: 1024px) {
+  .page {
+    padding: 48px 96px 88px;
+    gap: 32px;
+  }
+  .tete {
+    gap: 16px;
+  }
+  .retour {
+    font-size: 15px;
+  }
+  .titre {
+    font-size: 64px;
+  }
+  .chapo {
+    font-size: 19px;
+  }
+  .blocs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .bloc {
+    padding: 32px;
+    gap: 12px;
+  }
+  .blocTitre {
+    font-size: 28px;
+  }
+  .texte {
+    font-size: 18px;
+  }
+  .fin {
+    padding-top: 28px;
+  }
+}

@@ -97,3 +97,8 @@ export async function marquerEcoute(n: number, fait: boolean): Promise<{ ok: boo
   const r = await majProgression(n, (p) => ({ ...p, [`ecoute${n}`]: le, ...(fait ? { [String(n)]: Math.max(2, p[String(n)] ?? 0) } : {}) }));
   return { ok: r.ok, le };
 }
+
+/** « C'est lu » sur « Tirer le fil » : la date est rangée dans la progression, sous « fil{n} » (secondes). */
+export async function marquerFilLu(n: number): Promise<{ ok: boolean }> {
+  return majProgression(n, (p) => ({ ...p, [`fil${n}`]: Math.floor(Date.now() / 1000) }));
+}

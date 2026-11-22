@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { BarreEspace } from "@/components/BarreEspace";
-import { etatBuddy, numeroDeQuestion } from "@/lib/buddy/etat";
+import { debutEchange, etatBuddy, numeroDeQuestion, prochaineQuestionLe } from "@/lib/buddy/etat";
+import { dateEnLettres, jourAParis } from "@/lib/rituel/citations";
 import { INES, MENTION_TEST } from "@/lib/buddy/profil-test";
 import { QUESTIONS_BUDDY } from "@/lib/buddy/questions";
 import { chargerChemin } from "@/lib/chemin/donnees";
@@ -32,7 +33,9 @@ export default async function PageBuddy() {
   const mois = Math.min(2, Math.floor((chemin.semaine - 1) / 4));
   const quete = QUETE[chemin.quetes[mois]].nom;
   const montre = chemin.progression.buddy_montre ?? 3;
-  const numero = numeroDeQuestion(chemin.progression.buddy_le, Date.now() / 1000, QUESTIONS_BUDDY.length);
+  const numero = numeroDeQuestion(debutEchange(chemin.progression), Date.now() / 1000, QUESTIONS_BUDDY.length);
+  // « Prochaine question lundi 30 novembre. » : 7 jours après le début de la question en cours.
+  const suivante = numero < QUESTIONS_BUDDY.length ? dateEnLettres(jourAParis(new Date(prochaineQuestionLe(chemin.progression, numero) * 1000))) : null;
 
   return (
     <>
@@ -47,6 +50,7 @@ export default async function PageBuddy() {
           montreQuete: (montre & 2) === 2,
         }}
         autre={{ prenom: INES.prenom, quete, presentation: INES.presentation, mention: MENTION_TEST }}
+        prochaine={suivante ? suivante.charAt(0).toLowerCase() + suivante.slice(1) : null}
         questions={QUESTIONS_BUDDY.slice(0, numero).map((q, i) => ({
           numero: i + 1,
           texte: q,

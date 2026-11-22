@@ -3,7 +3,7 @@ import { proposerBuddyTest, repondreProposition } from "@/app/buddy/actions";
 import { etatBuddy } from "@/lib/buddy/etat";
 import { estEquipe } from "@/lib/equipe";
 import { surpriseArrivee, surpriseOuverte } from "@/lib/surprise/quand";
-import { declencherSurprise, ouvrirLaSuite } from "./actions";
+import { declencherSurprise, ouvrirLaSuite, revenirAuStadeReel } from "./actions";
 import { noter } from "@/lib/mesure/noter";
 import { redirect } from "next/navigation";
 import { BarreEspace } from "@/components/BarreEspace";
@@ -192,7 +192,7 @@ export default async function MonEspace() {
           <h2 id="buddy" className={styles.buddyTitre}>
             Envie de faire un bout de chemin à deux ?
           </h2>
-          <p className={styles.buddyTexte}>Une autre femme en chemin, une question par semaine, la même pour vous deux. Rien d&apos;autre n&apos;est partagé.</p>
+          <p className={styles.buddyTexte}>Une autre femme en chemin, une question par semaine, la même pour vous deux.</p>
           <div className={styles.buddyActions}>
             <form action={repondreProposition.bind(null, true)}>
               <button type="submit" className="bouton">
@@ -295,6 +295,9 @@ export default async function MonEspace() {
             </form>
             <form action={proposerBuddyTest}>
               <button type="submit">Proposer la buddy</button>
+            </form>
+            <form action={revenirAuStadeReel}>
+              <button type="submit">Revenir au stade réel</button>
             </form>
             <Link href="/equipe">Voir l&apos;engagement</Link>
           </div>

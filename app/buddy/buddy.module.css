@@ -234,3 +234,67 @@
     grid-template-columns: 1fr 1fr;
   }
 }
+
+/* V0.11 : la suite, les semaines d'avant, « Comment ça marche » */
+.suite {
+  margin: 12px 0 0;
+  font-size: 15px;
+  line-height: 1.5;
+}
+.suite strong {
+  font-weight: 600;
+}
+.passees,
+.comment {
+  border-top: 1.5px solid var(--rose-pale);
+  padding-top: 6px;
+}
+.passees summary,
+.comment summary {
+  min-height: var(--cible);
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--rouge-profond);
+  cursor: pointer;
+}
+.comment summary {
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: underline;
+  list-style: none;
+}
+.comment summary::-webkit-details-marker {
+  display: none;
+}
+.passeesListe {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-bottom: 8px;
+}
+.commentTexte {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+.commentTexte ul {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.lienPetit {
+  background: none;
+  border: 0;
+  padding: 0;
+  min-height: var(--cible);
+  font: inherit;
+  color: var(--rouge-profond);
+  text-decoration: underline;
+  cursor: pointer;
+}

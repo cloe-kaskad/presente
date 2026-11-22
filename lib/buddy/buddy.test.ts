@@ -35,3 +35,17 @@ describe("les règles d'association (vraie version)", () => {
     expect(choisirBuddy(f("a", 3), [f("b", 7)])).toBeNull();
   });
 });
+
+import { ceQue, de, prochaineQuestionLe } from "./etat";
+
+describe("la suite et l'élision", () => {
+  it("la prochaine question arrive 7 jours après le début de la question en cours, avance de test comprise", () => {
+    expect(prochaineQuestionLe({ buddy_le: 1000 }, 1)).toBe(1000 + 7 * 86400);
+    expect(prochaineQuestionLe({ buddy_le: 1000, buddy_avance: 1 }, 2)).toBe(1000 + 7 * 86400);
+  });
+  it("élide devant une voyelle", () => {
+    expect(ceQue("Inès")).toBe("Ce qu'Inès");
+    expect(ceQue("Marie")).toBe("Ce que Marie");
+    expect(de("Élodie")).toBe("d'Élodie");
+  });
+});

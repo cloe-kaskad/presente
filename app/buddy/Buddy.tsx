@@ -5,7 +5,8 @@ import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { CestNote } from "@/components/CestNote";
 import m from "@/components/mouvement.module.css";
-import type { EtatBuddy } from "@/lib/buddy/etat";
+import { de, type EtatBuddy } from "@/lib/buddy/etat";
+import { POINTS_BUDDY } from "@/lib/buddy/explication";
 import { arreterEchange, repondreQuestion, sePresenter } from "./actions";
 import styles from "./buddy.module.css";
 
@@ -14,7 +15,7 @@ type Autre = { prenom: string; quete: string; presentation: string; mention: str
 type Question = { numero: number; texte: string; maReponse: string; saReponse: string | null };
 
 /** « Un bout de chemin à deux » : se présenter, rencontrer, une question par semaine, sortir à tout moment. */
-export function Buddy({ etat, moi, autre, questions }: { etat: EtatBuddy; moi: Moi; autre: Autre; questions: Question[] }) {
+export function Buddy({ etat, moi, autre, questions, prochaine }: { etat: EtatBuddy; moi: Moi; autre: Autre; questions: Question[]; prochaine: string | null }) {
   return (
     <main className={styles.page}>
       <div className={styles.tete}>
@@ -24,7 +25,7 @@ export function Buddy({ etat, moi, autre, questions }: { etat: EtatBuddy; moi: M
         <span className={styles.surtitre}>Un bout de chemin à deux</span>
       </div>
       {etat === "proposee" ? <Presentation moi={moi} /> : null}
-      {etat === "acceptee" ? <Rencontre moi={moi} autre={autre} questions={questions} /> : null}
+      {etat === "acceptee" ? <Rencontre autre={autre} questions={questions} prochaine={prochaine} /> : null}
       {etat === "arretee" ? (
         <section className={styles.bloc}>
           <h1 className={styles.titre}>L&apos;échange s&apos;est arrêté.</h1>
@@ -51,9 +52,7 @@ function Presentation({ moi }: { moi: Moi }) {
       <h1 id="presentation" className={styles.titre}>
         Présente-toi en une phrase.
       </h1>
-      <p className={styles.texte}>
-        Une autre femme en chemin la lira. Rien d&apos;autre n&apos;est partagé : ni ton carnet, ni ton journal, ni ta carte.
-      </p>
+      <p className={styles.texte}>Une autre femme en chemin la lira.</p>
       <label className={styles.champ}>
         <span>Ce qui m&apos;amène ici, en une phrase</span>
         <textarea value={phrase} maxLength={300} rows={3} onChange={(e) => setPhrase(e.target.value)} placeholder="Une phrase suffit." />
@@ -91,7 +90,7 @@ function Presentation({ moi }: { moi: Moi }) {
   );
 }
 
-function Rencontre({ moi, autre, questions }: { moi: Moi; autre: Autre; questions: Question[] }) {
+function Rencontre({ autre, questions, prochaine }: { autre: Autre; questions: Question[]; prochaine: string | null }) {
   const router = useRouter();
   const [enCours, demarrer] = useTransition();
   const [confirmer, setConfirmer] = useState(false);
@@ -112,50 +111,54 @@ function Rencontre({ moi, autre, questions }: { moi: Moi; autre: Autre; question
         <p className={styles.phrase}>« {autre.presentation} »</p>
       </section>
 
-      {actuelle ? <QuestionDeLaSemaine q={actuelle} autre={autre.prenom} onRepondu={() => router.refresh()} /> : null}
+      {actuelle ? <QuestionDeLaSemaine q={actuelle} autre={autre.prenom} prochaine={prochaine} onRepondu={() => router.refresh()} /> : null}
 
+      {/* Les questions passées : lisibles, repliées, la plus récente en haut */}
       {passees.length ? (
-        <section className={styles.bloc} aria-labelledby="passees">
-          <h2 id="passees" className={styles.sousTitre}>
-            Les semaines d&apos;avant
-          </h2>
-          {passees.map((q) => (
-            <div key={q.numero} className={styles.echange}>
-              <span className={styles.question}>{q.texte}</span>
-              <Reponses q={q} autre={autre.prenom} />
-            </div>
-          ))}
-        </section>
+        <details className={styles.passees}>
+          <summary>Les semaines d&apos;avant ({passees.length})</summary>
+          <div className={`${styles.passeesListe} ${m.deplie}`}>
+            {passees.map((q) => (
+              <div key={q.numero} className={styles.echange}>
+                <span className={styles.question}>
+                  Semaine {q.numero} : {q.texte}
+                </span>
+                <Reponses q={q} autre={autre.prenom} />
+              </div>
+            ))}
+          </div>
+        </details>
       ) : null}
 
-      <section className={styles.toi} aria-labelledby="toi">
-        <h2 id="toi" className={styles.sousTitre}>
-          Ce que {autre.prenom} voit de toi
-        </h2>
-        <p className={styles.texte}>
-          {[moi.montrePrenom && moi.prenom ? moi.prenom : null, moi.montreQuete ? `en chemin sur ${moi.quete}` : null].filter(Boolean).join(", ") || "Ni ton prénom, ni ta quête."}
-          {moi.presentation ? ` · « ${moi.presentation} »` : ""}
-        </p>
-        <p className={styles.petit}>Et tes réponses aux questions de la semaine. Rien d&apos;autre : ni ton carnet, ni ton journal, ni ta carte.</p>
-      </section>
-
-      <div className={styles.sortir}>
-        {confirmer ? (
-          <>
-            <span>Arrêter l&apos;échange ? {autre.prenom} verra seulement « L&apos;échange s&apos;est arrêté. ».</span>
-            <button type="button" className={styles.lien} disabled={enCours} onClick={() => demarrer(async () => (await arreterEchange(), router.refresh()))}>
-              Oui, arrêter
-            </button>
-            <button type="button" className={styles.lien} onClick={() => setConfirmer(false)}>
-              Non
-            </button>
-          </>
-        ) : (
-          <button type="button" className={styles.lien} onClick={() => setConfirmer(true)}>
-            Arrêter l&apos;échange
-          </button>
-        )}
-      </div>
+      {/* « Comment ça marche » : le texte d'explication, et tout en bas, en petit, la sortie */}
+      <details className={styles.comment}>
+        <summary>Comment ça marche</summary>
+        <div className={`${styles.commentTexte} ${m.deplie}`}>
+          <ul>
+            {POINTS_BUDDY.map((p) => (
+              <li key={p}>{p}</li>
+            ))}
+          </ul>
+          <p className={styles.petit}>
+            Tu peux arrêter l&apos;échange quand tu veux.{" "}
+            {confirmer ? (
+              <>
+                {autre.prenom} verra seulement « L&apos;échange s&apos;est arrêté. ».{" "}
+                <button type="button" className={styles.lienPetit} disabled={enCours} onClick={() => demarrer(async () => (await arreterEchange(), router.refresh()))}>
+                  Oui, arrêter
+                </button>{" "}
+                <button type="button" className={styles.lienPetit} onClick={() => setConfirmer(false)}>
+                  Non
+                </button>
+              </>
+            ) : (
+              <button type="button" className={styles.lienPetit} onClick={() => setConfirmer(true)}>
+                Arrêter l&apos;échange
+              </button>
+            )}
+          </p>
+        </div>
+      </details>
     </>
   );
 }
@@ -175,7 +178,7 @@ function Reponses({ q, autre }: { q: Question; autre: string }) {
   );
 }
 
-function QuestionDeLaSemaine({ q, autre, onRepondu }: { q: Question; autre: string; onRepondu: () => void }) {
+function QuestionDeLaSemaine({ q, autre, prochaine, onRepondu }: { q: Question; autre: string; prochaine: string | null; onRepondu: () => void }) {
   const [texte, setTexte] = useState(q.maReponse);
   const [etat, setEtat] = useState<"rien" | "envoi" | "note" | "erreur">(q.maReponse ? "note" : "rien");
   const [vient, setVient] = useState(false);
@@ -189,6 +192,8 @@ function QuestionDeLaSemaine({ q, autre, onRepondu }: { q: Question; autre: stri
       {q.maReponse && etat === "note" ? (
         <div className={vient ? m.monte : undefined}>
           <Reponses q={q} autre={autre} />
+          {/* La suite, dite tout de suite */}
+          <p className={styles.suite}>{prochaine ? <>Prochaine question <strong>{prochaine}</strong>.</> : "C'était la dernière question pour l'instant."}</p>
         </div>
       ) : (
         <>
@@ -196,7 +201,7 @@ function QuestionDeLaSemaine({ q, autre, onRepondu }: { q: Question; autre: stri
             <span>Ta réponse, en quelques lignes</span>
             <textarea value={texte} rows={4} maxLength={2000} onChange={(e) => setTexte(e.target.value)} />
           </label>
-          <p className={styles.petit}>La réponse de {autre} s&apos;affiche quand tu as répondu. Pas besoin d&apos;être au même jour.</p>
+          <p className={styles.petit}>La réponse {de(autre)} s&apos;affiche quand tu as répondu. Pas besoin d&apos;être au même jour.</p>
           <div className={styles.actions}>
             <button
               type="button"

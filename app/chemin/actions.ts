@@ -7,6 +7,7 @@ import { chargerChemin } from "@/lib/chemin/donnees";
 import { detecterDetresse } from "@/lib/moteur/ecriture";
 import { jourAParis } from "@/lib/rituel/citations";
 import { estEquipe } from "@/lib/equipe";
+import { stadeReel } from "@/lib/semaines/calendrier";
 import { estHumeur } from "@/lib/rituel/humeurs";
 import { createClient } from "@/lib/supabase/server";
 
@@ -63,7 +64,11 @@ export async function ouvrirLaSuite(): Promise<void> {
   if (chemin.semaine < 12) {
     const { error } = await supabase
       .from("paths")
-      .update({ semaine_en_cours: chemin.semaine + 1 })
+      // La question de la buddy avance aussi d'une semaine (brief V0.11).
+      .update({
+        semaine_en_cours: chemin.semaine + 1,
+        ...(chemin.progression.buddy === 1 ? { progression: { ...chemin.progression, buddy_avance: (chemin.progression.buddy_avance ?? 0) + 1 } } : {}),
+      })
       .eq("id", chemin.id);
     if (error) console.error("[chemin] semaine suivante impossible :", error.code);
   }
@@ -91,5 +96,20 @@ export async function declencherSurprise(): Promise<void> {
     .update({ progression: { ...reste, surprise: Math.floor(Date.now() / 1000) } })
     .eq("id", chemin.id);
   if (error) console.error("[test] surprise non déclenchée :", error.code);
+  revalidatePath("/chemin");
+}
+
+/**
+ * Panneau de test : « Revenir au stade réel ». Défait les raccourcis de test (semaines ouvertes en avance,
+ * surprise et buddy déclenchées) pour retrouver où elle en serait vraiment. Ce qu'elle a écrit reste dans son carnet.
+ */
+export async function revenirAuStadeReel(): Promise<void> {
+  const { supabase, user } = await session();
+  if (!estEquipe(user.email)) return;
+  const chemin = await chargerChemin(supabase);
+  if (!chemin) redirect("/questionnaire");
+  const r = stadeReel({ progression: chemin.progression, dateDebut: chemin.dateDebut });
+  const { error } = await supabase.from("paths").update({ semaine_en_cours: r.semaine, progression: r.progression }).eq("id", chemin.id);
+  if (error) console.error("[test] retour au stade réel impossible :", error.code);
   revalidatePath("/chemin");
 }

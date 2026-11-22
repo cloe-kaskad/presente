@@ -25,3 +25,23 @@ describe("le calendrier du chemin", () => {
     expect(semaineFaite(2, { "2": 3 })).toBe(true);
   });
 });
+
+import { stadeReel } from "./calendrier";
+
+describe("revenir au stade réel", () => {
+  const s2 = (jour: string) => Date.parse(`${jour}T10:00:00Z`) / 1000;
+  it("défait les semaines ouvertes en avance, la surprise et la buddy de test", () => {
+    const r = stadeReel({
+      progression: { "1": 3, debut2: s2("2026-11-18"), debut3: s2("2026-11-18"), surprise: 1, surprise_vue: 1, buddy: 1, buddy_test: 1 },
+      dateDebut: "2026-11-16",
+      aujourdhui: "2026-11-20",
+    });
+    expect(r.semaine).toBe(1);
+    expect(r.progression).toEqual({ "1": 3 });
+  });
+  it("garde ce qui est vraiment arrivé, et recale le début d'une semaine ouverte en avance", () => {
+    const r = stadeReel({ progression: { debut2: s2("2026-11-20") }, dateDebut: "2026-11-16", aujourdhui: "2026-11-25" });
+    expect(r.semaine).toBe(2);
+    expect(r.progression.debut2).toBe(Date.parse("2026-11-23T12:00:00Z") / 1000);
+  });
+});

@@ -2,7 +2,8 @@
  * L'état de la buddy, rangé dans la progression du chemin (aucune colonne ajoutée) :
  * buddy : 1 acceptée, 2 arrêtée ; buddy_le : quand elle a accepté (secondes) ; buddy_refus : nombre de « Pas maintenant » ;
  * buddy_refus_semaine : la semaine du dernier refus ; buddy_montre : 1 = prénom, 2 = quête (on additionne) ;
- * buddy_test : l'équipe l'a proposée depuis le panneau de test.
+ * buddy_test : l'équipe l'a proposée depuis le panneau de test ;
+ * buddy_avance : semaines d'avance prises en test (« Ouvrir la suite maintenant » fait aussi avancer la question).
  * Sa phrase de présentation et ses réponses sont dans son carnet (codes « buddy:presentation », « buddy:q1 »…).
  */
 export type EtatBuddy = "rien" | "proposee" | "acceptee" | "arretee";
@@ -23,3 +24,18 @@ export function numeroDeQuestion(accepteLe: number | undefined, maintenant = Dat
   if (!accepteLe) return 1;
   return Math.max(1, Math.min(total, Math.floor((maintenant - accepteLe) / (7 * 86400)) + 1));
 }
+
+const SEMAINE = 7 * 86400;
+
+/** Le début de l'échange tel qu'on le compte : l'accord, moins les semaines d'avance prises en test. */
+export const debutEchange = (p: Record<string, number>) => (p.buddy_le ?? 0) - (p.buddy_avance ?? 0) * SEMAINE;
+
+/** Le jour (secondes) où arrive la question suivante : 7 jours après le début de la question en cours. */
+export function prochaineQuestionLe(p: Record<string, number>, numero: number): number {
+  return debutEchange(p) + numero * SEMAINE;
+}
+
+/** L'élision : « Ce qu'Inès », « Ce que Marie » ; « d'Inès », « de Marie ». */
+const voyelle = (prenom: string) => /^[aeiouyhàâäéèêëîïôöùûü]/i.test(prenom.normalize("NFC"));
+export const ceQue = (prenom: string) => (voyelle(prenom) ? `Ce qu'${prenom}` : `Ce que ${prenom}`);
+export const de = (prenom: string) => (voyelle(prenom) ? `d'${prenom}` : `de ${prenom}`);

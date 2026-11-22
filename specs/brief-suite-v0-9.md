@@ -55,14 +55,14 @@ Une lecture maison de cinq minutes pour aller plus loin, une par semaine de quê
 - Quatre blocs, toujours dans cet ordre : « Une idée » (philosophie), « Un chiffre », « Un regard » (sociologie, recherche), « Un écho » (actualité ou littérature). Chacun : un titre, un texte de trois ou quatre phrases, la source en petit. Grille de deux colonnes sur ordinateur, empilés sur mobile, fonds alternés comme sur la maquette.
 - En bas : une ligne libre facultative « Ce que tu en gardes, en une ligne. » (rangée dans le carnet, origine « Tirer le fil »), et le bouton « C'est lu » qui valide l'étape.
 - Dans la carte « Cette semaine », la ligne s'appelle « Tirer le fil », avec « 5 min de lecture » à droite.
-- Données : une nouvelle table Airtable « P! Tirer le fil » en lecture seule, que Claude (la session de Cloé) créera : Quête, Semaine dans le mois (1 ou 3), Titre, Chapô, et pour chaque bloc Titre, Texte, Source, Lien ; Statut (Brouillon, Validé). Le site n'affiche que les lignes « Validé ». Lire la table comme les autres (`lib/catalogue/airtable.ts`), avec la variable d'environnement de la table à ajouter dans Vercel par Cloé.
+- Données : la table Airtable « P! Tirer le fil » existe (base `appXzGMlNyLLQeRwY`, table `tblWqP9B2vSgOCQ6q`), en lecture seule pour le site. Champs : Titre `fldYO7gBPv2CRpnvL`, Quête `fldutMohptLseWc16` (L'Argent, La Voix, Le Travail, Les Émotions, Le Corps, Les Liens, La Création), Semaine dans le mois `fldjX2nzN0c8aoBSi` (1 ou 3), Statut `fldND05M8avF6yDp1` (Brouillon, Validé), Chapô `fldcXvHvA0P1UrMKF` ; Idée : titre `fldISknFzL6AG8rMn`, texte `fldm8XFxQnpBNBtH8`, source `fld0BxpfeXVfyGf3z`, lien `fldWv5zYdhyPhaEjM` ; Chiffre : titre `fldApmmP0J2lrMNs7`, texte `fldIFfZZYCmlHTqnO`, source `fldCElUSJaqdZPq7X`, lien `fld0DWFD3lGI65WOy` ; Regard : titre `fld61P9MjnaV58w6I`, texte `fldqEYeQ9RLVS7lA6`, source `fldFhoRliYZj650XW`, lien `fldHyXr4s48BykDgA` ; Écho : titre `fldH1AzLkjwgtPTeM`, texte `fld3YnNAMURGRM5Qe`, source `fld01pF5ubF94kczB`, lien `fldACmySDhiWJco2w`. Le champ « Notes pour Cloé » ne s'affiche jamais. Le site n'affiche que les lignes « Validé », pour la quête et la semaine en cours. Lire la table comme les autres (`lib/catalogue/airtable.ts`), avec le même jeton ; mettre l'identifiant de la table en constante comme pour les autres tables P!. Un bloc vide (pas de titre ni de texte) ne s'affiche pas. Quand un bloc a un lien, la source devient cliquable (nouvel onglet).
 - S'il n'y a rien de validé pour la semaine : l'étape n'apparaît pas dans la liste, rien d'autre ne change.
 
 ## Ordre de travail
 
 1. « J'ai écouté ».
 2. La carte « Cette semaine », ses étapes et la date de la suite.
-3. « Tirer le fil » (quand la table Airtable existe).
+3. « Tirer le fil ».
 
 ## Aussi : la signature sous le logo
 

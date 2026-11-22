@@ -10,6 +10,7 @@ import { AvisContenu } from "@/components/AvisContenu";
 import { ChoixCarnet, CurseurCarnet } from "@/components/SaisieCarnet";
 import { QUESTIONS_PALIER, type Episode, type QuestionMini } from "@/lib/semaines/contenu";
 import { avancer, terminer } from "../actions";
+import { JaiEcoute } from "@/components/JaiEcoute";
 import { Lecteur } from "./Lecteur";
 import styles from "./vivre.module.css";
 
@@ -29,6 +30,7 @@ export function SemaineMonde({
   questionQuete,
   fiche,
   palier,
+  ecoute,
 }: {
   n: number;
   etape: number;
@@ -44,6 +46,7 @@ export function SemaineMonde({
   questionQuete: string | null;
   fiche: { idees: string[]; lectures: string | null };
   palier: { texte: string; mots: string[]; prochain: { quete: string; monde: string } | null } | null;
+  ecoute: number | null;
 }) {
   const router = useRouter();
   const [etape, setEtape] = useState(etapeInitiale);
@@ -94,11 +97,7 @@ export function SemaineMonde({
             </ul>
             {fiche.lectures ? <p className={styles.lectures}>À lire ensuite : {fiche.lectures}</p> : null}
           </details>
-          {etape < 2 ? (
-            <button type="button" className={`bouton ${styles.suite}`} onClick={() => ouvrir(2)} disabled={enCours}>
-              J&apos;ai écouté
-            </button>
-          ) : null}
+          <JaiEcoute n={n} format="ecouter" lien={null} verbe="Écouter" initial={ecoute} fond="clair" onFait={() => etape < 2 && ouvrir(2)} />
         </section>
       ) : null}
 

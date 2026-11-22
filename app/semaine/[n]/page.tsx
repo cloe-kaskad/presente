@@ -4,6 +4,7 @@ import { apercuDuLien } from "@/lib/catalogue/apercu";
 import { planDuMonde } from "@/lib/moteur/prompts";
 import { MONDE, QUETE } from "@/lib/questionnaire/contenu";
 import { CARNETS, EPISODES, avantEpisodeDeSecours, questionsApres, remplir, versionLongue } from "@/lib/semaines/contenu";
+import { ecouteLe } from "@/lib/semaines/ecoute";
 import { etatExercice, joursDuRythme, jourEnCours, estCodeJour, jourDuCode } from "@/lib/semaines/exercice";
 import { ficheDeLEpisode } from "@/lib/semaines/fiche";
 import { texteDeSemaine } from "@/lib/semaines/textes";
@@ -133,6 +134,7 @@ export default async function Semaine({ params }: { params: Promise<{ n: string 
               : null
           }
           exercice={exercice}
+          ecoute={ecouteLe(n, chemin.progression, decetteSemaine)}
           citation={CITATIONS[(numeroDuJour(jourAParis()) + n * 3 + 1) % CITATIONS.length]}
         />
       </>
@@ -207,6 +209,7 @@ export default async function Semaine({ params }: { params: Promise<{ n: string 
         questionQuete={ep.questionQuete[quete] ?? null}
         fiche={ficheDeLEpisode(planDuMonde(monde), d === 2 ? 1 : 2)}
         palier={palier}
+        ecoute={ecouteLe(n, chemin.progression, decetteSemaine, true)}
       />
     </>
   );

@@ -1,0 +1,121 @@
+.ligne {
+  display: flex;
+  align-items: center;
+  gap: 10px 14px;
+  flex-wrap: wrap;
+}
+.bouton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--cible);
+  border-radius: 999px;
+  padding: 10px 18px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  border: 1.5px solid var(--blanc);
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+.plein {
+  background: var(--blanc);
+  color: var(--rouge-profond);
+}
+.plein:hover {
+  background: var(--rose-pale);
+}
+.contour {
+  background: transparent;
+  color: var(--blanc);
+}
+.contour:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+.contour:active,
+.pastille:active {
+  transform: scale(0.97);
+}
+.pastille {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: var(--cible);
+  background: var(--blanc);
+  color: var(--rouge-profond);
+  border: 0;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.rond {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--rouge-profond);
+  display: inline-flex;
+}
+.rond svg path {
+  fill: none;
+  stroke: var(--blanc);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* La coche se dessine (300 ms) */
+.coche {
+  stroke-dasharray: 1;
+  animation: dessine 0.3s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+}
+@keyframes dessine {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+.encore {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--blanc);
+  min-height: var(--cible);
+  display: inline-flex;
+  align-items: center;
+}
+.bouton:focus-visible,
+.pastille:focus-visible,
+.encore:focus-visible {
+  outline: 2px solid var(--blanc);
+  outline-offset: 3px;
+}
+
+/* Sur fond clair (épisode de monde) */
+.clair .contour {
+  color: var(--nuit);
+  border-color: var(--nuit);
+}
+.clair .contour:hover {
+  background: rgba(15, 42, 68, 0.08);
+}
+.clair .pastille {
+  background: var(--nuit);
+  color: var(--blanc);
+}
+.clair .rond {
+  background: var(--blanc);
+}
+.clair .rond svg path {
+  stroke: var(--nuit);
+}
+.clair .encore {
+  color: var(--nuit);
+}
+.clair .bouton:focus-visible,
+.clair .pastille:focus-visible {
+  outline-color: var(--nuit);
+}

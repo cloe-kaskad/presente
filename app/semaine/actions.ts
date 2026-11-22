@@ -89,3 +89,13 @@ export async function commencerExercice(n: number): Promise<{ ok: boolean }> {
 export async function terminerExercice(n: number): Promise<{ ok: boolean }> {
   return majProgression(n, (p) => ({ ...p, [String(n)]: Math.max(4, p[String(n)] ?? 0), [`ex${n}`]: 2, [`exfin${n}`]: Math.floor(Date.now() / 1000) }), true);
 }
+
+/**
+ * « J'ai écouté » (brief V0.9) : la date est rangée dans la progression, sous « ecoute{n} » (secondes).
+ * 0 = annulé. Sans clé : déduit du carnet (voir lib/semaines/ecoute.ts).
+ */
+export async function marquerEcoute(n: number, fait: boolean): Promise<{ ok: boolean; le: number }> {
+  const le = fait ? Math.floor(Date.now() / 1000) : 0;
+  const r = await majProgression(n, (p) => ({ ...p, [`ecoute${n}`]: le, ...(fait ? { [String(n)]: Math.max(2, p[String(n)] ?? 0) } : {}) }));
+  return { ok: r.ok, le };
+}

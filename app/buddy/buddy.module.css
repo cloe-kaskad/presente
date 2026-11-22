@@ -298,3 +298,83 @@
   text-decoration: underline;
   cursor: pointer;
 }
+
+/* V0.11 : l'explication, l'aperçu, l'attente, la rencontre trouvée */
+.points {
+  margin: 0;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 16px;
+  line-height: 1.55;
+}
+.change {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.55;
+  font-weight: 600;
+}
+.apercu {
+  background: var(--rose-pale);
+  border-radius: 16px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.apercuNom {
+  font-size: 16px;
+  font-weight: 600;
+}
+.apercuPhrase {
+  font-size: 16px;
+  line-height: 1.5;
+  font-style: italic;
+}
+/* Deux points qui se rapprochent, doucement */
+.deuxPoints {
+  display: flex;
+  gap: 40px;
+  height: 14px;
+  align-items: center;
+}
+.deuxPoints i {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--rouge-profond);
+  animation: rapproche 2.4s ease-in-out infinite;
+}
+.deuxPoints i:last-child {
+  background: var(--rose);
+  animation-name: rapprocheB;
+}
+@keyframes rapproche {
+  50% {
+    transform: translateX(14px);
+  }
+}
+@keyframes rapprocheB {
+  50% {
+    transform: translateX(-14px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .deuxPoints i {
+    animation: none;
+  }
+}
+.trouvee {
+  background: var(--rouge) url(/images/grain.jpg) center / cover no-repeat;
+  color: var(--blanc);
+  border-radius: 24px;
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+.trouvee .titre {
+  color: var(--blanc);
+}

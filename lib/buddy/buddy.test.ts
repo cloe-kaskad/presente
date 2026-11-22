@@ -49,3 +49,12 @@ describe("la suite et l'élision", () => {
     expect(de("Élodie")).toBe("d'Élodie");
   });
 });
+
+describe("la recherche (V0.11)", () => {
+  const lundi = Date.parse("2026-11-23T10:00:00Z") / 1000;
+  it("on cherche, puis on la trouve le lendemain, ou tout de suite en test", () => {
+    expect(etatBuddy({ buddy: 3, buddy_recherche_le: lundi }, 3, lundi + 3600)).toBe("recherche");
+    expect(etatBuddy({ buddy: 3, buddy_recherche_le: lundi }, 3, lundi + 86400)).toBe("trouvee");
+    expect(etatBuddy({ buddy: 3, buddy_recherche_le: lundi, buddy_trouvee: 1 }, 3, lundi)).toBe("trouvee");
+  });
+});

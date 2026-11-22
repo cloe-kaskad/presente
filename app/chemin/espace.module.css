@@ -746,3 +746,16 @@
     font-size: 36px;
   }
 }
+
+.attenteBuddy {
+  margin: 20px var(--gouttiere) 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--bordeaux);
+}
+@media (min-width: 1024px) {
+  .attenteBuddy {
+    margin-left: 96px;
+    margin-right: 96px;
+  }
+}

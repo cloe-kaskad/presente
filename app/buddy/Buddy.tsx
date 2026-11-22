@@ -6,12 +6,12 @@ import { useState, useTransition } from "react";
 import { CestNote } from "@/components/CestNote";
 import m from "@/components/mouvement.module.css";
 import { de, type EtatBuddy } from "@/lib/buddy/etat";
-import { POINTS_BUDDY } from "@/lib/buddy/explication";
-import { arreterEchange, repondreQuestion, sePresenter } from "./actions";
+import { CE_QUE_CA_CHANGE, POINTS_BUDDY } from "@/lib/buddy/explication";
+import { arreterEchange, chercherMaBuddy, rencontrer, repondreProposition, repondreQuestion } from "./actions";
 import styles from "./buddy.module.css";
 
 type Moi = { prenom: string | null; quete: string; presentation: string; montrePrenom: boolean; montreQuete: boolean };
-type Autre = { prenom: string; quete: string; presentation: string; mention: string };
+type Autre = { prenom: string; quete: string; presentation: string; mention: string; jours: number };
 type Question = { numero: number; texte: string; maReponse: string; saReponse: string | null };
 
 /** « Un bout de chemin à deux » : se présenter, rencontrer, une question par semaine, sortir à tout moment. */
@@ -24,7 +24,9 @@ export function Buddy({ etat, moi, autre, questions, prochaine }: { etat: EtatBu
         </Link>
         <span className={styles.surtitre}>Un bout de chemin à deux</span>
       </div>
-      {etat === "proposee" ? <Presentation moi={moi} /> : null}
+      {etat === "proposee" ? <Debut moi={moi} /> : null}
+      {etat === "recherche" ? <Recherche quete={moi.quete} /> : null}
+      {etat === "trouvee" ? <Trouvee /> : null}
       {etat === "acceptee" ? <Rencontre autre={autre} questions={questions} prochaine={prochaine} /> : null}
       {etat === "arretee" ? (
         <section className={styles.bloc}>
@@ -39,33 +41,57 @@ export function Buddy({ etat, moi, autre, questions, prochaine }: { etat: EtatBu
   );
 }
 
-function Presentation({ moi }: { moi: Moi }) {
+/** Écrans 2 et 3 : « Comment ça se passe », puis sa phrase avec l'aperçu de ce que l'autre verra. */
+function Debut({ moi }: { moi: Moi }) {
   const router = useRouter();
+  const [ecran, setEcran] = useState<"explication" | "phrase">("explication");
   const [phrase, setPhrase] = useState(moi.presentation);
-  const [prenom, setPrenom] = useState(true);
-  const [quete, setQuete] = useState(true);
   const [enCours, demarrer] = useTransition();
   const [erreur, setErreur] = useState(false);
 
+  if (ecran === "explication") {
+    return (
+      <section className={`${styles.bloc} ${m.monte}`} aria-labelledby="explication">
+        <h1 id="explication" className={styles.titre}>
+          Un bout de chemin à deux
+        </h1>
+        <ul className={styles.points}>
+          {POINTS_BUDDY.map((p) => (
+            <li key={p}>{p}</li>
+          ))}
+        </ul>
+        <p className={styles.change}>{CE_QUE_CA_CHANGE}</p>
+        <div className={styles.actions}>
+          <button type="button" className="bouton" onClick={() => setEcran("phrase")}>
+            Ça me tente
+          </button>
+          <form action={repondreProposition.bind(null, false)}>
+            <button type="submit" className={styles.lien}>
+              Pas maintenant
+            </button>
+          </form>
+        </div>
+      </section>
+    );
+  }
+
   return (
-    <section className={styles.bloc} aria-labelledby="presentation">
-      <h1 id="presentation" className={styles.titre}>
-        Présente-toi en une phrase.
+    <section className={`${styles.bloc} ${m.monte}`} aria-labelledby="phrase">
+      <h1 id="phrase" className={styles.titre}>
+        Ce qui t&apos;amène ici, en une phrase.
       </h1>
-      <p className={styles.texte}>Une autre femme en chemin la lira.</p>
       <label className={styles.champ}>
-        <span>Ce qui m&apos;amène ici, en une phrase</span>
+        <span className="sr-only">Ce qui t&apos;amène ici, en une phrase</span>
         <textarea value={phrase} maxLength={300} rows={3} onChange={(e) => setPhrase(e.target.value)} placeholder="Une phrase suffit." />
       </label>
-      <fieldset className={styles.cases}>
-        <legend>Ce que tu acceptes de montrer</legend>
-        <label>
-          <input type="checkbox" checked={prenom} onChange={(e) => setPrenom(e.target.checked)} /> Mon prénom{moi.prenom ? ` (${moi.prenom})` : ""}
-        </label>
-        <label>
-          <input type="checkbox" checked={quete} onChange={(e) => setQuete(e.target.checked)} /> Ma quête du moment ({moi.quete})
-        </label>
-      </fieldset>
+      <div className={styles.apercu} aria-label="Ce qu'elle verra">
+        <span className={styles.etiquette}>Ce qu&apos;elle verra</span>
+        <span className={styles.apercuNom}>
+          {moi.prenom ?? "Toi"}, en chemin sur {moi.quete}
+        </span>
+        <span className={styles.apercuPhrase}>{phrase.trim() ? `« ${phrase.trim()} »` : "Ta phrase s'affichera ici."}</span>
+      </div>
+      <p className={styles.petit}>C&apos;est tout ce qu&apos;elle verra de toi, avec tes réponses aux questions de la semaine.</p>
       <div className={styles.actions}>
         <button
           type="button"
@@ -73,19 +99,57 @@ function Presentation({ moi }: { moi: Moi }) {
           disabled={enCours || !phrase.trim()}
           onClick={() =>
             demarrer(async () => {
-              const r = await sePresenter(phrase, prenom, quete).catch(() => ({ ok: false }));
+              const r = await chercherMaBuddy(phrase).catch(() => ({ ok: false }));
               if (r.ok) router.refresh();
               else setErreur(true);
             })
           }
         >
-          Me présenter
+          Chercher ma buddy
         </button>
-        <Link href="/chemin" className={styles.lien}>
-          Pas maintenant
-        </Link>
+        <button type="button" className={styles.lien} onClick={() => setEcran("explication")}>
+          Revenir à l&apos;explication
+        </button>
       </div>
       {erreur ? <p role="alert">Ce n&apos;est pas enregistré. Réessaie dans un instant.</p> : null}
+    </section>
+  );
+}
+
+/** Écran 4 : on ne montre personne tout de suite. */
+function Recherche({ quete }: { quete: string }) {
+  return (
+    <section className={`${styles.bloc} ${m.monte}`} aria-labelledby="recherche">
+      <span className={styles.deuxPoints} aria-hidden="true">
+        <i />
+        <i />
+      </span>
+      <h1 id="recherche" className={styles.titre}>
+        On cherche ta buddy.
+      </h1>
+      <p className={styles.texte}>
+        Une femme en chemin depuis à peu près aussi longtemps que toi, si possible sur {quete}. On te prévient ici dès qu&apos;on l&apos;a trouvée.
+      </p>
+      <p className={styles.petit}>Phase de test : la recherche est simulée.</p>
+      <Link href="/chemin" className={styles.lien}>
+        Retour à mon chemin
+      </Link>
+    </section>
+  );
+}
+
+/** Trouvée : elle la rencontre quand elle veut. */
+function Trouvee() {
+  return (
+    <section className={`${styles.trouvee} ${m.monte}`} aria-labelledby="trouvee">
+      <h1 id="trouvee" className={styles.titre}>
+        On a trouvé ta buddy.
+      </h1>
+      <form action={rencontrer}>
+        <button type="submit" className="bouton bouton--blanc">
+          La rencontrer
+        </button>
+      </form>
     </section>
   );
 }
@@ -107,7 +171,9 @@ function Rencontre({ autre, questions, prochaine }: { autre: Autre; questions: Q
         <h1 id="autre" className={styles.nom}>
           {autre.prenom}
         </h1>
-        <span className={styles.quete}>En chemin sur {autre.quete}</span>
+        <span className={styles.quete}>
+          {autre.prenom}, en chemin depuis {autre.jours} jours, sur {autre.quete}.
+        </span>
         <p className={styles.phrase}>« {autre.presentation} »</p>
       </section>
 
@@ -185,7 +251,9 @@ function QuestionDeLaSemaine({ q, autre, prochaine, onRepondu }: { q: Question; 
 
   return (
     <section className={styles.bloc} aria-labelledby="question">
-      <span className={styles.etiquette}>La question de la semaine, la même pour vous deux</span>
+      <span className={styles.etiquette}>
+        Mois {Math.ceil(q.numero / 4)}, question {((q.numero - 1) % 4) + 1} sur 4 · la même pour vous deux
+      </span>
       <h2 id="question" className={styles.questionTitre}>
         {q.texte}
       </h2>

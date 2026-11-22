@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { proposerBuddyTest, repondreProposition } from "@/app/buddy/actions";
+import { proposerBuddyTest, rencontrer, repondreProposition, trouverMaBuddyTest } from "@/app/buddy/actions";
 import { etatBuddy } from "@/lib/buddy/etat";
 import { estEquipe } from "@/lib/equipe";
 import { surpriseArrivee, surpriseOuverte } from "@/lib/surprise/quand";
@@ -194,17 +194,28 @@ export default async function MonEspace() {
           </h2>
           <p className={styles.buddyTexte}>Une autre femme en chemin, une question par semaine, la même pour vous deux.</p>
           <div className={styles.buddyActions}>
-            <form action={repondreProposition.bind(null, true)}>
-              <button type="submit" className="bouton">
-                Oui, présentez-moi quelqu&apos;un
-              </button>
-            </form>
+            <Link href="/buddy" className="bouton">
+              Oui, dites-m&apos;en plus
+            </Link>
             <form action={repondreProposition.bind(null, false)}>
               <button type="submit" className={styles.buddyNon}>
                 Pas maintenant
               </button>
             </form>
           </div>
+        </section>
+      ) : buddy === "recherche" ? (
+        <p className={styles.attenteBuddy}>On cherche ta buddy.</p>
+      ) : buddy === "trouvee" ? (
+        <section className={`${styles.surprise} ${m.monte}`} style={{ animationDelay: "0.35s" }} aria-labelledby="buddy-trouvee">
+          <h2 id="buddy-trouvee" className={styles.surpriseTitre}>
+            On a trouvé ta buddy.
+          </h2>
+          <form action={rencontrer}>
+            <button type="submit" className="bouton bouton--blanc">
+              La rencontrer
+            </button>
+          </form>
         </section>
       ) : buddy === "acceptee" ? (
         <p className={styles.maSurprise}>
@@ -294,8 +305,13 @@ export default async function MonEspace() {
               <button type="submit">Déclencher la surprise</button>
             </form>
             <form action={proposerBuddyTest}>
-              <button type="submit">Proposer la buddy</button>
+              <button type="submit">Recommencer la buddy depuis le début</button>
             </form>
+            {buddy === "recherche" ? (
+              <form action={trouverMaBuddyTest}>
+                <button type="submit">Trouver ma buddy maintenant</button>
+              </form>
+            ) : null}
             <form action={revenirAuStadeReel}>
               <button type="submit">Revenir au stade réel</button>
             </form>

@@ -29,6 +29,10 @@ export const TYPES_EVENEMENT = [
   "buddy_acceptee",
   "buddy_refusee",
   "buddy_reponse",
+  "buddy_explication_vue",
+  "buddy_recherche_lancee",
+  "buddy_rencontree",
+  "cercle_interet",
   // audios guidés
   "audio_lance",
   "audio_termine",

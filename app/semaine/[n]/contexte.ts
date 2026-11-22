@@ -5,13 +5,14 @@ import { choixDuMois, profilDeChoix, retoursDuCarnet } from "@/lib/catalogue/sem
 import { jourAParis, plusJours } from "@/lib/rituel/citations";
 import { chargerHumeurs } from "@/lib/rituel/donnees";
 import { troisJoursLourds } from "@/lib/rituel/humeurs";
-import { chargerChemin } from "@/lib/chemin/donnees";
+import { chargerChemin, noterDebut, suivreLeCalendrier } from "@/lib/chemin/donnees";
 import { carteEcrite, chargerTextesCarte, texte as texteCarte } from "@/lib/moteur/carte";
 import { sesReponses } from "@/lib/moteur/ecriture";
 import { QUETE, libelleCapacite, type CodeCapacite } from "@/lib/questionnaire/contenu";
 import { chargerReponses } from "@/lib/questionnaire/donnees";
 import { extraitExact } from "@/lib/rituel/echo";
 import { chargerCarnet } from "@/lib/semaines/carnet";
+import { semaineFaite } from "@/lib/semaines/calendrier";
 import { dansLeMois, moisDe } from "@/lib/semaines/etiquettes";
 import { texteDeSemaine } from "@/lib/semaines/textes";
 import { createClient } from "@/lib/supabase/server";
@@ -35,7 +36,9 @@ export async function contexteSemaine(n: number) {
   if (!user) redirect("/connexion");
   const chemin = await chargerChemin(supabase);
   if (!chemin) redirect("/questionnaire");
-  if (n > chemin.semaine) redirect("/chemin");
+  await suivreLeCalendrier(supabase, chemin);
+  if (n > chemin.semaine) redirect("/chemin"); // pas encore arrivée
+  await noterDebut(supabase, chemin, n);
 
   const [{ data: profil }, reponses, carnet, textesCarte] = await Promise.all([
     supabase.from("profiles").select("*").maybeSingle(),
@@ -52,7 +55,7 @@ export async function contexteSemaine(n: number) {
   const monde = chemin.mondes[mois];
   const sujets: string | null = profil?.sujets_a_eviter ?? null;
   const aEviter = racinesAEviter(sujets);
-  const finie = n < chemin.semaine;
+  const finie = semaineFaite(n, chemin.progression);
   const etape = chemin.progression[String(n)] ?? 0;
   const capaciteDite = (c: CodeCapacite) => texteCarte(textesCarte, "capacite", c) ?? libelleCapacite(c);
   const caps = chemin.capacites[quete];

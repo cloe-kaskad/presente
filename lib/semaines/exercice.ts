@@ -1,9 +1,11 @@
 /**
  * L'exercice (semaine 1) ou le geste (semaine 3), sur sa propre page.
  * Son état est rangé dans paths.progression, sous la clé « ex{n} » : 1 = commencé, 2 = terminé.
- * Les exercices d'avant cette page (sans clé) sont déduits : semaine finie = terminé,
+ * Les exercices d'avant cette page (sans clé) sont déduits : semaine faite = terminé,
  * quelque chose d'écrit = en cours.
  */
+
+import { semaineFaite } from "./calendrier";
 
 export type EtatExercice = "pas_commence" | "en_cours" | "termine";
 
@@ -54,12 +56,13 @@ export function etatExercice(args: {
   semaineCourante: number;
   entrees: { code: string; reponse: string }[];
 }): EtatExercice | null {
-  const { n, progression, semaineCourante, entrees } = args;
-  if ((progression[String(n)] ?? 0) < 3 && n >= semaineCourante) return null; // pas encore créé
+  const { n, progression, entrees } = args;
+  const faite = semaineFaite(n, progression);
+  if ((progression[String(n)] ?? 0) < 3 && !faite) return null; // pas encore créé
   const cle = progression[cleEtat(n)];
   if (cle === 2) return "termine";
   if (cle === 1) return "en_cours";
-  if (n < semaineCourante) return "termine";
+  if (faite) return "termine";
   return aEcrit(n, entrees) ? "en_cours" : "pas_commence";
 }
 

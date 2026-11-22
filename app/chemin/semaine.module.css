@@ -1,0 +1,250 @@
+/* « Ton chemin, cette semaine. » (maquettes Chemin et D-Chemin, V0.9) */
+.grille {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.carte {
+  background: var(--rouge-profond);
+  color: var(--blanc);
+  border-radius: 24px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.etiquette {
+  font-size: 14px;
+  font-weight: 600;
+}
+.titre {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--blanc);
+  text-decoration: none;
+}
+.titre:hover {
+  text-decoration: underline;
+}
+.allege {
+  font-size: 14px;
+  line-height: 1.45;
+  opacity: 0.9;
+}
+.etapes {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+}
+.etape {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 0;
+  min-height: var(--cible);
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  color: var(--blanc);
+  text-decoration: none;
+}
+.etape:hover .etapeNom {
+  text-decoration: underline;
+}
+.etapeNom {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 600;
+}
+.etapeFaite .etapeNom {
+  font-weight: 500;
+  opacity: 0.85;
+}
+.etapeDroite {
+  font-size: 13px;
+  opacity: 0.85;
+  white-space: nowrap;
+}
+.rond {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  font-style: normal;
+}
+.rondFait {
+  background: var(--blanc);
+  color: var(--rouge-profond);
+}
+.rondEnCours {
+  border: 2.5px solid var(--blanc);
+  border-right-color: transparent;
+  transform: rotate(45deg);
+}
+.rondAFaire {
+  border: 1.5px dashed var(--blanc);
+  opacity: 0.8;
+}
+.surClair.rondFait {
+  background: var(--rouge-profond);
+  color: var(--blanc);
+}
+.surClair.rondEnCours {
+  border-color: var(--rouge-profond);
+  border-right-color: transparent;
+}
+.surClair.rondAFaire {
+  border-color: var(--rouge-profond);
+}
+.bas {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: 6px;
+}
+.bouton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--cible);
+  border-radius: 999px;
+  padding: 10px 18px;
+  background: var(--blanc);
+  color: var(--rouge-profond);
+  border: 1.5px solid var(--blanc);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.15s ease;
+}
+.bouton:hover {
+  background: var(--rose-pale);
+}
+.suite {
+  font-size: 14px;
+  line-height: 1.4;
+}
+.suite strong {
+  font-weight: 600;
+}
+.carte a:focus-visible {
+  outline: 2px solid var(--blanc);
+  outline-offset: 3px;
+}
+
+/* Les autres semaines */
+.colonne {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.autre {
+  background: var(--blanc);
+  border: 1.5px solid var(--rose);
+  border-radius: 20px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
+a.autre:hover {
+  border-color: var(--rouge-profond);
+}
+.autreAvenir {
+  background: none;
+  border-style: dashed;
+}
+.autreTexte {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.autreEtiquette {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--rouge-profond);
+}
+.autreTitre {
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--bordeaux);
+}
+.autreAvenir .autreTitre {
+  font-weight: 500;
+  color: var(--rouge-profond);
+}
+.passeesOrdi {
+  display: none;
+}
+.passeesTel summary {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--rouge-profond);
+  text-decoration: underline;
+  cursor: pointer;
+  min-height: var(--cible);
+  display: flex;
+  align-items: center;
+  list-style: none;
+}
+.passeesTel summary::-webkit-details-marker {
+  display: none;
+}
+.passeesListe {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.demo button {
+  background: none;
+  border: 0;
+  padding: 0;
+  min-height: var(--cible);
+  font: inherit;
+  font-size: 13px;
+  color: var(--bordeaux);
+  opacity: 0.7;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+@media (min-width: 1024px) {
+  .grille {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+    gap: 20px;
+    align-items: start;
+  }
+  .carte {
+    padding: 28px;
+    gap: 14px;
+  }
+  .titre {
+    font-size: 30px;
+  }
+  .etape {
+    padding: 10px 0;
+  }
+  .etapeNom {
+    font-size: 16px;
+  }
+  .passeesOrdi {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .passeesTel {
+    display: none;
+  }
+}

@@ -32,17 +32,15 @@ export async function avancer(n: number, etape: number): Promise<{ ok: boolean }
   return { ok: !error };
 }
 
-/** « J'ai terminé » : la semaine est faite, la suivante s'ouvre. */
+/** « J'ai terminé » : la semaine est faite. La suivante s'ouvrira à sa date. */
 export async function terminer(n: number, etapes: number): Promise<void> {
   if (!Number.isInteger(n) || n < 1 || n > 12) redirect("/chemin");
   const { supabase, chemin } = await session();
   const maj: Record<string, unknown> = {
     progression: { ...chemin.progression, [String(n)]: Math.max(etapes, chemin.progression[String(n)] ?? 0) },
   };
-  if (n === chemin.semaine && n < 12) maj.semaine_en_cours = n + 1;
-  let { error } = await supabase.from("paths").update(maj).eq("id", chemin.id);
-  // Avant la migration V0.4 (pas de colonne « progression ») : on avance au moins la semaine.
-  if (error && maj.semaine_en_cours) ({ error } = await supabase.from("paths").update({ semaine_en_cours: maj.semaine_en_cours }).eq("id", chemin.id));
+  // La semaine suivante ne s'ouvre plus ici : elle arrive 7 jours après le début de celle-ci (V0.9).
+  const { error } = await supabase.from("paths").update(maj).eq("id", chemin.id);
   if (error) console.error("[semaine] fin de semaine non enregistrée :", error.code);
   revalidatePath("/chemin");
   redirect("/chemin");
@@ -87,7 +85,7 @@ export async function commencerExercice(n: number): Promise<{ ok: boolean }> {
 
 /** « J'ai terminé » : l'exercice est terminé, et sa semaine aussi. On reste sur la page de l'exercice. */
 export async function terminerExercice(n: number): Promise<{ ok: boolean }> {
-  return majProgression(n, (p) => ({ ...p, [String(n)]: Math.max(4, p[String(n)] ?? 0), [`ex${n}`]: 2, [`exfin${n}`]: Math.floor(Date.now() / 1000) }), true);
+  return majProgression(n, (p) => ({ ...p, [String(n)]: Math.max(4, p[String(n)] ?? 0), [`ex${n}`]: 2, [`exfin${n}`]: Math.floor(Date.now() / 1000) }));
 }
 
 /**

@@ -1,7 +1,7 @@
 /**
  * Les étapes d'une semaine, et les huit étapes d'un mois (deux par semaine) pour le tracé.
- * progression[n] = nombre d'étapes faites dans la semaine n. Une semaine est finie quand
- * le chemin est passé à la suivante (« J'ai terminé »).
+ * progression[n] = nombre d'étapes faites dans la semaine n. Une semaine est finie quand toutes
+ * ses étapes le sont (« J'ai terminé », exercice terminé, palier) : la suivante, elle, arrive par la date.
  */
 export const ETAPES_SEMAINE = {
   1: ["avant", "contenu", "carnet", "exercice"],
@@ -19,11 +19,12 @@ export function pointsDeLaSemaine(d: DansLeMois, faites: number, terminee: boole
 }
 
 /** Combien des huit étapes du mois sont faites. */
-export function etapesFaitesDuMois(mois: 0 | 1 | 2, semaineEnCours: number, progression: Record<string, number>): number {
+export function etapesFaitesDuMois(mois: 0 | 1 | 2, progression: Record<string, number>): number {
   let total = 0;
   for (let d = 1 as DansLeMois; d <= 4; d = (d + 1) as DansLeMois) {
     const n = mois * 4 + d;
-    total += pointsDeLaSemaine(d, progression[String(n)] ?? 0, n < semaineEnCours);
+    const faites = progression[String(n)] ?? 0;
+    total += pointsDeLaSemaine(d, faites, faites >= ETAPES_SEMAINE[d].length);
     if (d === 4) break;
   }
   return total;

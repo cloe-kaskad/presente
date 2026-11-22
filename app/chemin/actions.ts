@@ -48,8 +48,11 @@ export async function noterHumeur(humeur: string, note: string): Promise<{ ok: b
   return { ok: true };
 }
 
-/** Pour tester en une soirée : débloque la semaine suivante sans attendre le calendrier. */
-export async function semaineSuivante(): Promise<void> {
+/**
+ * « Ouvrir la suite maintenant » (démo V0, comptes de la liste d'accès) : la semaine suivante s'ouvre
+ * sans attendre sa date. Son début sera noté quand elle l'ouvrira.
+ */
+export async function ouvrirLaSuite(): Promise<void> {
   const { supabase } = await session();
   const chemin = await chargerChemin(supabase);
   if (!chemin) redirect("/questionnaire");

@@ -1,6 +1,7 @@
 import "server-only";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { isCode, isQueteId, MONDES, type CodeCapacite, type MondeId, type QueteId } from "@/lib/questionnaire/contenu";
+import { cleDebut, semaineOuverte } from "@/lib/semaines/calendrier";
 import type { Chemin } from "./calcul";
 
 export type ChoixEnregistre = {
@@ -68,5 +69,26 @@ export async function ouvrirEspace(supabase: SupabaseClient, chemin: CheminEnreg
   const progression = { ...chemin.progression, espace: 1 };
   const { error } = await supabase.from("paths").update({ progression }).eq("id", chemin.id);
   if (error) console.error("[chemin] ouverture de l'espace non enregistrée :", error.code);
+  else chemin.progression = progression;
+}
+
+/**
+ * Le calendrier (V0.9) : ouvre la semaine suivante le jour venu (7 jours après le début de la précédente),
+ * que la précédente soit finie ou non. Met « chemin.semaine » à jour.
+ */
+export async function suivreLeCalendrier(supabase: SupabaseClient, chemin: CheminEnregistre): Promise<void> {
+  const n = semaineOuverte({ semaine: chemin.semaine, progression: chemin.progression, dateDebut: chemin.dateDebut });
+  if (n <= chemin.semaine) return;
+  const { error } = await supabase.from("paths").update({ semaine_en_cours: n }).eq("id", chemin.id);
+  if (error) console.error("[chemin] ouverture de la semaine suivante non enregistrée :", error.code);
+  else chemin.semaine = n;
+}
+
+/** Le jour où elle ouvre une semaine pour la première fois : le point de départ de la suivante. */
+export async function noterDebut(supabase: SupabaseClient, chemin: CheminEnregistre, n: number): Promise<void> {
+  if (chemin.progression[cleDebut(n)] || (n === 1 && chemin.dateDebut)) return;
+  const progression = { ...chemin.progression, [cleDebut(n)]: Math.floor(Date.now() / 1000) };
+  const { error } = await supabase.from("paths").update({ progression }).eq("id", chemin.id);
+  if (error) console.error("[chemin] début de semaine non enregistré :", error.code);
   else chemin.progression = progression;
 }

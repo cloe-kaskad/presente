@@ -3,9 +3,8 @@ import { redirect } from "next/navigation";
 import { BarreEspace } from "@/components/BarreEspace";
 import { TraceDuMois } from "@/components/TraceDuMois";
 import m from "@/components/mouvement.module.css";
-import { decrireContenu } from "@/lib/catalogue/presentation";
 import { choixDuMois, profilDeChoix, retoursDuCarnet } from "@/lib/catalogue/semaines";
-import { chargerChemin, ouvrirEspace } from "@/lib/chemin/donnees";
+import { chargerChemin, ouvrirEspace, suivreLeCalendrier } from "@/lib/chemin/donnees";
 import { semainesDuMois } from "@/lib/chemin/textes";
 import { carteEcrite, chargerTextesCarte } from "@/lib/moteur/carte";
 import { MONDE, QUETE, libelleCapacite } from "@/lib/questionnaire/contenu";
@@ -19,13 +18,16 @@ import { candidatsEcho } from "@/lib/rituel/echo-donnees";
 import { chargerCatalogue } from "@/lib/catalogue/airtable";
 import { chargerCarnet } from "@/lib/semaines/carnet";
 import { exercicesDuChemin } from "@/lib/semaines/exercice";
+import { arriveeApres, semaineFaite } from "@/lib/semaines/calendrier";
+import { ecouteLe } from "@/lib/semaines/ecoute";
+import { etapesDeLaSemaine, prochaineEtape } from "@/lib/semaines/etapes-semaine";
 import { enLettres, etapesFaitesDuMois } from "@/lib/semaines/etapes";
 import { createClient } from "@/lib/supabase/server";
-import { semaineSuivante } from "./actions";
 import { Article } from "./Article";
 import { Echo } from "./Echo";
 import { QuestionCherie } from "./QuestionCherie";
 import { Humeur } from "./Humeur";
+import { CetteSemaine, type AutreSemaine } from "./CetteSemaine";
 import { MesExercices } from "./MesExercices";
 import styles from "./espace.module.css";
 
@@ -40,6 +42,7 @@ export default async function MonEspace() {
 
   const chemin = await chargerChemin(supabase);
   if (!chemin) redirect("/questionnaire");
+  await suivreLeCalendrier(supabase, chemin);
 
   const aujourdhui = jourAParis();
   const [{ data: profil }, reponses, textesCarte, humeurs] = await Promise.all([
@@ -75,23 +78,15 @@ export default async function MonEspace() {
   // Trois jours lourds de suite : on allège (contenu doux au prochain choix, geste décalable).
   const lourd = troisJoursLourds(humeurs, aujourdhui);
   const choix = await choixDuMois(supabase, chemin, mois, profilDeChoix(profil, reponses, lourd, retoursDuCarnet(carnet)));
-  const semaines = semainesDuMois(
-    mois,
-    [libelleCapacite(capacites[0]), libelleCapacite(capacites[1])],
-    chemin.mondes[mois],
-  ).map((s) => {
-    // Semaines 1 et 3 : le titre du contenu choisi pour elle.
-    const c = s.dansLeMois === 1 ? choix.s1.contenu : s.dansLeMois === 3 ? choix.s3.contenu : null;
-    const etat = s.numero < chemin.semaine ? "faite" : s.numero === chemin.semaine ? "active" : "avenir";
-    const commencee = (chemin.progression[String(s.numero)] ?? 0) > 0;
-    if (!c) return { ...s, etat, commencee };
-    const suite = s.dansLeMois === 1 ? "ton carnet, puis un exercice pour ouvrir la question." : "ton carnet, puis un geste à poser dans ta semaine.";
-    return { ...s, titre: c.titre, description: `${decrireContenu(c)}, ${suite}`, etat, commencee };
-  });
-  const active = semaines.find((s) => s.etat === "active");
-  const faites = semaines.filter((s) => s.etat === "faite");
-  const prochaine = semaines.find((s) => s.etat === "avenir");
-
+  // Les semaines du mois et la suivante : leur étiquette et leur titre (le contenu choisi, l'épisode, ou la capacité).
+  const infoSemaine = (n: number) => {
+    const mo = Math.floor((n - 1) / 4) as 0 | 1 | 2;
+    const q = chemin.quetes[mo];
+    const caps = chemin.capacites[q];
+    const sem = semainesDuMois(mo, [libelleCapacite(caps[0]), libelleCapacite(caps[1])], chemin.mondes[mo])[(n - 1) % 4];
+    const c = mo === mois ? (sem.dansLeMois === 1 ? choix.s1.contenu : sem.dansLeMois === 3 ? choix.s3.contenu : null) : null;
+    return { ...sem, titre: c?.titre ?? sem.titre, contenu: c };
+  };
   const citation = citationDuJour(aujourdhui);
   // Tous ses exercices, pour les suivre depuis cette page sans repasser par le contenu.
   const exercices = exercicesDuChemin({
@@ -102,9 +97,39 @@ export default async function MonEspace() {
     entrees: carnet,
     aujourdhui,
   });
-  const etapes = etapesFaitesDuMois(mois, chemin.semaine, chemin.progression);
+  const etapes = etapesFaitesDuMois(mois, chemin.progression);
+
+  // La carte « Cette semaine » : ses étapes, la prochaine chose à faire, la date de la suite (V0.9).
+  const n = chemin.semaine;
+  const cette = infoSemaine(n);
+  const pratiqueDeLaSemaine = cette.dansLeMois === 1 ? choix.s1.pratique : cette.dansLeMois === 3 ? choix.s3.pratique : null;
+  const entreesDeLaSemaine = carnet.filter((e) => e.semaine === n);
+  const etapesSemaine = etapesDeLaSemaine({
+    n,
+    progression: chemin.progression,
+    entrees: entreesDeLaSemaine,
+    contenu: cette.contenu ? { type: cette.contenu.type, format: cette.contenu.format, temps: cette.contenu.temps } : null,
+    exercice: exercices.find((e) => e.n === n) ?? null,
+    pratique: pratiqueDeLaSemaine ? { nom: pratiqueDeLaSemaine.nom, rythme: pratiqueDeLaSemaine.rythme } : null,
+    ecoute: ecouteLe(n, chemin.progression, entreesDeLaSemaine, cette.dansLeMois === 2 || cette.dansLeMois === 4),
+  });
+  const jourArrivee = n < 12 ? arriveeApres(n, chemin.progression, chemin.dateDebut) : null;
+  const enToutesLettres = (jour: string) => {
+    const t = dateEnLettres(jour);
+    return t.charAt(0).toLowerCase() + t.slice(1);
+  };
+  const arrive = jourArrivee ? enToutesLettres(jourArrivee) : null;
+  const autres: AutreSemaine[] = [];
+  if (n < 12) {
+    const s2 = infoSemaine(n + 1);
+    autres.push({ n: n + 1, etiquette: s2.etiquette, titre: s2.titre, etat: "avenir", arrive });
+  }
+  for (let k = n - 1; k >= mois * 4 + 1; k--) {
+    const s2 = infoSemaine(k);
+    autres.push({ n: k, etiquette: s2.etiquette, titre: s2.titre, etat: semaineFaite(k, chemin.progression) ? "faite" : "a_reprendre" });
+  }
+  const sousTitre = cette.etiquette.replace(/^Semaine \d · /, "");
   const autresMois = [0, 1, 2].filter((m) => m > mois);
-  const etiquetteActive = (e: string) => e.replace(/^Semaine \d · /, "");
 
   return (
     <div className={styles.page}>
@@ -137,66 +162,22 @@ export default async function MonEspace() {
       {/* Ton chemin, cette semaine */}
       <section className={styles.semaines}>
         <h1 className={styles.titreSection}>Ton chemin, cette semaine.</h1>
-        <div className={styles.grilleSemaines}>
-          {semaines.map((s, i) =>
-            s.etat === "active" ? (
-              <div key={s.numero} className={`${styles.semaine} ${styles.active} ${m.monte}`} style={{ animationDelay: `${0.39 + i * 0.09}s` }}>
-                <span className={styles.semaineEtiquette}>Cette semaine · {etiquetteActive(s.etiquette)}</span>
-                <span className={styles.titreActive}>{s.titre}</span>
-                <span className={styles.description}>{s.description}</span>
-                {lourd && (s.dansLeMois === 1 || s.dansLeMois === 3) ? (
-                  <span className={styles.allege}>
-                    Ces derniers jours ont l&apos;air lourds. Tu peux décaler {s.dansLeMois === 3 ? "le geste" : "l'exercice"} de cette semaine : il
-                    t&apos;attendra.
-                  </span>
-                ) : null}
-                <Link href={`/semaine/${s.numero}`} className={`bouton bouton--blanc ${styles.continuer}`}>
-                  {s.commencee ? "Continuer" : "Commencer"}
-                </Link>
-              </div>
-            ) : (
-              <div
-                key={s.numero}
-                className={`${styles.semaine} ${s.etat === "faite" ? styles.faite : styles.avenir} ${m.monte}`}
-                style={{ animationDelay: `${0.39 + i * 0.09}s` }}
-              >
-                <span className={styles.pastille} aria-hidden="true">
-                  {s.etat === "faite" ? "✓" : ""}
-                </span>
-                <span className={styles.semaineEtiquette}>
-                  {s.etiquette}
-                  <span className="sr-only">{s.etat === "faite" ? " (faite)" : " (à venir)"}</span>
-                </span>
-                {s.etat === "faite" ? (
-                  <Link href={`/semaine/${s.numero}`} className={styles.titreSemaine}>
-                    {s.titre}
-                  </Link>
-                ) : (
-                  <span className={styles.titreSemaine}>{s.titre}</span>
-                )}
-              </div>
-            ),
-          )}
-        </div>
-        {/* Sur téléphone : la semaine en cours seulement, et une ligne pour le reste du mois */}
-        <details className={styles.toutLeMois}>
-          <summary className={styles.resume}>
-            {faites.length ? `${faites.length === 1 ? "Semaine" : "Semaines"} ${faites.map((s) => s.dansLeMois).join(" et ")} ${faites.length === 1 ? "faite" : "faites"}. ` : ""}
-            {prochaine ? `Ensuite : « ${prochaine.titre} ». ` : active ? "C'est la dernière semaine du mois. " : ""}
-            <span className={styles.voirTout}>Voir tout le mois</span>
-          </summary>
-          <ol>
-            {semaines.map((s) => (
-              <li key={s.numero}>
-                <span className={styles.semaineEtiquette}>
-                  {s.etiquette}
-                  {s.etat === "faite" ? " · faite" : s.etat === "active" ? " · cette semaine" : ""}
-                </span>
-                <span className={styles.titreLigne}>{s.titre}</span>
-              </li>
-            ))}
-          </ol>
-        </details>
+        <CetteSemaine
+          n={n}
+          etiquette={`Cette semaine · semaine ${cette.dansLeMois} · ${sousTitre}`}
+          titre={cette.titre}
+          etapes={etapesSemaine}
+          prochaine={prochaineEtape(etapesSemaine)}
+          arrive={arrive}
+          exerciceEnCours={exercices.some((e) => e.etat === "en_cours")}
+          allege={
+            lourd && (cette.dansLeMois === 1 || cette.dansLeMois === 3)
+              ? `Ces derniers jours ont l'air lourds. Tu peux décaler ${cette.dansLeMois === 3 ? "le geste" : "l'exercice"} de cette semaine : il t'attendra.`
+              : null
+          }
+          autres={autres}
+          peutOuvrirLaSuite={n < 12}
+        />
       </section>
 
       {/* Aujourd'hui, deux minutes pour toi */}
@@ -245,11 +226,6 @@ export default async function MonEspace() {
       </section>
 
       <footer className={styles.pied}>
-        <form action={semaineSuivante}>
-          <button type="submit" className={styles.discret} disabled={chemin.semaine >= 12}>
-            Passer à la semaine suivante (test)
-          </button>
-        </form>
         <form action="/auth/deconnexion" method="post">
           <button type="submit" className={styles.discret}>
             Me déconnecter

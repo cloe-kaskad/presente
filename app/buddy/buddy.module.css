@@ -1,0 +1,236 @@
+.page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 24px var(--gouttiere) 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: var(--bordeaux);
+}
+.tete {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.retour {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--rouge-profond);
+  text-decoration: none;
+  align-self: flex-start;
+}
+.surtitre,
+.etiquette {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--rouge-profond);
+}
+.titre {
+  margin: 0;
+  font-size: 32px;
+  line-height: 1.08;
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  color: var(--rouge);
+}
+.texte {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.55;
+}
+.petit {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  opacity: 0.8;
+}
+.bloc {
+  border: 1.5px solid var(--rose);
+  border-radius: 24px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.mention {
+  margin: 0;
+  align-self: flex-start;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--rouge-profond);
+  border: 1.5px dashed var(--rouge-profond);
+  border-radius: 999px;
+  padding: 4px 12px;
+}
+.autre {
+  background: var(--rose);
+  border-radius: 24px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.nom {
+  margin: 0;
+  font-size: 40px;
+  line-height: 1.05;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+.quete {
+  font-size: 15px;
+  font-weight: 600;
+}
+.phrase {
+  margin: 8px 0 0;
+  font-size: 18px;
+  line-height: 1.5;
+  font-style: italic;
+  font-weight: 500;
+}
+.sousTitre {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--rouge);
+}
+.questionTitre {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+.champ {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  font-size: 15px;
+  font-weight: 600;
+}
+.champ textarea {
+  width: 100%;
+  border: 1.5px solid var(--rose);
+  border-radius: 14px;
+  background: var(--blanc);
+  font: inherit;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--bordeaux);
+  padding: 12px 16px;
+  resize: vertical;
+}
+.champ textarea:focus-visible,
+.cases input:focus-visible {
+  outline: 2px solid var(--rouge-profond);
+  outline-offset: 2px;
+}
+.cases {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 15px;
+}
+.cases legend {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.cases label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: var(--cible);
+}
+.cases input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--rouge-profond);
+}
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.lien {
+  background: none;
+  border: 0;
+  padding: 0;
+  min-height: var(--cible);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--rouge-profond);
+  text-decoration: underline;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+.reponses {
+  display: grid;
+  gap: 10px;
+}
+.reponse {
+  background: var(--rose-pale);
+  border-radius: 16px;
+  padding: 14px 16px;
+}
+.reponseAutre {
+  background: var(--blanc);
+  border: 1.5px solid var(--rose);
+}
+.reponse p {
+  margin: 4px 0 0;
+  font-size: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+.qui {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--rouge-profond);
+}
+.echange {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1.5px solid var(--rose-pale);
+}
+.question {
+  font-size: 15px;
+  font-weight: 600;
+}
+.toi {
+  background: var(--rose-pale);
+  border-radius: 20px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.sortir {
+  display: flex;
+  align-items: center;
+  gap: 6px 16px;
+  flex-wrap: wrap;
+  font-size: 14px;
+}
+@media (min-width: 1024px) {
+  .page {
+    padding: 40px 48px 72px;
+  }
+  .titre {
+    font-size: 44px;
+  }
+  .nom {
+    font-size: 56px;
+  }
+  .reponses {
+    grid-template-columns: 1fr 1fr;
+  }
+}

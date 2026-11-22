@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { proposerBuddyTest, repondreProposition } from "@/app/buddy/actions";
+import { etatBuddy } from "@/lib/buddy/etat";
 import { estEquipe } from "@/lib/equipe";
 import { surpriseArrivee, surpriseOuverte } from "@/lib/surprise/quand";
 import { declencherSurprise, ouvrirLaSuite } from "./actions";
@@ -138,6 +140,7 @@ export default async function MonEspace() {
     autres.push({ n: k, etiquette: s2.etiquette, titre: s2.titre, etat: semaineFaite(k, chemin.progression) ? "faite" : "a_reprendre" });
   }
   const equipe = estEquipe(user.email);
+  const buddy = etatBuddy(chemin.progression, chemin.semaine);
   const surprise = surpriseOuverte(chemin.progression) ? "ouverte" : surpriseArrivee(chemin.progression, chemin.dateDebut) ? "arrivee" : null;
   const sousTitre = cette.etiquette.replace(/^Semaine \d · /, "");
   const autresMois = [0, 1, 2].filter((m) => m > mois);
@@ -180,6 +183,32 @@ export default async function MonEspace() {
       ) : surprise === "ouverte" ? (
         <p className={styles.maSurprise}>
           <Link href="/surprise">Ma surprise</Link>
+        </p>
+      ) : null}
+
+      {/* La buddy : la proposition (semaine 3, ou depuis le panneau de test), puis un petit lien */}
+      {buddy === "proposee" ? (
+        <section className={`${styles.buddy} ${m.monte}`} style={{ animationDelay: "0.35s" }} aria-labelledby="buddy">
+          <h2 id="buddy" className={styles.buddyTitre}>
+            Envie de faire un bout de chemin à deux ?
+          </h2>
+          <p className={styles.buddyTexte}>Une autre femme en chemin, une question par semaine, la même pour vous deux. Rien d&apos;autre n&apos;est partagé.</p>
+          <div className={styles.buddyActions}>
+            <form action={repondreProposition.bind(null, true)}>
+              <button type="submit" className="bouton">
+                Oui, présentez-moi quelqu&apos;un
+              </button>
+            </form>
+            <form action={repondreProposition.bind(null, false)}>
+              <button type="submit" className={styles.buddyNon}>
+                Pas maintenant
+              </button>
+            </form>
+          </div>
+        </section>
+      ) : buddy === "acceptee" ? (
+        <p className={styles.maSurprise}>
+          <Link href="/buddy">Ma buddy</Link>
         </p>
       ) : null}
 
@@ -263,6 +292,9 @@ export default async function MonEspace() {
             ) : null}
             <form action={declencherSurprise}>
               <button type="submit">Déclencher la surprise</button>
+            </form>
+            <form action={proposerBuddyTest}>
+              <button type="submit">Proposer la buddy</button>
             </form>
             <Link href="/equipe">Voir l&apos;engagement</Link>
           </div>

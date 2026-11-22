@@ -34,11 +34,12 @@ export type Note = {
 
 export type SemaineDuCarnet = { n: number; titre: string; cetteSemaine: boolean; premier: string; dernier: string; notes: Note[] };
 
-type Origine = "avant" | "apres" | "pratique" | "palier" | "echo" | "qc" | "fil";
+type Origine = "avant" | "apres" | "pratique" | "palier" | "echo" | "qc" | "fil" | "buddy";
 
 function origineDuCode(code: string): Origine {
   if (code.startsWith("echo:")) return "echo";
   if (code.startsWith("qc:")) return "qc";
+  if (code.startsWith("buddy:")) return "buddy";
   const reste = code.split(":").slice(1).join(":");
   if (/^(exo|acte|decale)(:|$)/.test(reste)) return "pratique";
   if (reste.startsWith("palier")) return "palier";
@@ -65,6 +66,8 @@ function libelle(o: Origine, info: InfoSemaine | undefined): { texte: string; ca
       return { texte: info?.pratique ? `${info.pratique.agir ? "Geste" : "Exercice"} · ${info.pratique.nom}` : "Exercice", categorie: "exercices" };
     case "palier":
       return { texte: "Le palier du mois", categorie: "exercices" };
+    case "buddy":
+      return { texte: "Un bout de chemin à deux", categorie: "jour" };
     case "fil":
       return { texte: "Tirer le fil", categorie: "contenus" };
     case "echo":

@@ -18,8 +18,8 @@ Un écran à lire avant de s'engager. Titre : « Un bout de chemin à deux ». T
 
 - « On te présente une femme qui est en chemin depuis à peu près aussi longtemps que toi, et si possible sur une quête que vous avez en commun. »
 - « Chaque semaine, une question, la même pour vous deux. Tu réponds en quelques lignes, quand tu veux dans la semaine. Tu lis sa réponse dès que tu as donné la tienne. »
-- « Ça dure quatre semaines. Ensuite, on vous demande à chacune si vous avez envie de continuer. »
-- « Pas de messagerie, pas de numéro à échanger. Juste ses mots et les tiens. »
+- « Les questions vont un peu plus loin de mois en mois. À la fin de chaque mois, on vous demande à chacune si vous avez envie de continuer. »
+- « Pas de messagerie ni de numéro à échanger pendant le chemin : juste ses mots et les tiens. À la fin de ton chemin, si vous en avez envie toutes les deux, vous pourrez vous écrire en dehors. »
 
 En dessous, une phrase sur ce que ça apporte : « Ce que ça change : savoir qu'une autre avance en même temps que toi, et lire comment elle s'y prend. »
 
@@ -44,7 +44,7 @@ Sur Mon chemin, une carte qui apparaît en montant : « On a trouvé ta buddy. �
 La page `/buddy` montre alors, dans cet ordre :
 
 - qui elle est : « Inès, en chemin depuis 15 jours, sur La Voix. » puis sa phrase de présentation. Le nombre de jours et la quête d'Inès se calent sur ceux de la testeuse (à un ou deux jours près) ;
-- la question de la semaine, avec « Question 1 sur 4 » ;
+- la question de la semaine, avec « Mois 1, question 1 sur 4 » ;
 - sa réponse à elle, puis celle d'Inès une fois la sienne donnée (comme aujourd'hui).
 
 ## Après avoir répondu : dire la suite
@@ -53,7 +53,32 @@ Aujourd'hui, après « C'est noté. », il n'y a plus rien. Ajouter sous les deu
 
 - « Prochaine question lundi 30 novembre. » (sept jours après le début de la question en cours, même règle que les étapes du chemin). En mode test, le lien « Ouvrir la suite maintenant » fait aussi avancer la question.
 - les questions passées restent lisibles en dessous, repliées, la plus récente en haut : « Semaine 1 : Qu'est-ce que tu as osé… ».
-- après la quatrième question : « Vous êtes arrivées au bout des quatre semaines. Envie de continuer avec Inès ? » Boutons « Oui, on continue » et « On s'arrête là ». En test, Inès dit oui.
+- après la quatrième question de chaque mois : « Un mois que vous vous lisez. Envie de continuer avec Inès ? » Boutons « Oui, on continue » et « On s'arrête là ». Chacune répond de son côté. Si l'une arrête, l'autre voit seulement « L'échange s'est arrêté. » et peut demander une nouvelle buddy. En test, Inès dit oui.
+
+## Des questions qui vont plus loin de mois en mois
+
+L'échange dure tout le chemin (trois mois, douze questions). On ne demande jamais à l'une de juger l'autre : après quelques phrases lues, ce serait trop dur et pas juste.
+
+- **Mois 1, ce que je fais** : des questions de faits, faciles. Exemples : « Qu'est-ce que tu as osé cette semaine, même petit ? », « Qu'est-ce que tu as fait pour toi et pour personne d'autre ? », « Où as-tu dit oui en pensant non ? ».
+- **Mois 2, ce qui résiste** : « Qu'est-ce que tu remets à plus tard depuis longtemps, et que tu sais ? », « De quoi as-tu peur que les autres pensent ? », « Qu'est-ce que tu n'as encore dit à personne sur ce que tu traverses ? ».
+- **Mois 3, ce que j'emporte** : « Qu'est-ce qui a bougé chez toi et que personne n'a encore remarqué ? », « Qu'est-ce que tu ne feras plus comme avant ? », « Que dirais-tu à celle que tu étais il y a trois mois ? ».
+- **La dernière question de chaque mois est la même** : « Dans ce qu'elle a écrit ce mois-ci, quelle phrase t'est restée ? ». Elle choisit une phrase de l'autre (en la touchant dans la liste de ses réponses) et peut ajouter une ligne. C'est un cadeau, pas une analyse.
+- **« Un mot pour elle »**, à partir de la deuxième question : après avoir lu la réponse de l'autre, elle peut laisser une seule ligne (140 caractères au plus), une fois par semaine. Ce n'est pas une messagerie : pas de réponse à la réponse.
+
+Mettre les douze questions dans `lib/buddy/questions.ts` avec leur mois, et douze réponses toutes faites pour Inès dans `lib/buddy/profil-test.ts` (textes provisoires, Cloé les réécrira). Inès laisse aussi « un mot » scripté une semaine sur deux.
+
+## S'écrire en dehors : seulement après la fin du chemin
+
+- Jamais pendant les trois mois. C'est annoncé dès l'écran « Comment ça se passe ».
+- Au dernier palier (fin du mois 3), une carte : « Ton chemin se termine. Envie de garder le lien avec Inès ? ». Chacune répond de son côté. Si l'une dit non ou ne répond pas, l'autre voit seulement « Merci pour ces trois mois à deux. », sans savoir qui a dit quoi.
+- Si les deux disent oui : chacune tape le contact qu'elle veut donner (adresse mail, téléphone ou Instagram, un seul champ libre). On ne prend rien dans son compte. Le contact de l'autre s'affiche une fois, et on ne le garde pas plus de trente jours.
+- Si elles se rencontrent avant, au cercle de parole (voir plus bas), elles font ce qu'elles veulent : le site ne s'en mêle pas.
+- Un lien « Quelque chose me gêne » dans « Comment ça marche », dès le premier jour : il envoie un message à l'équipe. C'est le seul cas où l'équipe lit un échange, et seulement celui-là, parce qu'elle le demande. Le dire en une ligne sous le lien.
+- **En test** : accessible par le panneau « Mode test » (« Aller à la fin du chemin à deux »). Aucun vrai contact : à la place, « Ici, tu recevrais le contact d'Inès. ».
+
+## Le cercle de parole (carte « comme si » seulement)
+
+Rien à construire pour l'instant. En test, une carte sur Mon chemin au début du mois 2, avec le bandeau « phase de test » : « Ton premier cercle. Six femmes en chemin, 1 h 15, à Kaskad République ou en visio. Ta buddy y sera. » Bouton « Je veux en être » qui note seulement l'événement `cercle_interet`. Cloé décidera ensuite qui anime et si le cercle est compris dans le prix.
 
 ## Ce qu'on retire ou qu'on déplace
 

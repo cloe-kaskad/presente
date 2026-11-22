@@ -97,8 +97,9 @@ Rien à construire pour l'instant. En test, une carte sur Mon chemin au début d
 
 Cloé a demandé de redessiner la page de proposition et l'attente. Les maquettes sont dans `design/` :
 
-- `Duo-A.html`, `Duo-B.html` (téléphone) et `D-Duo-A.html`, `D-Duo-B.html` (ordinateur) : la page « Un bout de chemin à deux », en deux variantes. **Attendre que Cloé dise laquelle elle choisit avant de coder cette page.** `Duo-B-plus.html` montre « En savoir plus » déplié.
-- `Duo-cherche.html` puis `Duo-attente.html` (et `D-Duo-attente.html`) : après « Ça me tente », deux à trois secondes d'animation plein écran (les deux tracés se rejoignent), puis le message sur le même écran, puis un seul bouton « Retour à mon chemin ». `Duo-attente-auto.html` est la variante avec retour automatique : ne la coder que si Cloé la demande.
+- `Duo-A.html` (téléphone) et `D-Duo-A.html` (ordinateur) : la page « Un bout de chemin à deux ». `Duo-A-plus.html` montre « En savoir plus » déplié.
+- Le visuel : deux voies parallèles avec leurs étapes, comme sur un plan. Elles ne se croisent jamais et ne s'enlacent pas (Cloé a refusé une première version, trop romantique). Reprendre le dessin des maquettes tel quel.
+- `Duo-cherche.html` puis `Duo-attente.html` (et `D-Duo-attente.html`) : après « Ça me tente », deux à trois secondes d'animation plein écran (deux voies parties de loin finissent côte à côte), puis le message sur le même écran, puis un seul bouton « Retour à mon chemin ». `Duo-attente-auto.html` est la variante avec retour automatique : ne la coder que si Cloé la demande.
 - `Duo-etats.html`, `D-Duo-etats.html` : la carte sur Mon chemin et ses quatre états (recherche en cours, trouvée, pas encore trouvée après 24 heures, « Pas maintenant » choisi).
 - `Duo-email.html` : l'email « On a trouvé ta buddy ». Si l'envoi d'emails n'existe pas encore sur le site, le dire à Cloé et ne faire que la carte sur Mon chemin.
 
@@ -108,4 +109,4 @@ Ce qui change par rapport au texte plus haut :
 - les deux boutons sont visibles sans défiler sur téléphone ;
 - l'écran de la phrase de présentation (écran 3) reste tel que décrit, entre « Ça me tente » et l'animation ;
 - le mouvement respecte « mouvement réduit » : dans ce cas, pas d'animation, le message s'affiche tout de suite ;
-- le mot « buddy » n'est pas définitif : le mettre dans une seule constante pour pouvoir le changer partout.
+- **le mot « buddy » va changer** : Cloé choisit un autre mot. Mettre tous les textes qui le contiennent dans un seul fichier (`lib/buddy/textes.ts`) pour pouvoir le remplacer partout d'un coup.

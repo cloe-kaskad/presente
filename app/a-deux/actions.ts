@@ -26,14 +26,14 @@ async function maj(patch: (p: Record<string, number>, semaine: number) => Record
   const { error } = await supabase.from("paths").update({ progression }).eq("id", chemin.id);
   if (error) console.error("[buddy] non enregistré :", error.code);
   revalidatePath("/chemin");
-  revalidatePath("/buddy");
+  revalidatePath("/a-deux");
   return { ok: !error, supabase, chemin };
 }
 
 /** « Oui, présentez-moi quelqu'un » ou « Pas maintenant ». */
 export async function repondreProposition(oui: boolean): Promise<void> {
   if (oui) {
-    redirect("/buddy");
+    redirect("/a-deux");
   }
   // La semaine du refus : la proposition revient une seule fois, au début du mois 2.
   const r = await maj((p, semaine) => ({ ...p, buddy_refus: (p.buddy_refus ?? 0) + 1, buddy_test: 0, buddy_refus_semaine: semaine }));
@@ -60,7 +60,7 @@ export async function rencontrer(): Promise<void> {
     await noter(r.supabase, "buddy_rencontree", { semaine: r.chemin.semaine, pathId: r.chemin.id, unique: true });
     await noter(r.supabase, "buddy_acceptee", { semaine: r.chemin.semaine, pathId: r.chemin.id, unique: true });
   }
-  redirect("/buddy");
+  redirect("/a-deux");
 }
 
 /** Sa réponse à la question de la semaine (rangée dans son carnet). */
@@ -70,7 +70,7 @@ export async function repondreQuestion(numero: number, question: string, reponse
   if (!texte) return { ok: false };
   const { chemin } = await session();
   const r = await enregistrerEntree({ semaine: chemin.semaine, type: "carnet", code: codeReponse(chemin.progression, numero), question: question.slice(0, 500), reponse: texte });
-  revalidatePath("/buddy");
+  revalidatePath("/a-deux");
   return r;
 }
 
@@ -104,7 +104,7 @@ export async function laisserUnMot(numero: number, mot: string): Promise<{ ok: b
   if (!texte) return { ok: false };
   const { chemin } = await session();
   const r = await enregistrerEntree({ semaine: chemin.semaine, type: "carnet", code: codeMot(chemin.progression, numero), question: "Un mot pour elle", reponse: texte });
-  revalidatePath("/buddy");
+  revalidatePath("/a-deux");
   return r;
 }
 

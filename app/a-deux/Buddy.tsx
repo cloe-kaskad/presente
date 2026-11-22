@@ -7,6 +7,7 @@ import { CestNote } from "@/components/CestNote";
 import m from "@/components/mouvement.module.css";
 import { de, type EtatBuddy } from "@/lib/buddy/etat";
 import { CE_QUE_CA_CHANGE, POINTS_BUDDY } from "@/lib/buddy/explication";
+import { TEXTES_A_DEUX as T } from "@/lib/buddy/textes";
 import {
   arreterEchange,
   chercherMaBuddy,
@@ -61,7 +62,7 @@ export function Buddy({
         <Link href="/chemin" className={styles.retour}>
           ← Mon chemin
         </Link>
-        <span className={styles.surtitre}>Un bout de chemin à deux</span>
+        <span className={styles.surtitre}>{T.titre}</span>
       </div>
       {etat === "proposee" ? <Debut moi={moi} /> : null}
       {etat === "recherche" ? <Recherche quete={moi.quete} /> : null}
@@ -74,7 +75,7 @@ export function Buddy({
           <div className={styles.actions}>
             <form action={demanderNouvelleBuddy}>
               <button type="submit" className="bouton">
-                Demander une nouvelle buddy
+                {T.nouvelle}
               </button>
             </form>
             <Link href="/chemin" className={styles.lien}>
@@ -99,7 +100,7 @@ function Debut({ moi }: { moi: Moi }) {
     return (
       <section className={`${styles.bloc} ${m.monte}`} aria-labelledby="explication">
         <h1 id="explication" className={styles.titre}>
-          Un bout de chemin à deux
+          {T.titre}
         </h1>
         <ul className={styles.points}>
           {POINTS_BUDDY.map((p) => (
@@ -151,7 +152,7 @@ function Debut({ moi }: { moi: Moi }) {
             })
           }
         >
-          Chercher ma buddy
+          {T.chercher}
         </button>
         <button type="button" className={styles.lien} onClick={() => setEcran("explication")}>
           Revenir à l&apos;explication
@@ -171,7 +172,7 @@ function Recherche({ quete }: { quete: string }) {
         <i />
       </span>
       <h1 id="recherche" className={styles.titre}>
-        On cherche ta buddy.
+        {T.onCherche}
       </h1>
       <p className={styles.texte}>
         Une femme en chemin depuis à peu près aussi longtemps que toi, si possible sur {quete}. On te prévient ici dès qu&apos;on l&apos;a trouvée.
@@ -189,7 +190,7 @@ function Trouvee() {
   return (
     <section className={`${styles.trouvee} ${m.monte}`} aria-labelledby="trouvee">
       <h1 id="trouvee" className={styles.titre}>
-        On a trouvé ta buddy.
+        {T.onATrouve}
       </h1>
       <form action={rencontrer}>
         <button type="submit" className="bouton bouton--blanc">
@@ -227,7 +228,7 @@ function Rencontre({
         {autre.mention}
       </p>
       <section className={`${styles.autre} ${m.monte}`} aria-labelledby="autre">
-        <span className={styles.etiquette}>Ta buddy</span>
+        <span className={styles.etiquette}>{T.Ta}</span>
         <h1 id="autre" className={styles.nom}>
           {autre.prenom}
         </h1>

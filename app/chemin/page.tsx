@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { allerALaFinTest, interesseeParLeCercle, proposerBuddyTest, rencontrer, repondreProposition, trouverMaBuddyTest } from "@/app/buddy/actions";
+import { allerALaFinTest, interesseeParLeCercle, proposerBuddyTest, rencontrer, repondreProposition, trouverMaBuddyTest } from "@/app/a-deux/actions";
 import { CestNote } from "@/components/CestNote";
+import { TEXTES_A_DEUX as T } from "@/lib/buddy/textes";
 import { MODE_TEST } from "@/lib/mode-test";
 import { codeReponse, etatBuddy, finDuCheminADeux } from "@/lib/buddy/etat";
 import { estEquipe } from "@/lib/equipe";
@@ -200,7 +201,7 @@ export default async function MonEspace() {
           </h2>
           <p className={styles.buddyTexte}>Une autre femme en chemin, une question par semaine, la même pour vous deux.</p>
           <div className={styles.buddyActions}>
-            <Link href="/buddy" className="bouton">
+            <Link href="/a-deux" className="bouton">
               Oui, dites-m&apos;en plus
             </Link>
             <form action={repondreProposition.bind(null, false)}>
@@ -211,11 +212,11 @@ export default async function MonEspace() {
           </div>
         </section>
       ) : buddy === "recherche" ? (
-        <p className={styles.attenteBuddy}>On cherche ta buddy.</p>
+        <p className={styles.attenteBuddy}>{T.onCherche}</p>
       ) : buddy === "trouvee" ? (
         <section className={`${styles.surprise} ${m.monte}`} style={{ animationDelay: "0.35s" }} aria-labelledby="buddy-trouvee">
           <h2 id="buddy-trouvee" className={styles.surpriseTitre}>
-            On a trouvé ta buddy.
+            {T.onATrouve}
           </h2>
           <form action={rencontrer}>
             <button type="submit" className="bouton bouton--blanc">
@@ -225,7 +226,7 @@ export default async function MonEspace() {
         </section>
       ) : buddy === "acceptee" ? (
         <p className={styles.maSurprise}>
-          <Link href="/buddy">Ma buddy</Link>
+          <Link href="/a-deux">{T.titre}</Link>
         </p>
       ) : null}
 
@@ -235,7 +236,7 @@ export default async function MonEspace() {
           <h2 id="buddy-fin" className={styles.surpriseTitre}>
             Ton chemin se termine. Envie de garder le lien avec Inès ?
           </h2>
-          <Link href="/buddy" className="bouton bouton--blanc">
+          <Link href="/a-deux" className="bouton bouton--blanc">
             Répondre
           </Link>
         </section>
@@ -249,7 +250,7 @@ export default async function MonEspace() {
             Ton premier cercle.
           </h2>
           <p className={styles.buddyTexte}>
-            Six femmes en chemin, 1 h 15, à Kaskad République ou en visio.{buddy === "acceptee" ? " Ta buddy y sera." : ""}
+            Six femmes en chemin, 1 h 15, à Kaskad République ou en visio.{buddy === "acceptee" ? ` ${T.auCercle}` : ""}
           </p>
           {chemin.progression.cercle ? (
             <CestNote anime={false} suite="On te tient au courant." />
@@ -345,14 +346,14 @@ export default async function MonEspace() {
               <button type="submit">Déclencher la surprise</button>
             </form>
             <form action={proposerBuddyTest}>
-              <button type="submit">Recommencer la buddy depuis le début</button>
+              <button type="submit">{T.test.recommencer}</button>
             </form>
             <form action={allerALaFinTest}>
-              <button type="submit">Aller à la fin du chemin à deux</button>
+              <button type="submit">{T.test.fin}</button>
             </form>
             {buddy === "recherche" ? (
               <form action={trouverMaBuddyTest}>
-                <button type="submit">Trouver ma buddy maintenant</button>
+                <button type="submit">{T.test.trouver}</button>
               </form>
             ) : null}
             <form action={revenirAuStadeReel}>

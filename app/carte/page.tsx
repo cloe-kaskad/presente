@@ -19,6 +19,7 @@ import { sesReponses } from "@/lib/moteur/ecriture";
 import { garderMotsExacts } from "@/lib/moteur/regles";
 import { createClient } from "@/lib/supabase/server";
 import { recalculerMonChemin } from "./actions";
+import m from "@/components/mouvement.module.css";
 import styles from "./carte.module.css";
 
 export const metadata = { title: "Ta carte · Présente !" };
@@ -164,7 +165,7 @@ export default async function Carte({ searchParams }: { searchParams: Promise<{ 
         </div>
         <div className={styles.droite}>
           <article className={styles.lettre}>
-            <p className={styles.ouverture}>
+            <p className={`${styles.ouverture} ${m.monte}`}>
               <AvecSesMots texte={synthese.ouverture} />
             </p>
             <span className={styles.filet} aria-hidden="true" />
@@ -172,15 +173,17 @@ export default async function Carte({ searchParams }: { searchParams: Promise<{ 
               ["Ce qui revient", synthese.ce_qui_revient],
               ["D'où ça vient, peut-être", synthese.d_ou_ca_vient],
               ["Ce qui se joue maintenant", synthese.ce_qui_se_joue],
-            ].map(([titre, t]) => (
-              <div key={titre} className={styles.bloc}>
+            ].map(([titre, t], i) => (
+              // La lettre apparaît paragraphe par paragraphe (150 ms d'écart).
+              <div key={titre} className={`${styles.bloc} ${m.monte}`} style={{ animationDelay: `${0.15 * (i + 1)}s` }}>
                 <h2 className={styles.blocTitre}>{titre}</h2>
                 <p className={styles.blocTexte}>
                   <AvecSesMots texte={t} />
                 </p>
               </div>
             ))}
-            <p className={styles.lecture}>C&apos;est une lecture, pas un verdict. Elle s&apos;affinera avec ce que tu écriras en route.</p>
+            <p className={`${styles.lecture} ${m.monte}`} style={{ animationDelay: "0.6s" }}>
+              C&apos;est une lecture, pas un verdict. Elle s&apos;affinera avec ce que tu écriras en route.</p>
           </article>
           {dansLEspace ? null : (
             <div className={styles.appel}>

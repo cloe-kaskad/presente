@@ -72,7 +72,7 @@ export function AvisContenu({
 
         {avecMot ? (
           motOuvert ? (
-            <>
+            <div className={`${styles.mot} ${motInitial ? "" : m.deplie}`}>
               <label className={styles.champ}>
                 <span>
                   Dis-moi pourquoi, ça m&apos;aide à mieux choisir la suite<span className={styles.facultatif}> (facultatif)</span>
@@ -97,7 +97,7 @@ export function AvisContenu({
                   </button>
                 </div>
               ) : null}
-            </>
+            </div>
           ) : (
             <button type="button" className={styles.ajouter} onClick={() => setMotOuvert(true)}>
               + Ajouter un mot

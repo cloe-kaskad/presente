@@ -161,3 +161,9 @@
     font-size: 32px;
   }
 }
+
+.mot {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}

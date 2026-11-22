@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import { ViewTransition } from "react";
 import "./globals.css";
 
 const dmSans = localFont({
@@ -31,7 +32,10 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="fr" className={`${dmSans.variable} ${anton.variable}`}>
-      <body>{children}</body>
+      <body>
+        {/* Changement de page : un fondu très court (150 ms) quand le navigateur sait le faire (brief V0.8). */}
+        <ViewTransition>{children}</ViewTransition>
+      </body>
     </html>
   );
 }

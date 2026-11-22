@@ -95,7 +95,7 @@ export function MesExercices({ exercices }: { exercices: ExerciceDuChemin[] }) {
       )}
 
       {termines.length && ouvert ? (
-        <div id="exercices-termines" className={styles.liste}>
+        <div id="exercices-termines" className={`${styles.liste} ${m.deplie}`}>
           {termines.map((e) => (
             <Link key={e.n} href={`/semaine/${e.n}/exercice`} className={styles.termine}>
               <span className={styles.termineNom}>{e.nom}</span>

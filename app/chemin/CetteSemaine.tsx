@@ -131,7 +131,7 @@ export function CetteSemaine({
             <summary>
               Voir les semaines {passees.every((a) => a.etat === "faite") ? "faites" : "passées"} ({passees.length})
             </summary>
-            <div className={styles.passeesListe}>{passees.map((a, i) => ligne(a, i + 1))}</div>
+            <div className={`${styles.passeesListe} ${m.deplie}`}>{passees.map((a, i) => ligne(a, i + 1))}</div>
           </details>
         ) : null}
         {peutOuvrirLaSuite ? (

@@ -225,3 +225,18 @@ img {
     font-size: 36px;
   }
 }
+
+/* Changement de page : un fondu très court (brief V0.8). Sans prise en charge du navigateur, rien ne change. */
+::view-transition-group(*),
+::view-transition-old(*),
+::view-transition-new(*) {
+  animation-duration: 0.15s;
+  animation-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none;
+  }
+}

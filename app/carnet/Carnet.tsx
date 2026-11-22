@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { dateDeNote, periode, type Categorie, type SemaineDuCarnet } from "@/lib/semaines/fil-du-carnet";
+import m from "@/components/mouvement.module.css";
 import styles from "./carnet.module.css";
 
 type Filtre = "tout" | Categorie | "debut";
@@ -98,8 +99,13 @@ export function Carnet({ semaines, debut }: { semaines: SemaineDuCarnet[]; debut
             </span>
           </div>
           <div className={styles.feuille}>
-            {s.notes.map((n) => (
-              <article key={n.cle} className={styles.note}>
+            {s.notes.map((n, i) => (
+              // Les notes de la semaine en cours montent en cascade (60 ms d'écart, six premières seulement).
+              <article
+                key={n.cle}
+                className={`${styles.note} ${s.cetteSemaine && i < 6 ? m.monte : ""}`}
+                style={s.cetteSemaine && i < 6 ? { animationDelay: `${i * 60}ms` } : undefined}
+              >
                 <span className={styles.date}>
                   <span className={styles.dateTel}>{dateDeNote(n.jour)}</span>
                   <span className={styles.dateOrdi}>{dateDeNote(n.jour, true)}</span>
@@ -133,7 +139,7 @@ export function Carnet({ semaines, debut }: { semaines: SemaineDuCarnet[]; debut
             </span>
           </div>
           {debutDeplie ? (
-            <div className={styles.feuille}>
+            <div className={`${styles.feuille} ${filtre === "debut" || r ? "" : m.deplie}`}>
               <article className={styles.note}>
                 <span className={styles.date} />
                 <div className={styles.noteCorps}>

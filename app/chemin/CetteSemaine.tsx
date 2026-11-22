@@ -1,7 +1,6 @@
 import Link from "next/link";
 import m from "@/components/mouvement.module.css";
 import type { EtapeSemaine } from "@/lib/semaines/etapes-semaine";
-import { ouvrirLaSuite } from "./actions";
 import styles from "./semaine.module.css";
 
 export type AutreSemaine = { n: number; etiquette: string; titre: string; etat: "faite" | "a_reprendre" | "avenir"; arrive?: string | null };
@@ -33,7 +32,6 @@ export function CetteSemaine({
   exerciceEnCours,
   allege,
   autres,
-  peutOuvrirLaSuite,
 }: {
   n: number;
   etiquette: string;
@@ -45,7 +43,6 @@ export function CetteSemaine({
   exerciceEnCours: boolean;
   allege: string | null;
   autres: AutreSemaine[];
-  peutOuvrirLaSuite: boolean;
 }) {
   const suivante = autres.find((a) => a.etat === "avenir");
   const passees = autres.filter((a) => a.etat !== "avenir");
@@ -133,11 +130,6 @@ export function CetteSemaine({
             </summary>
             <div className={`${styles.passeesListe} ${m.deplie}`}>{passees.map((a, i) => ligne(a, i + 1))}</div>
           </details>
-        ) : null}
-        {peutOuvrirLaSuite ? (
-          <form action={ouvrirLaSuite} className={styles.demo}>
-            <button type="submit">Ouvrir la suite maintenant</button>
-          </form>
         ) : null}
       </div>
     </div>

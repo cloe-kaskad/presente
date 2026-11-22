@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { estEquipe } from "@/lib/equipe";
+import { surpriseArrivee, surpriseOuverte } from "@/lib/surprise/quand";
+import { declencherSurprise, ouvrirLaSuite } from "./actions";
 import { noter } from "@/lib/mesure/noter";
 import { redirect } from "next/navigation";
 import { BarreEspace } from "@/components/BarreEspace";
@@ -134,6 +137,8 @@ export default async function MonEspace() {
     const s2 = infoSemaine(k);
     autres.push({ n: k, etiquette: s2.etiquette, titre: s2.titre, etat: semaineFaite(k, chemin.progression) ? "faite" : "a_reprendre" });
   }
+  const equipe = estEquipe(user.email);
+  const surprise = surpriseOuverte(chemin.progression) ? "ouverte" : surpriseArrivee(chemin.progression, chemin.dateDebut) ? "arrivee" : null;
   const sousTitre = cette.etiquette.replace(/^Semaine \d · /, "");
   const autresMois = [0, 1, 2].filter((m) => m > mois);
 
@@ -162,6 +167,22 @@ export default async function MonEspace() {
         </div>
       </section>
 
+      {/* La surprise du dixième jour : une carte à grain, puis un petit lien une fois ouverte */}
+      {surprise === "arrivee" ? (
+        <section className={`${styles.surprise} ${m.monte}`} style={{ animationDelay: "0.3s" }} aria-labelledby="surprise">
+          <h2 id="surprise" className={styles.surpriseTitre}>
+            Une surprise pour toi.
+          </h2>
+          <Link href="/surprise" className="bouton bouton--blanc">
+            Ouvrir
+          </Link>
+        </section>
+      ) : surprise === "ouverte" ? (
+        <p className={styles.maSurprise}>
+          <Link href="/surprise">Ma surprise</Link>
+        </p>
+      ) : null}
+
       {/* Mes exercices en cours, juste sous le bandeau */}
       <MesExercices exercices={exercices} />
 
@@ -182,7 +203,6 @@ export default async function MonEspace() {
               : null
           }
           autres={autres}
-          peutOuvrirLaSuite={n < 12}
         />
       </section>
 
@@ -230,6 +250,24 @@ export default async function MonEspace() {
           </div>
         ) : null}
       </section>
+
+      {/* Le panneau de test : l'équipe seulement (EQUIPE_EMAILS), invisible pour toute autre personne */}
+      {equipe ? (
+        <details className={styles.modeTest}>
+          <summary>Mode test</summary>
+          <div className={styles.modeTestLiens}>
+            {n < 12 ? (
+              <form action={ouvrirLaSuite}>
+                <button type="submit">Ouvrir la suite maintenant</button>
+              </form>
+            ) : null}
+            <form action={declencherSurprise}>
+              <button type="submit">Déclencher la surprise</button>
+            </form>
+            <Link href="/equipe">Voir l&apos;engagement</Link>
+          </div>
+        </details>
+      ) : null}
 
       <footer className={styles.pied}>
         <form action="/auth/deconnexion" method="post">

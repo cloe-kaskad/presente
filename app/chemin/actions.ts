@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import { chargerChemin } from "@/lib/chemin/donnees";
 import { detecterDetresse } from "@/lib/moteur/ecriture";
 import { jourAParis } from "@/lib/rituel/citations";
+import { estEquipe } from "@/lib/equipe";
 import { estHumeur } from "@/lib/rituel/humeurs";
 import { createClient } from "@/lib/supabase/server";
 
@@ -55,7 +56,8 @@ export async function noterHumeur(humeur: string, note: string): Promise<{ ok: b
  * sans attendre sa date. Son début sera noté quand elle l'ouvrira.
  */
 export async function ouvrirLaSuite(): Promise<void> {
-  const { supabase } = await session();
+  const { supabase, user } = await session();
+  if (!estEquipe(user.email)) return; // panneau de test : l'équipe seulement
   const chemin = await chargerChemin(supabase);
   if (!chemin) redirect("/questionnaire");
   if (chemin.semaine < 12) {
@@ -74,4 +76,20 @@ export async function choisirNewsletter(oui: boolean): Promise<{ ok: boolean }> 
   const { error } = await supabase.from("profiles").update({ newsletter: oui }).eq("id", user.id);
   if (error) console.error("[newsletter] choix non enregistré :", error.code);
   return { ok: !error };
+}
+
+/** Panneau de test (équipe seulement) : la surprise arrive tout de suite, sans attendre le dixième jour. */
+export async function declencherSurprise(): Promise<void> {
+  const { supabase, user } = await session();
+  if (!estEquipe(user.email)) return;
+  const chemin = await chargerChemin(supabase);
+  if (!chemin) redirect("/questionnaire");
+  // On la rend « pas encore ouverte » pour pouvoir rejouer la découverte.
+  const { surprise_vue: _vue, ...reste } = chemin.progression;
+  const { error } = await supabase
+    .from("paths")
+    .update({ progression: { ...reste, surprise: Math.floor(Date.now() / 1000) } })
+    .eq("id", chemin.id);
+  if (error) console.error("[test] surprise non déclenchée :", error.code);
+  revalidatePath("/chemin");
 }

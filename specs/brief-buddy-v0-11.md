@@ -92,3 +92,20 @@ Rien à construire pour l'instant. En test, une carte sur Mon chemin au début d
 - Une testeuse qui a déjà commencé l'échange avec Inès (Cloé) : ne pas lui refaire passer les écrans 2 à 4. Elle voit directement la page mise à jour. Le panneau « Mode test » garde un lien « Recommencer la buddy depuis le début » pour qu'elle puisse revoir tout le déroulé.
 - Événements à noter en plus : `buddy_explication_vue`, `buddy_recherche_lancee`, `buddy_rencontree`.
 - Téléphone et ordinateur, navigation au clavier, mouvement réduit respecté.
+
+## Maquettes (22 novembre, soir) : elles priment sur les textes ci-dessus pour les écrans 2 et 4
+
+Cloé a demandé de redessiner la page de proposition et l'attente. Les maquettes sont dans `design/` :
+
+- `Duo-A.html`, `Duo-B.html` (téléphone) et `D-Duo-A.html`, `D-Duo-B.html` (ordinateur) : la page « Un bout de chemin à deux », en deux variantes. **Attendre que Cloé dise laquelle elle choisit avant de coder cette page.** `Duo-B-plus.html` montre « En savoir plus » déplié.
+- `Duo-cherche.html` puis `Duo-attente.html` (et `D-Duo-attente.html`) : après « Ça me tente », deux à trois secondes d'animation plein écran (les deux tracés se rejoignent), puis le message sur le même écran, puis un seul bouton « Retour à mon chemin ». `Duo-attente-auto.html` est la variante avec retour automatique : ne la coder que si Cloé la demande.
+- `Duo-etats.html`, `D-Duo-etats.html` : la carte sur Mon chemin et ses quatre états (recherche en cours, trouvée, pas encore trouvée après 24 heures, « Pas maintenant » choisi).
+- `Duo-email.html` : l'email « On a trouvé ta buddy ». Si l'envoi d'emails n'existe pas encore sur le site, le dire à Cloé et ne faire que la carte sur Mon chemin.
+
+Ce qui change par rapport au texte plus haut :
+
+- la page de proposition n'a plus quatre puces : une accroche, le visuel des deux tracés, trois temps courts, le reste derrière « En savoir plus » ;
+- les deux boutons sont visibles sans défiler sur téléphone ;
+- l'écran de la phrase de présentation (écran 3) reste tel que décrit, entre « Ça me tente » et l'animation ;
+- le mouvement respecte « mouvement réduit » : dans ce cas, pas d'animation, le message s'affiche tout de suite ;
+- le mot « buddy » n'est pas définitif : le mettre dans une seule constante pour pouvoir le changer partout.

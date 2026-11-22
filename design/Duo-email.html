@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>L'email</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face{font-family:'Anton';src:url(assets/Anton.woff2) format('woff2');font-display:swap}
+@font-face{font-family:'DMSans';src:url(assets/DMSans.woff2) format('woff2');font-weight:100 1000;font-style:normal;font-display:swap}
+@font-face{font-family:'DMSans';src:url(assets/DMSans-Italic.woff2) format('woff2');font-weight:100 1000;font-style:italic;font-display:swap}
+body{margin:0}
+a{color:#c42c14}a:hover{color:#510004}
+input::placeholder,textarea::placeholder{color:#d98f86}
+
+@keyframes monte{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes monteB{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes trace{from{stroke-dashoffset:1}}
+@keyframes traceB{from{stroke-dashoffset:1}}
+@keyframes point{from{transform:scale(0)}60%{transform:scale(1.35)}to{transform:scale(1)}}
+@keyframes pointB{from{transform:scale(0)}60%{transform:scale(1.35)}to{transform:scale(1)}}
+@keyframes pouls{0%,100%{box-shadow:0 0 0 0 rgba(196,44,20,.45)}60%{box-shadow:0 0 0 9px rgba(196,44,20,0)}}
+@keyframes halo{0%,100%{filter:drop-shadow(0 0 0 rgba(255,255,255,.9))}50%{filter:drop-shadow(0 0 7px rgba(255,255,255,.95))}}
+.an-monte{animation:monte .7s cubic-bezier(.2,.7,.2,1) both}
+.an-trace{animation:trace 1.6s cubic-bezier(.4,0,.2,1) both}
+.an-anneau{animation:trace 1.2s .5s cubic-bezier(.4,0,.2,1) both}
+.an-pt{transform-box:fill-box;transform-origin:center;animation:point .5s cubic-bezier(.2,.7,.2,1) both}
+.an-ici{animation:point .5s cubic-bezier(.2,.7,.2,1) both,halo 2.6s 2.4s ease-in-out infinite}
+.an-pouls{animation:pouls 2s ease-out infinite}
+.an-carte{transition:transform .2s ease,box-shadow .2s ease}
+.an-carte:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(81,0,4,.14)}
+.pg:hover .an-monte{animation-name:monteB}
+.pg:hover .an-trace,.pg:hover .an-anneau{animation-name:traceB}
+.pg:hover .an-pt{animation-name:pointB}
+.pg:hover .an-ici{animation-name:pointB,halo}
+@media (prefers-reduced-motion:reduce){.an-monte,.an-trace,.an-anneau,.an-pt,.an-ici,.an-pouls{animation:none}}
+</style>
+</helmet>
+<div style="width:640px;height:760px;box-sizing:border-box;background:#fdf0f4;color:#c42c14;font-family:'DMSans',system-ui,sans-serif;display:flex;flex-direction:column;"><div style="padding:18px 28px;border-bottom:1.5px solid #f7beca;display:flex;flex-direction:column;gap:4px;background:#ffffff"><span style="font-size:13px;color:#510004;opacity:.7">De : Présente !</span><span style="font-size:17px;font-weight:600;color:#510004">On a trouvé ta buddy</span><span style="font-size:13px;color:#510004;opacity:.7">Inès est en chemin depuis 15 jours, comme toi.</span></div><main style="flex:1;padding:36px 28px 44px;display:flex;justify-content:center"><div style="width:100%;max-width:520px;background:#ffffff;border-radius:28px;overflow:hidden"><div style="background:#e6361d url(assets/grain.jpg) center/cover no-repeat;padding:30px 32px 26px;display:flex;flex-direction:column;gap:18px"><div style="display:flex;flex-direction:column;gap:6px"><span style="font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.01em;font-size:24px;line-height:1.1;color:#ffffff">Présente&nbsp;!</span><div style="display:flex;align-items:center;gap:5px"><span style="font-size:10px;font-weight:500;line-height:1;color:#ffffff">le parcours de</span><img src="assets/logo-lc-rouge.png" alt="Liberté, Chérie !" style="height:14px;width:auto;display:block;filter:brightness(0) invert(1);"></div></div><svg viewBox="0 0 220 70" width="220" height="70" role="img" aria-label="Deux tracés qui avancent côte à côte" style="display:block;overflow:visible;"><path d="M 12.0 58.0 C 92.4 76.0 114.4 2.0 208.0 20.0" pathLength="1" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" class="an-trace" style="stroke-dasharray:1;stroke-dashoffset:0;animation-duration:2.2s;animation-delay:0.00s"/><path d="M 12.0 29.4 C 66.0 21.0 145.2 73.5 208.0 42.0" pathLength="1" fill="none" stroke="#f7beca" stroke-width="2.5" stroke-linecap="round" class="an-trace" style="stroke-dasharray:1;stroke-dashoffset:0;animation-duration:2.2s;animation-delay:0.15s"/><circle class="an-pt" cx="12.0" cy="58.0" r="5" fill="#ffffff" style="animation-delay:0.20s"/><circle class="an-pt" cx="12.0" cy="29.4" r="5" fill="#f7beca" style="animation-delay:0.35s"/><circle class="an-pt an-ici" cx="208.0" cy="20.0" r="7" fill="#ffffff" style="animation-delay:2.10s"/><circle class="an-pt an-ici" cx="208.0" cy="42.0" r="7" fill="#f7beca" style="animation-delay:2.25s"/></svg></div><div style="padding:30px 32px 34px;display:flex;flex-direction:column;gap:16px;align-items:flex-start"><h1 style="margin:0;font-size:34px;line-height:1.06;font-weight:400;letter-spacing:-.035em;color:#e6361d;">On a trouvé ta buddy.</h1><p style="margin:0;font-size:17px;line-height:1.55;color:#510004">Elle s’appelle Inès. Elle est en chemin depuis 15 jours, sur La Voix, comme toi.</p><p style="margin:0;font-size:17px;line-height:1.55;color:#510004">Votre première question vous attend. Tu réponds quand tu veux dans la semaine.</p><a href="#" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;font-weight:600;font-size:16px;line-height:1.2;border-radius:999px;padding:14px 26px;box-sizing:border-box;background:#c42c14;color:#ffffff;border:1.5px solid #c42c14;min-height:52px;margin-top:6px;">Découvrir</a></div></div></main><div style="padding:0 28px 32px;text-align:center"><span style="font-size:13px;line-height:1.5;color:#510004;opacity:.75">Tu reçois cet email parce que tu as demandé à faire un bout de chemin à deux.<br>Tu peux arrêter l’échange quand tu veux, depuis ton chemin.</span></div></div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview": {"width": 640, "height": 760}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

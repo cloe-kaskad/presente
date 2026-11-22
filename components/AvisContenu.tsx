@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { enregistrerEntree } from "@/app/carnet/actions";
+import { CestNote } from "./CestNote";
+import m from "./mouvement.module.css";
 import type { Citation } from "@/lib/rituel/citations";
 import { RETOURS } from "@/lib/semaines/etiquettes";
 import styles from "./AvisContenu.module.css";
@@ -88,11 +90,13 @@ export function AvisContenu({
               <span id={`aide-${code}`} className={styles.aide}>
                 Par exemple : je n&apos;accroche pas avec cette autrice, trop court, trop théorique.
               </span>
-              <div>
-                <button type="button" className={styles.envoyer} disabled={!retour || etat === "envoi"} onClick={() => envoyer(retour, mot)}>
-                  Envoyer mon avis
-                </button>
-              </div>
+              {etat !== "note" ? (
+                <div>
+                  <button type="button" className={styles.envoyer} disabled={!retour || etat === "envoi"} onClick={() => envoyer(retour, mot)}>
+                    Envoyer mon avis
+                  </button>
+                </div>
+              ) : null}
             </>
           ) : (
             <button type="button" className={styles.ajouter} onClick={() => setMotOuvert(true)}>
@@ -101,19 +105,17 @@ export function AvisContenu({
           )
         ) : null}
 
-        <span role="status" className={styles.statut}>
-          {etat === "note" ? (
-            <>
-              <strong>C&apos;est noté.</strong> On en tient compte pour choisir tes prochains contenus.
-            </>
-          ) : etat === "erreur" ? (
-            "Ton avis n'a pas été enregistré. Réessaie dans un instant."
-          ) : null}
-        </span>
+        {etat === "note" ? (
+          <CestNote suite="On en tient compte pour choisir tes prochains contenus." className={styles.statut} />
+        ) : (
+          <span role="status" className={styles.statut}>
+            {etat === "erreur" ? "Ton avis n'a pas été enregistré. Réessaie dans un instant." : null}
+          </span>
+        )}
       </section>
 
       {citation && etat === "note" ? (
-        <section className={styles.citation} aria-label="Une citation">
+        <section className={`${styles.citation} ${m.monte}`} aria-label="Une citation">
           <span className={styles.citationEtiquette}>Contenu terminé</span>
           <p className={styles.citationTexte}>« {citation.texte} »</p>
           <span className={styles.citationAutrice}>

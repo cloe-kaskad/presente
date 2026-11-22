@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { CestNote } from "@/components/CestNote";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { HUMEURS } from "@/lib/rituel/humeurs";
@@ -13,13 +14,18 @@ export function Humeur({ initiale, noteInitiale }: { initiale?: string; noteInit
   const [humeur, setHumeur] = useState(initiale ?? "");
   const [note, setNote] = useState(noteInitiale ?? "");
   const [etat, setEtat] = useState<"idle" | "note" | "erreur">(initiale ? "note" : "idle");
+  // La coche ne se dessine que quand elle vient d'enregistrer, pas à l'ouverture de la page.
+  const [vient, setVient] = useState(false);
   const [enCours, demarrer] = useTransition();
 
   const envoyer = () =>
     demarrer(async () => {
       const r = await noterHumeur(humeur, note).catch(() => ({ ok: false, detresse: false }));
       if (r.detresse) router.push("/quand-ca-ne-va-pas");
-      else setEtat(r.ok ? "note" : "erreur");
+      else {
+        setEtat(r.ok ? "note" : "erreur");
+        setVient(r.ok);
+      }
     });
 
   return (
@@ -60,9 +66,7 @@ export function Humeur({ initiale, noteInitiale }: { initiale?: string; noteInit
       </label>
       <div className={styles.actions}>
         {etat === "note" ? (
-          <span className={styles.note} role="status">
-            C&apos;est noté.
-          </span>
+          <CestNote anime={vient} className={styles.note} />
         ) : (
           <button type="button" className="bouton" onClick={envoyer} disabled={!humeur || enCours}>
             {enCours ? "J'enregistre…" : "Noter ma journée"}

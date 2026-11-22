@@ -1,0 +1,53 @@
+.note {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: var(--cible);
+  font-size: 15px;
+  line-height: 1.45;
+  color: inherit;
+}
+.note strong {
+  font-weight: 600;
+}
+.coche {
+  flex: none;
+}
+.coche circle {
+  fill: currentColor;
+}
+.coche path {
+  fill: none;
+  stroke: var(--blanc);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+}
+.anime .coche circle {
+  transform-origin: center;
+  animation: rond 0.2s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+}
+.anime .coche path {
+  animation: dessine 0.3s 0.1s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+}
+.anime > span {
+  animation: apparait 0.2s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+}
+@keyframes dessine {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+@keyframes rond {
+  from {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+}
+@keyframes apparait {
+  from {
+    opacity: 0;
+    transform: translateX(-4px);
+  }
+}

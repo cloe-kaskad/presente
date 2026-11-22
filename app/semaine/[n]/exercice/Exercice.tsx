@@ -5,7 +5,9 @@ import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { enregistrerEntree } from "@/app/carnet/actions";
 import { AvecSesMots } from "@/components/AvecSesMots";
+import { CestNote } from "@/components/CestNote";
 import { ChampCarnet } from "@/components/ChampCarnet";
+import m from "@/components/mouvement.module.css";
 import { CitationSiLent } from "@/components/CitationSiLent";
 import { CurseurCarnet } from "@/components/SaisieCarnet";
 import type { Citation } from "@/lib/rituel/citations";
@@ -67,7 +69,9 @@ export function Exercice({
       router.refresh();
     });
 
-  const joursPasses = jours.filter((j) => j.jour !== aujourdhui.code.split(":").pop());
+  const jourDuJour = aujourdhui.code.split(":").pop();
+  // Le jour qu'elle vient de noter glisse en tête de « Ce que tu as déjà noté » (brief V0.8).
+  const [vientDeNoter, setVientDeNoter] = useState(false);
   const notes = jours.length;
   const aujourdhuiNote = Boolean(aujourdhui.reponse);
   const ou = etat === "en_cours" && total && jourCourant ? `en cours, jour ${jourCourant} sur ${total}` : ETAT[etat];
@@ -109,7 +113,7 @@ export function Exercice({
         </h2>
         <div>
           {liste.map((j) => (
-            <div key={j.jour} className={styles.ligneNote}>
+            <div key={j.jour} className={`${styles.ligneNote} ${vientDeNoter && j.jour === jourDuJour ? m.monte : ""}`}>
               <span className={styles.jourNote}>{capitale(j.date.split(" ")[0])}</span>
               <span className={styles.texteNote}>« {j.reponse} »</span>
             </div>
@@ -172,7 +176,7 @@ export function Exercice({
           <div className={styles.colonne}>
             <section className={styles.saisie} aria-labelledby="saisie">
               {total ? (
-                <SaisieDuJour n={n} nom={pratique.nom} aujourdhui={aujourdhui} />
+                <SaisieDuJour n={n} nom={pratique.nom} aujourdhui={aujourdhui} onNote={() => setVientDeNoter(true)} />
               ) : agir ? (
                 <>
                   <h2 id="saisie" className={styles.saisieTitre}>
@@ -216,7 +220,7 @@ export function Exercice({
                 </>
               )}
             </section>
-            {total ? dejaNote("Ce que tu as déjà noté", joursPasses) : null}
+            {total ? dejaNote("Ce que tu as déjà noté", jours) : null}
             <div className={styles.actions}>
               <button type="button" className="bouton bouton--grand" onClick={() => agirSur(terminerExercice)} disabled={enCours}>
                 {agir ? "Garder dans mon carnet" : "J'ai terminé"}
@@ -253,7 +257,7 @@ export function Exercice({
               </Link>
             </div>
           </section>
-          <section className={styles.citation} aria-label="Une citation">
+          <section className={`${styles.citation} ${m.monte}`} aria-label="Une citation">
             <span className={styles.citationEtiquette}>{agir ? "Geste fait" : "Exercice terminé"}</span>
             <p className={styles.citationTexte}>« {citation.texte} »</p>
             <span className={styles.citationAutrice}>
@@ -269,10 +273,11 @@ export function Exercice({
 }
 
 /** Un exercice sur plusieurs jours : la saisie du jour, avec un bouton pour la ranger. */
-function SaisieDuJour({ n, nom, aujourdhui }: { n: number; nom: string; aujourdhui: { code: string; date: string; reponse: string } }) {
+function SaisieDuJour({ n, nom, aujourdhui, onNote }: { n: number; nom: string; aujourdhui: { code: string; date: string; reponse: string }; onNote: () => void }) {
   const router = useRouter();
   const [valeur, setValeur] = useState(aujourdhui.reponse);
   const [etat, setEtat] = useState<"rien" | "envoi" | "note" | "erreur">(aujourdhui.reponse ? "note" : "rien");
+  const [vient, setVient] = useState(false);
   const jour = aujourdhui.date.split(" ")[0].toLowerCase();
 
   return (
@@ -284,7 +289,11 @@ function SaisieDuJour({ n, nom, aujourdhui }: { n: number; nom: string; aujourdh
         setEtat("envoi");
         const r = await enregistrerEntree({ semaine: n, type: "exercice", code: aujourdhui.code, question: `${nom} · ${capitale(aujourdhui.date)}`, reponse: valeur.trim() }).catch(() => ({ ok: false }));
         setEtat(r.ok ? "note" : "erreur");
-        if (r.ok) router.refresh();
+        if (r.ok) {
+          setVient(true);
+          onNote();
+          router.refresh();
+        }
       }}
     >
       <h2 id="saisie" className={styles.saisieTitre}>
@@ -298,12 +307,18 @@ function SaisieDuJour({ n, nom, aujourdhui }: { n: number; nom: string; aujourdh
           }} rows={3} placeholder="Une ligne suffit." />
       </label>
       <div className={styles.jourActions}>
-        <button type="submit" className="bouton" disabled={etat === "envoi" || !valeur.trim()}>
-          {aujourdhui.reponse ? "Modifier ce jour" : "Noter ce jour"}
-        </button>
-        <span role="status" className={styles.aide}>
-          {etat === "note" ? "C'est noté pour aujourd'hui." : etat === "erreur" ? "Ça n'a pas été enregistré. Réessaie dans un instant." : ""}
-        </span>
+        {etat === "note" ? (
+          <CestNote anime={vient} suite="À demain." />
+        ) : (
+          <>
+            <button type="submit" className="bouton" disabled={etat === "envoi" || !valeur.trim()}>
+              {aujourdhui.reponse ? "Modifier ce jour" : "Noter ce jour"}
+            </button>
+            <span role="status" className={styles.aide}>
+              {etat === "erreur" ? "Ça n'a pas été enregistré. Réessaie dans un instant." : ""}
+            </span>
+          </>
+        )}
       </div>
     </form>
   );

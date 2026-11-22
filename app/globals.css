@@ -116,6 +116,16 @@ img {
   color: var(--blanc);
   cursor: pointer;
 }
+.bouton {
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+.bouton:active:not([disabled]) {
+  transform: scale(0.97);
+}
 .bouton:hover {
   background: var(--bordeaux);
   border-color: var(--bordeaux);

@@ -34,6 +34,17 @@
   line-height: 1.2;
   cursor: pointer;
 }
+.puce {
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+.puce:active,
+.envoyer:active {
+  transform: scale(0.97);
+}
 .puce:hover {
   border-color: var(--bordeaux);
 }
@@ -116,8 +127,8 @@
 .statut:empty {
   display: none;
 }
-.statut strong {
-  font-weight: 600;
+.statut {
+  color: var(--bordeaux);
 }
 .citation {
   background: var(--rouge) url(/images/grain.jpg) center / cover no-repeat;

@@ -1,5 +1,6 @@
 "use client";
 
+import { CestNote } from "@/components/CestNote";
 import { useState } from "react";
 import { enregistrerEntree } from "@/app/carnet/actions";
 import { REPONSES_ECHO } from "@/lib/rituel/echo";
@@ -24,6 +25,7 @@ export function Echo({
   const [choix, setChoix] = useState(dejaChoisi ?? "");
   const [ligne, setLigne] = useState(dejaLigne ?? "");
   const [etat, setEtat] = useState<"idle" | "ok" | "erreur">(dejaChoisi ? "ok" : "idle");
+  const [vient, setVient] = useState(false);
 
   const enregistrer = async (c: string, l: string) => {
     const r = await enregistrerEntree({
@@ -34,6 +36,7 @@ export function Echo({
       reponse: l.trim() ? `${c} · ${l.trim()}` : c,
     }).catch(() => ({ ok: false }));
     setEtat(r.ok ? "ok" : "erreur");
+    setVient(r.ok);
   };
 
   return (
@@ -76,9 +79,13 @@ export function Echo({
           />
         </label>
       ) : null}
-      <span className={styles.note} role="status" aria-live="polite">
-        {etat === "ok" ? "Gardé dans ton carnet." : etat === "erreur" ? "Pas enregistré, vérifie ta connexion." : ""}
-      </span>
+      {etat === "ok" ? (
+        <CestNote anime={vient} suite="Gardé dans ton carnet." className={styles.note} />
+      ) : (
+        <span className={styles.note} role="status" aria-live="polite">
+          {etat === "erreur" ? "Pas enregistré, vérifie ta connexion." : ""}
+        </span>
+      )}
     </section>
   );
 }

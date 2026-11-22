@@ -237,6 +237,16 @@
   line-height: 1.2;
   cursor: pointer;
 }
+.puce {
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+.puce:active {
+  transform: scale(0.97);
+}
 .puce:hover {
   border-color: var(--bordeaux);
 }

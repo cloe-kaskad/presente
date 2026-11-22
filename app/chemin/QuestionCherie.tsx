@@ -1,5 +1,6 @@
 "use client";
 
+import { CestNote } from "@/components/CestNote";
 import { useState } from "react";
 import { enregistrerEntree } from "@/app/carnet/actions";
 import { choisirNewsletter } from "./actions";
@@ -23,6 +24,7 @@ export function QuestionCherie({
 }) {
   const [reponse, setReponse] = useState(reponseInitiale ?? "");
   const [etat, setEtat] = useState<"idle" | "en_cours" | "ok" | "erreur">(reponseInitiale ? "ok" : "idle");
+  const [vient, setVient] = useState(false);
   const [inscrite, setInscrite] = useState(false);
 
   const garder = async () => {
@@ -36,6 +38,7 @@ export function QuestionCherie({
       reponse: reponse.trim(),
     }).catch(() => ({ ok: false }));
     setEtat(r.ok ? "ok" : "erreur");
+    setVient(r.ok);
   };
 
   return (
@@ -67,9 +70,7 @@ export function QuestionCherie({
       />
       <div className={styles.actions}>
         {etat === "ok" ? (
-          <span className={styles.qcNote} role="status">
-            Gardé dans ton carnet.
-          </span>
+          <CestNote anime={vient} suite="Gardé dans ton carnet." className={styles.qcNote} />
         ) : (
           <button type="button" className={`bouton ${styles.qcBouton}`} onClick={garder} disabled={!reponse.trim() || etat === "en_cours"}>
             Garder dans mon carnet

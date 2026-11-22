@@ -1,4 +1,4 @@
-/** « Présente ! » + « l'école de Liberté, Chérie ! » */
+/** « Présente ! » + « le parcours de Liberté, Chérie ! » */
 export function Marque({ couleur = "blanc" }: { couleur?: "blanc" | "rouge" }) {
   const blanc = couleur === "blanc";
   return (
@@ -7,7 +7,7 @@ export function Marque({ couleur = "blanc" }: { couleur?: "blanc" | "rouge" }) {
         Présente&nbsp;!
       </span>
       <span className="marque__ecole" style={{ color: blanc ? "var(--blanc)" : "var(--rouge-profond)" }}>
-        <span>l&apos;école de</span>
+        <span>le parcours de</span>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/logo-lc-rouge.png"

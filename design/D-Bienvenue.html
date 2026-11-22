@@ -15,10 +15,32 @@
 body{margin:0}
 a{color:#c42c14}a:hover{color:#510004}
 input::placeholder,textarea::placeholder{color:#d98f86}
+
+@keyframes monte{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes monteB{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes trace{from{stroke-dashoffset:1}}
+@keyframes traceB{from{stroke-dashoffset:1}}
+@keyframes point{from{transform:scale(0)}60%{transform:scale(1.35)}to{transform:scale(1)}}
+@keyframes pointB{from{transform:scale(0)}60%{transform:scale(1.35)}to{transform:scale(1)}}
+@keyframes pouls{0%,100%{box-shadow:0 0 0 0 rgba(196,44,20,.45)}60%{box-shadow:0 0 0 9px rgba(196,44,20,0)}}
+@keyframes halo{0%,100%{filter:drop-shadow(0 0 0 rgba(255,255,255,.9))}50%{filter:drop-shadow(0 0 7px rgba(255,255,255,.95))}}
+.an-monte{animation:monte .7s cubic-bezier(.2,.7,.2,1) both}
+.an-trace{animation:trace 1.6s cubic-bezier(.4,0,.2,1) both}
+.an-anneau{animation:trace 1.2s .5s cubic-bezier(.4,0,.2,1) both}
+.an-pt{transform-box:fill-box;transform-origin:center;animation:point .5s cubic-bezier(.2,.7,.2,1) both}
+.an-ici{animation:point .5s cubic-bezier(.2,.7,.2,1) both,halo 2.6s 2.4s ease-in-out infinite}
+.an-pouls{animation:pouls 2s ease-out infinite}
+.an-carte{transition:transform .2s ease,box-shadow .2s ease}
+.an-carte:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(81,0,4,.14)}
+.pg:hover .an-monte{animation-name:monteB}
+.pg:hover .an-trace,.pg:hover .an-anneau{animation-name:traceB}
+.pg:hover .an-pt{animation-name:pointB}
+.pg:hover .an-ici{animation-name:pointB,halo}
+@media (prefers-reduced-motion:reduce){.an-monte,.an-trace,.an-anneau,.an-pt,.an-ici,.an-pouls{animation:none}}
 </style>
 </helmet>
 <div style="width:1440px;height:900px;box-sizing:border-box;background:#e6361d;color:#c42c14;font-family:'DMSans',system-ui,sans-serif;display:flex;flex-direction:column;color:#fff;background:#e6361d url(assets/grain.jpg) center/cover no-repeat">
-  <header style="padding:28px 96px"><div style="display:flex;flex-direction:column;gap:6px"><span style="font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.01em;font-size:30px;line-height:1.1;color:#ffffff">Présente&nbsp;!</span><div style="display:flex;align-items:center;gap:5px"><span style="font-size:10px;font-weight:500;line-height:1;color:#ffffff">l'école de</span><img src="assets/logo-lc-rouge.png" alt="Liberté, Chérie !" style="height:15px;width:auto;display:block;filter:brightness(0) invert(1);"></div></div></header>
+  <header style="padding:28px 96px"><div style="display:flex;flex-direction:column;gap:6px"><span style="font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.01em;font-size:30px;line-height:1.1;color:#ffffff">Présente&nbsp;!</span><div style="display:flex;align-items:center;gap:5px"><span style="font-size:10px;font-weight:500;line-height:1;color:#ffffff">le parcours de</span><img src="assets/logo-lc-rouge.png" alt="Liberté, Chérie !" style="height:15px;width:auto;display:block;filter:brightness(0) invert(1);"></div></div></header>
   <main style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:28px;padding:0 96px 120px;max-width:1100px">
     <span style="font-size:14px;font-weight:600;color:#ffffff">/ On ouvre ton espace</span>
     <p style="margin:0;font-size:60px;line-height:1.1;font-weight:500;letter-spacing:-.035em;color:#ffffff">« Il n’y a ni grille, ni serrure, ni verrou que vous puissiez poser sur la liberté de mon esprit. »</p>

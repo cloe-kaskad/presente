@@ -1,4 +1,4 @@
-# Brief Claude Code V0.9 : « J'ai écouté », les étapes de la semaine, la date de la suite, le dossier
+# Brief Claude Code V0.9 : « J'ai écouté », les étapes de la semaine, la date de la suite, « Tirer le fil »
 
 Retour de Cloé après son premier podcast : rien ne lui permet de dire qu'elle a écouté, et en arrivant sur Mon chemin elle ne sait pas ce qui est fait ni quand vient la suite. Elle veut aussi une petite lecture pour tenir la semaine.
 
@@ -11,9 +11,9 @@ Mêmes règles que d'habitude : une étape à la fois, pousser sur main, lui dir
 | Un contenu, pas encore écouté | `design/Contenu-avant.html` | `design/D-Contenu-avant.html` |
 | Un contenu, écouté | `design/Contenu-apres.html` | `design/D-Contenu-apres.html` |
 | Mon chemin, la carte de la semaine | `design/Chemin.html` | `design/D-Chemin.html` |
-| Le dossier de la semaine | `design/Dossier.html` | `design/D-Dossier.html` |
+| Tirer le fil | `design/Dossier.html` | `design/D-Dossier.html` |
 
-Les textes entre crochets dans le dossier sont des emplacements : le vrai contenu viendra d'Airtable.
+Les textes entre crochets dans « Tirer le fil » sont des emplacements : le vrai contenu viendra d'Airtable.
 
 ## 1. « J'ai écouté »
 
@@ -30,9 +30,9 @@ Remplacer la grille de quatre cartes égales par :
   - faite : rond blanc avec coche, texte un peu atténué, et à droite quand (« lundi ») ou combien (« 2 notes ») ;
   - en cours : arc, texte en gras, à droite « jour 3 sur 7 » ;
   - à faire : rond en pointillés, à droite la durée (« 5 min de lecture ») ;
-- les étapes d'une semaine de quête : le contenu, le carnet, l'exercice (ou le geste), le dossier de la semaine. Pour une semaine de monde : l'épisode, les questions d'après (et le palier en semaine 4). S'appuyer sur `lib/semaines/etapes.ts` ;
+- les étapes d'une semaine de quête : le contenu, le carnet, l'exercice (ou le geste), « Tirer le fil ». Pour une semaine de monde : l'épisode, les questions d'après (et le palier en semaine 4). S'appuyer sur `lib/semaines/etapes.ts` ;
 - chaque ligne est un lien vers l'étape ;
-- en bas de la carte : un bouton blanc qui mène à **la prochaine chose à faire** (son libellé change : « Écouter le podcast », « Écrire dans mon carnet », « Reprendre mon exercice », « Lire le dossier »), et la phrase « Ta prochaine étape arrive **lundi 23 novembre**. » ;
+- en bas de la carte : un bouton blanc qui mène à **la prochaine chose à faire** (son libellé change : « Écouter le podcast », « Écrire dans mon carnet », « Reprendre mon exercice », « Tirer le fil »), et la phrase « Ta prochaine étape arrive **lundi 23 novembre**. » ;
 - quand tout est fait : la phrase devient « Tu es à jour. D'ici lundi 23 novembre : ton exercice et ton rituel du jour. » et le bouton disparaît ;
 - à droite, les autres semaines du mois en lignes compactes : la suivante d'abord (pointillés, « arrive lundi 23 novembre »), puis les semaines faites (coche). Sur mobile : la carte, la semaine suivante, puis un lien « Voir les semaines faites (2) ».
 
@@ -44,18 +44,26 @@ Remplacer la grille de quatre cartes égales par :
 - Pour la démo, garder un moyen pour Cloé et Stéphanie d'ouvrir la suite sans attendre (un lien discret « Ouvrir la suite maintenant », visible seulement pour les comptes de la liste d'accès V0).
 - Afficher la date en toutes lettres, avec le jour de la semaine, au fuseau Europe/Paris.
 
-## 3. Le dossier de la semaine
+## 3. « Tirer le fil »
 
-Une lecture maison de cinq minutes, une par semaine de quête, écrite et validée par l'équipe. Elle n'est jamais générée par l'IA pour une utilisatrice.
+Le nom est choisi par Cloé : il ne faut pas que ça ressemble à du travail. Jamais « dossier », « lecture obligatoire », « leçon » dans l'interface.
 
-- Nouvelle adresse : `/semaine/[n]/dossier`.
+Une lecture maison de cinq minutes pour aller plus loin, une par semaine de quête, écrite et validée par l'équipe. Elle n'est jamais générée par l'IA pour une utilisatrice.
+
+- Nouvelle adresse : `/semaine/[n]/fil`.
+- En haut : « Tirer le fil · L'Argent, semaine 3 · 5 minutes », un titre, un chapô.
 - Quatre blocs, toujours dans cet ordre : « Une idée » (philosophie), « Un chiffre », « Un regard » (sociologie, recherche), « Un écho » (actualité ou littérature). Chacun : un titre, un texte de trois ou quatre phrases, la source en petit. Grille de deux colonnes sur ordinateur, empilés sur mobile, fonds alternés comme sur la maquette.
-- En bas : une ligne libre facultative « Ce que tu en gardes, en une ligne. » (rangée dans le carnet, origine « Dossier de la semaine »), et le bouton « J'ai lu » qui valide l'étape.
-- Données : une nouvelle table Airtable « P! Dossiers » en lecture seule, que Claude (la session de Cloé) créera : Quête, Semaine dans le mois (1 ou 3), Titre, Chapô, et pour chaque bloc Titre, Texte, Source, Lien ; Statut (Brouillon, Validé). Le site n'affiche que les dossiers « Validé ». Lire la table comme les autres (`lib/catalogue/airtable.ts`), avec la variable d'environnement de la table à ajouter dans Vercel par Cloé.
-- S'il n'y a pas de dossier validé pour la semaine : l'étape n'apparaît pas dans la liste, rien d'autre ne change.
+- En bas : une ligne libre facultative « Ce que tu en gardes, en une ligne. » (rangée dans le carnet, origine « Tirer le fil »), et le bouton « C'est lu » qui valide l'étape.
+- Dans la carte « Cette semaine », la ligne s'appelle « Tirer le fil », avec « 5 min de lecture » à droite.
+- Données : une nouvelle table Airtable « P! Tirer le fil » en lecture seule, que Claude (la session de Cloé) créera : Quête, Semaine dans le mois (1 ou 3), Titre, Chapô, et pour chaque bloc Titre, Texte, Source, Lien ; Statut (Brouillon, Validé). Le site n'affiche que les lignes « Validé ». Lire la table comme les autres (`lib/catalogue/airtable.ts`), avec la variable d'environnement de la table à ajouter dans Vercel par Cloé.
+- S'il n'y a rien de validé pour la semaine : l'étape n'apparaît pas dans la liste, rien d'autre ne change.
 
 ## Ordre de travail
 
 1. « J'ai écouté ».
 2. La carte « Cette semaine », ses étapes et la date de la suite.
-3. Le dossier de la semaine (quand la table Airtable existe).
+3. « Tirer le fil » (quand la table Airtable existe).
+
+## Aussi : la signature sous le logo
+
+Cloé a remplacé « l'école de » par « le parcours de » sous « Présente ! » (déjà fait dans `components/Marque.tsx`). Ne pas réintroduire « l'école de » dans l'interface.

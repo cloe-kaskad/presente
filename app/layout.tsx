@@ -20,7 +20,7 @@ const anton = localFont({
 
 export const metadata: Metadata = {
   title: "Présente !",
-  description: "L'école de Liberté, Chérie !",
+  description: "Le parcours de Liberté, Chérie !",
   robots: { index: false, follow: false },
 };
 

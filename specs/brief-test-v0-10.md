@@ -1,6 +1,6 @@
-# Brief Claude Code V0.10 : mesurer l'engagement, la surprise « comme si », la buddy de test
+# Brief Claude Code V0.10 : mesurer l'engagement, la surprise « comme si », la buddy de test, la façon de pratiquer, les audios guidés
 
-Trois demandes de Cloé pour la phase de test (elle et Stéphanie). La première est la plus importante pour elle : à faire en premier, même avec deux testeuses.
+Cinq demandes de Cloé pour la phase de test (elle seule pour l'instant, Stéphanie ensuite). La première est la plus importante pour elle : à faire en premier, même avec deux testeuses.
 
 Mêmes règles que d'habitude : une étape à la fois, pousser sur main, lui dire quoi tester en mots simples, SQL prêt à copier.
 
@@ -79,6 +79,26 @@ But : essayer le parcours de mise en relation avant d'avoir de vraies promotions
 - Ses réponses s'affichent dès que la testeuse a répondu.
 - Questions de la semaine et textes d'Inès : mettre des textes provisoires sobres, Cloé les réécrira.
 
+## 4. « Comment tu aimes pratiquer ? »
+
+But : choisir les exercices d'après ce qu'elle aime faire, pas seulement d'après la quête. Celle qui n'aime pas écrire ne doit pas recevoir trois exercices d'écriture de suite.
+
+- **Dans le questionnaire**, partie 5, un nouvel écran `p5:pratiquer` juste après `p5:formats` (« Comment apprends-tu le mieux ? »). Question : « Et pour passer à la pratique, tu préfères ? ». Aide : « Deux choix au plus. » Choix : « Écrire », « Bouger », « Créer avec mes mains », « Rester en silence », « Parler à voix haute ». Aucun choix n'est obligatoire : elle peut passer.
+- **Dans le choix des exercices** : à quête et moment égaux (Ouvrir, Agir), préférer une pratique dont la façon de faire correspond à un de ses choix. C'est une préférence, pas un filtre : si aucune pratique ne correspond, on prend la meilleure comme aujourd'hui. Ne pas proposer deux semaines de suite la même façon de faire si une autre pratique convient.
+- **Pour classer les pratiques** : s'appuyer sur le champ « Format » de la table P! Pratiques (`fldJCpf9NUqxVjII9`). Si ses valeurs ne permettent pas de ranger chaque pratique dans une des cinq façons, le dire à Cloé : Claude (côté design) ajoutera un champ dédié dans Airtable. Ne rien écrire dans Airtable depuis le site.
+- **Pour les comptes qui ont déjà rempli le questionnaire** (Cloé) : poser la question une seule fois, dans une petite carte sur Mon chemin (« Une question de plus pour mieux choisir tes exercices »), qui disparaît une fois la réponse donnée ou la carte fermée.
+- Événement à noter : `pratiquer_choisi` (sans le contenu du choix).
+
+## 5. Les audios guidés
+
+Cloé enregistre cette semaine trois guidages à sa voix (les textes sont dans son document « Présente! : proposition produit V1 », onglet « Audios à enregistrer »). Le lecteur doit être prêt avant les fichiers.
+
+- **Où sont les fichiers** : dans le dépôt, dossier `public/audio/`. C'est Claude (côté design) qui les y dépose quand Cloé les lui envoie. Noms prévus : `trois-souffles.m4a`, `cinq-minutes-assise.m4a`, `le-corps-repond.m4a`.
+- **Comment le site sait qu'une pratique a un audio** : nouveau champ texte « Audio (fichier) » dans la table P! Pratiques (`fldKb51iu5jOEGtqf`), qui contient le nom du fichier. Champ vide, ou fichier absent du dossier : aucun lecteur, la page reste comme aujourd'hui.
+- **Sur la page de l'exercice** : au-dessus de la consigne, une carte « Écouter le guidage » avec la durée, un bouton lecture et pause, une barre de progression qu'on peut déplacer, un bouton « Revenir de 15 secondes ». Dans la charte (rouge, rose pâle, coins ronds), pas le lecteur gris du navigateur. Une ligne en dessous : « Guidé par Cloé ». La consigne écrite reste visible sous le lecteur, pour celles qui ne peuvent pas écouter.
+- La lecture ne démarre jamais seule. Elle continue si l'écran du téléphone se verrouille. Le lecteur est utilisable au clavier et annonce son état aux lecteurs d'écran.
+- Événements à noter : `audio_lance`, `audio_termine` (avec la clé de la pratique).
+
 ## Le panneau de test
 
 Pour que Cloé et Stéphanie n'attendent pas dix ou quatorze jours : sur Mon chemin, pour les comptes de la liste d'accès de l'équipe seulement, un petit bloc replié « Mode test » avec trois liens : « Ouvrir la suite maintenant », « Déclencher la surprise », « Proposer la buddy ». Invisible pour toute autre personne.
@@ -88,3 +108,5 @@ Pour que Cloé et Stéphanie n'attendent pas dix ou quatorze jours : sur Mon che
 1. La mesure de l'engagement et la page de l'équipe.
 2. Le panneau de test et la surprise.
 3. La buddy de test.
+4. La question « Comment tu aimes pratiquer ? ».
+5. Le lecteur des audios guidés.

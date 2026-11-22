@@ -255,3 +255,23 @@ describe("« pas mal »", () => {
     expect(choisirContenu(cat, s1, { ...profil, avis: avis("moyen") }).contenu?.id).toBe("a");
   });
 });
+
+describe("varier les façons de pratiquer", () => {
+  const cat: Catalogue = {
+    contenus: [],
+    pratiques: [
+      pratique("ecrire", { capacites: ["AR3"], formeReponse: "Texte libre" }),
+      pratique("liste", { capacites: ["AR3"], formeReponse: "Liste ou colonnes" }),
+    ],
+  };
+  it("sans exercice précédent : la meilleure, dans l'ordre", () => {
+    expect(choisirPratique(cat, s1, profil).pratique?.id).toBe("ecrire");
+  });
+  it("pas deux fois de suite la même forme au même moment, quand une autre convient", () => {
+    expect(choisirPratique(cat, { ...s1, formesPrecedentes: { memeMoment: "Texte libre" } }, profil).pratique?.id).toBe("liste");
+  });
+  it("s'il n'y a qu'elle, on la garde", () => {
+    const seule: Catalogue = { contenus: [], pratiques: [cat.pratiques[0]] };
+    expect(choisirPratique(seule, { ...s1, formesPrecedentes: { memeMoment: "Texte libre" } }, profil).pratique?.id).toBe("ecrire");
+  });
+});

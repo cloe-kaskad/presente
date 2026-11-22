@@ -88,6 +88,11 @@ export type DemandeSemaine = {
   dejaPris?: string[];
   /** Le contenu de la semaine de quête précédente, pour varier. */
   precedent?: Pick<Contenu, "auteur" | "registre" | "type"> | null;
+  /**
+   * Varier les façons de pratiquer (brief V0.10) : la forme (« Forme de réponse » dans P! Pratiques) de l'exercice
+   * précédent au même moment (Ouvrir ou Agir), et celle de l'exercice juste avant. Aucune préférence n'est demandée.
+   */
+  formesPrecedentes?: { memeMoment?: string | null; justeAvant?: string | null };
 };
 
 // ---------------------------------------------------------------------------
@@ -193,6 +198,9 @@ function notePratique(x: Pratique, d: DemandeSemaine): number {
   else n += x.intensite === "franche" ? 2 : x.intensite === "douce" ? 1 : 0;
   if (d.semaine === 3 && x.formeReponse === "Acte réel puis retour") n += 2;
   if (d.semaine === 1 && x.formeReponse !== "Acte réel puis retour") n += 1;
+  // Pas deux fois de suite la même façon de faire, quand une autre pratique convient.
+  if (x.formeReponse && x.formeReponse === d.formesPrecedentes?.memeMoment) n -= 3;
+  if (x.formeReponse && x.formeReponse === d.formesPrecedentes?.justeAvant) n -= 1;
   return n;
 }
 

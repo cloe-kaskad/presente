@@ -118,8 +118,19 @@ export async function choixDuMois(
       continue;
     }
     if (erreur) continue;
+    // Varier les façons de pratiquer : la forme de l'exercice du même moment le mois d'avant, et celle de l'exercice juste avant.
+    const forme = (k: string) => {
+      const id = ({ ...chemin.choix, ...nouveaux } as Record<string, ChoixEnregistre | undefined>)[k]?.pratique;
+      return id ? (parId.pratiques.get(id)?.formeReponse ?? null) : null;
+    };
+    const moment = i === 0 ? "s1" : "s3";
+    const formesPrecedentes = {
+      memeMoment: mois > 0 ? forme(`m${mois}${moment}`) : null,
+      justeAvant: i === 1 ? forme(cles[0]) : mois > 0 ? forme(`m${mois}s3`) : null,
+    };
     const demande = {
       quete,
+      formesPrecedentes,
       semaine: (i === 0 ? 1 : 3) as 1 | 3,
       capacites: chemin.capacites[quete] as [string, string],
       dejaPris: [...idsDejaPris(chemin.choix, [cle]), ...idsDejaPris(nouveaux, [])].filter((id) => !aReproposer.has(id)),

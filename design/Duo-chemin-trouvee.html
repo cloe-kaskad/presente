@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Mon chemin le jour où on a trouvé</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face{font-family:'Anton';src:url(assets/Anton.woff2) format('woff2');font-display:swap}
+@font-face{font-family:'DMSans';src:url(assets/DMSans.woff2) format('woff2');font-weight:100 1000;font-style:normal;font-display:swap}
+@font-face{font-family:'DMSans';src:url(assets/DMSans-Italic.woff2) format('woff2');font-weight:100 1000;font-style:italic;font-display:swap}
+body{margin:0}
+a{color:#c42c14}a:hover{color:#510004}
+input::placeholder,textarea::placeholder{color:#d98f86}
+
+@keyframes monte{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes monteB{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes trace{from{stroke-dashoffset:1}}
+@keyframes traceB{from{stroke-dashoffset:1}}
+@keyframes point{from{transform:scale(0)}60%{transform:scale(1.35)}to{transform:scale(1)}}
+@keyframes pointB{from{transform:scale(0)}60%{transform:scale(1.35)}to{transform:scale(1)}}
+@keyframes pouls{0%,100%{box-shadow:0 0 0 0 rgba(196,44,20,.45)}60%{box-shadow:0 0 0 9px rgba(196,44,20,0)}}
+@keyframes halo{0%,100%{filter:drop-shadow(0 0 0 rgba(255,255,255,.9))}50%{filter:drop-shadow(0 0 7px rgba(255,255,255,.95))}}
+.an-monte{animation:monte .7s cubic-bezier(.2,.7,.2,1) both}
+.an-trace{animation:trace 1.6s cubic-bezier(.4,0,.2,1) both}
+.an-anneau{animation:trace 1.2s .5s cubic-bezier(.4,0,.2,1) both}
+.an-pt{transform-box:fill-box;transform-origin:center;animation:point .5s cubic-bezier(.2,.7,.2,1) both}
+.an-ici{animation:point .5s cubic-bezier(.2,.7,.2,1) both,halo 2.6s 2.4s ease-in-out infinite}
+.an-pouls{animation:pouls 2s ease-out infinite}
+.an-carte{transition:transform .2s ease,box-shadow .2s ease}
+.an-carte:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(81,0,4,.14)}
+.pg:hover .an-monte{animation-name:monteB}
+.pg:hover .an-trace,.pg:hover .an-anneau{animation-name:traceB}
+.pg:hover .an-pt{animation-name:pointB}
+.pg:hover .an-ici{animation-name:pointB,halo}
+@media (prefers-reduced-motion:reduce){.an-monte,.an-trace,.an-anneau,.an-pt,.an-ici,.an-pouls{animation:none}}
+@keyframes attend{0%,100%{opacity:.45}50%{opacity:1}}
+@keyframes attendB{0%,100%{opacity:.45}50%{opacity:1}}
+.an-attend{animation:attend 1.8s ease-in-out infinite}
+@keyframes flotte{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.an-flotte{animation:flotte 3.2s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){.an-attend,.an-flotte{animation:none}}
+</style>
+</helmet>
+<div class="pg" style="width:390px;height:850px;box-sizing:border-box;background:#ffffff;color:#c42c14;font-family:'DMSans',system-ui,sans-serif;display:flex;flex-direction:column;"><div style="position:relative;height:844px;overflow:hidden;display:flex;flex-direction:column"><header style="position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 24px;background:#ffffff;border-bottom:1.5px solid #f7beca"><div style="display:flex;flex-direction:column;gap:6px"><span style="font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.01em;font-size:22px;line-height:1.1;color:#e6361d">Présente&nbsp;!</span><div style="display:flex;align-items:center;gap:5px"><span style="font-size:10px;font-weight:500;line-height:1;color:#e6361d">le parcours de</span><img src="assets/logo-lc-rouge.png" alt="Liberté, Chérie !" style="height:13px;width:auto;display:block;"></div></div><nav style="display:flex;align-items:center;gap:14px"><a href="Chemin.html" style="font-size:14px;font-weight:600;color:#c42c14;text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:2px;">Chemin</a><a href="Journal.html" style="font-size:14px;font-weight:600;color:#c42c14;text-decoration:none;">Journal</a><a href="Carnet.html" style="font-size:14px;font-weight:600;color:#c42c14;text-decoration:none;">Carnet</a></nav></header><section style="background:#e6361d url(assets/grain.jpg) center/cover no-repeat;padding:32px 24px 26px;display:flex;flex-direction:column;gap:14px"><span style="font-size:14px;font-weight:600;color:#ffffff">Lundi 23 novembre · la citation du jour</span><p style="margin:0;font-size:40px;line-height:1.04;font-weight:500;letter-spacing:-.04em;color:#ffffff">« J’habite le possible. »</p><span style="font-size:14px;line-height:1.4;color:#ffffff"><strong style="font-weight:600">Emily Dickinson</strong>, poème, vers 1862</span></section><section style="padding:22px 24px 8px;display:flex;flex-direction:column;gap:22px"><section class="an-monte" style="background:#fdf0f4;border-radius:24px;padding:20px 20px;display:flex;flex-direction:column;gap:16px;align-items:stretch"><div style="display:flex;gap:14px;align-items:center;flex:1"><span role="img" aria-label="Toi et elle" style="display:inline-flex;gap:2px;align-items:center;flex:none"><span style="display:block"><span class="an-pt" style="box-sizing:border-box;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:600;line-height:1;flex:none;background:#e6361d;color:#ffffff;animation-delay:0.00s">C</span></span><span style="display:block;animation-delay:-1.6s"><span class="an-pt" style="box-sizing:border-box;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:600;line-height:1;flex:none;background:#510004;color:#ffffff;animation-delay:0.35s">I</span></span></span><div style="display:flex;flex-direction:column;gap:4px"><h2 style="margin:0;font-size:22px;line-height:1.2;font-weight:600;letter-spacing:-.015em;color:#e6361d;">On a trouvé ta copine de&nbsp;voyage.</h2><span style="font-size:15px;line-height:1.45;color:#510004">Inès, en chemin depuis 6 jours, sur La Voix.</span></div></div><a href="#" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;font-weight:600;font-size:16px;line-height:1.2;border-radius:999px;padding:14px 26px;box-sizing:border-box;background:#c42c14;color:#ffffff;border:1.5px solid #c42c14;min-height:48px;white-space:nowrap;">Découvrir</a></section><div style="display:flex;flex-direction:column;gap:14px"><h1 style="margin:0;font-size:30px;line-height:1.06;font-weight:400;letter-spacing:-.035em;color:#e6361d;">Ton chemin, cette semaine.</h1><div style="background:#c42c14;border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:12px;box-sizing:border-box"><span style="font-size:14px;font-weight:600;color:#ffffff">Cette semaine · semaine 3 · agir</span><span style="font-size:24px;font-weight:600;line-height:1.15;letter-spacing:-.02em;color:#ffffff">Le silence après le chiffre</span><div style="display:flex;flex-direction:column;margin-top:4px"><span style="display:flex;align-items:center;gap:12px;padding:9px 0;border-top:1px solid rgba(255,255,255,.22)"><i style="width:22px;height:22px;border-radius:50%;background:#ffffff;color:#c42c14;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;font-style:normal;flex:none">✓</i><span style="font-size:15px;font-weight:500;color:#ffffff;flex:1;opacity:.85">Podcast écouté</span><span style="font-size:13px;color:#ffffff;opacity:.85;white-space:nowrap">lundi</span></span><span style="display:flex;align-items:center;gap:12px;padding:9px 0;border-top:1px solid rgba(255,255,255,.22)"><i style="width:22px;height:22px;border-radius:50%;background:#ffffff;color:#c42c14;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;font-style:normal;flex:none">✓</i><span style="font-size:15px;font-weight:500;color:#ffffff;flex:1;opacity:.85">Ton carnet</span><span style="font-size:13px;color:#ffffff;opacity:.85;white-space:nowrap">2 notes</span></span><span style="display:flex;align-items:center;gap:12px;padding:9px 0;border-top:1px solid rgba(255,255,255,.22)"><i style="width:22px;height:22px;border-radius:50%;border:2.5px solid #ffffff;border-right-color:transparent;box-sizing:border-box;flex:none;transform:rotate(45deg)"></i><span style="font-size:15px;font-weight:600;color:#ffffff;flex:1;">Ton exercice</span><span style="font-size:13px;color:#ffffff;opacity:.85;white-space:nowrap">jour 3 sur 7</span></span><span style="display:flex;align-items:center;gap:12px;padding:9px 0;border-top:1px solid rgba(255,255,255,.22)"><i style="width:22px;height:22px;border-radius:50%;border:1.5px dashed #ffffff;box-sizing:border-box;flex:none;opacity:.8"></i><span style="font-size:15px;font-weight:600;color:#ffffff;flex:1;">Tirer le fil</span><span style="font-size:13px;color:#ffffff;opacity:.85;white-space:nowrap">5 min de lecture</span></span></div><div style="display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-top:auto;padding-top:6px"><a href="Dossier.html" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;font-weight:600;font-size:15px;line-height:1.2;border-radius:999px;padding:10px 18px;box-sizing:border-box;background:#ffffff;color:#c42c14;border:1.5px solid #ffffff;">Tirer le fil</a><span style="font-size:14px;line-height:1.4;color:#ffffff">Ta prochaine étape arrive <strong style="font-weight:600">lundi 23 novembre</strong>.</span></div></div></div></section></div></div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview": {"width": 390, "height": 850}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

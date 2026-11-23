@@ -110,3 +110,13 @@ Ce qui change par rapport au texte plus haut :
 - l'écran de la phrase de présentation (écran 3) reste tel que décrit, entre « Ça me tente » et l'animation ;
 - le mouvement respecte « mouvement réduit » : dans ce cas, pas d'animation, le message s'affiche tout de suite ;
 - **le mot « buddy » disparaît de tout ce que voit l'utilisatrice.** Le mot retenu par Cloé : « ta copine de voyage ». Règle : « ta copine de voyage » à la première mention sur chaque écran (« On cherche ta copine de voyage. », « On a trouvé ta copine de voyage. »), ensuite son prénom. Jamais « ta copine » seul. Partout où ce brief ou le précédent écrit « ta buddy » dans un texte d'interface, lire « ta copine de voyage ». Les noms techniques (dossier `lib/buddy`, adresse `/buddy`, événements) peuvent rester, sauf l'adresse visible : la renommer `/a-deux`. Mettre les textes dans `lib/buddy/textes.ts`.
+
+## Correction du 23 novembre : où vivent « On cherche » et « On a trouvé » sur Mon chemin
+
+Retour de Cloé sur ce qui est en ligne : la carte se met au-dessus du bandeau de la citation, et la carte « On a trouvé » a le même fond que ce bandeau. Les deux sont à reprendre. Maquettes : `design/Duo-chemin-cherche.html`, `design/Duo-chemin-trouvee.html`, `design/D-Duo-chemin-cherche.html`, `design/D-Duo-chemin-trouvee.html`, et `design/Duo-etats.html` mis à jour.
+
+- **Le bandeau de la citation du jour reste toujours la première chose sous le menu.** Rien ne se met au-dessus.
+- **Tout ce qui concerne l'échange à deux vit juste sous ce bandeau**, avant le titre « Ton chemin, cette semaine. ».
+- **Recherche en cours** : une simple ligne, sans cadre ni fond. Les deux petits ronds, puis « On cherche ta copine de voyage. Demandé aujourd'hui. ». Après 24 heures, la même ligne : « On cherche encore ta copine de voyage. Demandé samedi. On préfère attendre la bonne personne. Tu n'as rien à faire, on te prévient. »
+- **Trouvée** : une carte rose pâle (jamais le fond en dégradé du bandeau), à la même place. Les deux ronds en rouge et bordeaux avec les initiales, le titre en rouge « On a trouvé ta copine de voyage. », une ligne « Inès, en chemin depuis 6 jours, sur La Voix. », et le bouton rouge « Découvrir ». Elle arrive en montant, une seule fois.
+- Pas de barre flottante ni de fenêtre par-dessus la page.

@@ -787,71 +787,64 @@
   }
 }
 
-/* L'échange à deux sur Mon chemin (maquettes Duo-etats) */
+/* L'échange à deux sur Mon chemin, sous la citation (correction du 23 novembre, maquettes Duo-chemin-*) */
 .duoLigne {
-  margin: 16px var(--gouttiere) 20px;
-  border: 1.5px solid var(--rose);
-  border-radius: 18px;
-  padding: 14px 16px;
+  margin: 22px var(--gouttiere) 0;
   display: flex;
   gap: 12px;
   align-items: flex-start;
-  background: var(--blanc);
   color: var(--bordeaux);
 }
-.duoLigne > [role="img"] {
-  margin-top: -1px;
-}
 .duoLigneTexte {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  font-size: 15px;
-  line-height: 1.4;
-}
-.duoLigneTexte span + span {
   font-size: 14px;
   line-height: 1.5;
 }
 .duoLigneTexte strong {
   font-weight: 600;
 }
+.duoDoux {
+  opacity: 0.8;
+}
 .duoTrouvee {
-  margin: 20px var(--gouttiere) 24px;
-  background: var(--rouge) url(/images/grain.jpg) center / cover no-repeat;
+  margin: 22px var(--gouttiere) 0;
+  background: var(--rose-pale);
   border-radius: 24px;
-  padding: 22px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  color: var(--blanc);
+}
+.duoTrouvee form,
+.duoTrouvee :global(.bouton) {
+  width: 100%;
+}
+.duoTrouvee :global(.bouton) {
+  min-height: 48px;
+  white-space: nowrap;
+}
+.duoTrouveeHaut {
+  display: flex;
+  gap: 14px;
+  align-items: center;
 }
 .duoTrouveeTexte {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
 }
 .duoTrouveeTexte p {
   margin: 0;
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.45;
+  color: var(--bordeaux);
 }
 .duoTrouveeTitre {
   margin: 0;
-  font-size: 28px;
-  line-height: 1.06;
-  font-weight: 400;
-  letter-spacing: -0.035em;
-}
-.duoTrouveeBas {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-}
-.duoTrouveeBas :global(.bouton) {
-  min-height: 52px;
-  white-space: nowrap;
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--rouge);
 }
 .duoPlusTard {
   margin: 40px var(--gouttiere) 0;
@@ -884,25 +877,34 @@
     margin-right: 96px;
   }
   .duoLigne {
-    margin-top: 24px;
-    margin-bottom: 32px;
+    margin-top: 32px;
+    align-items: center;
+  }
+  .duoLigneTexte {
+    font-size: 15px;
   }
   .duoTrouvee {
-    margin: 32px 96px 40px;
-    padding: 30px;
+    margin: 32px 96px 0;
+    padding: 26px 30px;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-    gap: 40px;
+    gap: 28px;
+  }
+  .duoTrouvee form,
+  .duoTrouvee :global(.bouton) {
+    width: auto;
+  }
+  .duoTrouveeHaut {
+    flex: 1;
+    gap: 22px;
   }
   .duoTrouveeTitre {
-    font-size: 36px;
+    font-size: 28px;
+    line-height: 1.06;
+    font-weight: 400;
+    letter-spacing: -0.035em;
   }
   .duoTrouveeTexte p {
-    font-size: 18px;
-  }
-  .duoTrouveeBas {
-    flex-direction: row-reverse;
-    flex: none;
+    font-size: 17px;
   }
 }

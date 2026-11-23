@@ -179,8 +179,8 @@
   gap: 2px;
 }
 .ligne .boule {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
 }
 .ligne .attend {
   border-width: 2px;
@@ -189,12 +189,16 @@
   gap: 2px;
 }
 .carte .boule {
-  width: 52px;
-  height: 52px;
-  font-size: 21px;
+  width: 44px;
+  height: 44px;
+  font-size: 18px;
 }
 .clair .pleine {
   background: var(--rouge);
+  color: var(--blanc);
+}
+.clair .autre {
+  background: var(--bordeaux);
   color: var(--blanc);
 }
 .clair .attend {
@@ -288,9 +292,9 @@
     gap: 3px;
   }
   .carte .boule {
-    width: 60px;
-    height: 60px;
-    font-size: 25px;
+    width: 56px;
+    height: 56px;
+    font-size: 23px;
   }
   .proposition {
     display: grid;

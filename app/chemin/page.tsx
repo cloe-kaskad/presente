@@ -154,6 +154,15 @@ export default async function MonEspace() {
   // La carte de l'échange à deux (maquettes Duo-etats) : son initiale, et celle de l'autre une fois trouvée.
   const initiale = (prenomAffiche(profil?.prenom) ?? "").trim().charAt(0).toUpperCase();
   const joursInes = Math.max(1, Math.round((Date.now() - Date.parse(`${String(chemin.dateDebut).slice(0, 10)}T12:00:00Z`)) / 864e5) + 1);
+  // La carte « On a trouvé » arrive en montant une seule fois : à la première visite, on note qu'elle l'a vue.
+  const trouveeNouvelle = buddy === "trouvee" && !chemin.progression.buddy_trouvee_vue;
+  if (trouveeNouvelle) {
+    await supabase
+      .from("paths")
+      .update({ progression: { ...chemin.progression, buddy_trouvee_vue: Math.floor(Date.now() / 1000) } })
+      .eq("id", chemin.id);
+  }
+  const phrase = (t: string) => `${t.charAt(0).toUpperCase()}${t.slice(1)}.`;
   const surprise = surpriseOuverte(chemin.progression) ? "ouverte" : surpriseArrivee(chemin.progression, chemin.dateDebut) ? "arrivee" : null;
   const sousTitre = cette.etiquette.replace(/^Semaine \d · /, "");
   const autresMois = [0, 1, 2].filter((m) => m > mois);
@@ -161,38 +170,6 @@ export default async function MonEspace() {
   return (
     <div className={styles.page}>
       <BarreEspace courante="chemin" />
-
-      {/* L'échange à deux, en haut (maquettes Duo-etats) : la recherche en une ligne qui ne pousse rien, puis la carte « trouvée » */}
-      {buddy === "recherche" ? (
-        <div className={styles.duoLigne} role="status">
-          <DeuxBoules initiale={initiale} taille="ligne" clair flotter={false} />
-          <div className={styles.duoLigneTexte}>
-            <span>
-              <strong>{rechercheLongue(chemin.progression) ? T.onChercheEncore : T.onCherche_ligne}</strong> · {demandeLe(chemin.progression.buddy_recherche_le)}
-            </span>
-            {rechercheLongue(chemin.progression) ? <span>{T.rassure}</span> : null}
-          </div>
-        </div>
-      ) : buddy === "trouvee" ? (
-        <section className={`${styles.duoTrouvee} ${m.monte}`} aria-labelledby="duo-trouvee">
-          <div className={styles.duoTrouveeTexte}>
-            <h2 id="duo-trouvee" className={styles.duoTrouveeTitre}>
-              {T.onATrouve}
-            </h2>
-            <p>
-              {INES.prenom}, en chemin depuis {joursInes} jours, sur {QUETE[quete].nom}. Votre première question vous attend.
-            </p>
-          </div>
-          <div className={styles.duoTrouveeBas}>
-            <form action={rencontrer}>
-              <button type="submit" className="bouton bouton--blanc">
-                {T.decouvrir}
-              </button>
-            </form>
-            <DeuxBoules initiale={initiale} autre={INES.prenom.charAt(0)} taille="carte" flotter={false} />
-          </div>
-        </section>
-      ) : null}
 
       {/* Le bandeau : la date, la citation du jour, le chemin du mois qui se dessine */}
       <section className={styles.bandeau}>
@@ -214,6 +191,42 @@ export default async function MonEspace() {
           </span>
         </div>
       </section>
+
+      {/* L'échange à deux, juste sous la citation (correction du 23 novembre) : la recherche en une ligne sans cadre, puis la carte « trouvée » */}
+      {buddy === "recherche" ? (
+        <div className={styles.duoLigne} role="status">
+          <DeuxBoules initiale={initiale} taille="ligne" clair flotter={false} />
+          <span className={styles.duoLigneTexte}>
+            <strong>{rechercheLongue(chemin.progression) ? T.onChercheEncore : T.onCherche}</strong>{" "}
+            <span className={styles.duoDoux}>{phrase(demandeLe(chemin.progression.buddy_recherche_le))}</span>
+            {rechercheLongue(chemin.progression) ? (
+              <>
+                {" "}
+                <span className={styles.duoDoux}>{T.rassure}</span>
+              </>
+            ) : null}
+          </span>
+        </div>
+      ) : buddy === "trouvee" ? (
+        <section className={`${styles.duoTrouvee} ${trouveeNouvelle ? m.monte : ""}`} aria-labelledby="duo-trouvee">
+          <div className={styles.duoTrouveeHaut}>
+            <DeuxBoules initiale={initiale} autre={INES.prenom.charAt(0)} taille="carte" clair flotter={false} animer={trouveeNouvelle} />
+            <div className={styles.duoTrouveeTexte}>
+              <h2 id="duo-trouvee" className={styles.duoTrouveeTitre}>
+                {T.onATrouve}
+              </h2>
+              <p>
+                {INES.prenom}, en chemin depuis {joursInes} jours, sur {QUETE[quete].nom}.
+              </p>
+            </div>
+          </div>
+          <form action={rencontrer}>
+            <button type="submit" className="bouton">
+              {T.decouvrir}
+            </button>
+          </form>
+        </section>
+      ) : null}
 
       {/* La surprise du dixième jour : une carte à grain, puis un petit lien une fois ouverte */}
       {surprise === "arrivee" ? (

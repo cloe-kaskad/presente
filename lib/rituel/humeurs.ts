@@ -25,6 +25,14 @@ export const LEGENDE = [
   { label: "vivante", couleur: "#e6361d" },
 ];
 
+/** Un mot à elle (« + un mot ») : case blanche, bord bordeaux, chiffre bordeaux. */
+export const MOT_A_TOI = { fond: "#ffffff", texte: "#510004", bord: "#510004", famille: "un mot à toi" };
+
+/** La couleur d'un jour noté : celle de l'humeur de base, ou celle d'un mot à elle. */
+export function couleurDe(humeur: string): { fond: string; texte: string; bord: string | null } {
+  return estHumeur(humeur) ? { fond: COULEUR[humeur].fond, texte: COULEUR[humeur].texte, bord: null } : { fond: MOT_A_TOI.fond, texte: MOT_A_TOI.texte, bord: MOT_A_TOI.bord };
+}
+
 /** Les humeurs lourdes : trois jours de suite, le chemin s'allège. « fatiguée » n'en fait pas partie. */
 export const HUMEURS_LOURDES: Humeur[] = ["triste", "lourde", "anxieuse"];
 

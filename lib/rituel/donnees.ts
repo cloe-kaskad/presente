@@ -1,9 +1,10 @@
 import "server-only";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { jourAParis } from "./citations";
-import { estHumeur, type Humeur } from "./humeurs";
+import { nettoyerMots, normaliserMot } from "./mots";
 
-export type JourNote = { jour: string; humeur: Humeur; note: string };
+/** Un jour noté : une des dix humeurs, ou un mot à elle (« + un mot »). */
+export type JourNote = { jour: string; humeur: string; note: string };
 
 /**
  * Ses humeurs des derniers jours, une par jour (la plus récente du jour).
@@ -28,7 +29,15 @@ export async function chargerHumeurs(supabase: SupabaseClient, depuis: string): 
   }
   const parJour = new Map<string, JourNote>();
   for (const l of lignes) {
-    if (!parJour.has(l.jour) && estHumeur(l.humeur)) parJour.set(l.jour, { jour: l.jour, humeur: l.humeur, note: l.note ?? "" });
+    const humeur = typeof l.humeur === "string" ? normaliserMot(l.humeur) : "";
+    if (!parJour.has(l.jour) && humeur) parJour.set(l.jour, { jour: l.jour, humeur, note: l.note ?? "" });
   }
   return [...parJour.values()].sort((a, b) => (a.jour < b.jour ? 1 : -1));
+}
+
+/** Ses mots d'humeur à elle (« + un mot »). Avant la migration V0.12 (colonne absente) : aucun. */
+export async function chargerMesMots(supabase: SupabaseClient): Promise<string[]> {
+  const { data, error } = await supabase.from("profiles").select("mots_humeur").maybeSingle();
+  if (error) return [];
+  return nettoyerMots(data?.mots_humeur);
 }

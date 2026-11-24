@@ -2,8 +2,8 @@ import { redirect } from "next/navigation";
 import { BarreEspace } from "@/components/BarreEspace";
 import { AvecSesMots } from "@/components/AvecSesMots";
 import { dateEnLettres, jourAParis } from "@/lib/rituel/citations";
-import { chargerHumeurs } from "@/lib/rituel/donnees";
-import { COULEUR, LEGENDE } from "@/lib/rituel/humeurs";
+import { chargerHumeurs, chargerMesMots } from "@/lib/rituel/donnees";
+import { LEGENDE, MOT_A_TOI, couleurDe } from "@/lib/rituel/humeurs";
 import { resumeDeLaSemaine } from "@/lib/rituel/journal";
 import { createClient } from "@/lib/supabase/server";
 import { Humeur } from "@/app/chemin/Humeur";
@@ -26,7 +26,7 @@ export default async function Journal() {
   const debutDuMois = `${aujourdhui.slice(0, 7)}-01`;
   // Le mois en cours, plus la semaine passée pour le résumé.
   const depuis = new Date(Date.parse(`${debutDuMois}T12:00:00Z`) - 14 * 86_400_000).toISOString().slice(0, 10);
-  const humeurs = await chargerHumeurs(supabase, depuis);
+  const [humeurs, mesMots] = await Promise.all([chargerHumeurs(supabase, depuis), chargerMesMots(supabase)]);
   const resume = await resumeDeLaSemaine(supabase, user.id, humeurs, aujourdhui, profil?.sujets_a_eviter ?? null);
   if (resume.detresse) {
     await supabase.from("profiles").update({ detresse_le: new Date().toISOString() }).eq("id", user.id);
@@ -53,7 +53,7 @@ export default async function Journal() {
 
         {/* Noter sa journée sans repasser par Mon chemin (brief V0.12) ; sur ordinateur, à gauche de la relecture */}
         <div className={`${styles.dessus} ${resume.texte ? styles.dessusDeux : ""}`}>
-          <Humeur initiale={duJour?.humeur} noteInitiale={duJour?.note} surJournal />
+          <Humeur initiale={duJour?.humeur} noteInitiale={duJour?.note} mesMots={mesMots} surJournal />
           {resume.texte ? (
             <section className={styles.relue} aria-labelledby="relue">
               <h2 id="relue" className={styles.relueTitre}>
@@ -84,6 +84,10 @@ export default async function Journal() {
                   {l.label}
                 </li>
               ))}
+              <li>
+                <i style={{ background: MOT_A_TOI.fond, border: `1.5px solid ${MOT_A_TOI.bord}` }} aria-hidden="true" />
+                {MOT_A_TOI.famille}
+              </li>
             </ul>
           </section>
 
@@ -95,7 +99,7 @@ export default async function Journal() {
               <ol className={styles.liste}>
                 {duMois.map((h) => (
                   <li key={h.jour}>
-                    <i style={{ background: COULEUR[h.humeur].fond }} aria-hidden="true" />
+                    <i style={{ background: couleurDe(h.humeur).fond, ...(couleurDe(h.humeur).bord ? { border: `1.5px solid ${couleurDe(h.humeur).bord}` } : {}) }} aria-hidden="true" />
                     <div>
                       <span className={styles.listeDate}>
                         {dateEnLettres(h.jour)} · {h.humeur}

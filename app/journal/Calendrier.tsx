@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { COULEUR, type Humeur } from "@/lib/rituel/humeurs";
+import { couleurDe } from "@/lib/rituel/humeurs";
 import m from "@/components/mouvement.module.css";
 import styles from "./journal.module.css";
 
-type Jour = { jour: string; humeur: Humeur; note: string };
+type Jour = { jour: string; humeur: string; note: string };
 
 const JOURS = ["L", "M", "M", "J", "V", "S", "D"];
 
@@ -37,7 +37,9 @@ export function Calendrier({ debutDuMois, aujourdhui, jours }: { debutDuMois: st
           const n = Number(j.slice(8));
           // Les pastilles apparaissent en vague, jour après jour (15 ms d'écart).
           const vague = { animationDelay: `${i * 15}ms` };
-          const style = h ? { background: COULEUR[h.humeur].fond, color: COULEUR[h.humeur].texte, ...vague } : vague;
+          // Un mot à elle : case blanche, bord bordeaux, chiffre bordeaux.
+          const c = h ? couleurDe(h.humeur) : null;
+          const style = c ? { background: c.fond, color: c.texte, ...(c.bord ? { border: `1.5px solid ${c.bord}` } : {}), ...vague } : vague;
           const classe = `${m.vague} ${styles.jour} ${h ? styles.note : styles.vide} ${j === aujourdhui ? styles.aujourdhui : ""} ${choisi === j ? styles.choisi : ""}`;
           return h ? (
             <button

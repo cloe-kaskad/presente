@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState, useTransition } from "react";
+import { useRef, useState, useTransition } from "react";
 import { CestNote } from "@/components/CestNote";
-import { COULEUR, HUMEURS, estHumeur } from "@/lib/rituel/humeurs";
-import { noterHumeur } from "./actions";
+import { HUMEURS, couleurDe } from "@/lib/rituel/humeurs";
+import { MOT_LONGUEUR_MAX } from "@/lib/rituel/mots";
+import { ajouterMonMot, noterHumeur, retirerMonMot } from "./actions";
 import styles from "./espace.module.css";
 
 /**
@@ -13,7 +14,18 @@ import styles from "./espace.module.css";
  * La même carte sur Mon chemin et en haut de Mon journal (brief V0.12). Déjà notée aujourd'hui, elle se replie :
  * « Aujourd'hui, tu as noté calme. », sa phrase, et « Modifier » qui la rouvre avec son choix.
  */
-export function Humeur({ initiale, noteInitiale, surJournal = false }: { initiale?: string; noteInitiale?: string; surJournal?: boolean }) {
+export function Humeur({
+  initiale,
+  noteInitiale,
+  mesMots: motsInitiaux = [],
+  surJournal = false,
+}: {
+  initiale?: string;
+  noteInitiale?: string;
+  /** Ses mots à elle (« + un mot »), après les dix mots de base. */
+  mesMots?: string[];
+  surJournal?: boolean;
+}) {
   const router = useRouter();
   const Titre = surJournal ? "h2" : "h3";
   // Ce qui est enregistré pour aujourd'hui (la carte repliée le montre).
@@ -25,6 +37,41 @@ export function Humeur({ initiale, noteInitiale, surJournal = false }: { initial
   // La coche ne se dessine que quand elle vient d'enregistrer, pas à l'ouverture de la page.
   const [vient, setVient] = useState(false);
   const [enCours, demarrer] = useTransition();
+  // « + un mot » : ses mots à elle, et le petit champ d'ajout.
+  const [mots, setMots] = useState(motsInitiaux);
+  const [ajout, setAjout] = useState(false);
+  const [nouveau, setNouveau] = useState("");
+  const [messageMot, setMessageMot] = useState<string | null>(null);
+  const [ajoutEnCours, demarrerAjout] = useTransition();
+  const champMot = useRef<HTMLInputElement>(null);
+  const boutonPlus = useRef<HTMLButtonElement>(null);
+
+  const fermerAjout = () => {
+    setAjout(false);
+    setNouveau("");
+    setMessageMot(null);
+    requestAnimationFrame(() => boutonPlus.current?.focus());
+  };
+  const ajouter = () =>
+    demarrerAjout(async () => {
+      const r = await ajouterMonMot(nouveau).catch(() => ({ ok: false as const, erreur: "Ce n'est pas enregistré. Réessaie dans un instant.", mots }));
+      if (!r.ok) {
+        setMessageMot(r.erreur);
+        return;
+      }
+      setMots(r.mots);
+      setHumeur(r.mot);
+      setAjout(false);
+      setNouveau("");
+      setMessageMot(null);
+    });
+  const retirer = (mot: string) =>
+    demarrerAjout(async () => {
+      const r = await retirerMonMot(mot).catch(() => ({ ok: false, mots }));
+      setMots(r.mots);
+      if (r.ok && humeur === mot) setHumeur("");
+      champMot.current?.focus();
+    });
 
   const envoyer = () =>
     demarrer(async () => {
@@ -50,7 +97,10 @@ export function Humeur({ initiale, noteInitiale, surJournal = false }: { initial
       </Titre>
       {!ouverte && notee ? (
         <div className={styles.humeurRepliee}>
-          <i style={{ background: estHumeur(notee.humeur) ? COULEUR[notee.humeur].fond : "var(--blanc)" }} aria-hidden="true" />
+          <i
+            style={{ background: couleurDe(notee.humeur).fond, ...(couleurDe(notee.humeur).bord ? { border: `1.5px solid ${couleurDe(notee.humeur).bord}` } : {}) }}
+            aria-hidden="true"
+          />
           <div className={styles.humeurReplieeTexte}>
             <span>
               Aujourd&apos;hui, tu as noté <strong>{notee.humeur}</strong>.
@@ -74,19 +124,70 @@ export function Humeur({ initiale, noteInitiale, surJournal = false }: { initial
       ) : (
         <>
           <div className={styles.puces} role="radiogroup" aria-labelledby="humeur-titre">
-            {HUMEURS.map((h) => (
-              <button
-                key={h}
-                type="button"
-                role="radio"
-                aria-checked={humeur === h}
-                className={`${styles.puce} ${humeur === h ? styles.puceChoisie : ""}`}
-                onClick={() => setHumeur(h)}
-              >
-                {h}
+            {[...HUMEURS, ...mots].map((h, i) => {
+              const aElle = i >= HUMEURS.length;
+              const puce = (
+                <button
+                  key={h}
+                  type="button"
+                  role="radio"
+                  aria-checked={humeur === h}
+                  className={`${styles.puce} ${humeur === h ? styles.puceChoisie : ""} ${aElle && ajout ? styles.puceAvecCroix : ""}`}
+                  onClick={() => setHumeur(h)}
+                >
+                  {h}
+                </button>
+              );
+              // Pendant l'ajout, ses mots à elle montrent une croix pour les retirer de la liste.
+              return aElle && ajout ? (
+                <span key={h} className={styles.puceGroupe}>
+                  {puce}
+                  <button type="button" className={styles.croix} aria-label={`Retirer ${h}`} disabled={ajoutEnCours} onClick={() => retirer(h)}>
+                    ×
+                  </button>
+                </span>
+              ) : (
+                puce
+              );
+            })}
+            {ajout ? (
+              <span className={styles.ajoutMot}>
+                <input
+                  ref={champMot}
+                  value={nouveau}
+                  maxLength={MOT_LONGUEUR_MAX}
+                  aria-label="Ton mot"
+                  aria-describedby="mot-aide"
+                  autoFocus
+                  onChange={(e) => {
+                    setNouveau(e.target.value);
+                    setMessageMot(null);
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      if (nouveau.trim()) ajouter();
+                    } else if (e.key === "Escape") {
+                      e.preventDefault();
+                      fermerAjout();
+                    }
+                  }}
+                />
+                <button type="button" className={styles.ajouter} disabled={!nouveau.trim() || ajoutEnCours} onClick={ajouter}>
+                  Ajouter
+                </button>
+              </span>
+            ) : (
+              <button ref={boutonPlus} type="button" className={styles.plusUnMot} onClick={() => setAjout(true)}>
+                + un mot
               </button>
-            ))}
+            )}
           </div>
+          {ajout ? (
+            <p id="mot-aide" className={styles.motAide} role={messageMot ? "alert" : undefined}>
+              {messageMot ?? "Ton mot reste dans la liste, pour la prochaine fois. Une croix permet de le retirer."}
+            </p>
+          ) : null}
           <label className={styles.ligneLibre}>
             <span>
               Pourquoi, en une phrase ? <span className={styles.facultatif}>(si tu veux)</span>

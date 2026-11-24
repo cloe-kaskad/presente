@@ -255,6 +255,103 @@
   border-color: var(--bordeaux);
   color: var(--blanc);
 }
+/* « + un mot » (brief V0.12) */
+.plusUnMot {
+  min-height: var(--cible);
+  background: transparent;
+  color: var(--rouge-profond);
+  border: 1.5px dashed var(--rouge);
+  border-radius: 999px;
+  padding: 9px 15px;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+}
+.plusUnMot:hover {
+  border-style: solid;
+}
+.puceGroupe {
+  display: inline-flex;
+  align-items: center;
+  background: var(--blanc);
+  border: 1.5px solid var(--rose);
+  border-radius: 999px;
+}
+.puceGroupe:has(.puceChoisie) {
+  background: var(--bordeaux);
+  border-color: var(--bordeaux);
+}
+.puceAvecCroix {
+  border: 0;
+  padding-right: 4px;
+  background: transparent;
+}
+.puceAvecCroix.puceChoisie {
+  background: transparent;
+  color: var(--blanc);
+}
+.croix {
+  min-width: 36px;
+  min-height: var(--cible);
+  padding: 0 12px 0 4px;
+  background: none;
+  border: 0;
+  border-radius: 0 999px 999px 0;
+  font: inherit;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--rouge-profond);
+  cursor: pointer;
+}
+.puceGroupe:has(.puceChoisie) .croix {
+  color: var(--blanc);
+}
+.ajoutMot {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--blanc);
+  border: 1.5px solid var(--rouge);
+  box-shadow: 0 0 0 4px var(--rose);
+  border-radius: 999px;
+  padding: 4px 5px 4px 15px;
+}
+.ajoutMot input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--bordeaux);
+  width: 9em;
+  padding: 0;
+  min-height: 34px;
+}
+.ajouter {
+  border: 0;
+  background: var(--rouge);
+  color: var(--blanc);
+  border-radius: 999px;
+  padding: 6px 12px;
+  min-height: 34px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.ajouter[disabled] {
+  opacity: 0.55;
+  cursor: default;
+}
+.motAide {
+  margin: -4px 0 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--bordeaux);
+}
 .ligneLibre {
   display: flex;
   flex-direction: column;

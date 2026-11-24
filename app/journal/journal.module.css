@@ -129,6 +129,7 @@
   height: 12px;
   border-radius: 50%;
   flex: none;
+  box-sizing: border-box;
 }
 .liste {
   list-style: none;

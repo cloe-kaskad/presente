@@ -9,6 +9,8 @@ import { jourAParis } from "@/lib/rituel/citations";
 import { estEquipe } from "@/lib/equipe";
 import { stadeReel } from "@/lib/semaines/calendrier";
 import { estHumeur } from "@/lib/rituel/humeurs";
+import { chargerMesMots } from "@/lib/rituel/donnees";
+import { ajouterMot, normaliserMot, retirerMot, type Ajout } from "@/lib/rituel/mots";
 import { createClient } from "@/lib/supabase/server";
 
 async function session() {
@@ -24,10 +26,12 @@ async function session() {
  * L'humeur du jour, avec une phrase facultative. Une entrée par jour, modifiable dans la journée.
  * La phrase passe par la détection de détresse. Rien n'est écrit dans les logs.
  */
-export async function noterHumeur(humeur: string, note: string): Promise<{ ok: boolean; detresse?: boolean }> {
-  if (!estHumeur(humeur)) return { ok: false };
+export async function noterHumeur(brut: string, note: string): Promise<{ ok: boolean; detresse?: boolean }> {
+  const humeur = normaliserMot(brut);
   const phrase = note.trim().slice(0, 300);
   const { supabase, user } = await session();
+  // Une des dix humeurs, ou un de ses mots à elle.
+  if (!estHumeur(humeur) && !(await chargerMesMots(supabase)).includes(humeur)) return { ok: false };
 
   if (phrase && (await detecterDetresse([{ question: "Comment tu vas, aujourd'hui ? Pourquoi, en une phrase ?", reponse: phrase }]))) {
     await supabase.from("profiles").update({ detresse_le: new Date().toISOString() }).eq("id", user.id);
@@ -112,4 +116,40 @@ export async function revenirAuStadeReel(): Promise<void> {
   const { error } = await supabase.from("paths").update({ semaine_en_cours: r.semaine, progression: r.progression }).eq("id", chemin.id);
   if (error) console.error("[test] retour au stade réel impossible :", error.code);
   revalidatePath("/chemin");
+}
+
+/** Les mots tels qu'ils sont enregistrés. Avant la migration V0.12, la colonne n'existe pas : on le dit. */
+async function enregistrerMots(supabase: Awaited<ReturnType<typeof createClient>>, userId: string, mots: string[]): Promise<boolean> {
+  const { error } = await supabase.from("profiles").update({ mots_humeur: mots }).eq("id", userId);
+  if (error) console.error("[mots] non enregistrés :", error.code);
+  return !error;
+}
+
+/** « + un mot » : le mot rejoint sa liste (sauf doublon) et sera choisi pour aujourd'hui. */
+export async function ajouterMonMot(brut: string): Promise<Ajout> {
+  const { supabase, user } = await session();
+  const mots = await chargerMesMots(supabase);
+  const r = ajouterMot(mots, String(brut ?? ""));
+  if (r.ok && r.nouveau && !(await enregistrerMots(supabase, user.id, r.mots))) {
+    return { ok: false, erreur: "Ce n'est pas enregistré. Réessaie dans un instant.", mots };
+  }
+  if (r.ok && r.nouveau) {
+    revalidatePath("/chemin");
+    revalidatePath("/journal");
+  }
+  return r;
+}
+
+/** La croix : le mot quitte sa liste. Les jours déjà notés avec ce mot ne changent pas. */
+export async function retirerMonMot(mot: string): Promise<{ ok: boolean; mots: string[] }> {
+  const { supabase, user } = await session();
+  const mots = await chargerMesMots(supabase);
+  const reste = retirerMot(mots, String(mot ?? ""));
+  if (reste.length === mots.length) return { ok: true, mots };
+  const ok = await enregistrerMots(supabase, user.id, reste);
+  if (ok) {
+    revalidatePath("/chemin");
+    revalidatePath("/journal");
+  }
+  return { ok, mots: ok ? reste : mots };
 }

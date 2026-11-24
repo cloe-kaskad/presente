@@ -24,7 +24,7 @@ import { chargerReponses } from "@/lib/questionnaire/donnees";
 import { citationDuJour, dateEnLettres, jourAParis, plusJours } from "@/lib/rituel/citations";
 import { troisJoursLourds } from "@/lib/rituel/humeurs";
 import { articleDuJour, questionCherie } from "@/lib/rituel/airtable";
-import { chargerHumeurs } from "@/lib/rituel/donnees";
+import { chargerHumeurs, chargerMesMots } from "@/lib/rituel/donnees";
 import { echoDuJour } from "@/lib/rituel/echo";
 import { candidatsEcho } from "@/lib/rituel/echo-donnees";
 import { chargerCatalogue } from "@/lib/catalogue/airtable";
@@ -60,7 +60,7 @@ export default async function MonEspace() {
   await noter(supabase, "visite", { pathId: chemin.id, semaine: chemin.semaine });
 
   const aujourdhui = jourAParis();
-  const [{ data: profil }, reponses, textesCarte, humeurs] = await Promise.all([
+  const [{ data: profil }, reponses, textesCarte, humeurs, mesMots] = await Promise.all([
     supabase
       .from("profiles")
       .select("*")
@@ -68,6 +68,7 @@ export default async function MonEspace() {
     chargerReponses(supabase, 1),
     chargerTextesCarte(supabase, chemin.id),
     chargerHumeurs(supabase, plusJours(aujourdhui, -3)),
+    chargerMesMots(supabase),
   ]);
   if (profil?.detresse_le) redirect("/quand-ca-ne-va-pas");
   if (!carteEcrite(textesCarte, chemin)) redirect("/carte/trace");
@@ -333,7 +334,7 @@ export default async function MonEspace() {
         </div>
         <div className={styles.grilleJour}>
           <div className={`${styles.colonne} ${m.monte}`} style={{ animationDelay: "0.75s" }}>
-            <Humeur initiale={humeurDuJour?.humeur} noteInitiale={humeurDuJour?.note} />
+            <Humeur initiale={humeurDuJour?.humeur} noteInitiale={humeurDuJour?.note} mesMots={mesMots} />
             {echo ? (
               <Echo
                 semaine={chemin.semaine}

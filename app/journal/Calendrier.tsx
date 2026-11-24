@@ -52,6 +52,23 @@ export function Calendrier({ debutDuMois, aujourdhui, jours }: { debutDuMois: st
             >
               {n}
             </button>
+          ) : j === aujourdhui ? (
+            // Aujourd'hui, rien de noté : la case ramène à la carte « Comment tu vas » en haut de la page.
+            <a
+              key={j}
+              href="#comment-tu-vas"
+              className={`${classe} ${styles.aujourdhuiVide}`}
+              aria-label={`${nomJour(j)}, aujourd'hui : rien de noté. Noter ma journée`}
+              onClick={(e) => {
+                const carte = document.getElementById("comment-tu-vas");
+                if (!carte) return;
+                e.preventDefault();
+                carte.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+                carte.focus({ preventScroll: true });
+              }}
+            >
+              {n}
+            </a>
           ) : (
             <span key={j} className={classe} aria-label={`${nomJour(j)} : rien de noté`}>
               {n}

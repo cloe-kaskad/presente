@@ -21,6 +21,12 @@
   font-size: 15px;
   color: var(--rouge-profond);
 }
+/* La carte « Comment tu vas » en haut du journal, puis la relecture (brief V0.12) */
+.dessus {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
 .relue {
   background: var(--rose-pale);
   border-radius: 24px;
@@ -171,6 +177,15 @@ p.vide {
   .relue {
     padding: 36px;
   }
+  .dessus > section:first-child {
+    padding: 30px;
+  }
+  .dessusDeux {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 24px;
+    align-items: start;
+  }
   .relueTexte {
     font-size: 24px;
   }
@@ -188,4 +203,10 @@ p.vide {
     border-radius: 14px;
     font-size: 16px;
   }
+}
+
+/* La case d'aujourd'hui, vide : elle ramène à la carte « Comment tu vas » */
+a.aujourdhuiVide {
+  text-decoration: none;
+  color: inherit;
 }

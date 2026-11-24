@@ -97,6 +97,7 @@ export const HUMEURS = [
   "lourde",
   "anxieuse",
   "énervée",
+  "fatiguée",
   "grise",
   "calme",
   "légère",

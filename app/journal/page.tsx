@@ -6,6 +6,7 @@ import { chargerHumeurs } from "@/lib/rituel/donnees";
 import { COULEUR, LEGENDE } from "@/lib/rituel/humeurs";
 import { resumeDeLaSemaine } from "@/lib/rituel/journal";
 import { createClient } from "@/lib/supabase/server";
+import { Humeur } from "@/app/chemin/Humeur";
 import { Calendrier } from "./Calendrier";
 import styles from "./journal.module.css";
 
@@ -33,6 +34,7 @@ export default async function Journal() {
   }
 
   const duMois = humeurs.filter((h) => h.jour >= debutDuMois);
+  const duJour = humeurs.find((h) => h.jour === aujourdhui);
   const nomDuMois = new Intl.DateTimeFormat("fr-FR", { month: "long", year: "numeric", timeZone: "UTC" }).format(
     new Date(`${debutDuMois}T12:00:00Z`),
   );
@@ -49,17 +51,21 @@ export default async function Journal() {
           </span>
         </div>
 
-        {resume.texte ? (
-          <section className={styles.relue} aria-labelledby="relue">
-            <h2 id="relue" className={styles.relueTitre}>
-              Ta semaine, relue
-            </h2>
-            <p className={styles.relueTexte}>
-              <AvecSesMots texte={resume.texte} fond="blanc" />
-            </p>
-            <p className={styles.relueNote}>C&apos;est une lecture, pas un verdict. Personne de l&apos;équipe ne lit ton journal.</p>
-          </section>
-        ) : null}
+        {/* Noter sa journée sans repasser par Mon chemin (brief V0.12) ; sur ordinateur, à gauche de la relecture */}
+        <div className={`${styles.dessus} ${resume.texte ? styles.dessusDeux : ""}`}>
+          <Humeur initiale={duJour?.humeur} noteInitiale={duJour?.note} surJournal />
+          {resume.texte ? (
+            <section className={styles.relue} aria-labelledby="relue">
+              <h2 id="relue" className={styles.relueTitre}>
+                Ta semaine, relue
+              </h2>
+              <p className={styles.relueTexte}>
+                <AvecSesMots texte={resume.texte} fond="blanc" />
+              </p>
+              <p className={styles.relueNote}>C&apos;est une lecture, pas un verdict. Personne de l&apos;équipe ne lit ton journal.</p>
+            </section>
+          ) : null}
+        </div>
 
         <div className={styles.colonnes}>
           <section aria-labelledby="mois">
@@ -100,7 +106,7 @@ export default async function Journal() {
                 ))}
               </ol>
             ) : (
-              <p className={styles.vide}>Rien encore ce mois-ci. Ton humeur du jour se note dans Mon chemin, en deux secondes.</p>
+              <p className={styles.vide}>Rien encore ce mois-ci. Ton humeur du jour se note juste au-dessus, en deux secondes.</p>
             )}
           </section>
         </div>

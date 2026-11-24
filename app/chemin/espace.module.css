@@ -281,6 +281,49 @@
   display: inline-flex;
   align-items: center;
 }
+/* La carte repliée : déjà notée aujourd'hui (brief V0.12) */
+.humeurRepliee {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  color: var(--bordeaux);
+}
+.humeurRepliee > i {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin-top: 6px;
+  flex: none;
+}
+.humeurReplieeTexte {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  font-size: 17px;
+  line-height: 1.4;
+}
+.humeurReplieeTexte strong {
+  font-weight: 600;
+}
+.humeurPhrase {
+  font-size: 15px;
+  line-height: 1.5;
+}
+.modifier {
+  background: none;
+  border: 0;
+  padding: 0;
+  margin-top: -10px;
+  min-height: var(--cible);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--rouge-profond);
+  text-decoration: underline;
+  cursor: pointer;
+  white-space: nowrap;
+}
 .lienDiscret {
   font-size: 15px;
   font-weight: 600;
@@ -907,4 +950,8 @@
   .duoTrouveeTexte p {
     font-size: 17px;
   }
+}
+
+.humeur:focus:not(:focus-visible) {
+  outline: none;
 }

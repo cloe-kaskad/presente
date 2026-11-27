@@ -3,6 +3,8 @@ import { BarreEspace } from "@/components/BarreEspace";
 import { CITATIONS, dateEnLettres, jourAParis, numeroDuJour } from "@/lib/rituel/citations";
 import { codeJour, codeRetiens, estCodeJour, etatExercice, jourDuCode, jourEnCours, joursDuRythme } from "@/lib/semaines/exercice";
 import { contexteSemaine, introDeLaPratique, queteDeLaSemaine } from "../contexte";
+import { AUDIO_PROVISOIRE } from "@/lib/catalogue/guides";
+import { MODE_TEST } from "@/lib/mode-test";
 import { Exercice } from "./Exercice";
 
 export const metadata = { title: "Ton exercice · Présente !" };
@@ -50,6 +52,7 @@ export default async function PageExercice({ params }: { params: Promise<{ n: st
           pourquoi: pratique.pourquoiCaCompte,
           rythme: pratique.rythme,
           forme: pratique.formeReponse,
+          guidage: pratique.audio ? { cle: pratique.id, fichier: pratique.audio, provisoire: MODE_TEST ? AUDIO_PROVISOIRE : null } : null,
         }}
         intro={intro}
         origine={contenu ? { titre: contenu.titre, type: typeContenu } : null}

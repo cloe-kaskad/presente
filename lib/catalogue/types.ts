@@ -43,6 +43,8 @@ export type Pratique = {
   consigne: string | null;
   regles: string | null;
   pourquoiCaCompte: string | null;
+  /** Le guidage audio (nom du fichier dans public/audio/), ou null : voir lib/catalogue/guides.ts. */
+  audio?: string | null;
 };
 
 export type Catalogue = { contenus: Contenu[]; pratiques: Pratique[] };

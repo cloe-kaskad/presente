@@ -4,6 +4,8 @@ import type { CheminEnregistre, ChoixEnregistre } from "@/lib/chemin/donnees";
 import { QUESTIONS_OUVERTES, type FormatId, type TempsId } from "@/lib/questionnaire/contenu";
 import type { Reponses } from "@/lib/questionnaire/reponses";
 import { chargerCatalogue } from "./airtable";
+import { GUIDE_CHAQUE_MOIS } from "./guides";
+import { choixRanges, departDe } from "@/lib/semaines/depart";
 import { choisirContenu, choisirPratique, type AvisContenu, type ProfilChoix, type RetourId } from "./choix";
 import type { Contenu, Pratique } from "./types";
 
@@ -131,6 +133,7 @@ export async function choixDuMois(
     const demande = {
       quete,
       formesPrecedentes,
+      guide: GUIDE_CHAQUE_MOIS,
       semaine: (i === 0 ? 1 : 3) as 1 | 3,
       capacites: chemin.capacites[quete] as [string, string],
       dejaPris: [...idsDejaPris(chemin.choix, [cle]), ...idsDejaPris(nouveaux, [])].filter((id) => !aReproposer.has(id)),
@@ -155,9 +158,13 @@ export async function choixDuMois(
 
   if (Object.keys(nouveaux).length) {
     const choix = { ...chemin.choix, ...nouveaux };
-    const { error } = await supabase.from("paths").update({ choix }).eq("id", chemin.id);
+    const aEnregistrer = choixRanges(chemin.choixBrut ?? chemin.choix, choix, departDe(chemin.progression));
+    const { error } = await supabase.from("paths").update({ choix: aEnregistrer }).eq("id", chemin.id);
     if (error) console.error("[choix] non enregistré :", error.code);
-    else chemin.choix = choix;
+    else {
+      chemin.choix = choix;
+      chemin.choixBrut = aEnregistrer;
+    }
   }
 
   const semaine = (cle: string): SemaineDeQuete => {

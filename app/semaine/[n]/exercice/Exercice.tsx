@@ -14,6 +14,7 @@ import type { Citation } from "@/lib/rituel/citations";
 import { QUESTIONS_ACTE } from "@/lib/semaines/contenu";
 import { codeRetiens, type EtatExercice } from "@/lib/semaines/exercice";
 import { commencerExercice, terminerExercice } from "../../actions";
+import { Guidage } from "./Guidage";
 import styles from "./exercice.module.css";
 
 type Pratique = {
@@ -23,6 +24,8 @@ type Pratique = {
   pourquoi: string | null;
   rythme: string | null;
   forme: string | null;
+  /** Le guidage audio : l'identifiant de la pratique, le fichier, et l'enregistrement provisoire (phase de test). */
+  guidage?: { cle: string; fichier: string; provisoire: string | null } | null;
 };
 type Jour = { jour: string; date: string; reponse: string };
 
@@ -79,29 +82,33 @@ export function Exercice({
   const surtitre = [nature, pratique.rythme?.toLowerCase(), ou].filter(Boolean).join(" · ");
 
   const consigne = (
-    <section className={styles.consigne} aria-labelledby="consigne">
-      <h2 id="consigne" className={styles.etiquette}>
-        La consigne
-      </h2>
-      {intro ? (
-        <p className={styles.intro}>
-          <AvecSesMots texte={intro} />
-        </p>
-      ) : null}
-      {pratique.consigne ? <p className={styles.consigneTexte}>{pratique.consigne}</p> : null}
-      {pratique.regles ? (
-        <details className={styles.depliant}>
-          <summary>Les règles</summary>
-          <p>{pratique.regles}</p>
-        </details>
-      ) : null}
-      {pratique.pourquoi ? (
-        <details className={styles.depliant}>
-          <summary>Pourquoi ça compte</summary>
-          <p>{pratique.pourquoi}</p>
-        </details>
-      ) : null}
-    </section>
+    <>
+      {/* Le guidage audio, au-dessus de la consigne ; la consigne écrite reste visible pour celles qui ne peuvent pas écouter */}
+      {pratique.guidage ? <Guidage n={n} cle={pratique.guidage.cle} fichier={pratique.guidage.fichier} provisoire={pratique.guidage.provisoire} /> : null}
+      <section className={styles.consigne} aria-labelledby="consigne">
+        <h2 id="consigne" className={styles.etiquette}>
+          La consigne
+        </h2>
+        {intro ? (
+          <p className={styles.intro}>
+            <AvecSesMots texte={intro} />
+          </p>
+        ) : null}
+        {pratique.consigne ? <p className={styles.consigneTexte}>{pratique.consigne}</p> : null}
+        {pratique.regles ? (
+          <details className={styles.depliant}>
+            <summary>Les règles</summary>
+            <p>{pratique.regles}</p>
+          </details>
+        ) : null}
+        {pratique.pourquoi ? (
+          <details className={styles.depliant}>
+            <summary>Pourquoi ça compte</summary>
+            <p>{pratique.pourquoi}</p>
+          </details>
+        ) : null}
+      </section>
+    </>
   );
 
   // Ce qu'elle a déjà noté : les jours passés (du plus récent au plus ancien), puis ce qu'elle a écrit avant.

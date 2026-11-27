@@ -2,6 +2,7 @@ import "server-only";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { isCode, isQueteId, MONDES, type CodeCapacite, type MondeId, type QueteId } from "@/lib/questionnaire/contenu";
 import { cleDebut, semaineOuverte } from "@/lib/semaines/calendrier";
+import { choixVus, departDe } from "@/lib/semaines/depart";
 import type { Chemin } from "./calcul";
 
 export type ChoixEnregistre = {
@@ -18,6 +19,8 @@ export type CheminEnregistre = Chemin & {
   semaine: number;
   /** Clés « m1s1 », « m1s3 », « m2s1 »… */
   choix: Record<string, ChoixEnregistre>;
+  /** Tous les choix tels qu'ils sont enregistrés (vrais et démo), pour les réécrire sans rien perdre. */
+  choixBrut?: Record<string, ChoixEnregistre>;
   /** L'étape ouverte dans chaque semaine : {"1": 3}. */
   progression: Record<string, number>;
 };
@@ -50,7 +53,9 @@ export async function chargerChemin(supabase: SupabaseClient): Promise<CheminEnr
     mondes: mondes as [MondeId, MondeId, MondeId],
     dateDebut: data.date_debut,
     semaine: data.semaine_en_cours,
-    choix: (data.choix && typeof data.choix === "object" ? data.choix : {}) as Record<string, ChoixEnregistre>,
+    // Après « Revenir à la première semaine », la démo a ses propres choix (lib/semaines/depart.ts).
+    choix: choixVus((data.choix && typeof data.choix === "object" ? data.choix : {}) as Record<string, ChoixEnregistre>, departDe(data.progression)),
+    choixBrut: (data.choix && typeof data.choix === "object" ? data.choix : {}) as Record<string, ChoixEnregistre>,
     progression: (data.progression && typeof data.progression === "object" ? data.progression : {}) as Record<string, number>,
   };
 }

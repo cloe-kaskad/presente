@@ -275,3 +275,27 @@ describe("varier les façons de pratiquer", () => {
     expect(choisirPratique(seule, { ...s1, formesPrecedentes: { memeMoment: "Texte libre" } }, profil).pratique?.id).toBe("ecrire");
   });
 });
+
+describe("l'exercice guidé de la semaine 1 (V0.12, phase de test)", () => {
+  const catalogue: Catalogue = {
+    contenus: [],
+    pratiques: [
+      pratique("ordinaire", { capacites: ["AR3"], role: "ouvrir" }),
+      pratique("souffles", { nom: "Trois souffles avant de répondre", quete: "voix", role: "ouvrir", audio: "trois-souffles.m4a" }),
+      pratique("corps", { nom: "Le corps répond en premier", quete: "corps", role: "ouvrir", audio: "le-corps-repond.m4a" }),
+      pratique("agir", { capacites: ["AR3"], role: "agir", formeReponse: "Acte réel puis retour" }),
+    ],
+  };
+  it("propose le guidage de sa quête s'il existe", () => {
+    expect(choisirPratique(catalogue, { ...s1, quete: "corps", guide: true }, profil).pratique?.id).toBe("corps");
+  });
+  it("sinon un autre guidage, jamais deux fois", () => {
+    expect(choisirPratique(catalogue, { ...s1, guide: true }, profil).pratique?.id).toBe("corps");
+    expect(choisirPratique(catalogue, { ...s1, guide: true, dejaPris: ["corps"] }, profil).pratique?.id).toBe("souffles");
+    expect(choisirPratique(catalogue, { ...s1, guide: true, dejaPris: ["corps", "souffles"] }, profil).pratique?.id).toBe("ordinaire");
+  });
+  it("sans la règle, ou en semaine 3, rien ne change", () => {
+    expect(choisirPratique(catalogue, s1, profil).pratique?.id).toBe("ordinaire");
+    expect(choisirPratique(catalogue, { ...s3, guide: true }, profil).pratique?.id).toBe("agir");
+  });
+});

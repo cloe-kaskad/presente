@@ -64,3 +64,18 @@ describe("une démo ne retrouve jamais la précédente", () => {
     expect(retour.buddy_echange).toBe(1); // ses vraies réponses à deux reviennent
   });
 });
+
+import { choixRanges, choixVus } from "./depart";
+
+describe("les choix de la démo sont rangés à part", () => {
+  const brut = { m1s1: "vrai", m1s3: "vrai3", "d1:m1s1": "demo" };
+  it("chaque départ voit ses propres choix", () => {
+    expect(choixVus(brut, 0)).toEqual({ m1s1: "vrai", m1s3: "vrai3" });
+    expect(choixVus(brut, 1)).toEqual({ m1s1: "demo" });
+    expect(choixVus(brut, 2)).toEqual({});
+  });
+  it("enregistrer les choix de la démo ne touche pas aux vrais", () => {
+    expect(choixRanges(brut, { m1s1: "demo2", m1s3: "x" }, 2)).toEqual({ ...brut, "d2:m1s1": "demo2", "d2:m1s3": "x" });
+    expect(choixRanges(brut, { m1s1: "neuf" }, 0)).toEqual({ "d1:m1s1": "demo", m1s1: "neuf" });
+  });
+});

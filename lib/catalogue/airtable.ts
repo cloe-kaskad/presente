@@ -1,4 +1,5 @@
 import "server-only";
+import { fichierAudio } from "./guides";
 import { FORMATS, QUETE, QUETES, type FormatId, type QueteId } from "@/lib/questionnaire/contenu";
 import type { Catalogue, Contenu, Intensite, Pratique, Role, Temps } from "./types";
 
@@ -68,6 +69,7 @@ const PRATIQUES = {
   consigne: "fldcxgQo6OKuUtzNT",
   regles: "fldBAPxef1DrdcnTs",
   pourquoiCaCompte: "fldPKYLXQteRrbURE",
+  audio: "fldKb51iu5jOEGtqf",
 } as const;
 
 type Enregistrement = { id: string; fields: Record<string, unknown> };
@@ -241,6 +243,7 @@ async function lirePratiques(): Promise<Pratique[]> {
         consigne: texteOuNull(r.fields[f.consigne]),
         regles: texteOuNull(r.fields[f.regles]),
         pourquoiCaCompte: texteOuNull(r.fields[f.pourquoiCaCompte]),
+        audio: fichierAudio(texte(r.fields[f.audio]), texte(r.fields[f.nom])),
       };
     })
     .filter((x) => x.nom);

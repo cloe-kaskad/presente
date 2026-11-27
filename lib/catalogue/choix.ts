@@ -93,6 +93,8 @@ export type DemandeSemaine = {
    * précédent au même moment (Ouvrir ou Agir), et celle de l'exercice juste avant. Aucune préférence n'est demandée.
    */
   formesPrecedentes?: { memeMoment?: string | null; justeAvant?: string | null };
+  /** En semaine 1, proposer un exercice guidé à la voix de Cloé (de sa quête si possible) : voir guides.ts. */
+  guide?: boolean;
 };
 
 // ---------------------------------------------------------------------------
@@ -220,6 +222,13 @@ export function choisirPratique(catalogue: Catalogue, d: DemandeSemaine, p: Prof
       !pris.has(x.id) &&
       !toucheSujet(aEviter, x.nom, x.enBref, x.consigne),
   );
+
+  // Un exercice guidé (audio) en semaine 1 : celui de sa quête s'il existe, sinon un autre, jamais deux fois.
+  if (d.guide && d.semaine === 1) {
+    const guides = catalogue.pratiques.filter((x) => x.audio && x.role === "ouvrir" && !pris.has(x.id) && !toucheSujet(aEviter, x.nom, x.enBref, x.consigne));
+    const g = guides.find((x) => x.quete === d.quete) ?? [...guides].sort((a, b) => a.nom.localeCompare(b.nom, "fr"))[0];
+    if (g) return { pratique: g, capacite: g.capacites.includes(cible) ? cible : g.capacites.includes(autre) ? autre : null };
+  }
 
   const niveaux: { capacite: string | null; garder: (x: Pratique) => boolean }[] = [
     { capacite: cible, garder: (x) => x.capacites.includes(cible) },

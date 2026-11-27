@@ -20,3 +20,15 @@ describe("Tirer le fil : quelle lecture montrer", () => {
     expect(choisirLecture([L("Le Corps", "3", "Proposé")], "Le Corps", 3, true)).toBeNull();
   });
 });
+
+import { fichierAudio } from "./guides";
+describe("le fichier du guidage", () => {
+  it("lit le champ « Audio (fichier) », seulement un nom de fichier simple", () => {
+    expect(fichierAudio("cinq-minutes-assise.m4a", "x")).toBe("cinq-minutes-assise.m4a");
+    expect(fichierAudio("../secret.mp3", "x")).toBeNull();
+  });
+  it("en phase de test, reconnaît les trois guidages prévus par leur nom", () => {
+    expect(fichierAudio("", "Trois souffles avant de répondre")).toBe("trois-souffles.m4a");
+    expect(fichierAudio("", "Autre chose")).toBeNull();
+  });
+});

@@ -59,3 +59,26 @@ export function stadeGarde(p: Record<string, number>): { progression: Record<str
   if (p.buddy_max !== undefined) progression.buddy_max = p.buddy_max;
   return { progression, dateDebut };
 }
+
+/**
+ * Les contenus et exercices choisis (paths.choix) suivent le même rangement : ceux d'un nouveau départ sont rangés
+ * à part (« d2:m1s1 »), pour que la démo choisisse à neuf sans toucher aux vrais choix.
+ */
+const CHOIX_DEPART = /^d(\d+):(.*)$/;
+export function choixVus<T>(brut: Record<string, T>, depart: number): Record<string, T> {
+  const vus: Record<string, T> = {};
+  for (const [k, v] of Object.entries(brut ?? {})) {
+    const m = CHOIX_DEPART.exec(k);
+    if (m ? Number(m[1]) === depart : depart === 0) vus[m ? m[2] : k] = v;
+  }
+  return vus;
+}
+export function choixRanges<T>(brut: Record<string, T>, vus: Record<string, T>, depart: number): Record<string, T> {
+  const autres = Object.fromEntries(
+    Object.entries(brut ?? {}).filter(([k]) => {
+      const m = CHOIX_DEPART.exec(k);
+      return m ? Number(m[1]) !== depart : depart !== 0;
+    }),
+  );
+  return { ...autres, ...Object.fromEntries(Object.entries(vus).map(([k, v]) => [depart > 0 ? `d${depart}:${k}` : k, v])) };
+}

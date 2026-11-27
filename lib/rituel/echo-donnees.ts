@@ -12,6 +12,7 @@ export async function candidatsEcho(supabase: SupabaseClient, reponses: Reponses
     supabase.from("questionnaire_responses").select("partie, created_at").eq("passage", 1),
   ]);
   const liste: Candidat[] = (entrees ?? [])
+    // L'écho peut remonter n'importe laquelle de ses réponses, même d'avant un nouveau départ.
     .filter((e) => e.reponse?.trim() && !/^(echo|qc):/.test(e.question_code ?? ""))
     .map((e) => ({ code: e.question_code ?? "", question: e.question, reponse: e.reponse, jour: jourAParis(new Date(e.created_at)) }));
 

@@ -9,7 +9,7 @@ import { DeuxBoules } from "@/app/a-deux/Duo";
 import { prenomAffiche } from "@/lib/chemin/textes";
 import { estEquipe } from "@/lib/equipe";
 import { surpriseArrivee, surpriseOuverte } from "@/lib/surprise/quand";
-import { declencherSurprise, ouvrirLaSuite, revenirAuStadeReel } from "./actions";
+import { declencherSurprise, ouvrirLaSuite, revenirAuDebut, revenirAuStadeReel } from "./actions";
 import { noter } from "@/lib/mesure/noter";
 import { redirect } from "next/navigation";
 import { BarreEspace } from "@/components/BarreEspace";
@@ -413,6 +413,9 @@ export default async function MonEspace() {
             ) : null}
             <form action={revenirAuStadeReel}>
               <button type="submit">Revenir au stade réel</button>
+            </form>
+            <form action={revenirAuDebut}>
+              <button type="submit">Revenir à la première semaine</button>
             </form>
             <Link href="/equipe">Voir l&apos;engagement</Link>
           </div>

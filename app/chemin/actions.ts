@@ -8,6 +8,7 @@ import { detecterDetresse } from "@/lib/moteur/ecriture";
 import { jourAParis } from "@/lib/rituel/citations";
 import { estEquipe } from "@/lib/equipe";
 import { stadeReel } from "@/lib/semaines/calendrier";
+import { nouveauDepart, stadeGarde } from "@/lib/semaines/depart";
 import { estHumeur } from "@/lib/rituel/humeurs";
 import { chargerMesMots } from "@/lib/rituel/donnees";
 import { ajouterMot, normaliserMot, retirerMot, type Ajout } from "@/lib/rituel/mots";
@@ -112,10 +113,36 @@ export async function revenirAuStadeReel(): Promise<void> {
   if (!estEquipe(user.email)) return;
   const chemin = await chargerChemin(supabase);
   if (!chemin) redirect("/questionnaire");
-  const r = stadeReel({ progression: chemin.progression, dateDebut: chemin.dateDebut });
-  const { error } = await supabase.from("paths").update({ semaine_en_cours: r.semaine, progression: r.progression }).eq("id", chemin.id);
+  // Après « Revenir à la première semaine » : on retrouve d'abord son vrai chemin, gardé de côté.
+  const garde = stadeGarde(chemin.progression);
+  const dateDebut = garde?.dateDebut ?? chemin.dateDebut;
+  const r = stadeReel({ progression: garde?.progression ?? chemin.progression, dateDebut });
+  const { error } = await supabase
+    .from("paths")
+    .update({ semaine_en_cours: r.semaine, progression: r.progression, ...(garde?.dateDebut ? { date_debut: garde.dateDebut } : {}) })
+    .eq("id", chemin.id);
   if (error) console.error("[test] retour au stade réel impossible :", error.code);
-  revalidatePath("/chemin");
+  revalidatePath("/", "layout");
+}
+
+/**
+ * Panneau de test : « Revenir à la première semaine », pour refaire tout le chemin depuis le début (une démo).
+ * La semaine 1 s'ouvre aujourd'hui ; étapes, exercices, surprise et échange à deux repartent de zéro.
+ * Rien n'est effacé : ses réponses d'avant sont mises de côté (lib/semaines/depart.ts), son journal ne bouge pas.
+ */
+export async function revenirAuDebut(): Promise<void> {
+  const { supabase, user } = await session();
+  if (!estEquipe(user.email)) return;
+  const chemin = await chargerChemin(supabase);
+  if (!chemin) redirect("/questionnaire");
+  const progression = nouveauDepart(chemin.progression, chemin.dateDebut);
+  const { error } = await supabase
+    .from("paths")
+    .update({ semaine_en_cours: 1, date_debut: jourAParis(), progression })
+    .eq("id", chemin.id);
+  if (error) console.error("[test] retour à la première semaine impossible :", error.code);
+  revalidatePath("/", "layout");
+  redirect("/chemin");
 }
 
 /** Les mots tels qu'ils sont enregistrés. Avant la migration V0.12, la colonne n'existe pas : on le dit. */

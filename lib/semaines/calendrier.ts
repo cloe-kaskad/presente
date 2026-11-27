@@ -71,6 +71,6 @@ export function stadeReel(args: { progression: Record<string, number>; dateDebut
   }
   // La buddy de test ; la vraie proposition arrive d'elle-même à la semaine 3.
   delete p.buddy_test;
-  if (n < 3) for (const k of Object.keys(p)) if (k.startsWith("buddy") && k !== "buddy_echange") delete p[k];
+  if (n < 3) for (const k of Object.keys(p)) if (k.startsWith("buddy") && k !== "buddy_echange" && k !== "buddy_max") delete p[k];
   return { semaine: n, progression: p };
 }

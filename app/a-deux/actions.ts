@@ -88,9 +88,10 @@ export async function proposerBuddyTest(): Promise<void> {
   const { user } = await session();
   if (!estEquipe(user.email)) return;
   await maj((p) => {
-    const reste = Object.fromEntries(Object.entries(p).filter(([k]) => !k.startsWith("buddy")));
+    const reste = Object.fromEntries(Object.entries(p).filter(([k]) => !k.startsWith("buddy") || k === "buddy_max"));
     // Un nouvel échange : ses réponses repartent d'une page blanche (les anciennes restent dans son carnet).
-    return { ...reste, buddy_test: Math.floor(Date.now() / 1000), buddy_echange: (p.buddy_echange ?? 0) + 1 };
+    const echange = Math.max(p.buddy_echange ?? 0, p.buddy_max ?? 0) + 1;
+    return { ...reste, buddy_test: Math.floor(Date.now() / 1000), buddy_echange: echange, ...(p.buddy_max !== undefined ? { buddy_max: echange } : {}) };
   });
 }
 
@@ -128,8 +129,9 @@ export async function continuerLeMois(mois: 1 | 2, oui: boolean): Promise<void> 
 /** Après un arrêt : demander une nouvelle buddy. Un nouvel échange, qui repart d'une page blanche. */
 export async function demanderNouvelleBuddy(): Promise<void> {
   await maj((p) => {
-    const garde = Object.fromEntries(Object.entries(p).filter(([k]) => !k.startsWith("buddy") || k === "buddy_echange"));
-    return { ...garde, buddy: 3, buddy_recherche_le: Math.floor(Date.now() / 1000), buddy_echange: (p.buddy_echange ?? 0) + 1, buddy_montre: 3 };
+    const garde = Object.fromEntries(Object.entries(p).filter(([k]) => !k.startsWith("buddy") || k === "buddy_echange" || k === "buddy_max"));
+    const echange = Math.max(p.buddy_echange ?? 0, p.buddy_max ?? 0) + 1;
+    return { ...garde, buddy: 3, buddy_recherche_le: Math.floor(Date.now() / 1000), buddy_echange: echange, ...(p.buddy_max !== undefined ? { buddy_max: echange } : {}), buddy_montre: 3 };
   });
 }
 

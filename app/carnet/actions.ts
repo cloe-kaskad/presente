@@ -4,6 +4,7 @@ import { noter } from "@/lib/mesure/noter";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { chargerChemin } from "@/lib/chemin/donnees";
+import { codeRange, departDe } from "@/lib/semaines/depart";
 import { createClient } from "@/lib/supabase/server";
 
 const Entree = z.object({
@@ -38,7 +39,8 @@ export async function enregistrerEntree(e: EntreeAEnregistrer): Promise<{ ok: bo
     path_id: chemin.id,
     semaine: lu.data.semaine,
     type: lu.data.type,
-    question_code: lu.data.code,
+    // Après « Revenir à la première semaine », ses nouvelles réponses sont rangées à part (les anciennes restent).
+    question_code: codeRange(lu.data.code, departDe(chemin.progression)),
     question: lu.data.question,
     reponse: lu.data.reponse,
   };

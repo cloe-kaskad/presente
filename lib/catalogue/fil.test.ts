@@ -47,3 +47,18 @@ describe("la pause guidée des semaines 2 et 4", () => {
     expect(guideDeLaSemaine(pratiques, "voix", 8)?.id).not.toBe("ordinaire");
   });
 });
+
+import { lectureMaison } from "./fil";
+import { CAPACITES } from "@/lib/questionnaire/capacites";
+describe("les 49 lectures du site", () => {
+  it("une lecture complète pour chaque capacité, quatre blocs, aucun tiret cadratin", () => {
+    for (const code of Object.keys(CAPACITES)) {
+      const l = lectureMaison(code);
+      expect(l, code).not.toBeNull();
+      expect(l!.blocs.map((b) => b.cle), code).toEqual(["idee", "chiffre", "regard", "echo"]);
+      expect(JSON.stringify(l)).not.toMatch(/—/);
+    }
+    expect(lectureMaison("XX9")).toBeNull();
+    expect(lectureMaison(null)).toBeNull();
+  });
+});

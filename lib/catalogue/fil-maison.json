@@ -1,0 +1,1472 @@
+[
+ {
+  "capacite": "AR1",
+  "quete": "L'Argent",
+  "titre": "Ce que tu vaux n'est pas écrit sur toi.",
+  "chapo": "Pour aller un peu plus loin sur ta valeur et la façon de la chiffrer : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "La valeur naît d'une relation",
+   "texte": "Pour le philosophe Georg Simmel, la valeur n'est pas une propriété cachée à l'intérieur des choses. Elle naît d'une relation : entre quelqu'un qui désire et ce qu'il désire, puis dans l'échange, qui lui donne un prix que tout le monde peut voir. Ta valeur ne se trouve donc pas en cherchant très fort au fond de toi. Elle se construit au moment où tu la poses sur la table, avec un chiffre.",
+   "source": "Georg Simmel, Philosophie de l'argent, 1900",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "3,8 %",
+   "texte": "C'est l'écart de salaire, en équivalent temps plein, entre femmes et hommes qui occupent le même poste dans le même établissement, dans le secteur privé en France en 2023. Même travail, même employeur : le prix n'est pas tout à fait le même. Ce chiffre ne dit rien de toi. Il dit que la valeur d'un travail et son prix ne coïncident pas toujours, et que ça se discute.",
+   "source": "Insee, Insee Focus n° 349, mars 2025",
+   "lien": "https://www.insee.fr/fr/statistiques/8381248"
+  },
+  "regard": {
+   "titre": "Se payer soi-même",
+   "texte": "Dans une expérience devenue classique, la psychologue Brenda Major et ses collègues ont demandé à des étudiantes et des étudiants de faire une tâche de bureau, puis de se payer eux-mêmes, en privé. Les femmes se sont attribué moins, et à salaire égal, elles ont travaillé plus longtemps et plus soigneusement. Des travaux suivants ont montré que l'écart disparaît quand chacun dispose du même repère : ce que d'autres ont touché pour le même travail. Chiffrer sa valeur, c'est d'abord une affaire d'information, pas de mérite.",
+   "source": "Brenda Major, Dean McFarlin et Diana Gagnon, « Overworked and Underpaid: On the Nature of Gender Differences in Personal Entitlement », Journal of Personality and Social Psychology, 1984",
+   "lien": ""
+  },
+  "echo": {
+   "titre": "Un salaire qui t'appartient",
+   "texte": "Jusqu'à la loi du 13 juillet 1965, une femme mariée ne pouvait ni exercer une profession ni ouvrir un compte en banque à son nom sans l'accord de son mari. Il y a soixante ans à peine, la valeur de son travail ne lui revenait pas tout à fait. Tes grands-mères ont peut-être connu cette époque. Apprendre à chiffrer sa valeur, c'est une compétence encore jeune, et c'est normal qu'elle demande de l'entraînement.",
+   "source": "Loi n° 65-570 du 13 juillet 1965 portant réforme des régimes matrimoniaux",
+   "lien": "https://www.info.gouv.fr/actualite/la-femme-mariee-avait-le-statut-de-mineure-au-meme-titre-que-les-enfants"
+  }
+ },
+ {
+  "capacite": "AR2",
+  "quete": "L'Argent",
+  "titre": "Demander, ce n'est pas réclamer une faveur.",
+  "chapo": "Pour aller un peu plus loin sur l'art de négocier et de demander : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "Une demande de reconnaissance",
+   "texte": "Pour le philosophe Axel Honneth, nous avons besoin d'être reconnus de trois façons : par l'amour de nos proches, par des droits égaux, et par l'estime sociale pour ce que nous apportons. Quand cette estime manque, ce n'est pas un détail : c'est une forme de mépris, et beaucoup de luttes sociales en sont nées. Demander une augmentation ou fixer un tarif juste, ce n'est donc pas quémander. C'est demander que ta contribution soit reconnue à sa mesure.",
+   "source": "Axel Honneth, La Lutte pour la reconnaissance, 1992 (traduction française 2000)",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "22,2 %",
+   "texte": "C'est l'écart de revenu salarial annuel moyen entre femmes et hommes dans le secteur privé en France en 2023. Il s'explique en grande partie par le temps de travail et par les postes occupés, mais tout ce qui se joue au moment d'un recrutement, d'une promotion ou d'une augmentation y laisse aussi sa trace. Ce chiffre ne dit rien de toi. Il dit dans quel paysage se négocient les salaires.",
+   "source": "Insee, Insee Focus n° 349, mars 2025",
+   "lien": "https://www.insee.fr/fr/statistiques/8381248"
+  },
+  "regard": {
+   "titre": "Ce n'est pas une question d'audace",
+   "texte": "En 2007, les chercheuses Hannah Riley Bowles, Linda Babcock et Lei Lai ont montré, dans une série d'expériences, que les évaluateurs pénalisaient davantage une candidate qu'un candidat lorsqu'elle prenait l'initiative de négocier. Hésiter à demander n'est donc pas forcément un manque de courage : c'est parfois une lecture lucide du terrain. Et une étude de 2018 menée par Benjamin Artz, Amanda Goodall et Andrew Oswald conclut que les femmes demandent des augmentations aussi souvent que les hommes, mais les obtiennent moins souvent. Le problème n'est pas seulement du côté de celle qui demande.",
+   "source": "Hannah Riley Bowles, Linda Babcock et Lei Lai, « Social Incentives for Gender Differences in the Propensity to Initiate Negotiations: Sometimes It Does Hurt to Ask », Organizational Behavior and Human Decision Processes, 2007 ; Benjamin Artz, Amanda Goodall et Andrew Oswald, « Do Women Ask? », Industrial Relations, 2018",
+   "lien": "https://www.hks.harvard.edu/publications/social-incentives-gender-differences-propensity-initiate-negotiations-sometimes-it"
+  },
+  "echo": {
+   "titre": "Les sardinières de Douarnenez",
+   "texte": "À l'automne 1924, à Douarnenez, en Bretagne, les ouvrières des conserveries de sardines gagnaient 80 centimes de l'heure. Le 24 novembre, elles se mettent en grève. Après 46 jours sans salaire, elles obtiennent 1 franc de l'heure et une majoration de 50 % pour les heures de nuit et au-delà de la dixième heure. Cent ans plus tard, on chante encore leur nom : demander, elles l'ont fait ensemble.",
+   "source": "Ville de Douarnenez, dossier de presse du centenaire de la grève, 2024",
+   "lien": "https://www.douarnenez.bzh/wp-content/uploads/2024/11/DP-centenaire-de-la-greve_20241108-2.pdf"
+  }
+ },
+ {
+  "capacite": "AR3",
+  "quete": "L'Argent",
+  "titre": "Regarder ses comptes, c'est déjà reprendre la main.",
+  "chapo": "Pour aller un peu plus loin sur le fait de regarder ses comptes sans honte : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "Ne pas juger, comprendre",
+   "texte": "Spinoza écrit qu'il s'est appliqué à ne pas rire des actions humaines, à ne pas les déplorer, à ne pas les détester, mais à les comprendre. C'est une belle consigne pour ouvrir son relevé bancaire. Tes dépenses ne sont pas une faute à expier : ce sont des traces, qui racontent tes besoins, tes habitudes, tes envies. On ne change bien que ce qu'on a d'abord compris.",
+   "source": "Baruch Spinoza, Traité politique, chapitre I, 1677",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "15 %",
+   "texte": "C'est la part des femmes qui ont un niveau élevé de connaissances financières dans l'Union européenne, contre 27 % des hommes, selon la Banque centrale européenne. Personne ne naît en sachant lire un relevé de compte ou un taux d'intérêt : ça s'apprend, et on l'a moins souvent appris aux filles. Ce chiffre ne dit rien de toi. Il dit d'où beaucoup de femmes partent, et ça se rattrape.",
+   "source": "Banque centrale européenne, « L'écart entre les hommes et les femmes en matière de culture financière »",
+   "lien": "https://www.ecb.europa.eu/ecb-and-you/financial_literacy_europe/The-gender-gap-in-financial-literacy/html/index.fr.html"
+  },
+  "regard": {
+   "titre": "L'effet autruche",
+   "texte": "Les économistes Niklas Karlsson, George Loewenstein et Duane Seppi ont observé des investisseurs en Suède et aux États-Unis : ils consultent leurs comptes plus souvent quand les nouvelles sont bonnes, et les évitent quand ils craignent de mauvaises nouvelles. Ils ont appelé cela « l'effet autruche ». Une étude de 2016 sur plus d'un million de comptes de retraite américains mesure 9,5 % de connexions en moins après une baisse de la Bourse, et ce sont plutôt les hommes qui se comportent ainsi. Détourner les yeux n'est pas un défaut féminin : c'est un réflexe humain face à l'inquiétude.",
+   "source": "Niklas Karlsson, George Loewenstein et Duane Seppi, « The Ostrich Effect: Selective Attention to Information », Journal of Risk and Uncertainty, 2009 ; Nachum Sicherman et al., « Financial Attention », Review of Financial Studies, 2016",
+   "lien": "https://link.springer.com/article/10.1007/s11166-009-9060-6"
+  },
+  "echo": {
+   "titre": "Le regret de Mr Bennet",
+   "texte": "Dans Orgueil et Préjugés, Jane Austen raconte que Mr Bennet avait souvent souhaité, au lieu de dépenser tout son revenu, avoir mis de côté chaque année une somme pour sa femme et ses filles. Il ne l'a pas fait, et ses cinq filles risquent de se retrouver sans rien. Le père respectable, l'homme instruit de la maison, n'a pas regardé ses comptes non plus. Ne pas vouloir savoir, ça ne date pas d'hier, et ce n'est pas une affaire de genre.",
+   "source": "Jane Austen, Orgueil et Préjugés, 1813",
+   "lien": ""
+  }
+ },
+ {
+  "capacite": "AR4",
+  "quete": "L'Argent",
+  "titre": "Dans une famille, l'argent ne parle jamais que d'argent.",
+  "chapo": "Pour aller un peu plus loin sur la façon de parler d'argent en couple et en famille : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "Donner, recevoir, rendre",
+   "texte": "Dans son Essai sur le don, l'anthropologue Marcel Mauss montre que, dans de très nombreuses sociétés, le don repose sur une triple obligation : donner, recevoir et rendre. Un don crée un lien, et souvent une dette. Dans une famille, un prêt, une aide pour un appartement ou une addition toujours payée par la même personne ne sont jamais neutres. En parler, c'est choisir le lien qu'on veut, au lieu de subir celui qui s'installe en silence.",
+   "source": "Marcel Mauss, Essai sur le don, 1925",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "53 %",
+   "texte": "C'est la part des couples qui vivent ensemble en France et mettent en commun la totalité de leurs revenus, en 2024. Un quart n'en mettent en commun qu'une partie, et 18 % gardent des comptes séparés. La mise en commun totale concerne 67 % des couples mariés, mais seulement 27 % des couples pacsés. Ce chiffre ne dit rien de toi. Il dit qu'il n'existe pas une bonne façon de faire, mais plusieurs, qui se choisissent.",
+   "source": "Ined, enquête Erfi 2, Premiers résultats, 2026",
+   "lien": "https://www.ined.fr/fr/premiers-resultats-enquete-erfi2"
+  },
+  "regard": {
+   "titre": "L'écart qui se creuse à la maison",
+   "texte": "Les économistes Nicolas Frémeaux et Marion Leturcq ont mesuré qu'en France, l'écart de patrimoine entre hommes et femmes est passé de 9 % à 16 % entre 1998 et 2015. Leurs travaux portent sur la façon dont le patrimoine se répartit à l'intérieur des couples, là où les statistiques regardent rarement. Ce qui se décide sans se dire (au nom de qui on achète, qui épargne, qui paie les courses) finit par peser lourd. Parler d'argent à deux, ce n'est pas manquer de romantisme : c'est se protéger l'un l'autre.",
+   "source": "Nicolas Frémeaux et Marion Leturcq, travaux sur les inégalités de patrimoine au sein des couples, 2020",
+   "lien": ""
+  },
+  "echo": {
+   "titre": "Le secret de Nora",
+   "texte": "Dans Une maison de poupée, d'Henrik Ibsen, Nora a emprunté de l'argent en cachette, en imitant la signature de son père, pour financer le séjour en Italie qui devait sauver son mari malade. Pendant des années, elle rembourse en secret, notamment grâce à des travaux de copie faits le soir. Quand le secret éclate, c'est tout le couple qui vacille. La pièce, créée en 1879, pose une question toujours actuelle : que devient un couple où l'argent ne se dit pas ?",
+   "source": "Henrik Ibsen, Une maison de poupée, 1879",
+   "lien": ""
+  }
+ },
+ {
+  "capacite": "AR5",
+  "quete": "L'Argent",
+  "titre": "L'indépendance, ça se construit pièce à pièce.",
+  "chapo": "Pour aller un peu plus loin sur l'épargne, le patrimoine et la retraite : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "Une liberté concrète",
+   "texte": "Dans Le Deuxième Sexe, Simone de Beauvoir écrit à propos de la femme que « c'est le travail qui peut seul lui garantir une liberté concrète ». Pour elle, la liberté n'est pas d'abord un sentiment intérieur : elle a besoin de conditions matérielles. Un revenu à soi, une épargne à soi, une retraite à soi en font partie. Construire son indépendance financière, c'est donner un sol à sa liberté.",
+   "source": "Simone de Beauvoir, Le Deuxième Sexe, 1949",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "38 %",
+   "texte": "C'est l'écart entre la pension de retraite de droit direct des femmes et celle des hommes en France, fin 2023. Il était de 50 % en 2004 : il se réduit, mais lentement, parce que la retraite est le reflet de toute une vie de salaires, de temps partiels et d'interruptions. Ce chiffre ne dit rien de toi. Il dit pourquoi penser à sa retraite tôt n'a rien d'égoïste.",
+   "source": "Drees, Les retraités et les retraites, édition 2025",
+   "lien": "https://drees.solidarites-sante.gouv.fr/publications-communique-de-presse-documents-de-reference/250731_PANORAMAS-retraites"
+  },
+  "regard": {
+   "titre": "Les hommes accumulent",
+   "texte": "Les sociologues Céline Bessière et Sibylle Gollac ont enquêté pendant une vingtaine d'années chez des notaires et des avocats, au moment des héritages et des séparations. Elles montrent comment des « comptabilités inversées », des manières de compter apparemment neutres, contribuent à creuser les inégalités de patrimoine entre hommes et femmes. Le patrimoine ne se construit pas seulement à la banque : il se construit aussi dans ces moments de partage. Savoir comment ils fonctionnent, c'est déjà mieux s'y préparer.",
+   "source": "Céline Bessière et Sibylle Gollac, Le Genre du capital, 2020",
+   "lien": "https://laviedesidees.fr/Celine-Bessiere-Sibylle-Gollac-genre-capital"
+  },
+  "echo": {
+   "titre": "Plus important que le droit de vote",
+   "texte": "Dans Une chambre à soi, Virginia Woolf raconte qu'elle a appris le même soir, ou presque, deux nouvelles : la loi qui donnait le droit de vote aux femmes, et l'héritage d'une tante qui lui assurait 500 livres par an. Des deux, écrit-elle, l'argent lui a semblé de loin le plus important. Grâce à ce revenu, elle n'avait plus à flatter personne pour vivre. Elle en conclut qu'une femme a besoin d'argent et d'une chambre à soi pour écrire.",
+   "source": "Virginia Woolf, Une chambre à soi, 1929",
+   "lien": ""
+  }
+ },
+ {
+  "capacite": "AR6",
+  "quete": "L'Argent",
+  "titre": "Ce que tu as reçu, tu peux le relire.",
+  "chapo": "Pour aller un peu plus loin sur ce qu'on t'a transmis sur l'argent : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "L'histoire devenue réflexe",
+   "texte": "Le sociologue Pierre Bourdieu appelle « habitus » l'ensemble des manières de faire, de sentir et de juger que l'on acquiert, surtout dans l'enfance, et qui finissent par fonctionner toutes seules. Notre rapport à l'argent en fait partie : la peur de manquer, la gêne d'en parler, la fierté de ne rien devoir. Ces réflexes ont une histoire, qui est souvent celle de nos parents et de leur milieu. Les reconnaître comme hérités, c'est commencer à choisir ceux qu'on garde.",
+   "source": "Pierre Bourdieu, Le Sens pratique, 1980",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "60 %",
+   "texte": "En Europe, 52 % des personnes n'ont pas les connaissances financières de base, et parmi elles, 60 % sont des femmes, selon une enquête de 2023 citée par la Banque centrale européenne. Ce savoir-là s'apprend rarement à l'école : il se transmet, ou pas, et pas de la même façon à tout le monde. Ce chiffre ne dit rien de toi. Il dit qu'un manque peut se transmettre comme un héritage, et qu'on peut décider de l'arrêter.",
+   "source": "Banque centrale européenne, communiqué de presse du 2 mars 2026",
+   "lien": "https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.pr260302~9a52d535d2.fr.html"
+  },
+  "regard": {
+   "titre": "Chez le notaire, la famille compte",
+   "texte": "Les sociologues Céline Bessière et Sibylle Gollac ont suivi des familles chez des notaires et des avocats, au moment des successions et des divorces. Elles montrent que la transmission du patrimoine obéit à des arrangements familiaux qui paraissent naturels, mais qui avantagent souvent les hommes de la famille. Ce qu'on reçoit en argent vient donc avec ce qu'on reçoit en idées : qui mérite quoi, qui doit se contenter de quoi. Ce sont ces idées-là qu'on peut interroger.",
+   "source": "Céline Bessière et Sibylle Gollac, Le Genre du capital, 2020",
+   "lien": "https://laviedesidees.fr/Celine-Bessiere-Sibylle-Gollac-genre-capital"
+  },
+  "echo": {
+   "titre": "Eugénie, riche et pourtant",
+   "texte": "Dans Eugénie Grandet, Balzac raconte la fille d'un avare de Saumur, qui compte son or en secret et rationne tout à la maison. Après la mort de son père, Eugénie hérite d'une immense fortune. Pourtant, elle continue de vivre selon les règles de la maison paternelle, jusqu'à n'allumer le feu qu'aux jours où son père le permettait. Balzac montre ainsi qu'on peut hériter de l'argent, et aussi de la façon d'en avoir peur.",
+   "source": "Honoré de Balzac, Eugénie Grandet, 1834",
+   "lien": ""
+  }
+ },
+ {
+  "capacite": "AR7",
+  "quete": "L'Argent",
+  "titre": "Vouloir plus n'est pas un défaut.",
+  "chapo": "Pour aller un peu plus loin sur l'envie de gagner plus et de dépenser pour toi : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "Gagner, oui. En profiter, non ?",
+   "texte": "Dans L'Éthique protestante et l'esprit du capitalisme, Max Weber décrit une morale qui a valorisé le travail acharné et l'épargne, tout en se méfiant de la jouissance des richesses. Gagner était une vertu, profiter un danger. Une partie de cette morale imprègne encore notre culture, bien au-delà de la religion. La petite voix qui te dit de ne pas dépenser pour toi a donc une histoire : elle n'est pas forcément la tienne.",
+   "source": "Max Weber, L'Éthique protestante et l'esprit du capitalisme, 1904-1905",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "Un tiers",
+   "texte": "C'est de combien l'écart de revenu salarial entre femmes et hommes a reculé dans le secteur privé en France entre 1995 et 2023. Il reste important, mais il bouge, parce que des femmes ont étudié, travaillé, postulé, demandé. Ce chiffre ne dit rien de toi. Il dit que vouloir gagner plus, c'est aussi prendre part à un mouvement déjà en marche.",
+   "source": "Insee, Insee Focus n° 349, mars 2025",
+   "lien": "https://www.insee.fr/fr/statistiques/8381248"
+  },
+  "regard": {
+   "titre": "L'argent des épingles",
+   "texte": "La sociologue Viviana Zelizer a montré que l'argent n'est jamais tout à fait le même selon qui l'a gagné. Dans les familles, l'argent du mari et celui de la femme ne portaient pas les mêmes attentes, ni les mêmes règles sur la façon de le dépenser. Le sous-titre de son livre en garde la trace : « pin money », l'argent des épingles, ce petit argent laissé aux épouses pour leurs menues dépenses. Si dépenser pour toi te semble moins légitime, c'est peut-être que ce marquage-là a la vie dure.",
+   "source": "Viviana Zelizer, The Social Meaning of Money: Pin Money, Paychecks, Poor Relief, and Other Currencies, 1994",
+   "lien": ""
+  },
+  "echo": {
+   "titre": "Les cheveux de Jo",
+   "texte": "Dans Les Quatre Filles du docteur March, le geste le plus célèbre de Jo avec l'argent, c'est de vendre ses cheveux pour vingt-cinq dollars, afin de payer le voyage de sa mère auprès de son père blessé. Des générations de lectrices ont appris à admirer ce don de soi. Louisa May Alcott, elle, a écrit aussi pour gagner sa vie et faire vivre les siens. On peut aimer Jo, et se demander pourquoi l'argent dépensé pour soi n'a jamais eu son chapitre.",
+   "source": "Louisa May Alcott, Les Quatre Filles du docteur March, 1868",
+   "lien": ""
+  }
+ },
+ {
+  "capacite": "VO1",
+  "quete": "La Voix",
+  "titre": "Dire non, c'est aussi dire oui à quelque chose.",
+  "chapo": "Pour aller un peu plus loin sur ce petit mot qui coûte tant : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "Le non qui affirme",
+   "texte": "Albert Camus ouvre L'Homme révolté par une question : « Qu'est-ce qu'un homme révolté ? Un homme qui dit non. » Il ajoute aussitôt que refuser, ce n'est pas renoncer : celui qui dit non dit aussi oui, dès son premier mouvement. Le non trace une frontière, et derrière cette frontière il y a quelque chose qui compte pour toi. Quand tu dis non, tu ne fermes pas seulement une porte : tu montres ce que tu protèges.",
+   "source": "Albert Camus, L'Homme révolté, 1951",
+   "lien": "https://www.universalis.fr/encyclopedie/l-homme-revolte/"
+  },
+  "chiffre": {
+   "titre": "50 %",
+   "texte": "Dans une expérience menée par l'économiste Linda Babcock et ses collègues, une personne du groupe devait se dévouer pour une tâche ingrate, utile à tous mais coûteuse pour elle. Les femmes se sont portées volontaires 50 % plus souvent que les hommes, et on leur demandait aussi davantage de le faire. Dans les groupes non mixtes, l'écart disparaissait : les hommes se dévouaient autant. Ce chiffre ne dit rien de toi : il dit ce qu'un groupe attend des femmes, et ce que beaucoup ont appris à anticiper.",
+   "source": "Linda Babcock, Maria Recalde, Lise Vesterlund et Laurie Weingart, « Gender Differences in Accepting and Receiving Requests for Tasks with Low Promotability », American Economic Review, 2017",
+   "lien": "https://econpapers.repec.org/RePEc:aea:aecrev:v:107:y:2017:i:3:p:714-47"
+  },
+  "regard": {
+   "titre": "Ne pas pouvoir, ou ne pas vouloir",
+   "texte": "Les chercheurs Vanessa Patrick et Henrik Hagtvedt ont étudié la façon dont on formule un refus face à une tentation. Dire « je ne fais pas ça » s'est révélé plus efficace que « je ne peux pas » pour tenir sa décision, notamment dans une étude de terrain menée auprès de trente femmes pendant dix jours. Celles qui utilisaient le « je ne fais pas » disaient se sentir plus autonomes et plus maîtresses de leurs choix. « Je ne peux pas » laisse croire qu'une contrainte décide à ta place ; « je ne fais pas » dit simplement ce que tu choisis.",
+   "source": "Vanessa M. Patrick et Henrik Hagtvedt, « \"I Don't\" versus \"I Can't\": When Empowered Refusal Motivates Goal-Directed Behavior », Journal of Consumer Research, 2012",
+   "lien": "https://www.bauer.uh.edu/vpatrick/docs/dontversuscant.pdf"
+  },
+  "echo": {
+   "titre": "Le copiste qui préférait ne pas",
+   "texte": "En 1853, Herman Melville publie l'histoire de Bartleby, un copiste de Wall Street. Un jour, quand son patron lui demande un travail, il répond « I would prefer not to », que l'on traduit tantôt par « Je préférerais ne pas », tantôt par « J'aimerais mieux pas », et il ne cessera plus de le répéter. Pas de colère, pas d'explication, pas d'excuse : une phrase polie et immobile, qui laisse son entourage désemparé. Bartleby n'est pas un modèle (son histoire finit mal), mais sa formule rappelle qu'un refus peut tenir debout tout seul.",
+   "source": "Herman Melville, Bartleby, le scribe, 1853",
+   "lien": "https://www.translitterature.fr/Doc/article_472.pdf"
+  }
+ },
+ {
+  "capacite": "VO2",
+  "quete": "La Voix",
+  "titre": "À force de s'ajuster, on finit par se perdre de vue.",
+  "chapo": "Pour aller un peu plus loin sur cette habitude de s'adapter à tout le monde : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "Le déguisement qui colle à la peau",
+   "texte": "Au XVIIe siècle, La Rochefoucauld écrit : « Nous sommes si accoutumés à nous déguiser aux autres, qu'enfin nous nous déguisons à nous-mêmes. » Il ne parle pas de mensonge, mais d'habitude : à force de prendre la forme que les autres attendent, on ne sait plus très bien laquelle est la sienne. La maxime n'accuse personne, elle décrit un mécanisme. Et ce qui s'est installé par l'habitude peut aussi, petit à petit, se défaire.",
+   "source": "François de La Rochefoucauld, Réflexions ou sentences et maximes morales, maxime 119, 1665",
+   "lien": "https://fr.wikisource.org/wiki/Maximes"
+  },
+  "chiffre": {
+   "titre": "71 %",
+   "texte": "C'est la part des tâches ménagères assurée par les femmes en France selon l'Insee, d'après l'enquête Emploi du temps de 2010 (65 % pour les tâches parentales). En vingt-cinq ans, l'écart s'est réduit surtout parce que les femmes en font moins, et non parce que les hommes en font beaucoup plus. S'adapter aux besoins des autres, c'est aussi, très concrètement, des heures. Ce chiffre ne dit rien de toi : il dit dans quelle organisation on vit, et d'où vient une partie de la fatigue.",
+   "source": "Layla Ricroch, « En 25 ans, moins de tâches domestiques pour les femmes, l'écart de situation avec les hommes se réduit », Insee, Femmes et hommes, regards sur la parité, 2012",
+   "lien": "https://www.insee.fr/fr/statistiques/1372773"
+  },
+  "regard": {
+   "titre": "Le travail des émotions",
+   "texte": "Au début des années 1980, la sociologue américaine Arlie Hochschild observe des hôtesses de l'air : leur métier consiste aussi à rester calmes et souriantes, quoi qu'elles ressentent. Elle appelle cela le « travail émotionnel » : l'effort pour accorder ce qu'on ressent à ce que la situation attend. Ce travail est réel, il fatigue, et il reste le plus souvent invisible. S'adapter à l'humeur de chacun n'est donc pas qu'un trait de caractère : c'est un travail, et un travail peut se partager ou s'alléger.",
+   "source": "Arlie Russell Hochschild, The Managed Heart, 1983 (trad. Le Prix des sentiments. Au cœur du travail émotionnel, La Découverte, 2017)",
+   "lien": "https://www.santementale.fr/2017/06/le-prix-des-sentiments/"
+  },
+  "echo": {
+   "titre": "Tuer l'ange du foyer",
+   "texte": "En 1931, devant une association de femmes qui travaillent, Virginia Woolf raconte qu'elle a dû se débarrasser d'un fantôme pour pouvoir écrire. Elle l'appelle « l'Ange du foyer », d'après un poème célèbre de Coventry Patmore : une figure toujours prête à se sacrifier, qui n'avait ni avis ni désir à elle et préférait épouser ceux des autres. Cet ange lui soufflait d'être douce, de flatter, de ne jamais laisser deviner qu'elle pensait par elle-même. Woolf raconte qu'elle a fini par le tuer, et que cela faisait partie, dit-elle, du métier d'écrivaine.",
+   "source": "Virginia Woolf, « Professions for Women », conférence de 1931, publiée dans The Death of the Moth, 1942",
+   "lien": "https://opentextbc.ca/englishliterature/chapter/professions-for-women/"
+  }
+ },
+ {
+  "capacite": "VO3",
+  "quete": "La Voix",
+  "titre": "Une limite n'a pas besoin d'avocat.",
+  "chapo": "Pour aller un peu plus loin sur les limites qu'on pose sans plaider : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "Ce qui dépend de toi",
+   "texte": "Le Manuel d'Épictète, philosophe stoïcien et ancien esclave, s'ouvre sur une distinction : certaines choses dépendent de nous, d'autres non. Nos jugements, nos désirs, nos refus dépendent de nous ; ce que les autres en pensent, non. Une limite relève de la première catégorie : c'est toi qui la poses. La façon dont l'autre l'accueille relève de la seconde, et aucune justification, même longue, ne la fera passer de ton côté.",
+   "source": "Épictète, Manuel (mis par écrit par son élève Arrien), IIe siècle",
+   "lien": "https://open.unive.it/hitrade/translations/ThurotEpictete.pdf"
+  },
+  "chiffre": {
+   "titre": "217 contre 158",
+   "texte": "C'est le nombre d'excuses notées pendant douze jours par 33 étudiantes d'un côté et 33 étudiants de l'autre, dans une étude canadienne publiée en 2010. Les femmes s'excusaient davantage, mais pour la même proportion d'offenses que les hommes. La différence venait d'ailleurs : elles percevaient plus de situations comme blessantes pour l'autre. Ce chiffre ne dit rien de ta valeur : il dit qu'on a souvent appris à voir une offense là où l'autre n'en voit pas.",
+   "source": "Karina Schumann et Michael Ross, « Why Women Apologize More Than Men », Psychological Science, 2010",
+   "lien": "https://www.psychologicalscience.org/publications/observer/obsonline/when-do-you-owe-an-apology-depends-on-gender.html"
+  },
+  "regard": {
+   "titre": "Réparer ce qui n'est pas cassé",
+   "texte": "Le sociologue Erving Goffman a décrit ce qu'il appelle les échanges réparateurs : quand quelqu'un pense avoir commis une offense, il offre une réparation (une excuse, une justification, une explication), l'autre l'accepte, et l'équilibre est rétabli. Ce rituel est précieux quand il y a vraiment eu un tort. Mais se justifier longuement après avoir posé une limite, c'est traiter cette limite comme une faute à réparer. Or une limite n'abîme rien : il n'y a rien à réparer.",
+   "source": "Erving Goffman, Relations in Public, 1971, chapitre « Remedial Interchanges »",
+   "lien": ""
+  },
+  "echo": {
+   "titre": "Fatiguée de céder",
+   "texte": "Le 1er décembre 1955, à Montgomery, en Alabama, Rosa Parks refuse de céder sa place à un passager blanc dans un bus. On a longtemps raconté qu'elle était simplement épuisée après sa journée. Dans son autobiographie, elle corrige : elle n'était pas plus fatiguée que d'habitude, elle avait 42 ans, et la seule fatigue qu'elle ressentait, c'était d'être fatiguée de céder. Son non, ce jour-là, n'avait pas besoin d'une longue explication : il reposait sur ce qu'elle savait juste.",
+   "source": "Rosa Parks et Jim Haskins, Rosa Parks: My Story, 1992",
+   "lien": "https://naacp.org/find-resources/history-explained/civil-rights-leaders/rosa-parks"
+  }
+ },
+ {
+  "capacite": "VO4",
+  "quete": "La Voix",
+  "titre": "Demander, c'est entrer dans l'échange.",
+  "chapo": "Pour aller un peu plus loin sur l'art de demander : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "Recevoir fait partie du lien",
+   "texte": "Dans son Essai sur le don, l'anthropologue Marcel Mauss montre que, dans de très nombreuses sociétés, l'échange repose sur trois obligations : donner, recevoir et rendre. Recevoir n'y est pas une faiblesse, c'est un geste social à part entière, et refuser de recevoir peut même être vécu comme un affront. Celle qui demande ouvre un cycle où chacun trouve sa place. Se débrouiller seule, c'est parfois rester à l'écart de ce cycle.",
+   "source": "Marcel Mauss, « Essai sur le don », L'Année sociologique, 1925",
+   "lien": "https://www.universalis.fr/encyclopedie/don/"
+  },
+  "chiffre": {
+   "titre": "2 fois",
+   "texte": "Dans une série d'expériences publiées en 2007, des personnes devaient évaluer des candidats qui avaient, ou non, demandé un meilleur salaire. Demander pouvait coûter à tout le monde, mais selon les comptes rendus de l'étude, la pénalité infligée aux femmes était plus de deux fois plus forte que celle infligée aux hommes. L'étude l'explique par le regard porté sur elles : jugées moins « gentilles » et plus « exigeantes ». Ce chiffre ne dit rien de ta façon de demander : il dit que ton hésitation a des raisons, et qu'elles se trouvent surtout du côté de ceux qui reçoivent la demande.",
+   "source": "Hannah Riley Bowles, Linda Babcock et Lei Lai, « Social Incentives for Gender Differences in the Propensity to Initiate Negotiations: Sometimes It Does Hurt to Ask », Organizational Behavior and Human Decision Processes, 2007",
+   "lien": "https://gap.hks.harvard.edu/social-incentives-gender-differences-propensity-initiate-negotiations-sometimes-it-does-hurt-ask"
+  },
+  "regard": {
+   "titre": "On nous dit oui plus qu'on ne croit",
+   "texte": "Les psychologues Francis Flynn et Vanessa Lake ont comparé ce que pensent celles et ceux qui demandent de l'aide, et celles et ceux à qui on la demande. Les premiers sont plus pessimistes : ils surestiment les chances qu'on leur dise non. Ils croient aussi qu'un regard ou une allusion marchera mieux qu'une demande claire, alors que les personnes sollicitées se disent bien plus enclines à aider quand on leur demande directement. La demande nette, celle qu'on redoute, est souvent celle qui fonctionne le mieux.",
+   "source": "Francis J. Flynn et Vanessa K. B. Lake, « If You Need Help, Just Ask », Journal of Personality and Social Psychology, 2008",
+   "lien": "https://www.gsb.stanford.edu/index%2Ephp/node/374971"
+  },
+  "echo": {
+   "titre": "Le livre emprunté",
+   "texte": "Dans son Autobiographie, Benjamin Franklin raconte comment il a gagné un adversaire politique, membre comme lui de l'Assemblée de Pennsylvanie. Plutôt que de chercher à lui plaire, il lui a demandé de lui prêter un livre rare de sa bibliothèque. L'homme a accepté, Franklin le lui a rendu avec un mot de remerciement, et l'adversaire est devenu bienveillant, puis un ami. Demander un service, ce n'est pas toujours prendre : c'est parfois offrir à l'autre l'occasion de donner.",
+   "source": "Benjamin Franklin, Autobiographie, publication posthume, 1791",
+   "lien": "https://gutenberg.org/files/148/148-h/148-h.htm"
+  }
+ },
+ {
+  "capacite": "VO5",
+  "quete": "La Voix",
+  "titre": "Qui veut prendre la parole ?",
+  "chapo": "Pour aller un peu plus loin sur la parole en réunion et en public : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "Un droit, pas un talent",
+   "texte": "Dans l'assemblée d'Athènes, le héraut ouvrait les débats par une question que l'on retrouve chez Aristophane comme chez Démosthène : « Qui veut prendre la parole ? » Les Grecs avaient un mot pour ce droit égal de parler devant tous : l'isègoria. La question ne s'adressait pas aux plus brillants ni aux plus sûrs d'eux, mais à chacun (à l'époque, seulement aux citoyens hommes, ce qui en dit long). Prendre la parole n'y était pas un don : c'était une place qui revenait à tous.",
+   "source": "Aristophane, Les Acharniens, 425 av. J.-C. ; Démosthène, Sur la couronne, 330 av. J.-C.",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "46 sur 48",
+   "texte": "En 1975, les sociologues Don Zimmerman et Candace West enregistrent des conversations ordinaires dans des lieux publics d'une ville universitaire de Californie. Dans les échanges entre un homme et une femme, 46 des 48 interruptions relevées venaient des hommes. L'échantillon est petit et ancien, et la recherche a depuis nuancé ce résultat, mais il a ouvert tout un champ d'études. Ce chiffre ne dit rien de toi : il dit que se faire couper la parole n'est pas une affaire de voix trop faible.",
+   "source": "Don H. Zimmerman et Candace West, « Sex Roles, Interruptions and Silences in Conversation », 1975",
+   "lien": ""
+  },
+  "regard": {
+   "titre": "Le nombre et la règle",
+   "texte": "Les politistes Christopher Karpowitz et Tali Mendelberg ont observé des groupes qui devaient débattre puis décider ensemble. Quand les femmes y sont en minorité et que l'on décide à la majorité, elles parlent nettement moins que leur part. Leur temps de parole remonte quand elles sont plus nombreuses, ou quand la décision doit être prise à l'unanimité, parce que chaque voix devient alors nécessaire. Le silence en réunion dépend donc beaucoup de la façon dont la réunion est construite.",
+   "source": "Christopher F. Karpowitz et Tali Mendelberg, The Silent Sex: Gender, Deliberation, and Institutions, Princeton University Press, 2014",
+   "lien": ""
+  },
+  "echo": {
+   "titre": "Monter à la tribune",
+   "texte": "En 1791, Olympe de Gouges écrit la Déclaration des droits de la femme et de la citoyenne. Son article X contient cette phrase : « la femme a le droit de monter sur l'échafaud ; elle doit avoir également celui de monter à la Tribune ». Si l'on juge les femmes responsables de leurs opinions jusqu'à la mort, elles doivent pouvoir les dire en public. Elle est guillotinée deux ans plus tard, en 1793, et sa phrase n'a pas pris une ride.",
+   "source": "Olympe de Gouges, Déclaration des droits de la femme et de la citoyenne, 1791",
+   "lien": ""
+  }
+ },
+ {
+  "capacite": "VO6",
+  "quete": "La Voix",
+  "titre": "Un désaccord n'est pas une rupture.",
+  "chapo": "Pour aller un peu plus loin sur l'art de ne pas être d'accord : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "L'art de conférer",
+   "texte": "Montaigne consacre un chapitre entier des Essais à l'art de la conversation, qu'il appelle « conférer ». Il y écrit que, lorsqu'on le contredit, « on éveille mon attention, non pas ma colère », et qu'il s'avance vers celui qui le contredit, parce qu'il l'instruit. Pour lui, la contradiction ne blesse pas : elle réveille et elle exerce. Le désaccord n'y menace pas le lien, il le rend vivant.",
+   "source": "Michel de Montaigne, « De l'art de conférer », Essais, livre III, chapitre 8, 1588",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "75 %",
+   "texte": "Dans les expériences de Solomon Asch, au début des années 1950, des étudiants devaient comparer des longueurs de lignes, entourés de complices qui donnaient exprès une réponse fausse. Environ trois participants sur quatre se sont rangés au moins une fois à l'avis du groupe, contre l'évidence. Mais quand un seul autre participant donnait la bonne réponse, la conformité chutait fortement. Ce chiffre ne dit rien de ton courage : il dit la force d'un groupe, et le poids immense d'une seule voix qui ose différer.",
+   "source": "Solomon E. Asch, « Opinions and Social Pressure », Scientific American, 1955",
+   "lien": ""
+  },
+  "regard": {
+   "titre": "Le conflit qui relie",
+   "texte": "Au début du XXe siècle, le sociologue allemand Georg Simmel défend une idée à contre-courant : le conflit est une forme de relation, pas seulement sa fin. Se disputer, c'est encore être ensemble, se prendre au sérieux et chercher une issue commune. Pour Simmel, l'absence de toute opposition n'est pas forcément le signe d'une relation solide. Tenir un désaccord, c'est parfois faire confiance au lien.",
+   "source": "Georg Simmel, « Le conflit », chapitre de Sociologie, 1908 (trad. Le Conflit, Circé, 1992)",
+   "lien": ""
+  },
+  "echo": {
+   "titre": "Antigone et Ismène",
+   "texte": "Dans la tragédie de Sophocle, Antigone veut enterrer son frère Polynice malgré l'interdit du roi Créon, et elle le lui dit en face. Sa sœur Ismène, elle, refuse de la suivre : elle a peur et préfère se plier. La pièce ne fait pas d'Ismène une lâche, elle montre deux manières de vivre la même pression. Vingt-cinq siècles plus tard, on la joue encore, peut-être parce que chacune de nous connaît les deux sœurs.",
+   "source": "Sophocle, Antigone, vers 441 av. J.-C.",
+   "lien": ""
+  }
+ },
+ {
+  "capacite": "VO7",
+  "quete": "La Voix",
+  "titre": "Dire vrai, c'est prendre un risque. C'est aussi un cadeau.",
+  "chapo": "Pour aller un peu plus loin sur le courage de dire ce que l'on pense : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "Le courage de dire vrai",
+   "texte": "Dans ses derniers cours au Collège de France, en 1984, Michel Foucault s'intéresse à un mot grec, la parrêsia : le franc-parler, le fait de dire ce que l'on pense vraiment, en sachant que cela peut déplaire. Celui qui la pratique prend un risque, celui de froisser l'autre ou de perdre sa faveur. Pour Foucault, ce courage est une manière de s'engager soi-même dans ce que l'on dit. Lisser sa pensée protège la relation sur le moment ; dire vrai la prend au sérieux.",
+   "source": "Michel Foucault, Le Courage de la vérité, cours au Collège de France, 1984 (publié en 2009)",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "85 %",
+   "texte": "Dans une étude publiée en 2003, trois chercheuses américaines ont interrogé quarante salariés : 85 % ont raconté au moins une situation où ils n'avaient pas osé faire remonter un problème ou une inquiétude à leur hiérarchie. Les raisons les plus citées : la peur d'être mal vus, et celle d'abîmer une relation. L'échantillon est petit, mais le phénomène a été retrouvé dans de nombreuses études depuis. Ce chiffre ne dit rien de toi : il dit à quel point le silence est la réponse ordinaire à la peur de déplaire.",
+   "source": "Frances J. Milliken, Elizabeth W. Morrison et Patricia F. Hewlin, « An Exploratory Study of Employee Silence », Journal of Management Studies, 2003",
+   "lien": ""
+  },
+  "regard": {
+   "titre": "La spirale du silence",
+   "texte": "Dans les années 1970, la chercheuse allemande Elisabeth Noelle-Neumann, spécialiste de l'opinion publique, décrit ce qu'elle appelle la « spirale du silence ». Quand on croit que son opinion est minoritaire, on a tendance à la taire, par peur de se retrouver isolée. Ce silence rend l'opinion encore moins visible, ce qui pousse d'autres personnes à se taire à leur tour. Une seule voix qui dit ce qu'elle pense peut donc révéler que d'autres pensaient pareil.",
+   "source": "Elisabeth Noelle-Neumann, La Spirale du silence (Die Schweigespirale), 1980 ; première formulation en 1974",
+   "lien": ""
+  },
+  "echo": {
+   "titre": "Les 343",
+   "texte": "Le 5 avril 1971, Le Nouvel Observateur publie un manifeste signé par 343 femmes qui déclarent avoir avorté, à une époque où c'est un délit. Le texte, rédigé par Simone de Beauvoir, est signé par des inconnues comme par des femmes célèbres, qui s'exposent à des poursuites. Dire publiquement ce que la société préférait ne pas entendre a fait bouger le débat : la loi Veil est votée moins de quatre ans plus tard. Leur parole déplaisait, et c'est précisément pour cela qu'elle a compté.",
+   "source": "« Manifeste des 343 », Le Nouvel Observateur, 5 avril 1971",
+   "lien": ""
+  }
+ },
+ {
+  "capacite": "TR1",
+  "quete": "Le Travail",
+  "titre": "Ce que tu veux ne se trouve pas en y pensant très fort.",
+  "chapo": "Pour aller un peu plus loin sur l'envie : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "L'envie vient avant la raison",
+   "texte": "Pour Spinoza, le désir n'est pas un caprice à surveiller : c'est l'essence même de l'être humain, l'effort de chacun pour persévérer dans son être. Il renverse une habitude tenace : nous ne désirons pas une chose parce que nous l'avons jugée bonne, nous la jugeons bonne parce que nous la désirons. Chercher ce que l'on veut vraiment, ce n'est donc pas trouver la bonne réponse sur une liste. C'est remarquer ce qui, en toi, pousse déjà quelque part.",
+   "source": "Baruch Spinoza, Éthique, partie III, 1677",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "Plus de la moitié",
+   "texte": "C'est la part des femmes (ou des hommes) qui devraient changer de métier pour que les deux sexes soient répartis de la même façon entre les métiers, en France, en 2011. La ségrégation a baissé en trente ans, mais les métiers restent très séparés. Nos envies de métier poussent dans ce paysage-là, bien avant qu'on se demande ce qu'on veut. Ce chiffre ne dit rien de toi. Il dit d'où viennent une partie des chemins qu'on croyait choisis.",
+   "source": "Dares, « La répartition des hommes et des femmes par métiers : une baisse de la ségrégation depuis 30 ans », Dares Analyses n° 079, décembre 2013",
+   "lien": "https://www.centre-hubertine-auclert.fr/sites/default/files/medias/egalitheque/documents/2013-079.pdf"
+  },
+  "regard": {
+   "titre": "Les « moi possibles »",
+   "texte": "En 1986, les psychologues Hazel Markus et Paula Nurius proposent une notion simple : chacun porte des « moi possibles », des images de qui il pourrait devenir, celles qu'il espère et celles qu'il redoute. Ces images orientent nos choix, souvent sans qu'on les ait regardées en face. Les nommer, c'est déjà les rendre discutables : est-ce que celle-ci est la mienne, ou celle qu'on attendait de moi ? Ne plus savoir ce que l'on veut, c'est parfois avoir perdu de vue ses propres moi possibles, pas en manquer.",
+   "source": "Hazel Markus et Paula Nurius, « Possible Selves », American Psychologist, 1986",
+   "lien": ""
+  },
+  "echo": {
+   "titre": "Rentrer en soi, la nuit",
+   "texte": "Entre 1903 et 1908, Rainer Maria Rilke répond par lettres à un jeune homme, Franz Xaver Kappus, qui lui envoie ses poèmes et lui demande s'ils sont bons. Rilke refuse de juger. Il l'invite plutôt à rentrer en lui-même et à se demander, à l'heure la plus silencieuse de la nuit, s'il lui faut vraiment écrire. Les lettres, publiées en 1929, sont restées un des grands livres sur l'art de s'écouter avant d'écouter les autres.",
+   "source": "Rainer Maria Rilke, Lettres à un jeune poète, 1929",
+   "lien": ""
+  }
+ },
+ {
+  "capacite": "TR2",
+  "quete": "Le Travail",
+  "titre": "Et si la réussite était une question, pas une case ?",
+  "chapo": "Pour aller un peu plus loin sur ce qu'on appelle réussir : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "L'argent est un moyen, pas une fin",
+   "texte": "Au début de l'Éthique à Nicomaque, Aristote passe en revue les vies que l'on peut mener. Celle qui court après l'argent ne le convainc pas : la richesse, dit-il en substance, n'est pas le bien que l'on cherche, puisqu'on ne la veut qu'en vue d'autre chose. Toute la question est alors : en vue de quoi ? Une réussite qui ne sait plus répondre à cette question a peut-être pris le moyen pour le but.",
+   "source": "Aristote, Éthique à Nicomaque, livre I, IVe siècle avant notre ère",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "+30 %",
+   "texte": "C'est, d'après une étude de la Dares menée sur près de 17 000 salariés suivis entre 2013 et 2016, l'augmentation du risque de quitter son emploi quand le travail perd son sens. La perte de sens pèse autant dans les départs que la pénibilité ou l'intensité du travail. Ce que l'on fait compte, pas seulement ce que l'on gagne ou le poste que l'on occupe. Ce chiffre ne dit rien de toi. Il dit que tu n'es pas la seule à te poser la question.",
+   "source": "Thomas Coutrot et Coralie Perez, « Quand le travail perd son sens », Document d'études de la Dares n° 249, 2021",
+   "lien": "https://halshs.archives-ouvertes.fr/halshs-03324454v1/file/21020.pdf"
+  },
+  "regard": {
+   "titre": "Vivre plus vite ou vivre en résonance",
+   "texte": "Le sociologue allemand Hartmut Rosa décrit nos sociétés comme prises dans une course : il faut grandir, accélérer, accumuler pour simplement rester en place. Il oppose à cette logique la « résonance » : ces moments où le monde nous touche et où nous lui répondons, au travail comme ailleurs. Pour lui, une vie réussie ne se mesure pas à la quantité de ressources accumulées, mais à la qualité de ce lien. On peut avoir tout coché et manquer de résonance, ou l'inverse.",
+   "source": "Hartmut Rosa, Résonance. Une sociologie de la relation au monde, 2016 (traduction française 2018)",
+   "lien": ""
+  },
+  "echo": {
+   "titre": "Deux ans au bord d'un étang",
+   "texte": "Le 4 juillet 1845, Henry David Thoreau s'installe dans une cabane qu'il a construite près de l'étang de Walden, dans le Massachusetts. Il y reste un peu plus de deux ans, pour voir ce dont une vie a vraiment besoin. Dans Walden, il écrit que la plupart des hommes mènent des vies de tranquille désespoir. Il ne demande à personne de partir dans les bois : il propose de vérifier, une fois au moins, si l'on vit selon ses propres règles.",
+   "source": "Henry David Thoreau, Walden ou la Vie dans les bois, 1854",
+   "lien": ""
+  }
+ },
+ {
+  "capacite": "TR3",
+  "quete": "Le Travail",
+  "titre": "Personne n'est assis plus haut que les autres.",
+  "chapo": "Pour aller un peu plus loin sur le sentiment de légitimité : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "Tous assis sur la même chose",
+   "texte": "À la toute fin de ses Essais, Montaigne rappelle avec une franchise joyeuse que même sur le plus haut trône du monde, on n'est jamais assis que sur son derrière. Il ne se moque pas des rois : il rappelle que les titres et les places ne changent rien à notre condition commune. Chacun apprend, hésite, se trompe. Se sentir légitime, ce n'est peut-être pas se croire à la hauteur d'une place, mais se souvenir que ceux qui l'occupent sont faits de la même étoffe.",
+   "source": "Michel de Montaigne, Essais, livre III, chapitre 13, « De l'expérience », 1588",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "De 9 à 82 %",
+   "texte": "C'est l'écart entre les études qui mesurent la part de personnes concernées par le sentiment d'imposture, selon une vaste synthèse de la recherche publiée en 2020. Un écart aussi grand vient surtout des questionnaires et des seuils utilisés, mais le sentiment apparaît chez les femmes comme chez les hommes, des adolescents aux professionnels confirmés. Ce chiffre ne dit rien de toi. Il dit que ce doute est très partagé, et très mal mesuré.",
+   "source": "Dena Bravata et al., « Prevalence, Predictors, and Treatment of Impostor Syndrome: a Systematic Review », Journal of General Internal Medicine, 2020",
+   "lien": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7174434"
+  },
+  "regard": {
+   "titre": "Des femmes brillantes qui se croient en fraude",
+   "texte": "En 1978, les psychologues Pauline Rose Clance et Suzanne Imes décrivent un « phénomène de l'imposteur » chez plus de 150 femmes aux parcours remarquables : diplômes, postes, reconnaissance. Malgré tout cela, elles attribuent leur réussite à la chance, à une erreur ou au charme, et craignent d'être un jour « découvertes ». Les autrices parlent bien d'un phénomène, pas d'une maladie. Elles montrent surtout que le sentiment d'imposture ne dit rien de la compétence réelle.",
+   "source": "Pauline Rose Clance et Suzanne Imes, « The Imposter Phenomenon in High Achieving Women », Psychotherapy: Theory, Research and Practice, 1978",
+   "lien": ""
+  },
+  "echo": {
+   "titre": "Même à la Maison-Blanche",
+   "texte": "En décembre 2018, devant des lycéennes d'une école publique de Londres, Michelle Obama raconte qu'elle ressent encore un peu le sentiment d'imposture, malgré Princeton, Harvard et huit ans comme Première dame. Son livre Devenir venait de paraître, et elle parcourait le monde pour le présenter. Le doute ne disparaît pas avec la place : il devient juste plus facile à reconnaître.",
+   "source": "Michelle Obama, rencontre à l'Elizabeth Garrett Anderson School, Londres, décembre 2018 ; Devenir, 2018",
+   "lien": ""
+  }
+ },
+ {
+  "capacite": "TR4",
+  "quete": "Le Travail",
+  "titre": "S'arrêter n'est pas un luxe. C'est une frontière.",
+  "chapo": "Pour aller un peu plus loin sur les limites au travail : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "Son propre contremaître",
+   "texte": "Pour le philosophe Byung-Chul Han, nous sommes passés d'une société de l'interdit à une société de la performance. Autrefois, un chef imposait la cadence ; aujourd'hui, chacun se l'impose à lui-même, au nom de sa liberté et de son potentiel. On devient à la fois l'exploitant et l'exploité, ce qui rend l'épuisement difficile à voir, puisque personne ne semble l'exiger. Poser une limite, dans cette lecture, c'est reprendre la main sur un contremaître intérieur.",
+   "source": "Byung-Chul Han, La Société de la fatigue, 2010 (traduction française 2014)",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "85 %",
+   "texte": "C'est la part des femmes en emploi qui disent que la fatigue liée au travail pèse sur leur vie personnelle, en France (78 % des hommes). L'enquête de l'Ined montre que l'écart tient surtout aux conditions d'emploi, comme les horaires longs ou décalés, et aux configurations familiales. Ce chiffre ne dit rien de toi. Il dit que le débordement est la règle, pas l'exception, et qu'il tient beaucoup à l'organisation du travail.",
+   "source": "Roméo Fontaine, Ariane Pailhé et Delphine Remillon, « Tensions entre vie privée et vie professionnelle : qui sont les plus exposés ? », Population et Sociétés n° 637, Ined, octobre 2025",
+   "lien": "https://www.ined.fr/fr/publications/editions/population-et-societes/tensions-entre-vie-privee-et-vie-professionnelle-qui-sont-les-plus-exposes"
+  },
+  "regard": {
+   "titre": "Une soirée vraiment libre",
+   "texte": "Au milieu des années 2000, la chercheuse Leslie Perlow, de Harvard, mène une expérience dans un grand cabinet de conseil réputé pour ses semaines sans fin. Chaque membre de l'équipe obtient une soirée par semaine vraiment libre, sans téléphone ni messages, et l'équipe s'organise pour la rendre possible. Résultat : plus de satisfaction, une meilleure communication, et un travail qui n'en souffre pas. La limite tient parce qu'elle est collective, pas parce qu'une personne serre les dents.",
+   "source": "Leslie Perlow et Jessica Porter, « Making Time Off Predictable, and Required », Harvard Business Review, 2009",
+   "lien": ""
+  },
+  "echo": {
+   "titre": "« Je préférerais ne pas »",
+   "texte": "En 1853, Herman Melville publie l'histoire de Bartleby, un copiste de Wall Street. Un jour, à chaque nouvelle demande de son patron, il répond la même phrase, polie et inébranlable : I would prefer not to, « je préférerais ne pas ». Il ne crie pas, n'argumente pas, ne s'excuse pas. Depuis, des générations de lecteurs et de philosophes reviennent à cette petite phrase, qui montre qu'un refus peut tenir en peu de mots.",
+   "source": "Herman Melville, Bartleby, le scribe, 1853",
+   "lien": ""
+  }
+ },
+ {
+  "capacite": "TR5",
+  "quete": "Le Travail",
+  "titre": "Le vertige de changer, c'est le goût de la liberté.",
+  "chapo": "Pour aller un peu plus loin sur l'envie de changer : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "Le vertige du possible",
+   "texte": "En 1844, Søren Kierkegaard décrit l'angoisse comme le vertige de la liberté. Celui qui regarde dans un abîme a le vertige non parce qu'il va tomber, mais parce qu'il pourrait sauter. De la même façon, l'angoisse naît devant ce qui devient possible. Avoir peur de changer ne prouve donc pas qu'on ne devrait pas le faire : c'est souvent le signe qu'on a aperçu une possibilité réelle.",
+   "source": "Søren Kierkegaard, Le Concept d'angoisse, 1844",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "51 %",
+   "texte": "C'est la part des personnes qui ont créé une entreprise individuelle classique en France en 2022 sans avoir d'expérience dans l'activité qu'elles lancent. Un quart d'entre elles gardent en parallèle une autre activité professionnelle, deux fois plus qu'en 2002, et les femmes représentent désormais la moitié de ces créateurs, contre un tiers vingt ans plus tôt. Ce chiffre ne dit rien de toi. Il dit qu'on se lance rarement en sachant déjà tout.",
+   "source": "Insee, « Les créateurs d'entreprises individuelles en 2022 : plus de jeunes et plus de femmes que vingt ans auparavant », Emploi et revenus des indépendants, Insee Références, édition 2025",
+   "lien": "https://insee.fr/fr/statistiques/8376585"
+  },
+  "regard": {
+   "titre": "Agir d'abord, savoir ensuite",
+   "texte": "La chercheuse Herminia Ibarra a suivi des dizaines de personnes qui ont changé de métier. Elle observe que la plupart ne trouvent pas leur nouvelle voie à force d'introspection, avant de bouger. Elles la trouvent en essayant : de petits projets, de nouvelles rencontres, des expériences à l'essai, dont elles tirent peu à peu une histoire. Changer, dans cette lecture, n'est pas un grand saut : c'est une série de pas de côté.",
+   "source": "Herminia Ibarra, Working Identity: Unconventional Strategies for Reinventing Your Career, 2003",
+   "lien": ""
+  },
+  "echo": {
+   "titre": "Une cuisinière née à 37 ans",
+   "texte": "En 1949, à 37 ans, l'Américaine Julia Child s'inscrit au Cordon Bleu à Paris, où son mari est en poste. Jusque-là, la cuisine n'était pas du tout son métier. Douze ans plus tard, en 1961, paraît Mastering the Art of French Cooking, écrit avec Simone Beck et Louisette Bertholle, qui fera connaître la cuisine française à des millions de foyers américains. Elle avait 49 ans.",
+   "source": "Julia Child, Simone Beck et Louisette Bertholle, Mastering the Art of French Cooking, 1961",
+   "lien": ""
+  }
+ },
+ {
+  "capacite": "TR6",
+  "quete": "Le Travail",
+  "titre": "Être reconnue, ce n'est pas réclamer. C'est exister.",
+  "chapo": "Pour aller un peu plus loin sur la reconnaissance du travail : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "La reconnaissance, un besoin, pas un caprice",
+   "texte": "Pour le philosophe Axel Honneth, on ne se construit pas seul : on a besoin d'être reconnu, par ses proches, par le droit, et par la société pour ce qu'on y apporte. Cette troisième forme, l'estime sociale, passe en grande partie par le travail. Quand elle manque, ce n'est pas un détail d'ego : c'est une injustice, et l'origine de bien des luttes. Demander que son travail se voie, c'est donc entrer dans une très vieille histoire, pas faire un caprice.",
+   "source": "Axel Honneth, La Lutte pour la reconnaissance, 1992 (traduction française 2000)",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "14,2 %",
+   "texte": "C'est l'écart de salaire moyen entre les femmes et les hommes du secteur privé en France en 2023, à temps de travail égal. À poste comparable, dans le même établissement, il tombe à 3,8 % : l'essentiel de l'écart vient donc des postes que les femmes occupent, et de ceux auxquels elles accèdent moins. Ce chiffre ne dit rien de toi. Il dit que la reconnaissance se joue aussi dans les promotions et les postes, pas seulement dans les efforts.",
+   "source": "Insee, Insee Focus n° 349, mars 2025",
+   "lien": "https://www.insee.fr/fr/statistiques/8381248"
+  },
+  "regard": {
+   "titre": "Les tâches qui ne mènent nulle part",
+   "texte": "Dans une série d'études publiées en 2017, les économistes Linda Babcock, Maria Recalde, Lise Vesterlund et Laurie Weingart s'intéressent aux tâches utiles mais peu valorisées : organiser, relire, siéger dans un comité. Dans les groupes mixtes, les femmes se portent davantage volontaires et on les sollicite plus souvent. Dans des groupes d'hommes seuls, les hommes se portent volontaires tout autant. Ce n'est donc pas une question de caractère, mais d'attentes partagées.",
+   "source": "Linda Babcock, Maria Recalde, Lise Vesterlund et Laurie Weingart, « Gender Differences in Accepting and Receiving Requests for Tasks with Low Promotability », American Economic Review, 2017",
+   "lien": ""
+  },
+  "echo": {
+   "titre": "L'effet Matilda",
+   "texte": "En 1993, l'historienne des sciences Margaret Rossiter donne un nom à un mécanisme ancien : l'effet Matilda, la tendance à attribuer à des hommes le travail de femmes scientifiques, ou à l'oublier. Elle le baptise en hommage à Matilda Joslyn Gage, militante américaine du XIXe siècle qui avait déjà dénoncé ce phénomène. Nommer l'invisible, c'est déjà commencer à le rendre visible.",
+   "source": "Margaret W. Rossiter, « The Matthew Matilda Effect in Science », Social Studies of Science, 1993",
+   "lien": ""
+  }
+ },
+ {
+  "capacite": "TR7",
+  "quete": "Le Travail",
+  "titre": "Penser à tout est un travail. Il peut se partager.",
+  "chapo": "Pour aller un peu plus loin sur la charge qu'on porte : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "Se soucier, c'est déjà travailler",
+   "texte": "La philosophe américaine Joan Tronto fait du soin, le « care », une question politique et pas seulement privée. Elle y distingue plusieurs moments : se soucier de quelque chose, en prendre la charge, faire concrètement, puis recevoir le soin. Les deux premiers, remarquer et organiser, sont les plus invisibles, et souvent les plus inégalement répartis. Partager la charge, c'est partager aussi ces moments-là, pas seulement l'exécution.",
+   "source": "Joan Tronto, Moral Boundaries, 1993 (traduction française : Un monde vulnérable, 2009)",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "64 %",
+   "texte": "C'est la part des heures de travail domestique réalisées par les femmes en France, selon la dernière grande enquête Emploi du temps de l'Insee (2010). Au total, ce travail représentait 60 milliards d'heures sur l'année. Ce chiffre ne dit rien de toi. Il dit que la maison est un lieu de travail, et que ce travail n'est pas réparti au hasard.",
+   "source": "Insee, « Le travail domestique : 60 milliards d'heures en 2010 », Insee Première n° 1423, 2012",
+   "lien": "https://www.insee.fr/fr/statistiques/2123967"
+  },
+  "regard": {
+   "titre": "La vie en deux",
+   "texte": "En 1984, la sociologue française Monique Haicault publie un article sur « la gestion ordinaire de la vie en deux ». Elle y décrit les femmes qui travaillent comme obligées de penser en même temps à deux espaces, l'emploi et la maison, même quand elles ne sont physiquement que dans l'un. C'est l'origine de la notion de charge mentale : un travail d'organisation permanent, qui ne se voit pas parce qu'il se passe dans la tête.",
+   "source": "Monique Haicault, « La gestion ordinaire de la vie en deux », Sociologie du travail, 1984",
+   "lien": "https://halshs.archives-ouvertes.fr/halshs-01503920v1/file/LaGestionOrdinairedelaVieenDeux.pdf"
+  },
+  "echo": {
+   "titre": "« Fallait demander »",
+   "texte": "Le 9 mai 2017, la dessinatrice Emma publie en ligne une bande dessinée intitulée Fallait demander. On y voit une femme qui gère tout pendant que son compagnon, plein de bonne volonté, attend qu'on lui dise quoi faire. La bande dessinée est partagée des centaines de milliers de fois et fait entrer l'expression « charge mentale » dans les conversations de tout le pays. Trente ans après l'article de Monique Haicault, un dessin a rendu le concept visible.",
+   "source": "Emma, Fallait demander, bande dessinée publiée en ligne, 2017",
+   "lien": "https://www.politis.fr/articles/2017/05/la-charge-mentale-le-travail-cache-des-femmes-36922"
+  }
+ },
+ {
+  "capacite": "EM1",
+  "quete": "Les Émotions",
+  "titre": "Ce qu'on nomme, on le tient un peu mieux.",
+  "chapo": "Pour aller un peu plus loin sur l'art de mettre un mot sur ce qu'on ressent : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "Comprendre, c'est déjà moins subir",
+   "texte": "Pour Spinoza, une émotion qui nous agite sans qu'on sache bien ce qu'elle est nous rend passives : elle nous mène. Dès qu'on s'en forme une idée claire, elle cesse d'être une simple passion. Elle ne disparaît pas, mais on n'est plus seulement traversée par elle. Chercher le mot juste, c'est donc reprendre un peu la main, pas se mettre à distance de soi.",
+   "source": "Baruch Spinoza, Éthique, cinquième partie, proposition 3, 1677",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "10 %",
+   "texte": "Dans une grande enquête menée en Allemagne auprès de 1 859 adultes représentatifs, environ une personne sur dix dépasse le seuil de l'alexithymie, c'est-à-dire une difficulté marquée à identifier et à décrire ses émotions. Les estimations varient d'un pays et d'une méthode à l'autre, mais l'ordre de grandeur reste le même. Ce chiffre ne dit rien de toi. Il dit que ne pas savoir nommer ce qu'on ressent est une expérience bien plus répandue qu'on ne le croit.",
+   "source": "Matthias Franz et al., « Alexithymia in the German general population », Social Psychiatry and Psychiatric Epidemiology, 2008",
+   "lien": "https://link.springer.com/doi/10.1007/s00127-007-0265-1"
+  },
+  "regard": {
+   "titre": "Mettre un mot, ça calme",
+   "texte": "En 2007, une équipe de l'université de Californie à Los Angeles a montré des visages chargés d'émotion à des volontaires placés dans un scanner. Quand ils devaient nommer l'émotion (« colère », « peur »), l'activité de l'amygdale, une zone qui réagit vivement aux signaux d'alerte, baissait. Les chercheurs ont eux-mêmes précisé que l'effet est modeste. Mais l'idée est belle : le mot n'efface pas l'émotion, il l'apaise un peu.",
+   "source": "Matthew D. Lieberman et al., « Putting feelings into words », Psychological Science, 2007",
+   "lien": "https://www.psychologicalscience.org/journals/psychological-science/j.1467-9280.2007.01916.x/"
+  },
+  "echo": {
+   "titre": "Un mot inuit pour l'attente",
+   "texte": "L'historienne Tiffany Watt Smith a réuni dans un livre plus de cent cinquante émotions venues du monde entier, des plus familières aux plus rares. On y trouve par exemple « iktsuarpok », un mot inuit pour cette impatience qui fait sortir sans cesse voir si quelqu'un arrive. Ce que ce livre rappelle, c'est que chaque langue découpe les sentiments à sa façon. Si tu ne trouves pas le mot, il existe peut-être ailleurs, ou il reste à inventer.",
+   "source": "Tiffany Watt Smith, The Book of Human Emotions, Profile Books et Wellcome Collection, 2015",
+   "lien": ""
+  }
+ },
+ {
+  "capacite": "EM2",
+  "quete": "Les Émotions",
+  "titre": "Dire ce qu'on ressent, ça se fait à deux.",
+  "chapo": "Pour aller un peu plus loin sur l'art de laisser sortir ce qu'on ressent, sans tout garder ni tout lâcher de travers : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "La parole a deux propriétaires",
+   "texte": "Montaigne écrit que la parole est « moitié à celui qui parle, moitié à celui qui l'écoute ». Dire ce qu'on ressent n'est donc pas un exploit solitaire : c'est un geste qui attend quelqu'un en face. Si ça sort de travers, ce n'est pas forcément toi qui parles mal. Parfois, il manque simplement la bonne oreille, ou le bon moment.",
+   "source": "Michel de Montaigne, Essais, livre III, chapitre 13, « De l'expérience », 1588",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "64 %",
+   "texte": "C'est la part des Français qui disent avoir toujours quelqu'un à qui parler de leurs problèmes du quotidien, selon le baromètre de l'Ifop pour l'association Astrée, édition 2024. Autrement dit, une bonne partie des gens n'ont pas toujours cette oreille-là. Ce chiffre ne dit rien de toi. Il dit que garder pour soi est souvent moins un choix qu'un manque d'espace pour dire.",
+   "source": "Ifop pour l'association Astrée, baromètre de la solitude, 2024",
+   "lien": ""
+  },
+  "regard": {
+   "titre": "Se retenir, ça se sent en face",
+   "texte": "En 2003, une équipe de psychologues a réuni des femmes qui ne se connaissaient pas pour parler d'un sujet bouleversant. À l'une des deux, on demandait en secret de cacher ses émotions. Résultat : la conversation passait moins bien, le lien se créait moins, et la tension artérielle de l'autre personne montait. Garder tout pour soi n'est donc pas neutre : celle ou celui qui est en face le sent aussi.",
+   "source": "Emily A. Butler, James J. Gross et al., « The Social Consequences of Expressive Suppression », Emotion, 2003",
+   "lien": ""
+  },
+  "echo": {
+   "titre": "La lettre qui n'est jamais arrivée",
+   "texte": "En novembre 1919, Franz Kafka écrit à son père une lettre de plus de cent pages, la plus longue de sa vie, pour lui dire enfin ce qu'il n'a jamais pu lui dire en face. Il la confie à sa mère, qui ne la transmet pas et la lui rend. Le père ne l'a jamais lue ; nous, si, puisqu'elle a été publiée après la mort de Kafka. Tout y est dit, et pourtant rien n'a été entendu : c'est peut-être le plus beau rappel qu'une émotion a besoin d'arriver quelque part.",
+   "source": "Franz Kafka, Lettre au père, écrite en 1919, publication posthume",
+   "lien": ""
+  }
+ },
+ {
+  "capacite": "EM3",
+  "quete": "Les Émotions",
+  "titre": "La colère n'est pas un défaut. C'est une information.",
+  "chapo": "Pour aller un peu plus loin sur la colère : celle qui fait peur, celle qu'on ne sent plus, et ce qu'on peut en faire. Une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "La juste colère",
+   "texte": "Aristote ne demande pas de ne jamais se mettre en colère. Il remarque que s'emporter, tout le monde sait le faire ; ce qui est rare, c'est de se fâcher contre la bonne personne, au bon degré, au bon moment, pour la bonne raison. Pour lui, ne jamais s'indigner de rien n'est pas une vertu, c'est un manque. La colère n'est donc pas à éteindre : elle est à ajuster.",
+   "source": "Aristote, Éthique à Nicomaque, livre II, chapitre 9, IVe siècle avant notre ère",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "23 %",
+   "texte": "C'est la part des adultes dans le monde qui disent avoir ressenti de la colère pendant une bonne partie de la journée de la veille, selon l'institut Gallup en 2025. Gallup note aussi que, depuis près de vingt ans, plus de femmes que d'hommes déclarent ressentir chaque jour colère, tristesse, inquiétude et stress. Ce chiffre ne dit rien de toi. Il dit que la colère est une émotion ordinaire, et qu'elle a souvent de bonnes raisons d'exister.",
+   "source": "Gallup, State of the World's Emotional Health, 2025",
+   "lien": "https://www.gallup.com/analytics/349280/gallup-global-emotions-report.aspx"
+  },
+  "regard": {
+   "titre": "Deux poids, deux colères",
+   "texte": "En 2008, deux chercheurs américains ont montré à des participants des vidéos d'entretiens d'embauche où une personne exprimait de la colère. Un homme en colère gagnait en statut. Une femme en colère en perdait, qu'elle soit stagiaire ou PDG, et ce aux yeux des hommes comme des femmes. On attribuait sa colère à son caractère, celle de l'homme aux circonstances ; quand on donnait une raison extérieure à sa colère, l'écart disparaissait. Si ta colère te fait peur, ce n'est peut-être pas un hasard : on a appris à la payer plus cher.",
+   "source": "Victoria L. Brescoll et Eric Luis Uhlmann, « Can an Angry Woman Get Ahead? », Psychological Science, 2008",
+   "lien": "https://www.hks.harvard.edu/centers/wappp/publications/can-angry-woman-get-ahead-status-conferral-gender-and-expression-emotion"
+  },
+  "echo": {
+   "titre": "Les usages de la colère",
+   "texte": "En juin 1981, la poétesse américaine Audre Lorde prononce à Storrs, dans le Connecticut, un discours devant une grande association d'études féministes. Elle y défend l'idée que la colère des femmes, bien entendue et bien dirigée, est une source d'énergie et de clarté, pas une chose honteuse à cacher. Ce texte, « The Uses of Anger », a été repris dans son recueil Sister Outsider, traduit en français en 2003. Quarante ans plus tard, il se lit toujours comme une permission.",
+   "source": "Audre Lorde, « The Uses of Anger: Women Responding to Racism », 1981, dans Sister Outsider (1984 ; trad. fr. Mamamélis et Trois, 2003)",
+   "lien": ""
+  }
+ },
+ {
+  "capacite": "EM4",
+  "quete": "Les Émotions",
+  "titre": "La culpabilité, cette dette qu'on n'a jamais contractée.",
+  "chapo": "Pour aller un peu plus loin sur cette culpabilité qui s'invite partout : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "Un vieux mot de comptable",
+   "texte": "En allemand, le même mot, « Schuld », veut dire à la fois la faute et la dette. Nietzsche part de ce double sens pour raconter que la culpabilité est née d'un rapport entre créancier et débiteur : se sentir coupable, c'est se sentir redevable. Cette idée donne une question simple à poser à sa propre culpabilité : envers qui suis-je censée être en dette, et cette dette, l'ai-je vraiment contractée ?",
+   "source": "Friedrich Nietzsche, Généalogie de la morale, deuxième dissertation, 1887",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "49 %",
+   "texte": "Dans une enquête Ipsos sur la charge mentale réalisée pour O2 Care Services, près d'une personne interrogée sur deux dit avoir déjà ressenti de la culpabilité à l'idée de faire appel à quelqu'un d'extérieur pour l'aider au quotidien. Le même travail note que beaucoup de femmes se sentent coupables de ne pas pouvoir tout gérer. Ce chiffre ne dit rien de toi. Il dit à quel point l'idée de « devoir tout faire soi-même » est installée dans le paysage.",
+   "source": "Ipsos pour O2 Care Services, enquête « Charge mentale »",
+   "lien": "https://www.ipsos.com/fr-fr/node/395541"
+  },
+  "regard": {
+   "titre": "J'ai mal fait, ou je suis mauvaise ?",
+   "texte": "La psychologue américaine June Tangney a passé des années à distinguer deux sentiments proches. La culpabilité porte sur un acte : « j'ai mal fait ». La honte porte sur la personne : « je suis mauvaise ». La première permet de réparer, de s'excuser, d'avancer ; la seconde n'offre aucune prise, puisqu'on ne répare pas ce qu'on est. Se demander laquelle des deux on éprouve, c'est déjà trier.",
+   "source": "June Price Tangney et Ronda L. Dearing, Shame and Guilt, Guilford Press, 2002",
+   "lien": "https://www.guilford.com/books/Shame-and-Guilt/June-Tangney/9781572309876"
+  },
+  "echo": {
+   "titre": "Le juge-pénitent",
+   "texte": "Dans La Chute d'Albert Camus, Jean-Baptiste Clamence, ancien avocat parisien réfugié à Amsterdam, raconte sa vie à un inconnu dans un bar. Il est hanté par un soir où il n'a pas porté secours à une jeune femme sur un pont de Paris. Il s'accuse sans fin, mais pour mieux accuser les autres : il se dit « juge-pénitent ». Camus montre là une culpabilité qui tourne en rond et ne répare rien.",
+   "source": "Albert Camus, La Chute, Gallimard, 1956",
+   "lien": ""
+  }
+ },
+ {
+  "capacite": "EM5",
+  "quete": "Les Émotions",
+  "titre": "Décevoir quelqu'un n'est pas trahir quelqu'un.",
+  "chapo": "Pour aller un peu plus loin sur la peur de décevoir et sur le regard des autres : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "L'enfer, c'est les autres ?",
+   "texte": "La phrase la plus célèbre de Sartre vient de Huis clos, sa pièce de 1944 où trois personnages sont enfermés pour l'éternité sous le regard les uns des autres. On l'a souvent comprise comme une haine des autres. Sartre a expliqué plus tard qu'il voulait dire autre chose : quand on dépend entièrement du jugement d'autrui pour savoir qui l'on est, ce jugement devient un enfer. La peur de décevoir ressemble à cela : se regarder uniquement avec les yeux des autres.",
+   "source": "Jean-Paul Sartre, Huis clos, 1944, et son commentaire enregistré en 1965",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "75 %",
+   "texte": "C'est la part des femmes cadres dirigeantes qui disent avoir déjà ressenti, à certains moments de leur carrière, le syndrome de l'imposteur : la peur de ne pas être à la hauteur et d'être un jour « démasquée ». L'enquête a été menée auprès de 750 femmes à un ou deux échelons de la direction générale. Ce chiffre ne dit rien de toi. Il dit que même celles qui réussissent le plus vivent souvent avec la peur de décevoir.",
+   "source": "KPMG, Advancing the Future of Women in Business, 2020",
+   "lien": "https://assets.kpmg.com/content/dam/kpmg/sk/pdf/2020/2020-KPMG-Womens-Leadership-Summit-Report.pdf"
+  },
+  "regard": {
+   "titre": "L'enfant qui devine ce qu'on attend d'elle",
+   "texte": "En 1979, la psychanalyste Alice Miller publie un petit livre devenu un classique. Elle y décrit des adultes brillants qui se sentent pourtant vides et étrangers à eux-mêmes. Son hypothèse : enfants, ils ont appris à sentir et à combler les besoins de leurs parents, au point de mettre de côté les leurs. « Doué » ne parle pas ici d'intelligence, mais de ce talent précoce à ne pas décevoir.",
+   "source": "Alice Miller, Le Drame de l'enfant doué, 1979 (trad. fr. PUF)",
+   "lien": ""
+  },
+  "echo": {
+   "titre": "La porte de Nora",
+   "texte": "En 1879, au Théâtre royal de Copenhague, le public découvre Une maison de poupée d'Henrik Ibsen. Nora, épouse parfaite qui a passé sa vie à plaire à son père puis à son mari, finit par partir et claquer la porte. Ce bruit de porte a fait scandale dans toute l'Europe. Il reste un des sons les plus célèbres du théâtre : celui d'une femme qui accepte de décevoir pour devenir quelqu'un.",
+   "source": "Henrik Ibsen, Une maison de poupée, 1879",
+   "lien": ""
+  }
+ },
+ {
+  "capacite": "EM6",
+  "quete": "Les Émotions",
+  "titre": "Être fragile devant quelqu'un, c'est lui faire confiance.",
+  "chapo": "Pour aller un peu plus loin sur la tristesse et la vulnérabilité, celles qu'on cache et celles qu'on ose montrer : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "Nous sommes tous exposés",
+   "texte": "Après le 11 septembre 2001, la philosophe Judith Butler écrit un livre sur le deuil et la violence. Elle y part d'un constat simple : nous sommes tous vulnérables, exposés aux autres, et c'est justement ce qui nous relie. La perte et la peine ne sont pas des failles individuelles à cacher, elles disent que nous tenons à d'autres. Être fragile, dans cette lecture, c'est être lié.",
+   "source": "Judith Butler, Vie précaire. Les pouvoirs du deuil et de la violence après le 11 septembre 2001, Éditions Amsterdam, 2005 (éd. originale 2004)",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "26 %",
+   "texte": "C'est la part des adultes dans le monde qui disent avoir ressenti de la tristesse pendant une bonne partie de la journée de la veille, selon l'institut Gallup en 2025. À peu près une personne sur quatre, chaque jour. Ce chiffre ne dit rien de toi. Il dit que la tristesse est l'une des expériences les plus partagées qui soient, même quand chacun la cache dans son coin.",
+   "source": "Gallup, State of the World's Emotional Health, 2025",
+   "lien": "https://www.gallup.com/analytics/349280/gallup-global-emotions-report.aspx"
+  },
+  "regard": {
+   "titre": "La chercheuse qui voulait tout contrôler",
+   "texte": "La chercheuse américaine Brené Brown a passé des années à étudier la honte et le sentiment de lien. Ses entretiens l'ont menée à une conclusion qui l'a d'abord dérangée : les personnes qui se sentent le plus reliées aux autres sont celles qui acceptent de se montrer imparfaites. En 2010, elle raconte cette découverte lors d'une conférence TEDx à Houston. La vidéo dépasse aujourd'hui les 60 millions de vues sur le site de TED : signe que le sujet touche bien au-delà des laboratoires.",
+   "source": "Brené Brown, « The Power of Vulnerability », TEDxHouston, 2010",
+   "lien": "https://www.ted.com/talks/brene_brown_the_power_of_vulnerability"
+  },
+  "echo": {
+   "titre": "Tristesse, l'héroïne inattendue",
+   "texte": "Dans Vice-versa, le film des studios Pixar sorti en 2015, Joie tente pendant tout le film d'écarter Tristesse des commandes. C'est pourtant Tristesse qui permet à la jeune Riley de retrouver ses parents. Le psychologue Dacher Keltner, conseiller scientifique du film, l'expliquait ainsi : notre culture est dure avec la tristesse, alors qu'elle est un puissant signal qui pousse à chercher du réconfort et à se rapprocher. Un film pour enfants a fait pleurer les adultes en leur disant cela.",
+   "source": "Vice-versa (Inside Out), Pixar, 2015 ; « The Science of Inside Out », The New York Times, 3 juillet 2015",
+   "lien": "https://greatergood.berkeley.edu/article/item/how_ggsc_turned_pixar_inside_out"
+  }
+ },
+ {
+  "capacite": "EM7",
+  "quete": "Les Émotions",
+  "titre": "Et si tu te parlais comme à une amie ?",
+  "chapo": "Pour aller un peu plus loin sur cette voix intérieure si sévère, et sur l'art de se pardonner : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "L'examen du soir",
+   "texte": "Le philosophe Sénèque raconte que, chaque soir, une fois la lumière éteinte, il repasse sa journée en revue, comme le faisait son maître Sextius. Il ne s'y épargne pas : il note ses emportements, ses paroles de trop. Mais il conclut en se pardonnant, et en se promettant de faire mieux. Pour lui, se juger lucidement et se pardonner ne s'opposent pas : l'un ne va pas sans l'autre.",
+   "source": "Sénèque, De la colère, livre III, chapitre 36, vers 41 de notre ère",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "72 %",
+   "texte": "Dans une enquête menée auprès de 750 femmes cadres dirigeantes, 72 % disent s'être tournées vers un mentor ou une personne de confiance quand elles doutaient de leur capacité à assumer un nouveau poste. Le doute est donc fréquent, même au plus haut niveau, et il se calme rarement seul. Ce chiffre ne dit rien de toi. Il dit que la voix qui rassure vient souvent d'abord de quelqu'un d'autre, avant qu'on apprenne à la faire sienne.",
+   "source": "KPMG, Advancing the Future of Women in Business, 2020",
+   "lien": "https://assets.kpmg.com/content/dam/kpmg/sk/pdf/2020/2020-KPMG-Womens-Leadership-Summit-Report.pdf"
+  },
+  "regard": {
+   "titre": "L'autocompassion n'est pas de la complaisance",
+   "texte": "Depuis 2003, la chercheuse américaine Kristin Neff étudie ce qu'elle appelle l'autocompassion. Elle la décrit en trois gestes : se traiter avec gentillesse plutôt qu'avec dureté, se rappeler que l'erreur fait partie de l'expérience humaine commune, et regarder ce qu'on ressent sans le grossir ni le nier. Ses travaux distinguent cette attitude de l'estime de soi : il ne s'agit pas de se trouver formidable, mais de se traiter avec bienveillance quand on ne l'est pas.",
+   "source": "Kristin D. Neff, « Self-Compassion: An Alternative Conceptualization of a Healthy Attitude Toward Oneself », Self and Identity, 2003",
+   "lien": ""
+  },
+  "echo": {
+   "titre": "« You do not have to be good »",
+   "texte": "Le poème « Wild Geese » de l'Américaine Mary Oliver commence par cette phrase : « You do not have to be good. » Autrement dit : tu n'as pas à être parfaite, tu n'as pas à faire pénitence à genoux à travers le désert. Le poème rappelle ensuite que le monde continue de t'offrir sa place, comme aux oies sauvages qui passent dans le ciel. Il circule depuis des décennies, recopié, lu à voix haute, offert : comme si beaucoup avaient besoin d'entendre cette permission.",
+   "source": "Mary Oliver, « Wild Geese », dans Dream Work, 1986",
+   "lien": ""
+  }
+ },
+ {
+  "capacite": "EM8",
+  "quete": "Les Émotions",
+  "titre": "Le plaisir n'est pas une récompense. C'est un point de départ.",
+  "chapo": "Pour aller un peu plus loin sur la joie et le plaisir, et sur ce qui nous empêche d'en profiter : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "Épicure, le mal-aimé",
+   "texte": "On a fait d'Épicure le patron des fêtards. Dans sa Lettre à Ménécée, il dit pourtant que le plaisir est le commencement et la fin de la vie heureuse, mais un plaisir simple : ne pas souffrir dans son corps, ne pas être troublée dans son âme. Un repas frugal, un ami, une conversation suffisent. Pour lui, savoir goûter ce qui est là n'est pas une faiblesse : c'est une sagesse.",
+   "source": "Épicure, Lettre à Ménécée, IIIe siècle avant notre ère",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "2 heures sur 3",
+   "texte": "En France, les femmes assurent 64 % des heures de travail domestique, soit près de deux heures sur trois, selon l'Insee à partir de son enquête Emploi du temps. Ce temps-là est pris quelque part, souvent sur le repos et les loisirs. Ce chiffre ne dit rien de toi. Il dit que si profiter te paraît difficile, ce n'est peut-être pas seulement une question de tête : c'est aussi une question d'heures.",
+   "source": "Insee, « Le travail domestique : 60 milliards d'heures en 2010 », Insee Première n° 1423, 2012",
+   "lien": "https://www.insee.fr/fr/statistiques/2123967"
+  },
+  "regard": {
+   "titre": "La joie élargit",
+   "texte": "En 2001, la psychologue américaine Barbara Fredrickson propose une théorie devenue célèbre : les émotions positives « élargissent et construisent ». Quand on a peur, l'attention se resserre sur la menace ; quand on est joyeuse, elle s'ouvre, on explore, on se lie aux autres. Avec le temps, ces moments construisent des ressources durables. La joie n'est donc pas un luxe qu'on s'accorde une fois tout réglé : elle aide à tenir.",
+   "source": "Barbara L. Fredrickson, « The Role of Positive Emotions in Positive Psychology: The Broaden-and-Build Theory », American Psychologist, 2001",
+   "lien": ""
+  },
+  "echo": {
+   "titre": "Le Bonheur de vivre",
+   "texte": "En 1906, Henri Matisse expose à Paris une grande toile, Le Bonheur de vivre : des corps nus allongés dans l'herbe, des danseurs en ronde, des couleurs franches sous les arbres. Elle choque une partie du public par ses couleurs et sa liberté. Elle est aujourd'hui conservée à la Fondation Barnes, à Philadelphie. Plus d'un siècle après, elle reste une invitation tranquille : le plaisir aussi mérite sa place sur le mur.",
+   "source": "Henri Matisse, Le Bonheur de vivre, 1905-1906, Fondation Barnes, Philadelphie",
+   "lien": ""
+  }
+ },
+ {
+  "capacite": "CO1",
+  "quete": "Le Corps",
+  "titre": "Ton corps parle tout le temps. Il parle juste bas.",
+  "chapo": "Pour aller un peu plus loin sur l'écoute de ton corps : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "On n'a pas un corps, on l'est",
+   "texte": "Pour Maurice Merleau-Ponty, le corps n'est pas un objet que l'on posséderait, comme une machine qu'on surveille de loin. C'est par lui que l'on perçoit, que l'on habite le monde, que l'on a un point de vue. La fatigue, la faim, l'élan ne sont donc pas des bruits de fond : ce sont des manières de te dire où tu en es. L'écouter, c'est un peu s'écouter penser.",
+   "source": "Maurice Merleau-Ponty, Phénoménologie de la perception, 1945",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "21,5 %",
+   "texte": "C'est la part des adultes de 18 à 79 ans qui dorment six heures ou moins sur vingt-quatre heures, en France, selon le Baromètre de Santé publique France 2024. Le temps de sommeil moyen est de 7 h 32. Ce chiffre ne dit rien de toi. Il dit dans quel paysage on vit : un paysage où la fatigue est banale, donc facile à ne plus entendre.",
+   "source": "Santé publique France, Baromètre 2024, « Sommeil : temps moyen sur 24 heures et plainte d'insomnie », 2025",
+   "lien": "https://www.santepubliquefrance.fr/determinants-de-sante/sommeil/documents/rapport-synthese/sommeil-temps-moyen-sur-24-heures-et-plainte-d-insomnie.-barometre-de-sante-publique-france-resultats-de-l-edition-2024"
+  },
+  "regard": {
+   "titre": "L'écoute du corps s'apprend",
+   "texte": "En 1971, le sociologue Luc Boltanski montre que l'attention portée aux sensations du corps n'est pas la même selon les milieux sociaux. Là où le corps sert d'outil de travail, on a appris à « tenir », à ne pas s'écouter, faute aussi de mots pour décrire ce qu'on ressent. Ne pas entendre son corps n'est donc pas un défaut personnel. C'est souvent une habitude qu'on nous a transmise.",
+   "source": "Luc Boltanski, « Les usages sociaux du corps », Annales, 1971",
+   "lien": ""
+  },
+  "echo": {
+   "titre": "Le grand oubli de la littérature",
+   "texte": "En 1926, Virginia Woolf publie un essai, On Being Ill. Elle s'y étonne que les écrivains aient tant parlé de l'esprit et si peu du corps, alors que ce corps nous accompagne chaque jour. Elle remarque même qu'on a écrit des romans sur l'amour et la guerre, mais pas sur une simple grippe. Comme si ce que vit le corps ne méritait pas d'être raconté.",
+   "source": "Virginia Woolf, On Being Ill, 1926",
+   "lien": ""
+  }
+ },
+ {
+  "capacite": "CO2",
+  "quete": "Le Corps",
+  "titre": "Prendre soin de soi, c'est une très vieille idée.",
+  "chapo": "Pour aller un peu plus loin sur le soin de soi sans culpabilité : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "Le souci de soi",
+   "texte": "Michel Foucault a étudié comment, dans l'Antiquité grecque et romaine, « prendre soin de soi » était une pratique sérieuse : on y consacrait du temps, des exercices, des conversations. Ce n'était pas un caprice ni un repli. C'était au contraire la condition pour bien vivre avec les autres et tenir sa place dans la cité. Le soin de soi a donc une longue histoire, bien plus ancienne que la culpabilité qui l'entoure aujourd'hui.",
+   "source": "Michel Foucault, Histoire de la sexualité, tome 3 : Le Souci de soi, 1984",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "64 %",
+   "texte": "C'est la part du travail domestique (ménage, courses, cuisine, soins aux enfants, etc.) réalisée par les femmes en France, selon l'enquête Emploi du temps 2010 de l'Insee, dans sa définition intermédiaire. Selon la définition retenue, la part varie de 60 à 72 %. Ce chiffre ne dit rien de toi. Il dit pourquoi le temps pour soi a si souvent l'air d'être pris à quelqu'un.",
+   "source": "Insee Première n° 1423, « Le travail domestique : 60 milliards d'heures en 2010 », 2012",
+   "lien": "https://www.insee.fr/fr/statistiques/2123967"
+  },
+  "regard": {
+   "titre": "La charge qui ne se voit pas",
+   "texte": "En 1984, la sociologue Monique Haicault décrit la « charge mentale » des femmes qui travaillent et tiennent une maison : penser à tout, tout le temps, d'un lieu à l'autre. Ce travail de gestion ne s'arrête jamais vraiment, même quand on ne fait rien en apparence. On comprend mieux pourquoi un moment pour soi peut sembler volé. Ce n'est pas un défaut de caractère : c'est un poste qui ne prend jamais de pause.",
+   "source": "Monique Haicault, « La gestion ordinaire de la vie en deux », Sociologie du travail, 1984",
+   "lien": "https://halshs.archives-ouvertes.fr/halshs-01503920v1/file/LaGestionOrdinairedelaVieenDeux.pdf"
+  },
+  "echo": {
+   "titre": "Ce n'est pas de la complaisance",
+   "texte": "En 1988, la poétesse américaine Audre Lorde écrit, alors qu'elle traverse une longue maladie : « Prendre soin de moi n'est pas de la complaisance envers moi-même, c'est de la préservation de soi, et c'est un acte de lutte politique » (notre traduction). Cette phrase a fait le tour du monde. Elle rappelle que le soin de soi peut être une façon de rester debout, pas une façon de se retirer.",
+   "source": "Audre Lorde, A Burst of Light, 1988",
+   "lien": ""
+  }
+ },
+ {
+  "capacite": "CO3",
+  "quete": "Le Corps",
+  "titre": "Se reposer n'est pas une récompense.",
+  "chapo": "Pour aller un peu plus loin sur le repos et la lenteur : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "La fatigue de celle qui se commande elle-même",
+   "texte": "Pour le philosophe Byung-Chul Han, nous sommes passés d'une société de l'interdit à une société de la performance. Plus besoin d'un chef qui ordonne : chacun devient son propre patron, et le plus exigeant de tous. On s'épuise alors en croyant être libre. Se reposer devient difficile parce que la voix qui dit « encore un peu » est désormais à l'intérieur.",
+   "source": "Byung-Chul Han, La Société de la fatigue, 2010 (traduction française Circé, 2014)",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "42 à 77 milliards",
+   "texte": "C'est le nombre d'heures de travail domestique effectuées en France en 2010, selon la définition retenue, d'après l'Insee. Le travail rémunéré, lui, représentait 38 milliards d'heures. Autrement dit, la fin de la journée de travail est rarement le début du repos. Ce chiffre ne dit rien de toi. Il dit pourquoi tant de gens ont l'impression de ne jamais s'arrêter.",
+   "source": "Insee Première n° 1423, « Le travail domestique : 60 milliards d'heures en 2010 », 2012",
+   "lien": "https://www.insee.fr/fr/statistiques/2123967"
+  },
+  "regard": {
+   "titre": "On gagne du temps, on en manque",
+   "texte": "Le sociologue allemand Hartmut Rosa part d'un paradoxe : les machines et les techniques nous font gagner un temps immense, et pourtant nous manquons de temps comme jamais. Pour lui, c'est que le rythme de vie s'accélère plus vite encore que les outils. Chaque minute gagnée se remplit aussitôt de nouvelles choses à faire. Ne pas savoir se reposer, c'est aussi vivre dans une époque qui ne sait pas ralentir.",
+   "source": "Hartmut Rosa, Accélération. Une critique sociale du temps, 2005 (traduction française La Découverte, 2010)",
+   "lien": "https://laviedesidees.fr/Vers-une-petrification-du"
+  },
+  "echo": {
+   "titre": "Un droit oublié",
+   "texte": "En 1880, Paul Lafargue publie Le Droit à la paresse, d'abord en feuilleton dans le journal L'Égalité. Contre ceux qui réclamaient le droit au travail, il défend l'idée qu'avec les machines, trois heures de travail par jour suffiraient. Le reste du temps serait libre, pour vivre. Le texte a près de cent cinquante ans, et sa question n'a pas pris une ride.",
+   "source": "Paul Lafargue, Le Droit à la paresse, 1880 (version augmentée en 1883)",
+   "lien": "https://fr.wikisource.org/wiki/Le_Droit_%C3%A0_la_paresse"
+  }
+ },
+ {
+  "capacite": "CO4",
+  "quete": "Le Corps",
+  "titre": "Ton reflet n'a pas été fait que par toi.",
+  "chapo": "Pour aller un peu plus loin sur la paix avec ton image : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "On ne naît pas femme",
+   "texte": "« On ne naît pas femme : on le devient », écrit Simone de Beauvoir. Elle montre que ce que l'on croit naturel chez les femmes (dont le souci de leur apparence) se construit, par l'éducation et le regard des autres. Si le rapport à son image a été appris, il peut aussi se défaire. La guerre avec ton reflet n'est pas une fatalité : elle a une histoire.",
+   "source": "Simone de Beauvoir, Le Deuxième Sexe, 1949",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "61 %",
+   "texte": "C'est la part des Françaises qui estiment être « trop grosses », selon une enquête Ifop publiée en 2026. Elles étaient 41 % en 2001 et 36 % en 1997. En trente ans, le regard porté sur soi s'est durci bien plus vite que les corps n'ont changé. Ce chiffre ne dit rien de toi. Il dit quelle pression pèse sur les miroirs.",
+   "source": "Ifop pour Darwin Nutrition, « Les complexes liés à son poids et les nouvelles solutions minceurs des Français », 2026",
+   "lien": "https://www.ifop.com/article/les-complexes-lies-a-son-poids-et-les-nouvelles-solutions-minceurs-des-francais/"
+  },
+  "regard": {
+   "titre": "Se regarder de l'extérieur",
+   "texte": "En 1997, les psychologues Barbara Fredrickson et Tomi-Ann Roberts proposent la « théorie de l'objectification ». Selon elles, à force d'être regardées, les femmes apprennent à se voir elles-mêmes depuis l'extérieur, comme une observatrice le ferait. Cette surveillance de soi permanente occupe de l'attention et laisse moins de place à ce que l'on vit de l'intérieur. Faire la paix avec son image, c'est peut-être d'abord retrouver ce point de vue intérieur.",
+   "source": "Barbara Fredrickson et Tomi-Ann Roberts, « Objectification Theory », Psychology of Women Quarterly, 1997",
+   "lien": ""
+  },
+  "echo": {
+   "titre": "Une aliénation très moderne",
+   "texte": "En 2012, la journaliste Mona Chollet publie Beauté fatale. Elle y décortique la presse féminine, la publicité, les blogs et les séries, et montre comment le corps des femmes y devient un produit à améliorer sans fin. Le livre ne fait pas la morale à celles qui aiment se faire belles. Il pose une question simple : qui a intérêt à ce que l'on ne soit jamais satisfaite ?",
+   "source": "Mona Chollet, Beauté fatale. Les nouveaux visages d'une aliénation féminine, Zones, 2012",
+   "lien": ""
+  }
+ },
+ {
+  "capacite": "CO5",
+  "quete": "Le Corps",
+  "titre": "Le désir n'est pas un caprice. C'est un moteur.",
+  "chapo": "Pour aller un peu plus loin sur ton désir et la façon de le dire : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "Le désir est notre essence",
+   "texte": "Pour Spinoza, « le désir est l'essence même de l'homme ». Le désir n'est donc pas un défaut à surveiller ni un luxe : c'est l'élan par lequel chacun cherche à persévérer et à grandir. Spinoza va plus loin : nous ne désirons pas une chose parce qu'elle est bonne, c'est parce que nous la désirons que nous la jugeons bonne. Connaître son désir, c'est donc se connaître de près.",
+   "source": "Baruch Spinoza, Éthique, partie III, 1677",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "43,7 %",
+   "texte": "C'est la part des femmes de 18 à 69 ans qui disent avoir « souvent ou parfois » des rapports sexuels pour faire plaisir à leur partenaire, sans en avoir envie elles-mêmes, selon l'enquête Contexte des sexualités en France 2023. Elles étaient 50,9 % en 2006. Chez les hommes, la part est stable, autour de 23 %. Ce chiffre ne dit rien de toi : il dit que le silence sur le désir recule, lentement.",
+   "source": "Inserm, ANRS MIE, Santé publique France, enquête Contexte des sexualités en France (CSF-2023), premiers résultats, 2024",
+   "lien": "https://presse.inserm.fr/wp-content/uploads/2024/11/rapp_CSF_web.pdf"
+  },
+  "regard": {
+   "titre": "Le désir a des scénarios",
+   "texte": "En 1973, les sociologues John Gagnon et William Simon proposent la théorie des « scripts sexuels ». Pour eux, le désir n'est pas une simple pulsion naturelle : il s'apprend, à travers des scénarios culturels, des échanges avec l'autre et des images intérieures. On hérite donc de répliques toutes faites sur ce qu'une femme peut vouloir ou dire. Ce qui a été appris peut aussi se réécrire.",
+   "source": "John Gagnon et William Simon, Sexual Conduct, 1973",
+   "lien": ""
+  },
+  "echo": {
+   "titre": "Écrire le désir à la première personne",
+   "texte": "En 1991, Annie Ernaux publie Passion simple, un court récit où elle décrit sans détour une passion pour un homme et l'attente qui l'occupe tout entière. Le livre a dérouté, parce qu'une femme y disait son désir sans s'excuser. Trente ans plus tard, en 2022, Annie Ernaux reçoit le prix Nobel de littérature. Dire son désir peut aussi devenir une œuvre.",
+   "source": "Annie Ernaux, Passion simple, Gallimard, 1991",
+   "lien": ""
+  }
+ },
+ {
+  "capacite": "CO6",
+  "quete": "Le Corps",
+  "titre": "Ton corps a une histoire. Elle vaut d'être connue.",
+  "chapo": "Pour aller un peu plus loin sur la connaissance de ton corps, au fil des âges : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "Se connaître par l'expérience",
+   "texte": "Le dernier chapitre des Essais de Montaigne s'appelle « De l'expérience ». Vieillissant, il y parle de son sommeil, de ses repas, de ses douleurs, de ses habitudes, avec une curiosité tranquille. Pour lui, on apprend plus sur soi en observant sa propre vie qu'en lisant des traités savants. Son corps qui change n'est pas un ennemi : c'est un livre qu'il prend le temps de lire.",
+   "source": "Michel de Montaigne, Essais, livre III, chapitre 13, « De l'expérience », 1588",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "51 ans",
+   "texte": "C'est l'âge moyen de la ménopause en France, qui survient en général entre 45 et 55 ans, selon l'Inserm. Cela veut dire qu'une femme vit souvent un tiers de sa vie, ou plus, après ce passage. Ce chiffre ne dit rien de toi : c'est une moyenne, et chaque corps a son calendrier. Il dit seulement qu'il s'agit d'un âge de la vie, pas d'une fin.",
+   "source": "Inserm, repris par Santé.fr, « Ménopause et périménopause »",
+   "lien": "https://www.sante.fr/menopause-perimenopause"
+  },
+  "regard": {
+   "titre": "Un organe redécouvert en 1998",
+   "texte": "En 1998, l'urologue australienne Helen O'Connell et son équipe publient une étude d'anatomie qui montre que les descriptions du clitoris dans les manuels étaient incomplètes et souvent fausses. Son organe est bien plus étendu que la petite partie visible. Que cette connaissance arrive si tard dit beaucoup : le corps des femmes a longtemps été moins étudié. Mal connaître son corps n'est donc pas une faute personnelle.",
+   "source": "Helen O'Connell et al., « Anatomical relationship between urethra and clitoris », Journal of Urology, 1998",
+   "lien": "https://pubmed.ncbi.nlm.nih.gov/9598482/"
+  },
+  "echo": {
+   "titre": "Un livre écrit par celles qui le lisent",
+   "texte": "Au début des années 1970, à Boston, un groupe de femmes réunit ce qu'elles savent et apprennent sur leur corps et publie Our Bodies, Ourselves. Le livre devient un phénomène mondial. Il paraît en France en 1977 sous le titre Notre corps, nous-mêmes, puis un collectif français le réécrit entièrement en 2020. Son idée tient en une phrase : le savoir sur son corps peut se partager entre égales.",
+   "source": "Collectif Notre corps, nous-mêmes, Notre corps, nous-mêmes, Hors d'atteinte, 2020 (première édition française, Albin Michel, 1977)",
+   "lien": "https://ourbodiesourselves.org/global-projects/notre-corps-nous-memes-2020"
+  }
+ },
+ {
+  "capacite": "CO7",
+  "quete": "Le Corps",
+  "titre": "Bouger, d'abord, pour le plaisir d'être là.",
+  "chapo": "Pour aller un peu plus loin sur le mouvement pour le plaisir : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "Penser en marchant",
+   "texte": "Nietzsche écrit dans Ecce Homo qu'il faut rester assis le moins possible, et ne se fier à aucune pensée qui ne soit née en plein air, dans le libre mouvement du corps (traduction libre). Pour lui, bouger n'est pas un exercice pour se perfectionner. C'est une fête du corps, d'où naissent les meilleures idées. Le mouvement y est une joie, pas un devoir.",
+   "source": "Friedrich Nietzsche, Ecce Homo, « Pourquoi je suis si avisé », écrit en 1888, publié en 1908",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "55 %",
+   "texte": "C'est la part des femmes qui ont pratiqué une activité physique ou sportive au moins une fois par semaine en 2023, en France, contre 63 % des hommes, selon le Baromètre national des pratiques sportives. L'écart s'était réduit en 2022, il s'est creusé à nouveau. Ce chiffre ne dit rien de toi. Il dit que le temps pour bouger reste inégalement partagé.",
+   "source": "INJEP et Crédoc, Baromètre national des pratiques sportives 2023, 2023",
+   "lien": "https://www.vie-publique.fr/en-bref/292575-quelles-sont-les-pratiques-sportives-des-francais-en-2023"
+  },
+  "regard": {
+   "titre": "Lancer comme une fille",
+   "texte": "En 1980, la philosophe Iris Marion Young publie « Throwing Like a Girl ». Elle y décrit comment beaucoup de femmes apprennent à bouger avec retenue : prendre peu de place, ne pas engager tout le corps, se méfier de leur élan. Pour elle, ce n'est pas une question de biologie mais d'éducation et de regard. Retrouver le plaisir de bouger, c'est parfois oser reprendre de l'espace.",
+   "source": "Iris Marion Young, « Throwing Like a Girl », Human Studies, 1980",
+   "lien": ""
+  },
+  "echo": {
+   "titre": "Une histoire de la marche",
+   "texte": "En 2000, l'écrivaine américaine Rebecca Solnit publie Wanderlust, traduit en français sous le titre L'Art de marcher. Elle y raconte la marche comme un art, une façon de penser et un geste politique, des pèlerins aux promeneuses des villes. Elle consacre un chapitre aux femmes et à leur droit, longtemps contesté, de marcher librement dans l'espace public. Marcher pour rien, juste pour marcher, a donc toute une histoire.",
+   "source": "Rebecca Solnit, L'Art de marcher, Actes Sud, 2002 (Wanderlust, 2000)",
+   "lien": ""
+  }
+ },
+ {
+  "capacite": "LI1",
+  "quete": "Les Liens",
+  "titre": "S'éloigner n'est pas trahir.",
+  "chapo": "Pour aller un peu plus loin sur les liens qu'on garde et ceux qu'on laisse filer : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "Sur quoi tient une relation",
+   "texte": "Aristote distingue trois sortes d'amitié : celles fondées sur l'utile, celles fondées sur le plaisir, et celles où l'on aime l'autre pour ce qu'il est. Les deux premières, explique-t-il, se défont facilement : quand l'utilité ou l'agrément disparaît, le lien perd sa raison d'être. Il ne le dit pas avec reproche, il le constate. Se demander sur quoi repose une relation, ce n'est donc pas être dure : c'est regarder ce qui la fait tenir.",
+   "source": "Aristote, Éthique à Nicomaque, livres VIII et IX (IVe siècle av. J.-C.)",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "5",
+   "texte": "C'est, selon l'anthropologue Robin Dunbar, la taille habituelle de notre cercle le plus proche : les quelques personnes vers qui l'on se tourne quand tout va mal. Autour viennent des cercles d'environ 15, 50 puis 150 relations, qui reçoivent chacun moins de temps et d'attention. Ce chiffre ne dit rien de toi. Il dit seulement que les places proches sont rares, et que choisir fait partie de toute vie sociale.",
+   "source": "Robin Dunbar, Friends: Understanding the Power of Our Most Important Relationships, 2021",
+   "lien": "https://ideas.ted.com/how-many-friends-do-most-people-dunbars-number/"
+  },
+  "regard": {
+   "titre": "Les réseaux bougent, et c'est normal",
+   "texte": "Les sociologues Claire Bidart, Alain Degenne et Michel Grossetti ont enquêté à Caen et à Toulouse sur la façon dont nos relations évoluent au fil du temps. Leur constat : les liens naissent, se transforment et s'éteignent au rythme des étapes de la vie (études, travail, déménagement, couple, enfants). Perdre quelqu'un de vue n'est ni un accident ni une faute. C'est l'une des façons ordinaires dont un réseau de relations reste vivant.",
+   "source": "Claire Bidart, Alain Degenne, Michel Grossetti, La Vie en réseau. Dynamique des relations sociales, PUF, 2011",
+   "lien": ""
+  },
+  "echo": {
+   "titre": "Le cou pelé du chien",
+   "texte": "Dans une fable de La Fontaine, un loup affamé croise un chien gras et bien nourri, qui lui propose de le suivre chez son maître. En chemin, le loup remarque le cou pelé du chien : c'est la marque du collier. « Attaché ? » demande-t-il, avant de s'enfuir dans les bois. La fable ne juge pas le chien : elle rappelle qu'un confort peut avoir un prix, et qu'on a le droit de ne pas le payer.",
+   "source": "Jean de La Fontaine, « Le Loup et le Chien », Fables, livre I, 1668",
+   "lien": "https://www.lacoccinelle.net/poesies/1257995-jean-de-la-fontaine-le-loup-et-le-chien-livre-i.html"
+  }
+ },
+ {
+  "capacite": "LI2",
+  "quete": "Les Liens",
+  "titre": "Une amitié, ça se cultive. Une heure après l'autre.",
+  "chapo": "Pour aller un peu plus loin sur les amitiés qu'on entretient et celles qu'on fait naître : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "« Parce que c'était lui, parce que c'était moi »",
+   "texte": "Montaigne a écrit l'une des plus belles pages sur l'amitié en pensant à Étienne de La Boétie, rencontré vers 1559 et mort quatre ans plus tard. À la question de savoir pourquoi il l'aimait, il finit par répondre : « Parce que c'était lui, parce que c'était moi. » Il a ajouté cette phrase à la main, en marge de son exemplaire, bien après la première édition, comme s'il avait mis des années à la trouver. Une vraie amitié, pour lui, ne se justifie pas par ce qu'elle rapporte : elle se reconnaît.",
+   "source": "Michel de Montaigne, « De l'amitié », Essais, livre I, chapitre 28 (1580-1595)",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "200 heures",
+   "texte": "C'est, selon une étude du chercheur américain Jeffrey Hall, le temps passé ensemble qu'il faut, en moyenne, pour qu'une connaissance devienne une amie proche (environ 50 heures pour une simple camarade, 90 pour une amie). Et pas n'importe quel temps : celui où l'on discute et où l'on rit compte bien plus que celui où l'on travaille côte à côte. Ce chiffre ne dit rien de toi. Il dit qu'une amitié qui tarde n'est pas un échec : c'est une affaire d'heures.",
+   "source": "Jeffrey A. Hall, « How many hours does it take to make a friend? », Journal of Social and Personal Relationships, 2018",
+   "lien": "https://news.ku.edu/2018/03/06/study-reveals-number-hours-it-takes-make-friend"
+  },
+  "regard": {
+   "titre": "La force des liens faibles",
+   "texte": "En 1973, le sociologue américain Mark Granovetter interroge des personnes qui viennent de changer d'emploi. Celles qui l'ont trouvé grâce à quelqu'un l'ont le plus souvent trouvé par une personne vue de temps en temps ou rarement, pas par leurs proches. Les connaissances un peu lointaines ouvrent sur d'autres mondes que le nôtre. Une voisine, une ancienne collègue, une rencontre d'atelier : ces liens légers comptent, et ce sont aussi des portes d'entrée.",
+   "source": "Mark Granovetter, « The Strength of Weak Ties », American Journal of Sociology, 1973",
+   "lien": ""
+  },
+  "echo": {
+   "titre": "Deux filles de Naples",
+   "texte": "Dans L'Amie prodigieuse, Elena Ferrante raconte l'amitié de Lila et Elena, nées dans un quartier pauvre de Naples, sur plus d'un demi-siècle. Une amitié faite d'admiration, de rivalité, d'éloignements et de retrouvailles. Ce premier tome d'une saga en quatre volumes est devenu un succès mondial. Il rappelle qu'une longue amitié n'est pas une ligne droite : elle traverse des silences, et elle tient quand même.",
+   "source": "Elena Ferrante, L'Amie prodigieuse, 2011 (traduction française, Gallimard, 2014)",
+   "lien": ""
+  }
+ },
+ {
+  "capacite": "LI3",
+  "quete": "Les Liens",
+  "titre": "Aimer, sans disparaître.",
+  "chapo": "Pour aller un peu plus loin sur l'amour qui laisse de la place à soi : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "Aimer dans sa force",
+   "texte": "Dans Le Deuxième Sexe, Simone de Beauvoir consacre un chapitre à « l'amoureuse ». Elle y décrit une femme à qui l'on a appris à faire de l'amour le centre de sa vie, au point de s'y perdre. Mais elle n'oppose pas l'amour à la liberté : elle imagine le jour où une femme pourra aimer dans sa force et non dans sa faiblesse, pour se trouver et non pour se fuir. Aimer, dans ce sens, ne demande pas de s'effacer.",
+   "source": "Simone de Beauvoir, Le Deuxième Sexe, tome II, chapitre « L'amoureuse », 1949",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "64 %",
+   "texte": "C'est la part du travail domestique (cuisine, vaisselle, ménage, courses) assurée par les femmes en France, selon l'enquête Emploi du temps de l'Insee menée en 2010. Une femme en couple avec un enfant y consacrait en moyenne 34 heures par semaine. Ce chiffre ne dit rien de toi. Il dit dans quel partage, souvent invisible, beaucoup de couples se sont installés sans l'avoir décidé.",
+   "source": "Delphine Roy, « Le travail domestique : 60 milliards d'heures en 2010 », Insee Première n° 1423, 2012",
+   "lien": "https://www.insee.fr/fr/statistiques/2123967"
+  },
+  "regard": {
+   "titre": "Libres ensemble",
+   "texte": "Le sociologue François de Singly a mené plusieurs enquêtes auprès de couples et de familles pour comprendre comment on vit à deux aujourd'hui. Il y observe une aspiration forte : partager une vie commune sans renoncer à être quelqu'un par soi-même. Les personnes qu'il décrit mènent une sorte de double vie, avec un temps pour le « nous » et un temps pour le « je ». Le couple n'y apparaît pas comme une fusion, mais comme un lieu où chacun peut rester soi.",
+   "source": "François de Singly, Libres ensemble. L'individualisme dans la vie commune, Nathan, 2000",
+   "lien": ""
+  },
+  "echo": {
+   "titre": "Deux solitudes",
+   "texte": "En 1904, le poète Rainer Maria Rilke répond aux lettres d'un jeune homme qui lui demande conseil. Il lui parle de l'amour comme de deux solitudes qui se protègent, se bordent et se saluent. Pas une fusion où l'on se dissout, mais deux personnes qui veillent chacune sur l'espace de l'autre. Plus d'un siècle plus tard, ces lettres se lisent toujours comme une invitation à aimer sans se perdre.",
+   "source": "Rainer Maria Rilke, Lettres à un jeune poète, lettre du 14 mai 1904 (publiées en 1929)",
+   "lien": ""
+  }
+ },
+ {
+  "capacite": "LI4",
+  "quete": "Les Liens",
+  "titre": "Dans une famille, on peut changer de place.",
+  "chapo": "Pour aller un peu plus loin sur les rôles qu'on nous a donnés et celui qu'on veut tenir : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "Ce qu'on fait de ce qu'on a fait de nous",
+   "texte": "Dans un long livre consacré à l'écrivain Jean Genet, Jean-Paul Sartre défend une idée simple et exigeante : on n'est pas seulement ce que les autres ont fait de nous. On est aussi ce que l'on fait, soi, à partir de cela. Appliquée à la famille, cette idée change le regard : les rôles reçus tôt (la sage, la responsable, celle qui arrange tout) sont un point de départ, pas un destin. Il reste toujours une marge où l'on peut reprendre la main.",
+   "source": "Jean-Paul Sartre, Saint Genet, comédien et martyr, 1952",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "56 %",
+   "texte": "C'est la part des femmes parmi les 9,3 millions de personnes qui, en France, aident régulièrement un proche en situation de handicap ou de perte d'autonomie, alors qu'elles représentent 52 % de la population adulte. Elles sont surtout présentes dans l'aide à la vie quotidienne. Ce chiffre ne dit rien de toi. Il dit quel rôle on attend encore, souvent sans le dire, des filles, des sœurs et des mères.",
+   "source": "Drees, « 9,3 millions de personnes déclarent apporter une aide régulière à un proche en situation de handicap ou de perte d'autonomie en 2021 », Études et résultats n° 1255, 2023",
+   "lien": "https://drees.solidarites-sante.gouv.fr/publications-communique-de-presse/etudes-et-resultats/93-millions-de-personnes-declarent-apporter"
+  },
+  "regard": {
+   "titre": "Celle qui tient le fil",
+   "texte": "En 1985, la sociologue canadienne Carolyn Rosenthal donne un nom à un travail que personne ne voyait : entretenir les liens de la famille (elle parle de kinkeeping, que l'on pourrait traduire par « garder la parenté »). Donner des nouvelles, garder le contact, servir de relais entre les uns et les autres : le plus souvent, une seule personne s'en charge. Les recherches qui ont suivi montrent que ce rôle revient surtout aux femmes, et en particulier aux mères. Nommer ce rôle, c'est déjà pouvoir se demander si on veut le garder.",
+   "source": "Carolyn J. Rosenthal, « Kinkeeping in the Familial Division of Labor », Journal of Marriage and the Family, 1985",
+   "lien": ""
+  },
+  "echo": {
+   "titre": "La Place",
+   "texte": "Dans La Place, Annie Ernaux écrit sur son père, fils de paysans devenu patron d'un café-épicerie en Normandie, et sur l'écart qui s'est creusé entre eux à mesure qu'elle faisait des études. Elle parle d'une distance de classe, « mais particulière, qui n'a pas de nom ». Le livre ne règle aucun compte : il cherche comment aimer les siens sans rester à la place qu'on vous avait réservée. Il a reçu le prix Renaudot en 1984, et son autrice le prix Nobel de littérature en 2022.",
+   "source": "Annie Ernaux, La Place, Gallimard, 1983",
+   "lien": ""
+  }
+ },
+ {
+  "capacite": "LI5",
+  "quete": "Les Liens",
+  "titre": "Être seule, ça s'apprivoise.",
+  "chapo": "Pour aller un peu plus loin sur la solitude qu'on subit et celle qu'on choisit : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "Rester dans sa chambre",
+   "texte": "Au XVIIe siècle, Blaise Pascal note : « Tout le malheur des hommes vient d'une seule chose, qui est de ne savoir pas demeurer en repos, dans une chambre. » Pour lui, on court après les jeux, les conversations et les distractions surtout pour éviter de se retrouver seul avec soi. Il ne prétend pas que c'est facile. Il suggère que la solitude inquiète parce qu'on y rencontre quelqu'un : soi-même.",
+   "source": "Blaise Pascal, Pensées, fragment sur le divertissement, 1670",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "18 %",
+   "texte": "C'est la part des personnes qui vivaient seules dans leur logement en France en 2021, selon l'Insee. Les ménages d'une seule personne sont passés de 27 % des ménages en 1990 à 38 % en 2021. Vivre seule est devenu une façon de vivre très répandue, et cela ne veut pas dire se sentir seule. Ce chiffre ne dit rien de toi. Il dit dans quel paysage on vit.",
+   "source": "Insee, fiche « Ménages, couples et familles », France, portrait social, données du recensement 2021",
+   "lien": "https://www.insee.fr/fr/statistiques/8242327"
+  },
+  "regard": {
+   "titre": "Quinze minutes",
+   "texte": "Des chercheurs en psychologie ont demandé à des volontaires de passer quinze minutes seuls, sans téléphone, sans lecture, sans activité. Résultat : les émotions fortes, agréables ou non, retombaient, et un état plus calme s'installait. Cet effet n'apparaissait pas quand on était avec quelqu'un d'autre. Et quand le moment seul était choisi, il apportait aussi de la détente.",
+   "source": "Thuy-vy Nguyen, Richard Ryan, Edward Deci, « Solitude as an Approach to Affective Self-Regulation », Personality and Social Psychology Bulletin, 2018",
+   "lien": "https://www.rochester.edu/newscenter/one-hundred-years-solitude-try-15-minutes-instead-283972/"
+  },
+  "echo": {
+   "titre": "Une chambre à soi",
+   "texte": "En 1928, Virginia Woolf donne deux conférences devant des étudiantes de Cambridge sur les femmes et l'écriture. Elle en tire en 1929 un livre et une conclusion devenue célèbre : pour écrire, une femme a besoin d'argent et d'une chambre à soi. Une pièce dont on peut fermer la porte, un temps qui n'appartient qu'à soi. Près d'un siècle plus tard, cette chambre reste le symbole d'une solitude qui libère au lieu d'isoler.",
+   "source": "Virginia Woolf, Une chambre à soi (A Room of One's Own), 1929",
+   "lien": "https://en.wikisource.org/wiki/A_Room_of_One%27s_Own_(Hogarth_1929)/Chapter_1"
+  }
+ },
+ {
+  "capacite": "LI6",
+  "quete": "Les Liens",
+  "titre": "Recevoir, c'est aussi donner.",
+  "chapo": "Pour aller un peu plus loin sur l'aide qu'on demande et celle qu'on accepte : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "Donner, recevoir, rendre",
+   "texte": "Dans son Essai sur le don, l'anthropologue Marcel Mauss montre que, dans de nombreuses sociétés, le don repose sur trois obligations : donner, recevoir et rendre. Recevoir n'y est pas une faiblesse : c'est un geste qui compte autant que donner. Refuser ce qu'on nous offre revient presque à refuser le lien. Accepter, au contraire, c'est entrer dans la circulation qui fait tenir les relations.",
+   "source": "Marcel Mauss, « Essai sur le don », L'Année sociologique, 1923-1924",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "50 %",
+   "texte": "C'est l'écart que mesurent les psychologues Francis Flynn et Vanessa Bohns : les personnes qui ont besoin d'aide sous-estiment jusqu'à 50 % la probabilité que les autres acceptent quand on leur demande directement. Dans leurs expériences, il fallait solliciter bien moins de monde que prévu pour obtenir assez de oui. Ce chiffre ne dit rien de toi. Il dit que la peur du refus voit souvent plus grand que la réalité.",
+   "source": "Francis J. Flynn et Vanessa K. B. Lake (Bohns), « If you need help, just ask », Journal of Personality and Social Psychology, 2008",
+   "lien": "https://pubmed.ncbi.nlm.nih.gov/18605856/"
+  },
+  "regard": {
+   "titre": "Heureux d'avoir aidé",
+   "texte": "En 2022, les psychologues Xuan Zhao et Nicholas Epley ont mené une série d'expériences, jusque dans un parc public, auprès de plus de 2 000 adultes américains. Les personnes qui demandaient de l'aide sous-estimaient la bonne volonté des autres, et surtout le plaisir qu'ils allaient ressentir à aider. Elles imaginaient aussi les déranger bien plus que ce n'était le cas. Demander, c'est parfois offrir à quelqu'un l'occasion de se sentir utile.",
+   "source": "Xuan Zhao et Nicholas Epley, « Surprisingly Happy to Have Helped », Psychological Science, 2022",
+   "lien": "https://journals.sagepub.com/doi/10.1177/09567976221097615"
+  },
+  "echo": {
+   "titre": "Les chandeliers de l'évêque",
+   "texte": "Au début des Misérables, Jean Valjean, tout juste sorti du bagne, est accueilli pour la nuit par l'évêque Myriel, à qui il vole son argenterie. Ramené par les gendarmes, il entend l'évêque affirmer qu'il lui avait tout donné, et lui tendre en plus ses chandeliers d'argent. Ce cadeau immérité bouleverse Valjean et change le cours de sa vie. Victor Hugo en fait le point de départ du roman : parfois, c'est en recevant qu'on devient quelqu'un d'autre.",
+   "source": "Victor Hugo, Les Misérables, 1862",
+   "lien": ""
+  }
+ },
+ {
+  "capacite": "LI7",
+  "quete": "Les Liens",
+  "titre": "Ta vie n'a pas de mode d'emploi.",
+  "chapo": "Pour aller un peu plus loin sur le modèle de vie qu'on reçoit et celui qu'on invente : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "Des expériences de vie",
+   "texte": "En 1859, dans De la liberté, le philosophe anglais John Stuart Mill défend l'utilité de ce qu'il appelle des « expériences de vie ». Puisque personne n'est sûr de détenir la bonne façon de vivre, mieux vaut que chacun puisse essayer la sienne, tant qu'elle ne nuit à personne. Pour lui, cette diversité ne menace pas la société : elle lui permet d'apprendre. Un modèle de vie n'est donc pas une règle, c'est une proposition parmi d'autres.",
+   "source": "John Stuart Mill, De la liberté (On Liberty), chapitre III, 1859",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "4,3 %",
+   "texte": "C'est la part des femmes de 18 à 49 ans qui, en France, n'ont pas d'enfant et déclarent ne pas en vouloir (6,3 % chez les hommes), selon l'enquête Fecond de 2010. La moitié de ces personnes vivent en couple, et plus de la moitié expliquent qu'elles se sentent bien ainsi ou veulent rester libres. Ce chiffre ne dit rien de toi. Il dit que d'autres chemins existent déjà, même s'ils se voient moins.",
+   "source": "Charlotte Debest et Magali Mazuy, « Rester sans enfant : un choix de vie à contre-courant », Population & Sociétés n° 508, Ined, 2014",
+   "lien": "https://www.ined.fr/fichier/s_rubrique/172/population_societes_2014_508_choix_sans_enfant.fr.fr.fr.pdf"
+  },
+  "regard": {
+   "titre": "Le prince charmant",
+   "texte": "À la fin des années 1990, le sociologue Jean-Claude Kaufmann recueille les témoignages de femmes qui vivent seules, souvent actives et sans conjoint. Il montre qu'elles oscillent entre deux élans : le goût d'une vie autonome et le poids du modèle du couple, incarné par l'attente du prince charmant. Une part du malaise ne vient pas de leur vie elle-même, mais du regard porté sur elle. Son enquête aide à distinguer ce que l'on veut de ce que l'on croit devoir vouloir.",
+   "source": "Jean-Claude Kaufmann, La Femme seule et le Prince charmant. Enquête sur la vie en solo, Nathan, 1999",
+   "lien": ""
+  },
+  "echo": {
+   "titre": "La porte de Nora",
+   "texte": "En 1879, le public de Copenhague découvre Nora, l'héroïne d'Une maison de poupée, la pièce de Henrik Ibsen. À la fin, elle quitte son mari et ses enfants. Quand il lui rappelle ses devoirs d'épouse et de mère, elle répond qu'elle a d'abord des devoirs envers elle-même, et qu'elle est avant tout un être humain. La porte qu'elle referme en partant a fait scandale dans toute l'Europe, et résonne encore.",
+   "source": "Henrik Ibsen, Une maison de poupée, 1879",
+   "lien": ""
+  }
+ },
+ {
+  "capacite": "CR1",
+  "quete": "La Création",
+  "titre": "Une envie de créer n'est pas un caprice.",
+  "chapo": "Pour aller un peu plus loin sur ces envies de créer qu'on laisse en attente : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "La joie, signe de création",
+   "texte": "Pour Henri Bergson, le plaisir et la joie ne sont pas la même chose. Le plaisir est un mécanisme qui aide la vie à se maintenir ; la joie, elle, annonce que la vie a réussi quelque chose. Et le philosophe remarque qu'on la trouve partout où il y a création, d'autant plus profonde que la création est riche. Ton envie de créer n'est peut-être rien d'autre qu'une joie qui cherche son chemin.",
+   "source": "Henri Bergson, « La conscience et la vie » (conférence de 1911), dans L'Énergie spirituelle, 1919",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "23,4 millions",
+   "texte": "C'est le nombre de personnes de 15 ans ou plus qui ont pratiqué en amateur au moins une activité de loisir créatif, artistique ou scientifique au cours de l'année, en France métropolitaine en 2018 : 45 % de la population. Photo, dessin, musique, écriture : l'envie de créer est partout. Ce chiffre ne dit rien de toi. Il dit que cette envie n'est réservée à personne, et que tu es en nombreuse compagnie.",
+   "source": "Insee, France, portrait social, édition 2022 (« 23 millions d'amateurs pratiquent une activité de loisir créatif, artistique ou scientifique en 2018 »)",
+   "lien": "https://www.insee.fr/fr/statistiques/6535287"
+  },
+  "regard": {
+   "titre": "Écrire pour le plaisir",
+   "texte": "La psychologue américaine Teresa Amabile a demandé à des étudiantes et étudiants qui écrivaient de la poésie de réfléchir quelques minutes, avant d'écrire, soit aux raisons extérieures d'écrire (être reconnu, réussir, gagner de l'argent), soit aux raisons intérieures (le plaisir des mots, la joie de s'exprimer). Les poèmes écrits après avoir pensé aux raisons extérieures ont été jugés moins créatifs. Le plaisir n'est pas une récompense qui vient après : c'est souvent lui qui fait naître le meilleur.",
+   "source": "Teresa Amabile, « Motivation and creativity: Effects of motivational orientation on creative writers », Journal of Personality and Social Psychology, 1985",
+   "lien": ""
+  },
+  "echo": {
+   "titre": "Les jardins de nos mères",
+   "texte": "Dans un essai de 1974, la romancière Alice Walker se demande où est passée la créativité de ses mères et grands-mères, femmes noires du Sud des États-Unis privées de temps, de livres et de liberté. Elle la retrouve dans le jardin que sa propre mère faisait fleurir autour de maisons modestes, et dans des courtepointes cousues par des femmes restées anonymes. L'envie de créer ne disparaît pas quand personne ne l'écoute : elle se glisse où elle peut.",
+   "source": "Alice Walker, « In Search of Our Mothers' Gardens », 1974 (repris dans le recueil du même nom, 1983)",
+   "lien": ""
+  }
+ },
+ {
+  "capacite": "CR2",
+  "quete": "La Création",
+  "titre": "Le temps de créer ne tombe pas du ciel.",
+  "chapo": "Pour aller un peu plus loin sur ce temps qui manque toujours pour créer : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "Le temps qu'on donne",
+   "texte": "Pour Sénèque, la vie n'est pas trop courte : c'est nous qui la rendons courte, en la laissant prendre par d'autres. Il s'étonne que l'on défende si bien son argent et que l'on donne son temps à qui le demande, comme s'il ne valait rien. Garder une heure pour soi n'est pas de l'égoïsme. Chez lui, c'est même le début de la sagesse.",
+   "source": "Sénèque, De la brièveté de la vie, vers 49 apr. J.-C.",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "71 %",
+   "texte": "C'est la part des tâches ménagères assurée par les femmes en France en 2010, selon l'enquête Emploi du temps de l'Insee ; pour les tâches parentales, c'est 65 %. Le temps de créer se prend souvent sur un temps déjà grignoté par la maison. Une nouvelle enquête est en cours en 2025-2026. Ce chiffre ne dit rien de toi. Il dit d'où vient une partie du manque de temps, et que ce n'est pas une faute personnelle.",
+   "source": "Clara Champagne, Ariane Pailhé et Anne Solaz, « Le temps domestique et parental des hommes et des femmes : quels facteurs d'évolutions en 25 ans ? », Économie et Statistique (Insee), 2015",
+   "lien": "https://www.insee.fr/fr/statistiques/1303232"
+  },
+  "regard": {
+   "titre": "Une tête jamais tout à fait libre",
+   "texte": "En 1984, la sociologue Monique Haicault décrit la vie des femmes qui travaillent et tiennent aussi une maison : même au bureau, une partie de leur esprit reste occupée par le foyer, à prévoir, organiser, ne rien oublier. C'est de ce travail que vient l'idée de « charge mentale ». Créer demande des heures, mais aussi une tête disponible. C'est souvent ce second temps-là qui manque le plus.",
+   "source": "Monique Haicault, « La gestion ordinaire de la vie en deux », Sociologie du travail, 1984",
+   "lien": ""
+  },
+  "echo": {
+   "titre": "Une porte qui ferme à clé",
+   "texte": "En 1928, Virginia Woolf est invitée à parler des femmes et du roman devant des étudiantes de Cambridge. Sa réponse tient en deux choses très concrètes : de l'argent à soi (cinq cents livres de rente par an) et une pièce à soi, avec une serrure. Pas de don mystérieux, des conditions matérielles. Un siècle plus tard, la porte qui ferme peut aussi être une heure protégée dans la semaine.",
+   "source": "Virginia Woolf, Une chambre à soi, 1929",
+   "lien": ""
+  }
+ },
+ {
+  "capacite": "CR3",
+  "quete": "La Création",
+  "titre": "Personne n'est douée avant d'avoir commencé.",
+  "chapo": "Pour aller un peu plus loin sur cette petite voix qui dit « je ne suis pas douée » : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "On est ce qu'on fait",
+   "texte": "Pour Jean-Paul Sartre, il n'existe pas de talent caché qui attendrait au fond de nous : on n'est rien d'autre que ce que l'on fait. Il le dit à propos de Proust, dont le génie n'est pour lui que l'ensemble de ses livres. L'idée est exigeante, mais elle libère : personne n'est « douée » avant d'avoir commencé. Le talent, c'est ce qu'on voit après.",
+   "source": "Jean-Paul Sartre, L'existentialisme est un humanisme, 1946",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "6 ans",
+   "texte": "C'est l'âge auquel, dans une étude américaine, les filles commencent à associer moins souvent que les garçons leur propre sexe à l'idée d'être « vraiment très intelligent ». À 5 ans, filles et garçons répondent de la même façon. À 6 ans, les filles se mettent aussi à éviter les jeux présentés comme réservés aux enfants très doués. Ce chiffre ne dit rien de toi. Il dit à quel point l'idée d'être douée ou non nous est donnée tôt, et de l'extérieur.",
+   "source": "Lin Bian, Sarah-Jane Leslie et Andrei Cimpian, « Gender stereotypes about intellectual ability emerge early and influence children's interests », Science, 2017",
+   "lien": ""
+  },
+  "regard": {
+   "titre": "Le piège du compliment",
+   "texte": "Les psychologues Claudia Mueller et Carol Dweck ont fait faire des exercices à des enfants, puis ont félicité les uns pour leur intelligence, les autres pour leurs efforts. Face à des exercices plus difficiles, les enfants félicités pour leur intelligence ont plus souvent choisi la facilité, et y ont pris moins de plaisir. Croire qu'on « l'a » ou qu'on ne « l'a pas » rend l'échec menaçant. Se voir comme quelqu'un qui apprend rend l'essai possible.",
+   "source": "Claudia Mueller et Carol Dweck, « Praise for intelligence can undermine children's motivation and performance », Journal of Personality and Social Psychology, 1998",
+   "lien": ""
+  },
+  "echo": {
+   "titre": "La question du génie",
+   "texte": "En 1971, l'historienne de l'art Linda Nochlin pose une question qui fait date : pourquoi n'y a-t-il pas eu de grandes artistes femmes ? Sa réponse ne parle pas de don. Elle parle d'académies fermées aux femmes, de cours de nu interdits, de familles et d'institutions qui décidaient qui pouvait devenir artiste. Ce qu'on appelle le génie a toujours eu besoin d'une porte ouverte.",
+   "source": "Linda Nochlin, « Why Have There Been No Great Women Artists? », ARTnews, 1971",
+   "lien": ""
+  }
+ },
+ {
+  "capacite": "CR4",
+  "quete": "La Création",
+  "titre": "Finir, c'est choisir le moment de lâcher.",
+  "chapo": "Pour aller un peu plus loin sur ce qu'on commence sans finir, et ce qu'on garde pour soi : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "Jamais achevé, abandonné",
+   "texte": "Le poète Paul Valéry retouchait ses textes sans fin. Il écrit que, pour les amateurs de perfection, « un ouvrage n'est jamais achevé… mais abandonné », au feu ou au public, presque par accident. Finir ne veut donc pas dire atteindre la perfection. Cela veut dire choisir le moment où l'on laisse partir.",
+   "source": "Paul Valéry, « Au sujet du Cimetière marin », La Nouvelle Revue française, 1933",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "11",
+   "texte": "C'est le nombre de poèmes d'Emily Dickinson publiés de son vivant, sur près de 1 800 retrouvés par sa sœur Lavinia après sa mort, en 1886. Pourtant, elle montrait : elle a envoyé plus de 250 poèmes à sa belle-sœur et voisine Susan, sa première lectrice. Ce chiffre ne dit rien de la valeur de ce qu'on garde pour soi. Il rappelle que montrer peut commencer par une seule personne.",
+   "source": "Emily Dickinson Museum, « \"I had told you I did not print\": Poems Published in Dickinson's Lifetime »",
+   "lien": "https://www.emilydickinsonmuseum.org/publishedinlifetime/"
+  },
+  "regard": {
+   "titre": "Ce qui reste en plan",
+   "texte": "En 1927, la psychologue Bluma Zeigarnik donne de petites tâches à des adultes et à des enfants, et en interrompt certaines avant la fin. Ensuite, les tâches laissées en plan reviennent plus souvent en mémoire que les tâches terminées (environ deux fois plus chez les enfants). L'effet a été discuté depuis et ne se vérifie pas toujours, mais beaucoup s'y reconnaissent : ce qui n'est pas fini continue d'occuper un coin de la tête. Finir, c'est aussi faire de la place.",
+   "source": "Bluma Zeigarnik, « Das Behalten erledigter und unerledigter Handlungen », Psychologische Forschung, 1927",
+   "lien": ""
+  },
+  "echo": {
+   "titre": "Des toiles qui ont attendu",
+   "texte": "La peintre suédoise Hilma af Klint peint des toiles abstraites dès 1906, mais les montre très peu de son vivant. Elle meurt en 1944, et ses œuvres attendent des décennies avant d'être vraiment vues. En 2018-2019, sa rétrospective au musée Guggenheim de New York attire plus de 600 000 visiteurs : l'exposition la plus visitée de l'histoire du musée. Une œuvre peut attendre son public, à condition d'avoir été finie.",
+   "source": "Solomon R. Guggenheim Museum, « Hilma af Klint: Paintings for the Future », 2018-2019 (bilan annoncé en avril 2019)",
+   "lien": "https://hyperallergic.com/496326/hilma-af-klint-breaks-records-at-the-guggenheim-museum/"
+  }
+ },
+ {
+  "capacite": "CR5",
+  "quete": "La Création",
+  "titre": "Jouer pour rien, ce n'est jamais pour rien.",
+  "chapo": "Pour aller un peu plus loin sur le goût de jouer et d'essayer sans but : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "Plus vieux que la culture",
+   "texte": "Pour l'historien néerlandais Johan Huizinga, le jeu est plus ancien que la culture : les animaux n'ont pas attendu les humains pour jouer. Il le décrit comme une activité libre, à part de la vie ordinaire, qui ne rapporte rien et qui a ses propres règles. Et il en voit la trace dans la poésie, la musique, la fête. Jouer pour rien n'est pas perdre son temps : c'est l'une des sources de ce qu'on crée.",
+   "source": "Johan Huizinga, Homo ludens, 1938",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "54 %",
+   "texte": "C'est la part des personnes de 15 ans ou plus qui ont arrêté, à un moment de leur vie, une activité créative ou artistique qu'elles avaient commencée en amateur : 28 millions de personnes en France métropolitaine en 2018. Un instrument rangé, un carnet de dessin oublié, une danse abandonnée. Ce chiffre ne dit rien de toi. Il dit que lâcher un jeu est l'expérience la plus partagée qui soit, et que ce qui a été lâché peut se reprendre.",
+   "source": "Insee, France, portrait social, édition 2022 (« 23 millions d'amateurs pratiquent une activité de loisir créatif, artistique ou scientifique en 2018 »)",
+   "lien": "https://www.insee.fr/fr/statistiques/6535287"
+  },
+  "regard": {
+   "titre": "Le jeu, lieu de la création",
+   "texte": "Le pédiatre et psychanalyste anglais Donald Winnicott a passé sa vie à observer des enfants jouer. Il en tire une idée qui vaut aussi pour les adultes : c'est en jouant, peut-être seulement en jouant, qu'on peut être créatif et se sentir pleinement soi. Le jeu n'est pas, pour lui, une pause entre deux choses sérieuses. C'est l'espace où l'on essaie, sans que rien ne soit encore joué.",
+   "source": "Donald W. Winnicott, Jeu et réalité, 1971 (Playing and Reality)",
+   "lien": ""
+  },
+  "echo": {
+   "titre": "La glaneuse de patates",
+   "texte": "En 2000, en tournant Les Glaneurs et la Glaneuse, Agnès Varda ramasse des pommes de terre en forme de cœur et les filme comme des trésors. Trois ans plus tard, à 75 ans, elle en fait une installation pour la Biennale de Venise, Patatutopia, et s'y promène déguisée en pomme de terre. Toute sa vie, elle a suivi sa curiosité vers ce qui semblait sans importance. Chez elle, le jeu n'est pas un détour : c'est une façon de regarder.",
+   "source": "Agnès Varda, Les Glaneurs et la Glaneuse, 2000 ; Patatutopia, Biennale de Venise, 2003",
+   "lien": ""
+  }
+ },
+ {
+  "capacite": "CR6",
+  "quete": "La Création",
+  "titre": "La main pense, elle aussi.",
+  "chapo": "Pour aller un peu plus loin sur l'envie de faire quelque chose de ses mains : une idée, un chiffre, un regard, un écho. Cinq minutes, à lire quand tu veux.",
+  "idee": {
+   "titre": "L'outil de tous les outils",
+   "texte": "Le philosophe grec Anaxagore pensait que l'humain est le plus intelligent des animaux parce qu'il a des mains. Aristote lui répond que c'est plutôt l'inverse : la main peut devenir tour à tour griffe, corne, lance ou épée, et il fallait un être capable d'en faire usage. Le débat n'a jamais été tranché. Mais une chose est sûre : quand on fait de ses mains, la main et la pensée travaillent ensemble.",
+   "source": "Aristote, Les Parties des animaux, livre IV, IVe siècle av. J.-C.",
+   "lien": ""
+  },
+  "chiffre": {
+   "titre": "61 %",
+   "texte": "C'est la part des femmes parmi les personnes qui pratiquent en amateur un art graphique ou manuel (dessin, peinture, sculpture, poterie) en France en 2018. Pour la poterie, elles sont 78 %. Ce chiffre ne dit rien de ton talent. Il dit que l'envie de faire de ses mains est très largement partagée, et que tu y trouveras de la compagnie.",
+   "source": "Ministère de la Culture (DEPS), Chiffres clés 2022, « Diffusion des pratiques en amateur au sein de la population » (enquête Pratiques culturelles 2018)",
+   "lien": "https://www.culture.gouv.fr/fr/Media/Medias-creation-rapide/Chiffres-cles-2022-Diffusion-des-pratiques-en-amateur-au-sein-de-la-population-Fiche.pdf"
+  },
+  "regard": {
+   "titre": "Bien faire, pour soi",
+   "texte": "Le sociologue Richard Sennett a étudié les artisans, des souffleurs de verre aux luthiers. Pour lui, le savoir-faire naît d'un dialogue constant entre la main et la tête : on fait, on sent, on corrige, on recommence. Et il décrit un plaisir particulier, celui de bien faire une chose pour elle-même, sans autre but. Ce plaisir n'est pas réservé aux métiers : il est à la portée de n'importe quelles mains qui s'y mettent.",
+   "source": "Richard Sennett, Ce que sait la main. La culture de l'artisanat, 2010 (The Craftsman, 2008)",
+   "lien": ""
+  },
+  "echo": {
+   "titre": "Fille de tapissiers",
+   "texte": "Louise Bourgeois a grandi dans l'atelier de restauration de tapisseries anciennes de ses parents, près de Paris, où elle dessinait enfant les parties manquantes des motifs. Des décennies plus tard, elle rend hommage à sa mère, qui réparait les tissus, avec une araignée géante intitulée Maman, une tisseuse. À la fin de sa vie, elle coud des œuvres avec ses propres vêtements. Les mains se souviennent longtemps de ce qu'elles ont appris.",
+   "source": "Louise Bourgeois, Maman, 1999",
+   "lien": ""
+  }
+ }
+]

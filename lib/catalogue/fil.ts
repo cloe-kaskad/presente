@@ -1,6 +1,7 @@
 import "server-only";
 import { QUETE, type QueteId } from "@/lib/questionnaire/contenu";
 import { lireTable } from "./airtable";
+import MAISON from "./fil-maison.json";
 
 /**
  * « Tirer le fil » (brief V0.9) : une lecture maison de cinq minutes par semaine de quête, écrite et validée
@@ -48,19 +49,41 @@ export function choisirLecture<T extends { statut: string; quete: string; semain
   return juste ?? validees.find((l) => !l.capacite && l.semaine === String(semaine)) ?? null;
 }
 
-/** La lecture validée pour la capacité de la semaine (ou, à défaut, la quête et la semaine), ou null. En cas d'erreur : null. */
+type BlocMaison = { titre: string; texte: string; source: string; lien?: string };
+type LectureMaison = { capacite: string; quete: string; titre: string; chapo: string; idee: BlocMaison; chiffre: BlocMaison; regard: BlocMaison; echo: BlocMaison };
+
+/**
+ * Les 49 lectures écrites le 27 novembre 2026 (une par capacité), rangées dans le site, affichées à la demande de Cloé.
+ * Une lecture validée dans Airtable pour la même capacité passe toujours devant.
+ */
+export function lectureMaison(capacite: string | null): Fil | null {
+  if (!capacite) return null;
+  const l = (MAISON as LectureMaison[]).find((x) => x.capacite.toUpperCase() === capacite.toUpperCase());
+  if (!l) return null;
+  const blocs = (["idee", "chiffre", "regard", "echo"] as const)
+    .map((cle) => ({ cle, etiquette: ETIQUETTES[cle], titre: l[cle].titre.trim(), texte: l[cle].texte.trim(), source: l[cle].source.trim(), lien: lienSur(l[cle].lien) }))
+    .filter((b) => b.titre || b.texte);
+  return { titre: l.titre, chapo: l.chapo, blocs };
+}
+
+/**
+ * La lecture de la capacité de la semaine : d'abord Airtable (validée), puis les lectures du site, puis la lecture
+ * générale de la quête et de la semaine dans Airtable. Sinon null. Airtable injoignable : les lectures du site.
+ */
 export async function tirerLeFil(quete: QueteId, semaine: 1 | 3, capacite: string | null = null): Promise<Fil | null> {
   const f = TIRER_LE_FIL;
   const champs = [f.titre, f.quete, f.semaine, f.capacite, f.statut, f.chapo, ...(["idee", "chiffre", "regard", "echo"] as const).flatMap((b) => Object.values(f[b]))];
   try {
-    const lignes = await lireTable(f.table, champs);
-    const lecture = choisirLecture(
-      lignes.map((l) => ({ ligne: l, statut: choix(l.fields[f.statut]), quete: choix(l.fields[f.quete]), semaine: choix(l.fields[f.semaine]), capacite: texte(l.fields[f.capacite]) })),
-      QUETE[quete].nom,
-      semaine,
-      capacite,
-    );
-    if (!lecture) return null;
+    const lignes = (await lireTable(f.table, champs)).map((l) => ({
+      ligne: l,
+      statut: choix(l.fields[f.statut]),
+      quete: choix(l.fields[f.quete]),
+      semaine: choix(l.fields[f.semaine]),
+      capacite: texte(l.fields[f.capacite]),
+    }));
+    const deLaCapacite = capacite ? choisirLecture(lignes.filter((l) => l.capacite), QUETE[quete].nom, semaine, capacite) : null;
+    const lecture = deLaCapacite ?? (lectureMaison(capacite) ? null : choisirLecture(lignes, QUETE[quete].nom, semaine, capacite));
+    if (!lecture) return lectureMaison(capacite);
     const r = lecture.ligne;
     const blocs = (["idee", "chiffre", "regard", "echo"] as const)
       .map((cle) => ({
@@ -73,10 +96,10 @@ export async function tirerLeFil(quete: QueteId, semaine: 1 | 3, capacite: strin
       }))
       .filter((b) => b.titre || b.texte); // un bloc vide ne s'affiche pas
     const titre = texte(r.fields[f.titre]);
-    if (!titre && !blocs.length) return null;
+    if (!titre && !blocs.length) return lectureMaison(capacite);
     return { titre, chapo: texte(r.fields[f.chapo]), blocs };
   } catch (e) {
     console.error("[tirer le fil] lecture impossible :", e instanceof Error ? e.message : "inconnue");
-    return null;
+    return lectureMaison(capacite);
   }
 }

@@ -148,3 +148,14 @@ a.source:hover {
     padding-top: 28px;
   }
 }
+
+/* Phase de test : une lecture montrée « comme si » */
+.exemple {
+  align-self: flex-start;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+  border: 1px dashed currentColor;
+  border-radius: 999px;
+  padding: 3px 10px;
+}

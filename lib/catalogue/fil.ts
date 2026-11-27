@@ -1,5 +1,6 @@
 import "server-only";
 import { QUETE, type QueteId } from "@/lib/questionnaire/contenu";
+import { MODE_TEST } from "@/lib/mode-test";
 import { lireTable } from "./airtable";
 
 /**
@@ -21,7 +22,8 @@ const TIRER_LE_FIL = {
 } as const;
 
 export type BlocDuFil = { cle: "idee" | "chiffre" | "regard" | "echo"; etiquette: string; titre: string; texte: string; source: string; lien: string | null };
-export type Fil = { titre: string; chapo: string; blocs: BlocDuFil[] };
+/** exemple : en phase de test, une autre lecture validée montrée « comme si » (aucune n'est encore écrite ici). */
+export type Fil = { titre: string; chapo: string; blocs: BlocDuFil[]; exemple?: boolean };
 
 const ETIQUETTES = { idee: "Une idée", chiffre: "Un chiffre", regard: "Un regard", echo: "Un écho" } as const;
 
@@ -32,16 +34,39 @@ const lienSur = (v: unknown) => {
   return /^https?:\/\//i.test(t) ? t : null;
 };
 
+/**
+ * Quelle lecture montrer : celle validée pour cette quête et cette semaine. En phase de test, sans elle,
+ * une autre lecture validée « comme si » (de la même quête si possible), marquée exemple. Jamais de texte écrit par l'IA.
+ */
+export function choisirLecture<T extends { statut: string; quete: string; semaine: string }>(
+  lignes: T[],
+  quete: string,
+  semaine: 1 | 3,
+  enTest: boolean,
+): (T & { exemple: boolean }) | null {
+  const validees = lignes.filter((l) => l.statut === "Validé");
+  const juste = validees.find((l) => l.quete === quete && l.semaine === String(semaine));
+  if (juste) return { ...juste, exemple: false };
+  if (!enTest) return null;
+  const autre = validees.find((l) => l.quete === quete) ?? validees[0];
+  return autre ? { ...autre, exemple: true } : null;
+}
+
 /** La lecture validée pour cette quête et cette semaine du mois (1 ou 3), ou null. En cas d'erreur : null. */
 export async function tirerLeFil(quete: QueteId, semaine: 1 | 3): Promise<Fil | null> {
   const f = TIRER_LE_FIL;
   const champs = [f.titre, f.quete, f.semaine, f.statut, f.chapo, ...(["idee", "chiffre", "regard", "echo"] as const).flatMap((b) => Object.values(f[b]))];
   try {
     const lignes = await lireTable(f.table, champs);
-    const r = lignes.find(
-      (l) => choix(l.fields[f.statut]) === "Validé" && choix(l.fields[f.quete]) === QUETE[quete].nom && choix(l.fields[f.semaine]) === String(semaine),
+    const lecture = choisirLecture(
+      lignes.map((l) => ({ ligne: l, statut: choix(l.fields[f.statut]), quete: choix(l.fields[f.quete]), semaine: choix(l.fields[f.semaine]) })),
+      QUETE[quete].nom,
+      semaine,
+      MODE_TEST,
     );
-    if (!r) return null;
+    if (!lecture) return null;
+    const r = lecture.ligne;
+    const juste = !lecture.exemple;
     const blocs = (["idee", "chiffre", "regard", "echo"] as const)
       .map((cle) => ({
         cle,
@@ -54,7 +79,7 @@ export async function tirerLeFil(quete: QueteId, semaine: 1 | 3): Promise<Fil | 
       .filter((b) => b.titre || b.texte); // un bloc vide ne s'affiche pas
     const titre = texte(r.fields[f.titre]);
     if (!titre && !blocs.length) return null;
-    return { titre, chapo: texte(r.fields[f.chapo]), blocs };
+    return { titre, chapo: texte(r.fields[f.chapo]), blocs, ...(juste ? {} : { exemple: true }) };
   } catch (e) {
     console.error("[tirer le fil] lecture impossible :", e instanceof Error ? e.message : "inconnue");
     return null;

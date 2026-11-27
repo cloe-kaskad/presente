@@ -23,6 +23,7 @@ export function Fil({ n, surtitre, fil, garde, luLe }: { n: number; surtitre: st
           ← Mon chemin
         </Link>
         <span className={styles.surtitre}>{surtitre}</span>
+        {fil.exemple ? <span className={styles.exemple}>Texte d&apos;exemple · la lecture de cette semaine est en cours d&apos;écriture</span> : null}
         <h1 className={styles.titre}>{fil.titre}</h1>
         {fil.chapo ? <p className={styles.chapo}>{fil.chapo}</p> : null}
       </div>

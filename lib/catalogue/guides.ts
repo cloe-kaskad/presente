@@ -16,10 +16,23 @@ export const GUIDES_PREVUS: Record<string, string> = {
 export const AUDIO_PROVISOIRE = "/audio/provisoire.mp3";
 
 /**
- * En phase de test, l'exercice de la semaine 1 de chaque mois est un exercice guidé (Cloé, 27 novembre :
- * « au minimum une fois par mois »). Pour la vraie version, à décider.
+ * La pause guidée (Cloé, 27 novembre) : dans les semaines sans capacité ni « Tirer le fil » (semaines 2 et 4, celles
+ * du monde), une visualisation ou une respiration guidée prend la place de « Tirer le fil ». Elle ne remplace jamais
+ * l'exercice. Semaine 2 : le guidage de sa quête s'il existe, puis on tourne parmi les autres.
  */
-export const GUIDE_CHAQUE_MOIS = MODE_TEST;
+export function guideDeLaSemaine<T extends { id: string; nom: string; quete: string | null; audio?: string | null }>(
+  pratiques: T[],
+  quete: string,
+  n: number,
+): T | null {
+  const d = ((n - 1) % 4) + 1;
+  if (d !== 2 && d !== 4) return null;
+  const guides = pratiques.filter((p) => p.audio).sort((a, b) => a.nom.localeCompare(b.nom, "fr"));
+  if (!guides.length) return null;
+  const ordre = [...guides.filter((g) => g.quete === quete), ...guides.filter((g) => g.quete !== quete)];
+  const rang = Math.floor((n - 1) / 4) * 2 + (d === 4 ? 1 : 0);
+  return ordre[rang % ordre.length];
+}
 
 /** Le nom du fichier audio d'une pratique, ou null. Seulement un nom de fichier simple (pas de chemin). */
 export function fichierAudio(champ: string, nom: string): string | null {

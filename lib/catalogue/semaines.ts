@@ -4,7 +4,6 @@ import type { CheminEnregistre, ChoixEnregistre } from "@/lib/chemin/donnees";
 import { QUESTIONS_OUVERTES, type FormatId, type TempsId } from "@/lib/questionnaire/contenu";
 import type { Reponses } from "@/lib/questionnaire/reponses";
 import { chargerCatalogue } from "./airtable";
-import { GUIDE_CHAQUE_MOIS } from "./guides";
 import { choixRanges, departDe } from "@/lib/semaines/depart";
 import { choisirContenu, choisirPratique, type AvisContenu, type ProfilChoix, type RetourId } from "./choix";
 import type { Contenu, Pratique } from "./types";
@@ -133,7 +132,6 @@ export async function choixDuMois(
     const demande = {
       quete,
       formesPrecedentes,
-      guide: GUIDE_CHAQUE_MOIS,
       semaine: (i === 0 ? 1 : 3) as 1 | 3,
       capacites: chemin.capacites[quete] as [string, string],
       dejaPris: [...idsDejaPris(chemin.choix, [cle]), ...idsDejaPris(nouveaux, [])].filter((id) => !aReproposer.has(id)),

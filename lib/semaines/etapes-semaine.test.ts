@@ -61,3 +61,15 @@ describe("« Tirer le fil » dans la semaine", () => {
     expect(e.at(-1)).toMatchObject({ libelle: "Tirer le fil", etat: "a_faire", droite: "5 min de lecture", href: "/semaine/1/fil" });
   });
 });
+
+describe("la pause guidée des semaines 2 et 4 (à la place de « Tirer le fil »)", () => {
+  it("s'ajoute après les questions d'après, avant le palier", () => {
+    const e = etapesDeLaSemaine({ n: 4, progression: {}, entrees: [], contenu: null, exercice: null, pratique: null, ecoute: null, pause: { lu: null } });
+    expect(e.map((x) => x.cle)).toEqual(["episode", "questions", "pause", "palier"]);
+    expect(e[2]).toMatchObject({ libelle: "Une pause guidée", href: "/semaine/4/pause", droite: "5 min" });
+  });
+  it("faite : elle le dit, avec le jour", () => {
+    const e = etapesDeLaSemaine({ n: 2, progression: {}, entrees: [], contenu: null, exercice: null, pratique: null, ecoute: null, pause: { lu: lundi } });
+    expect(e.find((x) => x.cle === "pause")).toMatchObject({ libelle: "Pause guidée faite", etat: "faite", droite: "lundi" });
+  });
+});

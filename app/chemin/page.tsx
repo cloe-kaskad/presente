@@ -29,6 +29,7 @@ import { echoDuJour } from "@/lib/rituel/echo";
 import { candidatsEcho } from "@/lib/rituel/echo-donnees";
 import { chargerCatalogue } from "@/lib/catalogue/airtable";
 import { tirerLeFil } from "@/lib/catalogue/fil";
+import { guideDeLaSemaine } from "@/lib/catalogue/guides";
 import { chargerCarnet } from "@/lib/semaines/carnet";
 import { exercicesDuChemin } from "@/lib/semaines/exercice";
 import { arriveeApres, semaineFaite } from "@/lib/semaines/calendrier";
@@ -120,7 +121,7 @@ export default async function MonEspace() {
   const cette = infoSemaine(n);
   const pratiqueDeLaSemaine = cette.dansLeMois === 1 ? choix.s1.pratique : cette.dansLeMois === 3 ? choix.s3.pratique : null;
   const entreesDeLaSemaine = carnet.filter((e) => e.semaine === n);
-  const filDeLaSemaine = cette.dansLeMois === 1 || cette.dansLeMois === 3 ? await tirerLeFil(quete, cette.dansLeMois) : null;
+  const filDeLaSemaine = cette.dansLeMois === 1 || cette.dansLeMois === 3 ? await tirerLeFil(quete, cette.dansLeMois, capacites[cette.dansLeMois === 1 ? 0 : 1]) : null;
   const etapesSemaine = etapesDeLaSemaine({
     n,
     progression: chemin.progression,
@@ -130,6 +131,7 @@ export default async function MonEspace() {
     pratique: pratiqueDeLaSemaine ? { nom: pratiqueDeLaSemaine.nom, rythme: pratiqueDeLaSemaine.rythme } : null,
     ecoute: ecouteLe(n, chemin.progression, entreesDeLaSemaine, cette.dansLeMois === 2 || cette.dansLeMois === 4),
     fil: filDeLaSemaine ? { lu: chemin.progression[`fil${n}`] ?? null } : null,
+    pause: guideDeLaSemaine(catalogue.pratiques, quete, n) ? { lu: chemin.progression[`pause${n}`] ?? null } : null,
   });
   const jourArrivee = n < 12 ? arriveeApres(n, chemin.progression, chemin.dateDebut) : null;
   const enToutesLettres = (jour: string) => {

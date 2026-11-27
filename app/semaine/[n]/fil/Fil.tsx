@@ -12,7 +12,18 @@ import styles from "./fil.module.css";
 const FOND: Record<string, string> = { idee: styles.rose, chiffre: styles.blanc, regard: styles.bleu, echo: styles.blanc };
 
 /** « Tirer le fil » (maquettes Dossier et D-Dossier, V0.9) : une idée, un chiffre, un regard, un écho. */
-export function Fil({ n, surtitre, fil, garde, luLe }: { n: number; surtitre: string; fil: DonneesFil; garde: string; luLe: number | null }) {
+type Focus = { capacite: string; contenu: { titre: string; nature: string } | null; exercice: { nom: string; geste: boolean } | null };
+
+/** « Ce fil prolonge le podcast « X » et ton exercice « Y ». » : le lien avec la semaine, sans IA. */
+function phraseDuLien(f: Focus): string | null {
+  const morceaux = [
+    f.contenu ? `${f.contenu.nature} « ${f.contenu.titre} »` : null,
+    f.exercice ? `${f.exercice.geste ? "ton geste" : "ton exercice"} « ${f.exercice.nom} »` : null,
+  ].filter(Boolean);
+  return morceaux.length ? `Ce fil prolonge ${morceaux.join(" et ")}.` : null;
+}
+
+export function Fil({ n, surtitre, fil, focus, garde, luLe }: { n: number; surtitre: string; fil: DonneesFil; focus: Focus; garde: string; luLe: number | null }) {
   const router = useRouter();
   const [enCours, demarrer] = useTransition();
 
@@ -23,9 +34,14 @@ export function Fil({ n, surtitre, fil, garde, luLe }: { n: number; surtitre: st
           ← Mon chemin
         </Link>
         <span className={styles.surtitre}>{surtitre}</span>
-        {fil.exemple ? <span className={styles.exemple}>Texte d&apos;exemple · la lecture de cette semaine est en cours d&apos;écriture</span> : null}
         <h1 className={styles.titre}>{fil.titre}</h1>
         {fil.chapo ? <p className={styles.chapo}>{fil.chapo}</p> : null}
+        {/* Le focus de la semaine : la capacité travaillée, et le lien avec le contenu et l'exercice */}
+        <div className={styles.focus}>
+          <span className={styles.focusEtiquette}>Ce que tu travailles cette semaine</span>
+          <span className={styles.focusCapacite}>{focus.capacite}</span>
+          {phraseDuLien(focus) ? <p className={styles.focusLien}>{phraseDuLien(focus)}</p> : null}
+        </div>
       </div>
 
       <div className={styles.blocs}>

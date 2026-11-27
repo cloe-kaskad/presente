@@ -115,6 +115,11 @@ export async function marquerFilLu(n: number): Promise<{ ok: boolean }> {
   return majProgression(n, (p) => ({ ...p, [`fil${n}`]: Math.floor(Date.now() / 1000) }), false, ["fil_lu"]);
 }
 
+/** « C'est fait » sur la pause guidée des semaines 2 et 4 : la date est rangée sous « pause{n} » (secondes). */
+export async function marquerPauseFaite(n: number): Promise<{ ok: boolean }> {
+  return majProgression(n, (p) => ({ ...p, [`pause${n}`]: Math.floor(Date.now() / 1000) }));
+}
+
 /** Les clics que seul le navigateur voit (ouvrir le contenu, l'article, la surprise, l'audio). Jamais de texte. */
 export async function noterDepuisLeNavigateur(type: string, semaine?: number, cle?: string): Promise<void> {
   if (!(TYPES_DEPUIS_LE_NAVIGATEUR as readonly string[]).includes(type)) return;

@@ -149,13 +149,57 @@ a.source:hover {
   }
 }
 
-/* Phase de test : une lecture montrée « comme si » */
-.exemple {
-  align-self: flex-start;
+/* Le focus de la semaine : la capacité travaillée et le lien avec le contenu et l'exercice */
+.focus {
+  margin-top: 6px;
+  background: var(--rose-pale);
+  border-left: 4px solid var(--rouge);
+  border-radius: 6px 18px 18px 6px;
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: var(--bordeaux);
+}
+.focusEtiquette {
   font-size: 12px;
   font-weight: 600;
-  line-height: 1.4;
-  border: 1px dashed currentColor;
-  border-radius: 999px;
-  padding: 3px 10px;
+  letter-spacing: 0.02em;
+  color: var(--rouge-profond);
+}
+.focusCapacite {
+  font-size: 20px;
+  line-height: 1.25;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.focusLien {
+  margin: 4px 0 0;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* La pause guidée des semaines 2 et 4 */
+.pause {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 760px;
+}
+.pauseTexte {
+  border: 1.5px solid var(--rose);
+  border-radius: 24px;
+  padding: 20px 22px;
+  color: var(--bordeaux);
+}
+.pauseTexte p {
+  margin: 8px 0 0;
+  font-size: 17px;
+  line-height: 1.55;
+}
+.pauseEtiquette {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--rouge);
 }

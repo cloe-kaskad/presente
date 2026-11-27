@@ -1,7 +1,7 @@
 /**
  * Les étapes d'une semaine, avec leur état, pour la carte « Cette semaine » de Mon chemin (brief V0.9).
  * Semaine de quête : le contenu, le carnet, l'exercice (ou le geste), et « Tirer le fil » quand il y en a un de validé.
- * Semaine de monde : l'épisode, les questions d'après, et le palier en semaine 4.
+ * Semaine de monde : l'épisode, les questions d'après, la pause guidée (à la place de « Tirer le fil »), et le palier en semaine 4.
  */
 import { jourAParis } from "@/lib/rituel/citations";
 import type { ExerciceDuChemin } from "./exercice";
@@ -58,8 +58,10 @@ export function etapesDeLaSemaine(args: {
   ecoute: number | null;
   /** « Tirer le fil » validé pour cette semaine, et quand elle l'a lu ; null : l'étape n'apparaît pas. */
   fil?: { lu: number | null } | null;
+  /** Semaines 2 et 4 : la pause guidée (visualisation ou respiration), à la place de « Tirer le fil ». */
+  pause?: { lu: number | null } | null;
 }): EtapeSemaine[] {
-  const { n, progression, entrees, contenu, exercice, pratique, ecoute, fil } = args;
+  const { n, progression, entrees, contenu, exercice, pratique, ecoute, fil, pause } = args;
   const d = ((n - 1) % 4) + 1;
   const page = `/semaine/${n}`;
   const ecrites = (filtre: (code: string) => boolean) => entrees.filter((e) => filtre(e.code) && e.reponse.trim()).length;
@@ -84,6 +86,16 @@ export function etapesDeLaSemaine(args: {
         action: "Répondre aux questions",
       },
     ];
+    if (pause) {
+      etapes.push({
+        cle: "pause",
+        libelle: pause.lu ? "Pause guidée faite" : "Une pause guidée",
+        etat: pause.lu ? "faite" : "a_faire",
+        droite: pause.lu ? jourDeLaSemaine(pause.lu) : "5 min",
+        href: `${page}/pause`,
+        action: "Faire la pause guidée",
+      });
+    }
     if (d === 4) {
       const fait = (progression[String(n)] ?? 0) >= 4;
       etapes.push({ cle: "palier", libelle: "Le palier", etat: fait ? "faite" : "a_faire", droite: fait ? "fait" : "5 min", href: page, action: "Vers le palier" });

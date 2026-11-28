@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Le fil dans une page</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face{font-family:'Anton';src:url(assets/Anton.woff2) format('woff2');font-display:swap}
+@font-face{font-family:'DMSans';src:url(assets/DMSans.woff2) format('woff2');font-weight:100 1000;font-style:normal;font-display:swap}
+@font-face{font-family:'DMSans';src:url(assets/DMSans-Italic.woff2) format('woff2');font-weight:100 1000;font-style:italic;font-display:swap}
+body{margin:0}
+a{color:#c42c14}a:hover{color:#510004}
+input::placeholder,textarea::placeholder{color:#d98f86}
+
+@keyframes monte{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes monteB{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes trace{from{stroke-dashoffset:1}}
+@keyframes traceB{from{stroke-dashoffset:1}}
+@keyframes point{from{transform:scale(0)}60%{transform:scale(1.35)}to{transform:scale(1)}}
+@keyframes pointB{from{transform:scale(0)}60%{transform:scale(1.35)}to{transform:scale(1)}}
+@keyframes pouls{0%,100%{box-shadow:0 0 0 0 rgba(196,44,20,.45)}60%{box-shadow:0 0 0 9px rgba(196,44,20,0)}}
+@keyframes halo{0%,100%{filter:drop-shadow(0 0 0 rgba(255,255,255,.9))}50%{filter:drop-shadow(0 0 7px rgba(255,255,255,.95))}}
+.an-monte{animation:monte .7s cubic-bezier(.2,.7,.2,1) both}
+.an-trace{animation:trace 1.6s cubic-bezier(.4,0,.2,1) both}
+.an-anneau{animation:trace 1.2s .5s cubic-bezier(.4,0,.2,1) both}
+.an-pt{transform-box:fill-box;transform-origin:center;animation:point .5s cubic-bezier(.2,.7,.2,1) both}
+.an-ici{animation:point .5s cubic-bezier(.2,.7,.2,1) both,halo 2.6s 2.4s ease-in-out infinite}
+.an-pouls{animation:pouls 2s ease-out infinite}
+.an-carte{transition:transform .2s ease,box-shadow .2s ease}
+.an-carte:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(81,0,4,.14)}
+.pg:hover .an-monte{animation-name:monteB}
+.pg:hover .an-trace,.pg:hover .an-anneau{animation-name:traceB}
+.pg:hover .an-pt{animation-name:pointB}
+.pg:hover .an-ici{animation-name:pointB,halo}
+@media (prefers-reduced-motion:reduce){.an-monte,.an-trace,.an-anneau,.an-pt,.an-ici,.an-pouls{animation:none}}
+@keyframes attend{0%,100%{opacity:.45}50%{opacity:1}}
+@keyframes attendB{0%,100%{opacity:.45}50%{opacity:1}}
+.an-attend{animation:attend 1.8s ease-in-out infinite}
+@keyframes flotte{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.an-flotte{animation:flotte 3.2s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){.an-attend,.an-flotte{animation:none}}
+</style>
+</helmet>
+<div class="pg" style="width:390px;height:844px;box-sizing:border-box;background:#ffffff;color:#c42c14;font-family:'DMSans',system-ui,sans-serif;display:flex;flex-direction:column;"><header style="position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 24px;background:#ffffff;border-bottom:1.5px solid #f7beca"><div style="display:flex;flex-direction:column;gap:6px"><span style="font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.01em;font-size:22px;line-height:1.1;color:#e6361d">Présente&nbsp;!</span><div style="display:flex;align-items:center;gap:5px"><span style="font-size:10px;font-weight:500;line-height:1;color:#e6361d">le parcours de</span><img src="assets/logo-lc-rouge.png" alt="Liberté, Chérie !" style="height:13px;width:auto;display:block;"></div></div><nav style="display:flex;align-items:center;gap:14px"><a href="Chemin.html" style="font-size:14px;font-weight:600;color:#c42c14;text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:2px;">Chemin</a><a href="Journal.html" style="font-size:14px;font-weight:600;color:#c42c14;text-decoration:none;">Journal</a><a href="Carnet.html" style="font-size:14px;font-weight:600;color:#c42c14;text-decoration:none;">Carnet</a></nav></header><div style="padding:16px 24px 14px;border-bottom:1.5px solid #fdf0f4;display:flex;flex-direction:column;gap:10px"><a href="Fil-chemin.html" style="font-size:13px;font-weight:600;color:#c42c14;text-decoration:none">‹ Mon chemin</a><nav aria-label="Où tu en es" style="display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center"><span style="white-space:nowrap;font-size:13px;font-weight:500;color:#510004;opacity:.8">La Voix<span aria-hidden="true" style="opacity:.6;margin-left:8px">›</span></span><span style="white-space:nowrap;font-size:13px;font-weight:500;color:#510004;opacity:.8">Semaine 3<span aria-hidden="true" style="opacity:.6;margin-left:8px">›</span></span><span style="white-space:nowrap;font-size:13px;font-weight:600;color:#510004;">Étape 3 sur 4</span></nav><div style="display:flex;gap:5px"><i style="flex:1;height:5px;border-radius:5px;background:#e6361d;opacity:.45"></i><i style="flex:1;height:5px;border-radius:5px;background:#e6361d;opacity:.45"></i><i style="flex:1;height:5px;border-radius:5px;background:#e6361d;"></i><i style="flex:1;height:5px;border-radius:5px;background:#f7beca;"></i></div></div><main style="flex:1;padding:26px 24px 24px;display:flex;flex-direction:column;gap:14px"><h1 style="margin:0;font-size:32px;line-height:1.06;font-weight:400;letter-spacing:-.035em;color:#e6361d;">Ce que mes oui achètent.</h1><p style="margin:0;font-size:16px;line-height:1.55;color:#510004">Pendant sept jours, note un oui que tu as dit dans la journée, et ce qu’il achetait : la paix, du temps, de l’affection, rien.</p><div aria-hidden="true" style="display:flex;flex-direction:column;gap:10px;margin-top:6px"><i style="display:block;height:120px;border-radius:20px;background:#fdf0f4"></i><i style="display:block;height:64px;border-radius:20px;background:#fdf0f4"></i></div><a href="#" style="margin-top:auto;text-decoration:none;border-top:1.5px solid #f7beca;padding-top:16px;display:flex;justify-content:space-between;align-items:center;gap:12px"><span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:13px;color:#510004;opacity:.75">Ensuite, étape 4 sur 4</span><span style="font-size:17px;font-weight:600;color:#510004">Tirer le fil</span></span><span style="font-size:22px;color:#e6361d">›</span></a></main></div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview": {"width": 390, "height": 844}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

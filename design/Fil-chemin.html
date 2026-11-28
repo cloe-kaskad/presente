@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Le fil sur Mon chemin</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face{font-family:'Anton';src:url(assets/Anton.woff2) format('woff2');font-display:swap}
+@font-face{font-family:'DMSans';src:url(assets/DMSans.woff2) format('woff2');font-weight:100 1000;font-style:normal;font-display:swap}
+@font-face{font-family:'DMSans';src:url(assets/DMSans-Italic.woff2) format('woff2');font-weight:100 1000;font-style:italic;font-display:swap}
+body{margin:0}
+a{color:#c42c14}a:hover{color:#510004}
+input::placeholder,textarea::placeholder{color:#d98f86}
+
+@keyframes monte{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes monteB{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes trace{from{stroke-dashoffset:1}}
+@keyframes traceB{from{stroke-dashoffset:1}}
+@keyframes point{from{transform:scale(0)}60%{transform:scale(1.35)}to{transform:scale(1)}}
+@keyframes pointB{from{transform:scale(0)}60%{transform:scale(1.35)}to{transform:scale(1)}}
+@keyframes pouls{0%,100%{box-shadow:0 0 0 0 rgba(196,44,20,.45)}60%{box-shadow:0 0 0 9px rgba(196,44,20,0)}}
+@keyframes halo{0%,100%{filter:drop-shadow(0 0 0 rgba(255,255,255,.9))}50%{filter:drop-shadow(0 0 7px rgba(255,255,255,.95))}}
+.an-monte{animation:monte .7s cubic-bezier(.2,.7,.2,1) both}
+.an-trace{animation:trace 1.6s cubic-bezier(.4,0,.2,1) both}
+.an-anneau{animation:trace 1.2s .5s cubic-bezier(.4,0,.2,1) both}
+.an-pt{transform-box:fill-box;transform-origin:center;animation:point .5s cubic-bezier(.2,.7,.2,1) both}
+.an-ici{animation:point .5s cubic-bezier(.2,.7,.2,1) both,halo 2.6s 2.4s ease-in-out infinite}
+.an-pouls{animation:pouls 2s ease-out infinite}
+.an-carte{transition:transform .2s ease,box-shadow .2s ease}
+.an-carte:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(81,0,4,.14)}
+.pg:hover .an-monte{animation-name:monteB}
+.pg:hover .an-trace,.pg:hover .an-anneau{animation-name:traceB}
+.pg:hover .an-pt{animation-name:pointB}
+.pg:hover .an-ici{animation-name:pointB,halo}
+@media (prefers-reduced-motion:reduce){.an-monte,.an-trace,.an-anneau,.an-pt,.an-ici,.an-pouls{animation:none}}
+@keyframes attend{0%,100%{opacity:.45}50%{opacity:1}}
+@keyframes attendB{0%,100%{opacity:.45}50%{opacity:1}}
+.an-attend{animation:attend 1.8s ease-in-out infinite}
+@keyframes flotte{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.an-flotte{animation:flotte 3.2s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){.an-attend,.an-flotte{animation:none}}
+</style>
+</helmet>
+<div class="pg" style="width:390px;height:844px;box-sizing:border-box;background:#ffffff;color:#c42c14;font-family:'DMSans',system-ui,sans-serif;display:flex;flex-direction:column;"><header style="position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 24px;background:#ffffff;border-bottom:1.5px solid #f7beca"><div style="display:flex;flex-direction:column;gap:6px"><span style="font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.01em;font-size:22px;line-height:1.1;color:#e6361d">Présente&nbsp;!</span><div style="display:flex;align-items:center;gap:5px"><span style="font-size:10px;font-weight:500;line-height:1;color:#e6361d">le parcours de</span><img src="assets/logo-lc-rouge.png" alt="Liberté, Chérie !" style="height:13px;width:auto;display:block;"></div></div><nav style="display:flex;align-items:center;gap:14px"><a href="Chemin.html" style="font-size:14px;font-weight:600;color:#c42c14;text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:2px;">Chemin</a><a href="Journal.html" style="font-size:14px;font-weight:600;color:#c42c14;text-decoration:none;">Journal</a><a href="Carnet.html" style="font-size:14px;font-weight:600;color:#c42c14;text-decoration:none;">Carnet</a></nav></header><main style="flex:1;padding:28px 24px 40px"><section style="display:flex;flex-direction:column;gap:18px"><div style="display:flex;flex-direction:column;gap:8px"><nav aria-label="Où tu en es" style="display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center"><span style="white-space:nowrap;font-size:13px;font-weight:500;color:#510004;opacity:.8">Mois 1 · La Voix<span aria-hidden="true" style="opacity:.6;margin-left:8px">›</span></span><span style="white-space:nowrap;font-size:13px;font-weight:500;color:#510004;opacity:.8">Semaine 3 sur 4<span aria-hidden="true" style="opacity:.6;margin-left:8px">›</span></span><span style="white-space:nowrap;font-size:13px;font-weight:600;color:#510004;">Étape 3 sur 4</span></nav><h1 style="margin:0;font-size:28px;line-height:1.06;font-weight:400;letter-spacing:-.035em;color:#e6361d;">Cette semaine : le silence après le chiffre.</h1></div><ol style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column"><li style="display:flex;gap:14px;align-items:stretch"><div style="display:flex;flex-direction:column;align-items:center"><span style="width:30px;height:30px;border-radius:50%;background:#e6361d;display:flex;align-items:center;justify-content:center;flex:none"><svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><i style="flex:1;width:2px;background:#e6361d;margin:4px 0;min-height:14px"></i></div><div style="flex:1;display:flex;flex-direction:column;gap:2px;padding:3px 0 18px"><span style="font-size:16px;font-weight:600;line-height:1.3;color:#510004;opacity:.7">Écouter le podcast</span><span style="font-size:13px;line-height:1.4;color:#510004;opacity:.75">fait lundi</span></div></li><li style="display:flex;gap:14px;align-items:stretch"><div style="display:flex;flex-direction:column;align-items:center"><span style="width:30px;height:30px;border-radius:50%;background:#e6361d;display:flex;align-items:center;justify-content:center;flex:none"><svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><i style="flex:1;width:2px;background:#e6361d;margin:4px 0;min-height:14px"></i></div><div style="flex:1;display:flex;flex-direction:column;gap:2px;padding:3px 0 18px"><span style="font-size:16px;font-weight:600;line-height:1.3;color:#510004;opacity:.7">Écrire dans ton carnet</span><span style="font-size:13px;line-height:1.4;color:#510004;opacity:.75">2 notes</span></div></li><li style="display:flex;gap:14px;align-items:stretch"><div style="display:flex;flex-direction:column;align-items:center"><span class="an-pouls" style="width:30px;height:30px;border-radius:50%;background:#ffffff;border:2.5px solid #e6361d;box-sizing:border-box;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600;color:#e6361d;flex:none">3</span><i style="flex:1;width:2px;background:#f7beca;margin:4px 0;min-height:14px"></i></div><div class="an-monte" style="flex:1;background:#fdf0f4;border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:10px;margin-bottom:14px"><span style="font-size:13px;font-weight:600;color:#e6361d">Maintenant</span><span style="font-size:20px;font-weight:600;line-height:1.2;letter-spacing:-.015em;color:#510004">Ton exercice</span><span style="font-size:14px;line-height:1.45;color:#510004">Ce que mes oui achètent · jour 3 sur 7</span><div style="margin-top:4px"><a href="#" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;font-weight:600;font-size:15px;line-height:1.2;border-radius:999px;padding:10px 18px;box-sizing:border-box;background:#c42c14;color:#ffffff;border:1.5px solid #c42c14;min-height:48px;">Continuer mon exercice</a></div></div></li><li style="display:flex;gap:14px;align-items:stretch"><div style="display:flex;flex-direction:column;align-items:center"><span style="width:30px;height:30px;border-radius:50%;border:1.5px dashed #f7beca;box-sizing:border-box;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;color:#c42c14;flex:none">4</span></div><div style="flex:1;display:flex;flex-direction:column;gap:2px;padding:3px 0 0px"><span style="font-size:16px;font-weight:600;line-height:1.3;color:#510004;">Tirer le fil</span><span style="font-size:13px;line-height:1.4;color:#510004;opacity:.75">Ensuite · 5 minutes de lecture</span></div></li></ol><div style="border-top:1.5px solid #f7beca;padding-top:16px;display:flex;flex-direction:column;gap:12px"><div aria-label="Le mois en quatre semaines" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px"><div style="display:flex;flex-direction:column;gap:6px;min-width:0"><i style="height:6px;border-radius:6px;background:#e6361d;"></i><span style="font-size:12px;font-weight:600;color:#510004;white-space:nowrap">Semaine 1</span><span style="font-size:12px;line-height:1.3;color:#510004;opacity:.75">faite</span></div><div style="display:flex;flex-direction:column;gap:6px;min-width:0"><i style="height:6px;border-radius:6px;background:#e6361d;"></i><span style="font-size:12px;font-weight:600;color:#510004;white-space:nowrap">Semaine 2</span><span style="font-size:12px;line-height:1.3;color:#510004;opacity:.75">faite</span></div><div style="display:flex;flex-direction:column;gap:6px;min-width:0"><i style="height:6px;border-radius:6px;background:linear-gradient(90deg,#e6361d 55%,#f7beca 55%);"></i><span style="font-size:12px;font-weight:600;color:#e6361d;white-space:nowrap">Semaine 3</span><span style="font-size:12px;line-height:1.3;color:#510004;opacity:.75">en cours</span></div><div style="display:flex;flex-direction:column;gap:6px;min-width:0"><i style="height:6px;border-radius:6px;background:#f7beca;"></i><span style="font-size:12px;font-weight:600;color:#510004;white-space:nowrap">Semaine 4</span><span style="font-size:12px;line-height:1.3;color:#510004;opacity:.75">lundi 30 nov.</span></div></div><span style="font-size:13px;line-height:1.45;color:#510004">Tu peux faire les étapes dans l’ordre que tu veux. La semaine 4 s’ouvre <strong style="font-weight:600">lundi 30 novembre</strong>.</span></div></section></main></div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview": {"width": 390, "height": 844}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

@@ -44,7 +44,7 @@ export function Echo({
       <span id="echo-titre" className={styles.echoDate}>
         Tu écrivais ça le {dateEcrite}
       </span>
-      <p className={styles.echoMots}>« {mots} »</p>
+      <p className={styles.echoMots} data-sien="">« {mots} »</p>
       <span className={styles.echoQuestion} id="echo-question">
         C&apos;est toujours vrai ?
       </span>

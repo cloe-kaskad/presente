@@ -104,7 +104,7 @@ export default async function Journal() {
                       <span className={styles.listeDate}>
                         {dateEnLettres(h.jour)} · {h.humeur}
                       </span>
-                      {h.note ? <p className={styles.listeNote}>{h.note}</p> : null}
+                      {h.note ? <p className={styles.listeNote} data-sien="">{h.note}</p> : null}
                     </div>
                   </li>
                 ))}

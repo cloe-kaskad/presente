@@ -122,13 +122,13 @@ export function Exercice({
           {liste.map((j) => (
             <div key={j.jour} className={`${styles.ligneNote} ${vientDeNoter && j.jour === jourDuJour ? m.monte : ""}`}>
               <span className={styles.jourNote}>{capitale(j.date.split(" ")[0])}</span>
-              <span className={styles.texteNote}>« {j.reponse} »</span>
+              <span className={styles.texteNote} data-sien="">« {j.reponse} »</span>
             </div>
           ))}
           {autres.map((a) => (
             <div key={a.code} className={styles.ligneNote}>
               <span className={styles.jourNote}>{a.question.length < 26 ? a.question : "Noté"}</span>
-              <span className={styles.texteNote}>« {a.reponse} »</span>
+              <span className={styles.texteNote} data-sien="">« {a.reponse} »</span>
             </div>
           ))}
         </div>

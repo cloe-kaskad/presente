@@ -23,7 +23,7 @@ export function Calendrier({ debutDuMois, aujourdhui, jours }: { debutDuMois: st
 
   return (
     <div>
-      <div className={styles.calendrier} role="grid" aria-label="Ton mois">
+      <div className={styles.calendrier} role="grid" aria-label="Ton mois" data-sien="">
         {JOURS.map((j, i) => (
           <span key={i} className={styles.entete} aria-hidden="true">
             {j}
@@ -78,7 +78,7 @@ export function Calendrier({ debutDuMois, aujourdhui, jours }: { debutDuMois: st
           );
         })}
       </div>
-      <p className={styles.detail} aria-live="polite">
+      <p className={styles.detail} aria-live="polite" data-sien="">
         {detail ? (
           <>
             <strong>

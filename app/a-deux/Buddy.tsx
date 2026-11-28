@@ -315,8 +315,8 @@ function Reponses({ q, autre }: { q: Question; autre: string }) {
     <div className={styles.reponses}>
       <div className={styles.reponse}>
         <span className={styles.qui}>Toi</span>
-        <p>{q.maReponse}</p>
-        {q.monMot ? <p className={styles.mot}>Ton mot pour elle : {q.monMot}</p> : null}
+        <p data-sien="">{q.maReponse}</p>
+        {q.monMot ? <p className={styles.mot} data-sien="">Ton mot pour elle : {q.monMot}</p> : null}
       </div>
       <div className={`${styles.reponse} ${styles.reponseAutre}`}>
         <span className={styles.qui}>{autre}</span>

@@ -118,7 +118,7 @@ export function Carnet({ semaines, debut }: { semaines: SemaineDuCarnet[]; debut
                   {n.lignes.map((l, i) => (
                     <div key={i} className={styles.ligne}>
                       <span className={styles.question}>{l.question}</span>
-                      <p className={styles.reponse}>{l.reponse}</p>
+                      <p className={styles.reponse} data-sien="">{l.reponse}</p>
                     </div>
                   ))}
                 </div>
@@ -154,7 +154,7 @@ export function Carnet({ semaines, debut }: { semaines: SemaineDuCarnet[]; debut
                   {debutVisible.map((l, i) => (
                     <div key={i} className={styles.ligne}>
                       <span className={styles.question}>{l.question}</span>
-                      <p className={styles.reponse}>{l.reponse}</p>
+                      <p className={styles.reponse} data-sien="">{l.reponse}</p>
                     </div>
                   ))}
                 </div>

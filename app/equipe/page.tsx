@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { chargerCatalogue } from "@/lib/catalogue/airtable";
 import { estEquipe } from "@/lib/equipe";
@@ -67,6 +68,9 @@ export default async function Equipe() {
         <p className={styles.intro}>
           Uniquement des totaux, calculés à partir des étapes franchies. Jamais ce qu&apos;elles écrivent, jamais de nom.
           {error ? " La table des étapes n'est pas encore créée dans Supabase." : ""}
+        </p>
+        <p className={styles.intro}>
+          <Link href="/equipe/retours">Les retours des testeuses →</Link>
         </p>
       </header>
 

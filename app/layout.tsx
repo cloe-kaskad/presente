@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-import { ViewTransition } from "react";
+import { Suspense, ViewTransition } from "react";
+import { RetoursSiTesteuse } from "@/components/retours/RetoursSiTesteuse";
 import "./globals.css";
 
 const dmSans = localFont({
@@ -35,6 +36,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         {/* Changement de page : un fondu très court (150 ms) quand le navigateur sait le faire (brief V0.8). */}
         <ViewTransition>{children}</ViewTransition>
+        {/* « Un retour ? » : l'équipe et les testeuses seulement (brief V0.13). */}
+        <Suspense fallback={null}>
+          <RetoursSiTesteuse />
+        </Suspense>
       </body>
     </html>
   );

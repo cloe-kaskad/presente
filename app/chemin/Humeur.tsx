@@ -105,7 +105,7 @@ export function Humeur({
             <span>
               Aujourd&apos;hui, tu as noté <strong>{notee.humeur}</strong>.
             </span>
-            {notee.note ? <span className={styles.humeurPhrase}>« {notee.note} »</span> : null}
+            {notee.note ? <span className={styles.humeurPhrase} data-sien="">« {notee.note} »</span> : null}
             {vient ? <CestNote anime className={styles.note} /> : null}
           </div>
           <button

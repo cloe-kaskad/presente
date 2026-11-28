@@ -1,6 +1,6 @@
-# Brief Claude Code V0.13 : des questions propres à chaque contenu, le fil d'Ariane, la transcription automatique
+# Brief Claude Code V0.13 : les retours des testeuses, des questions propres à chaque contenu, le fil d'Ariane, la transcription automatique
 
-Trois chantiers issus de la présentation à Stéphanie (27 novembre). Ils sont indépendants : les faire dans cet ordre, une étape à la fois, pousser sur main, dire à Cloé quoi tester en mots simples.
+Quatre chantiers issus de la présentation à Stéphanie (27 novembre). Ils sont indépendants. **Commencer par le point 4 (les retours)** : Stéphanie démarre son test et rien ne doit se perdre. Ensuite 1, 2, 3, une étape à la fois, pousser sur main, dire à Cloé quoi tester en mots simples.
 
 ## 1. Des questions propres à chaque contenu
 
@@ -57,3 +57,37 @@ But : pour chaque nouveau podcast ajouté dans Airtable (un titre et un lien suf
 **Garde-fous.** Dix contenus au plus par lancement. Un contenu déjà rempli n'est jamais réécrit, sauf si Cloé vide le champ. Un plafond de dépense par lancement, annoncé dans le compte rendu.
 
 **Phase de test.** Les questions écrites vont directement sur le site (décision de Cloé : elle corrige après). Prévoir tout de même un champ « P! Questions : à relire » (case à cocher) rempli par le script, pour qu'elle retrouve ce qui est nouveau.
+
+## 4. Les retours des testeuses, pointés sur la page (à faire en premier)
+
+But : qu'une testeuse puisse dire « ici, ça ne va pas » au moment où elle le voit, sans passer par WhatsApp, et que tout soit rangé au même endroit.
+
+**Pour qui.** Les comptes de l'équipe et les testeuses (une liste d'adresses, comme `EQUIPE_EMAILS` : `TESTEUSES_EMAILS`). Jamais pour une cliente.
+
+**Le geste.**
+
+- Un bouton rond discret, en bas à droite de toutes les pages : « Un retour ? ». Sur téléphone, il ne doit recouvrir aucun bouton de la page.
+- Elle le touche : la page passe en « mode retour ». Un bandeau en haut : « Touche l'endroit que tu veux commenter. » et un lien « Annuler ». Elle peut aussi choisir « Sur toute la page ».
+- Elle touche un endroit : une pastille rouge s'y pose, et une petite fenêtre s'ouvre à côté avec :
+  - un champ « Qu'est-ce que tu veux nous dire ? » (obligatoire, texte libre) ;
+  - quatre pastilles facultatives : « Je ne comprends pas », « Ça ne marche pas », « J'aime », « Une idée » ;
+  - « Ajouter une image » (facultatif : une capture ou une photo, 5 Mo au plus) ;
+  - le bouton « Envoyer ».
+- Après l'envoi : « Merci, c'est noté. » pendant deux secondes, la pastille disparaît, la page redevient normale.
+- Elle peut en envoyer autant qu'elle veut. Ses retours déjà envoyés ne restent pas affichés sur la page.
+
+**Ce qu'on enregistre, sans qu'elle ait rien à faire :** l'adresse de la page, le titre de la page, l'endroit pointé (position en pourcentage de la largeur et de la hauteur de la page, et le texte visible de l'élément touché, coupé à 120 caractères), la taille de l'écran, téléphone ou ordinateur, la semaine et l'étape où elle en est, la date, son prénom.
+
+**Ce qu'on n'enregistre pas.** Pas de capture d'écran automatique : la page contient ce qu'elle a écrit dans son carnet et son journal, et l'équipe ne lit pas ces contenus. Si l'élément touché est un de ses propres textes (réponse, note, humeur), on enregistre « un de ses textes » à la place du contenu. L'image, elle, c'est son choix de la joindre.
+
+**Où c'est rangé.** Table `retours` dans Supabase, images dans un espace de stockage privé. Elle seule peut écrire ; seule l'équipe peut lire.
+
+**La page de l'équipe, `/equipe/retours`.**
+
+- La liste, du plus récent au plus ancien : qui, quand, sur quelle page, le type, son texte, l'élément pointé, l'image si elle en a mis une.
+- Des filtres : par page, par personne, par type, « à traiter » ou « traité ».
+- Une case « Traité » et un champ « Note » par retour.
+- Un bouton « Copier pour Claude » : met dans le presse-papiers tous les retours à traiter, en texte simple, pour que Cloé les colle dans sa conversation.
+- Un lien « Ouvrir la page » (la page générale, pas celle de la testeuse).
+
+**À vérifier.** Clavier et lecteur d'écran (le mode retour se quitte avec Échap), le bouton ne gêne ni « Noter ma journée » ni la barre du bas sur téléphone, un envoi sans réseau ne perd pas le texte (le garder et proposer « Réessayer »).
